@@ -18,13 +18,11 @@
 
 package xiaofei.library.shelly.internal;
 
-import java.util.List;
-
 /**
  * Created by Xiaofei on 16/5/27.
  */
 public interface Player {
 
-    void play(Object input);
+    Scheduler play(Object input);
 
 }

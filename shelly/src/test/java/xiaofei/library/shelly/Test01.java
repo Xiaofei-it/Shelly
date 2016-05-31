@@ -81,7 +81,49 @@ public class Test01 {
                         System.out.println("After map : " + input);
                     }
                 })
+                .then(A.class, "target1")
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return " " + input + " function1 2nd";
+                    }
+                })
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("After map2 : " + input);
+                    }
+                })
+                .then(A.class, "target1")
                 .commit();
         Shelly.playDomino("case01", "Haha");
+
+        Shelly.createDomino("case02")
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("Target action0");
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return " " + input + " function1";
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return " " + input + " function 2nd";
+                    }
+                })
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("After map2 : " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case02", "ABC");
     }
 }
