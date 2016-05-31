@@ -23,6 +23,7 @@ import org.junit.Test;
 import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction;
 
 /**
@@ -48,7 +49,7 @@ public class Test01 {
     public void case01() {
         Shelly.register(new A(1));
         Shelly.register(new A(2));
-        Shelly.getDomino("case01")
+        Shelly.createDomino("case01")
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -67,7 +68,20 @@ public class Test01 {
                     public void call(A a, Object input) {
                         a.g((String) input);
                     }
-                }).commit();
-        Shelly.play("case01", "Haha");
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return " " + input + " function1";
+                    }
+                })
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("After map : " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case01", "Haha");
     }
 }

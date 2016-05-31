@@ -36,11 +36,11 @@ public class Shelly {
         TARGET_CENTER.register(object);
     }
 
-    public static Domino getDomino(String name) {
-        return new Domino(name);
+    public static Domino createDomino(Object label) {
+        return new Domino(label);
     }
 
-    public static void play(final String name, final Object input) {
-        DOMINO_CENTER.play(name, input);
+    public static void playDomino(String label, Object input) {
+        DOMINO_CENTER.play(label, input);
     }
 }

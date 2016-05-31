@@ -34,9 +34,9 @@ public class TargetCenter {
 
     private static TargetCenter sInstance = null;
 
-    private HashMap<Class<?>, HashMap<String, Method>> mMethods;
+    private final HashMap<Class<?>, HashMap<String, Method>> mMethods;
 
-    private HashMap<Class<?>, ArrayList<Object>> mObjects;
+    private final HashMap<Class<?>, ArrayList<Object>> mObjects;
 
     private TargetCenter() {
         mMethods = new HashMap<Class<?>, HashMap<String, Method>>();
@@ -92,9 +92,9 @@ public class TargetCenter {
                 try {
                     method.invoke(object, input);
                 } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         }

@@ -18,9 +18,7 @@
 
 package xiaofei.library.shelly.internal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import xiaofei.library.shelly.Domino;
 
@@ -31,9 +29,9 @@ public class DominoCenter {
 
     private static DominoCenter sInstance = null;
 
-    private HashMap<String, Domino> mDominoes;
+    private HashMap<Object, Domino> mDominoes;
     private DominoCenter() {
-        mDominoes = new HashMap<String, Domino>();
+        mDominoes = new HashMap<Object, Domino>();
     }
 
     public static synchronized DominoCenter getInstance() {
@@ -44,20 +42,20 @@ public class DominoCenter {
     }
 
     public void commit(Domino domino) {
-        String name = domino.getName();
+        Object label = domino.getLabel();
         synchronized (mDominoes) {
-            if (mDominoes.containsKey(name)) {
-                throw new IllegalStateException("Domino name duplicate! Check whether you have commit a domino with the same name before.");
+            if (mDominoes.containsKey(label)) {
+                throw new IllegalStateException("Domino name duplicate! Check whether you have commit a domino with the same label before.");
             }
-            mDominoes.put(name, domino);
+            mDominoes.put(label, domino);
         }
     }
 
-    public void play(String name, Object input) {
+    public void play(String label, Object input) {
         synchronized (mDominoes) {
-            Domino domino = mDominoes.get(name);
+            Domino domino = mDominoes.get(label);
             if (domino == null) {
-                throw new IllegalStateException("There is no domino named '" + name + "'.");
+                throw new IllegalStateException("There is no domino labeled '" + label + "'.");
             }
             domino.play(input);
         }

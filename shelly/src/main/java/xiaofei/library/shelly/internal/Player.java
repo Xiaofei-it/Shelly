@@ -23,6 +23,11 @@ import java.util.List;
 /**
  * Created by Xiaofei on 16/5/27.
  */
-public interface Player {
-    void play(Object input);
+public abstract class Player {
+
+    protected abstract void playInternal(Object input);
+
+    public void play(Object input) {
+        playInternal(input);
+    }
 }

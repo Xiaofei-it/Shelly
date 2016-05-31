@@ -22,6 +22,7 @@ import java.util.List;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
@@ -38,43 +39,43 @@ public class Domino {
 
     private Player mPlayer;
 
-    private String mName;
+    private Object mLabel;
 
-    public Domino(String name) {
-        this(name, null);
+    public Domino(Object label) {
+        this(label, null);
     }
 
-    private Domino(String name, Player player) {
-        mName = name;
+    private Domino(Object label, Player player) {
+        mLabel = label;
         mPlayer = player;
     }
 
-    public String getName() {
-        return mName;
+    public Object getLabel() {
+        return mLabel;
     }
 
     public Domino target(final Domino domino) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 domino.play(input);
             }
         });
     }
 
     public Domino target(final Class<?> clazz, final String target) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 TARGET_CENTER.call(clazz, target, input);
             }
         });
     }
 
     public <T> Domino target(final Class<T> clazz, final TargetAction<T> targetAction) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 List<Object> objects = TARGET_CENTER.getObjects(clazz);
                 for (Object object : objects) {
                     targetAction.call((T) object, input);
@@ -84,37 +85,51 @@ public class Domino {
     }
 
     public Domino target(final Action0 action0) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 action0.call();
             }
         });
     }
 
     public Domino target(final Action1 action1) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 action1.call(input);
             }
         });
     }
 
     public Domino then(final Domino domino) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 mPlayer.play(input);
                 domino.play(input);
             }
         });
     }
 
-    public Domino then(final Class<?> clazz, final String target) {
-        return new Domino(mName, new Player() {
+    public Domino map(final Function1 function1) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            protected void playInternal(Object input) {
+
+            }
+
             @Override
             public void play(Object input) {
+                mPlayer.play(input);
+                playInternal(function1.call(input));
+            }
+        });
+    }
+    public Domino then(final Class<?> clazz, final String target) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public void playInternal(Object input) {
                 mPlayer.play(input);
                 TARGET_CENTER.call(clazz, target, input);
             }
@@ -122,9 +137,9 @@ public class Domino {
     }
 
     public <T> Domino then(final Class<T> clazz, final TargetAction<T> targetAction) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 mPlayer.play(input);
                 List<Object> objects = TARGET_CENTER.getObjects(clazz);
                 for (Object object : objects) {
@@ -135,9 +150,9 @@ public class Domino {
     }
 
     public Domino then(final Action0 action0) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 mPlayer.play(input);
                 action0.call();
             }
@@ -145,9 +160,9 @@ public class Domino {
     }
 
     public Domino then(final Action1 action1) {
-        return new Domino(mName, new Player() {
+        return new Domino(mLabel, new Player() {
             @Override
-            public void play(Object input) {
+            public void playInternal(Object input) {
                 mPlayer.play(input);
                 action1.call(input);
             }

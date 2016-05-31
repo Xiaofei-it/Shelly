@@ -18,60 +18,17 @@
 
 package xiaofei.library.shellytest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import xiaofei.library.shelly.Shelly;
-import xiaofei.library.shelly.annotation.DominoTarget;
-import xiaofei.library.shelly.function.Action0;
-import xiaofei.library.shelly.function.Action1;
-import xiaofei.library.shelly.function.TargetAction;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Xiaofei on 16/5/26.
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static class A {
-        private int i;
-        A(int i) {
-            this.i = i;
-        }
-        @DominoTarget("target1")
-        public void f(String s) {
-            System.out.println("A " + i + " f " + s);
-        }
-
-        public void g(String s) {
-            System.out.println("A " + i + " g " + s);
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Shelly.register(new A(1));
-        Shelly.register(new A(2));
-        Shelly.getDomino("case01")
-                .target(new Action0() {
-                    @Override
-                    public void call() {
-                        System.out.println("Target action0");
-                    }
-                })
-                .then(new Action1() {
-                    @Override
-                    public void call(Object input) {
-                        System.out.println("Target action1 " + input);
-                    }
-                })
-                .then(A.class, "target1")
-                .then(A.class, new TargetAction<A>() {
-                    @Override
-                    public void call(A a, Object input) {
-                        a.g((String) input);
-                    }
-                }).commit();
-        Shelly.play("case01", "Haha");
     }
 }
