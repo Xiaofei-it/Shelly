@@ -106,12 +106,14 @@ public class Test01 {
                     }
                 })
                 .map(new Function1() {
+                    int i = 1;
                     @Override
                     public Object call(Object input) {
                         return " " + input + " function1";
                     }
                 })
                 .map(new Function1() {
+                    int i = 2;
                     @Override
                     public Object call(Object input) {
                         return " " + input + " function 2nd";

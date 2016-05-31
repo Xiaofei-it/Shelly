@@ -19,6 +19,7 @@
 package xiaofei.library.shelly;
 
 import java.util.List;
+import java.util.Objects;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -29,6 +30,7 @@ import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.Scheduler;
 import xiaofei.library.shelly.internal.TargetCenter;
+import xiaofei.library.shelly.internal.ThreadScheduler;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -135,12 +137,22 @@ public class Domino {
                     @Override
                     public void play(Player player, Object input) {
                         scheduler.play(player, function1.call(input));
-                        //player.play(function1.call(input));
                     }
                 };
             }
         });
     }
+
+    public Domino background() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new ThreadScheduler();
+            }
+        });
+    }
+
     public Domino then(final Class<?> clazz, final String target) {
         return new Domino(mLabel, new Player() {
             @Override
