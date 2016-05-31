@@ -24,5 +24,5 @@ import java.util.List;
  * Created by Xiaofei on 16/5/27.
  */
 public interface Player {
-    List<Object> play(List<Object> inputs);
+    void play(Object input);
 }

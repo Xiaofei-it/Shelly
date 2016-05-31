@@ -59,9 +59,7 @@ public class DominoCenter {
             if (domino == null) {
                 throw new IllegalStateException("There is no domino named '" + name + "'.");
             }
-            List<Object> list = new ArrayList<>();
-            list.add(input);
-            domino.play(list);
+            domino.play(input);
         }
     }
 

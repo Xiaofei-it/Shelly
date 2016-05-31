@@ -74,7 +74,7 @@ public class TargetCenter {
         }
     }
 
-    public List<Object> call(Class<?> clazz, String target, Object input) {
+    public void call(Class<?> clazz, String target, Object input) {
         Method method;
         synchronized (mMethods) {
             HashMap<String, Method> methods = mMethods.get(clazz);
@@ -86,15 +86,11 @@ public class TargetCenter {
         if (method == null) {
             throw new IllegalStateException();
         }
-        List<Object> result = new ArrayList<>();
         synchronized (mObjects) {
             ArrayList<Object> objects = mObjects.get(clazz);
             for (Object object : objects) {
                 try {
-                    Object output = method.invoke(object, input);
-                    if (output != null) {
-                        result.add(output);
-                    }
+                    method.invoke(object, input);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
@@ -102,6 +98,5 @@ public class TargetCenter {
                 }
             }
         }
-        return result;
     }
 }

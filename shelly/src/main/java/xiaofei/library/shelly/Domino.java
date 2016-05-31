@@ -18,14 +18,10 @@
 
 package xiaofei.library.shelly;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import xiaofei.library.shelly.annotation.Target;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
-import xiaofei.library.shelly.function.Function0;
-import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
@@ -60,8 +56,8 @@ public class Domino {
     public Domino target(final Domino domino) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
-                return domino.play(inputs);
+            public void play(Object input) {
+                domino.play(input);
             }
         });
     }
@@ -69,8 +65,8 @@ public class Domino {
     public Domino target(final Class<?> clazz, final String target) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
-                return TARGET_CENTER.call(clazz, target, inputs);
+            public void play(Object input) {
+                TARGET_CENTER.call(clazz, target, input);
             }
         });
     }
@@ -78,12 +74,11 @@ public class Domino {
     public <T> Domino target(final Class<T> clazz, final TargetAction<T> targetAction) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
+            public void play(Object input) {
                 List<Object> objects = TARGET_CENTER.getObjects(clazz);
                 for (Object object : objects) {
-                    targetAction.call((T) object, inputs);
+                    targetAction.call((T) object, input);
                 }
-                return new ArrayList<>();
             }
         });
     }
@@ -91,9 +86,8 @@ public class Domino {
     public Domino target(final Action0 action0) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
+            public void play(Object input) {
                 action0.call();
-                return new ArrayList<>();
             }
         });
     }
@@ -101,61 +95,8 @@ public class Domino {
     public Domino target(final Action1 action1) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
-                action1.call(inputs);
-                return new ArrayList<>();
-            }
-        });
-    }
-
-    public Domino target(final Function0 function0) {
-        return new Domino(mName, new Player() {
-            @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> list = new ArrayList<>();
-                list.add(function0.call());
-                return list;
-            }
-        });
-    }
-
-    public Domino target(final Function1 function1) {
-        return new Domino(mName, new Player() {
-            @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> result = new ArrayList<>();
-                for (Object input : inputs) {
-                    result.add(function1.call(input));
-                }
-                return result;
-            }
-        });
-    }
-
-    public Domino with(final Domino domino) {
-        return new Domino(mName, new Player() {
-            @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> result = mPlayer.play(inputs);
-                result.addAll(domino.play(inputs));
-                return result;
-            }
-        });
-    }
-
-    public Domino with(Class<?> clazz, String target) {
-        return null;
-    }
-
-    public Domino with(final Function1 function1) {
-        return new Domino(mName, new Player() {
-            @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> result = mPlayer.play(inputs);
-                for (Object input : inputs) {
-                    result.add(function1.call(input));
-                }
-                return result;
+            public void play(Object input) {
+                action1.call(input);
             }
         });
     }
@@ -163,45 +104,59 @@ public class Domino {
     public Domino then(final Domino domino) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> list = mPlayer.play(inputs);
-                List<Object> result = new ArrayList<>();
-                for (Object o : list) {
-                    List<Object> tmp = domino.play(list);
-                    if (tmp != null) {
-                        result.addAll(tmp);
-                    }
-                }
-                return result;
+            public void play(Object input) {
+                mPlayer.play(input);
+                domino.play(input);
             }
         });
     }
 
-    public Domino then(String target) {
-        return null;
-    }
-
-    public Domino then(final Function1 function1) {
+    public Domino then(final Class<?> clazz, final String target) {
         return new Domino(mName, new Player() {
             @Override
-            public List<Object> play(List<Object> inputs) {
-                List<Object> tmp = mPlayer.play(inputs);
-                List<Object> result = new ArrayList<>();
-                for (Object input :tmp) {
-                    result.add(function1.call(input));
-                }
-                return result;
+            public void play(Object input) {
+                mPlayer.play(input);
+                TARGET_CENTER.call(clazz, target, input);
             }
         });
     }
 
-    /**
-     * call one by one
-     * @param inputs
-     * @return
-     */
-    public List<Object> play(List<Object> inputs) {
-        return mPlayer.play(inputs);
+    public <T> Domino then(final Class<T> clazz, final TargetAction<T> targetAction) {
+        return new Domino(mName, new Player() {
+            @Override
+            public void play(Object input) {
+                mPlayer.play(input);
+                List<Object> objects = TARGET_CENTER.getObjects(clazz);
+                for (Object object : objects) {
+                    targetAction.call((T) object, input);
+                }
+            }
+        });
+    }
+
+    public Domino then(final Action0 action0) {
+        return new Domino(mName, new Player() {
+            @Override
+            public void play(Object input) {
+                mPlayer.play(input);
+                action0.call();
+            }
+        });
+    }
+
+    public Domino then(final Action1 action1) {
+        return new Domino(mName, new Player() {
+            @Override
+            public void play(Object input) {
+                mPlayer.play(input);
+                action1.call(input);
+            }
+        });
+    }
+
+
+    public void play(Object input) {
+        mPlayer.play(input);
     }
 
     public void commit() {

@@ -20,44 +20,54 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import xiaofei.library.shelly.function.Function0;
-import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.annotation.DominoTarget;
+import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.TargetAction;
 
 /**
  * Created by Xiaofei on 16/5/30.
  */
 public class Test01 {
 
+    private static class A {
+        private int i;
+        A(int i) {
+            this.i = i;
+        }
+        @DominoTarget("target1")
+        public void f(String s) {
+            System.out.println("A " + i + " f " + s);
+        }
+
+        public void g(String s) {
+            System.out.println("A " + i + " g " + s);
+        }
+    }
     @Test
     public void case01() {
+        Shelly.register(new A(1));
+        Shelly.register(new A(2));
         Shelly.getDomino("case01")
-                .target(new Function0() {
+                .target(new Action0() {
                     @Override
-                    public Object call() {
-                        return "ok";
+                    public void call() {
+                        System.out.println("Target action0");
                     }
                 })
-                .with(new Function1() {
+                .then(new Action1() {
                     @Override
-                    public Object call(Object input) {
-                        ;
-                        return ((String) input) + "1";
+                    public void call(Object input) {
+                        System.out.println("Target action1 " + input);
                     }
                 })
-                .then(new Function1() {
+                .then(A.class, "target1")
+                .then(A.class, new TargetAction<A>() {
                     @Override
-                    public Object call(Object input) {
-                        System.out.println((String) input);
-                        return (String) input;
+                    public void call(A a, Object input) {
+                        a.g((String) input);
                     }
-                }).with(new Function1() {
-                    @Override
-                    public Object call(Object input) {
-                        System.out.println(((String) input) + "with");
-                        return null;
-                    }
-                })
-                .commit();
-        Shelly.play("case01", "");
+                }).commit();
+        Shelly.play("case01", "Haha");
     }
 }

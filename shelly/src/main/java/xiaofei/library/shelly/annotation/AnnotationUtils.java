@@ -34,8 +34,12 @@ public class AnnotationUtils {
         HashMap<String, Method> result = new HashMap<String, Method>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
-            if (method.isAnnotationPresent(Target.class)) {
-                String value = method.getAnnotation(Target.class).value();
+            DominoTarget dominoTarget = method.getAnnotation(DominoTarget.class);
+            if (dominoTarget != null) {
+                String value = dominoTarget.value();
+                if (!method.isAccessible()) {
+                    method.setAccessible(true);
+                }
                 result.put(value, method);
             }
         }

@@ -18,9 +18,17 @@
 
 package xiaofei.library.shelly.annotation;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Created by Xiaofei on 16/5/26.
  */
-public @interface Target {
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface DominoTarget {
     String value();
 }
