@@ -18,6 +18,8 @@
 
 package xiaofei.library.shelly.internal;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 import xiaofei.library.shelly.Domino;
@@ -27,9 +29,12 @@ import xiaofei.library.shelly.Domino;
  */
 public class DominoCenter {
 
+    private static final String TAG = "DominoCenter";
+
     private static DominoCenter sInstance = null;
 
     private HashMap<Object, Domino> mDominoes;
+
     private DominoCenter() {
         mDominoes = new HashMap<Object, Domino>();
     }
@@ -44,10 +49,9 @@ public class DominoCenter {
     public void commit(Domino domino) {
         Object label = domino.getLabel();
         synchronized (mDominoes) {
-            if (mDominoes.containsKey(label)) {
-                throw new IllegalStateException("Domino name duplicate! Check whether you have commit a domino with the same label before.");
+            if (mDominoes.put(label, domino) != null) {
+                Log.w(TAG, "Domino name duplicate! Check whether you have commit a domino with the same label before.");
             }
-            mDominoes.put(label, domino);
         }
     }
 
