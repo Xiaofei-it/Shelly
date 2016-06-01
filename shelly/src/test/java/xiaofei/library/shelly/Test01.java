@@ -127,5 +127,29 @@ public class Test01 {
                 })
                 .commit();
         Shelly.playDomino("case02", "ABC");
+
+        Shelly.createDomino("case03")
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("Target action0");
+                    }
+                })
+                .cachedThread()
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("cached thread : " + input);
+                    }
+                })
+                .newThread()
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("new Thread : " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case03", "ABC");
     }
 }

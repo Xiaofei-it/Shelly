@@ -18,26 +18,21 @@
 
 package xiaofei.library.shelly.internal;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class ThreadScheduler implements Scheduler {
+public class NewThreadScheduler implements Scheduler {
 
-    private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
-
-    public ThreadScheduler() {
+    public NewThreadScheduler() {
 
     }
 
     public void play(final Player player, final Object input) {
-        sExecutorService.execute(new Runnable() {
+        new Thread() {
             @Override
             public void run() {
                 player.play(input);
             }
-        });
+        }.start();
     }
 }

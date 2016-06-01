@@ -19,7 +19,6 @@
 package xiaofei.library.shelly;
 
 import java.util.List;
-import java.util.Objects;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -27,10 +26,12 @@ import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction;
 import xiaofei.library.shelly.internal.DefaultScheduler;
 import xiaofei.library.shelly.internal.DominoCenter;
+import xiaofei.library.shelly.internal.NewThreadScheduler;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.Scheduler;
 import xiaofei.library.shelly.internal.TargetCenter;
-import xiaofei.library.shelly.internal.ThreadScheduler;
+import xiaofei.library.shelly.internal.CachedThreadScheduler;
+import xiaofei.library.shelly.internal.UiThreadScheduler;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -143,12 +144,32 @@ public class Domino {
         });
     }
 
-    public Domino background() {
+    public Domino cachedThread() {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
                 mPlayer.play(input);
-                return new ThreadScheduler();
+                return new CachedThreadScheduler();
+            }
+        });
+    }
+
+    public Domino newThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new NewThreadScheduler();
+            }
+        });
+    }
+
+    public Domino uiThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new UiThreadScheduler();
             }
         });
     }
