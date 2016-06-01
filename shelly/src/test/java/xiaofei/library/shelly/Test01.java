@@ -21,10 +21,9 @@ package xiaofei.library.shelly;
 import org.junit.Test;
 
 import xiaofei.library.shelly.annotation.DominoTarget;
-import xiaofei.library.shelly.function.Action0;
-import xiaofei.library.shelly.function.Action1;
-import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.function.TargetAction;
+import xiaofei.library.shelly.action.Action0;
+import xiaofei.library.shelly.action.Action1;
+import xiaofei.library.shelly.action.TargetAction;
 
 /**
  * Created by Xiaofei on 16/5/30.
@@ -69,19 +68,45 @@ public class Test01 {
                         a.g((String) input);
                     }
                 })
-                .map(new Function1() {
-                    @Override
-                    public Object call(Object input) {
-                        return " " + input + " function1";
-                    }
-                })
                 .then(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("After map : " + input);
                     }
                 })
+                .then(A.class, "target1")
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("After map2 : " + input);
+                    }
+                })
+                .then(A.class, "target1")
                 .commit();
         Shelly.playDomino("case01", "Haha");
+
+        Shelly.createDomino("case03")
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("Target action0");
+                    }
+                })
+                .cachedThread()
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("cached thread : " + input);
+                    }
+                })
+                .newThread()
+                .then(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("new Thread : " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case03", "ABC");
     }
 }

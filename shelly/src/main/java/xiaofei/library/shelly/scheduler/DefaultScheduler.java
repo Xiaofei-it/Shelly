@@ -16,10 +16,20 @@
  *
  */
 
-package xiaofei.library.shelly.function;
+package xiaofei.library.shelly.scheduler;
+
+import xiaofei.library.shelly.internal.Player;
 
 /**
- * Created by Xiaofei on 16/5/30.
+ * Created by Xiaofei on 16/5/31.
  */
-public interface Function {
+public class DefaultScheduler implements Scheduler {
+
+    public DefaultScheduler() {
+
+    }
+
+    public void play(Player player, Object input) {
+        player.play(input);
+    }
 }
