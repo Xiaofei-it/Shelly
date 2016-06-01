@@ -16,18 +16,11 @@
  *
  */
 
-package xiaofei.library.shelly.internal;
+package xiaofei.library.shelly.action;
 
 /**
- * Created by Xiaofei on 16/5/31.
+ * Created by Xiaofei on 16/5/30.
  */
-public class DefaultScheduler implements Scheduler {
-
-    public DefaultScheduler() {
-
-    }
-
-    public void play(Player player, Object input) {
-        player.play(input);
-    }
+public interface Action1 {
+    void call(Object input);
 }

@@ -16,7 +16,9 @@
  *
  */
 
-package xiaofei.library.shelly.internal;
+package xiaofei.library.shelly.scheduler;
+
+import xiaofei.library.shelly.internal.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.

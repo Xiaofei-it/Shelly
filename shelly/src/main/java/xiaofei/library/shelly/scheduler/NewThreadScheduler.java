@@ -16,11 +16,25 @@
  *
  */
 
-package xiaofei.library.shelly.function;
+package xiaofei.library.shelly.scheduler;
+
+import xiaofei.library.shelly.internal.Player;
 
 /**
- * Created by Xiaofei on 16/5/30.
+ * Created by Xiaofei on 16/5/31.
  */
-public interface Action0 extends Function {
-    void call();
+public class NewThreadScheduler implements Scheduler {
+
+    public NewThreadScheduler() {
+
+    }
+
+    public void play(final Player player, final Object input) {
+        new Thread() {
+            @Override
+            public void run() {
+                player.play(input);
+            }
+        }.start();
+    }
 }

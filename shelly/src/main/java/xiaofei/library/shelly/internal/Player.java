@@ -18,6 +18,8 @@
 
 package xiaofei.library.shelly.internal;
 
+import xiaofei.library.shelly.scheduler.Scheduler;
+
 /**
  * Created by Xiaofei on 16/5/27.
  */

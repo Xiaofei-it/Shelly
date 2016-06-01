@@ -16,10 +16,12 @@
  *
  */
 
-package xiaofei.library.shelly.internal;
+package xiaofei.library.shelly.scheduler;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import xiaofei.library.shelly.internal.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
