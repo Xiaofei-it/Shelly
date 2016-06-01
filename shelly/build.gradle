@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'shelly'
+
+    publishedGroupId = 'xiaofei.library'
+    libraryName = 'Shelly'
+    artifact = 'shelly'
+
+    libraryDescription = 'A smart and easy-to-use alternative to RxJava and EventBus.'
+
+    siteUrl = 'https://github.com/Xiaofei-it/Shelly'
+    gitUrl = 'https://github.com/Xiaofei-it/Shelly.git'
+
+    libraryVersion = '0.1'
+
+    developerId = 'Xiaofei-it'
+    developerName = 'Eric Zhao'
+    developerEmail = 'xiaofei.it@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -23,3 +47,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
