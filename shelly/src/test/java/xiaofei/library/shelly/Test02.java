@@ -16,38 +16,45 @@
  *
  */
 
-package xiaofei.library.shellytest;
+package xiaofei.library.shelly;
 
-import android.widget.Toast;
+import org.junit.Test;
 
-import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.action.Action0;
-import xiaofei.library.shelly.action.TargetAction;
+
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Xiaofei on 16/6/1.
+ * Created by Xiaofei on 16/5/30.
  */
-public class Test {
-    public static void init() {
+public class Test02 {
+
+    @Test
+    public void f() {
         Shelly.createDomino(1)
-                .singleThread()
                 .target(new Action0() {
                     @Override
                     public void call() {
-                        try {
-                            Thread.sleep(10000);
-                            System.out.println("Haha");
-                        } catch (InterruptedException e) {
-
-                        }
+                        System.out.println("directly then");
                     }
                 })
-                .uiThread()
-                .target(MainActivity.class, new TargetAction<MainActivity>() {
+                .commit();
+        Shelly.playDomino(1, 2);
+
+        Shelly.createDomino(2)
+                .target(new Action0() {
                     @Override
-                    public void call(MainActivity mainActivity, Object input) {
-                        mainActivity.f();
+                    public void call() {
+                        System.out.println("double target 1");
                     }
-                }).commit();
+                })
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("double target 2");
+                    }
+                })
+                .commit();
+        Shelly.playDomino(2, 2);
     }
 }

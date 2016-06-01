@@ -55,33 +55,33 @@ public class Test01 {
                         System.out.println("Target action0");
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("Target action1 " + input);
                     }
                 })
-                .then(A.class, "target1")
-                .then(A.class, new TargetAction<A>() {
+                .target(A.class, "target1")
+                .target(A.class, new TargetAction<A>() {
                     @Override
                     public void call(A a, Object input) {
                         a.g((String) input);
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("After map : " + input);
                     }
                 })
-                .then(A.class, "target1")
-                .then(new Action1() {
+                .target(A.class, "target1")
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("After map2 : " + input);
                     }
                 })
-                .then(A.class, "target1")
+                .target(A.class, "target1")
                 .commit();
         Shelly.playDomino("case01", "Haha");
 
@@ -93,52 +93,52 @@ public class Test01 {
                     }
                 })
                 .cachedThread()
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .newThread()
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("new Thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("new Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .singleThread()
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("single Thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("single Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .cachedThread()
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .then(new Action1() {
+                .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread4 : " + Thread.currentThread().getName() + " " + input);
@@ -161,7 +161,7 @@ public class Test01 {
                     }
                 })
                 .newThread()
-                .then(new Action0() {
+                .target(new Action0() {
                     @Override
                     public void call() {
                         System.out.println("Case 04 : then");
