@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import xiaofei.library.shelly.annotation.AnnotationUtils;
@@ -36,11 +37,11 @@ public class TargetCenter {
 
     private final HashMap<Class<?>, HashMap<String, Method>> mMethods;
 
-    private final HashMap<Class<?>, ArrayList<Object>> mObjects;
+    private final HashMap<Class<?>, LinkedList<Object>> mObjects;
 
     private TargetCenter() {
         mMethods = new HashMap<Class<?>, HashMap<String, Method>>();
-        mObjects = new HashMap<Class<?>, ArrayList<Object>>();
+        mObjects = new HashMap<Class<?>, LinkedList<Object>>();
     }
 
     public static synchronized TargetCenter getInstance() {
@@ -59,12 +60,27 @@ public class TargetCenter {
             }
         }
         synchronized (mObjects) {
-            ArrayList<Object> objects = mObjects.get(clazz);
+            LinkedList<Object> objects = mObjects.get(clazz);
             if (objects == null) {
-                objects = new ArrayList<Object>();
+                objects = new LinkedList<>();
                 mObjects.put(clazz, objects);
             }
             objects.add(object);
+        }
+    }
+
+    public void unregister(Object object) {
+        Class<?> clazz = object.getClass();
+        synchronized (mObjects) {
+            LinkedList<Object> objects = mObjects.get(clazz);
+            if (objects == null || !objects.remove(object)) {
+                throw new IllegalArgumentException("Object " + object + " has not been registered.");
+            }
+            if (objects.isEmpty()) {
+                synchronized (mMethods) {
+                    mMethods.remove(clazz);
+                }
+            }
         }
     }
 
@@ -87,7 +103,7 @@ public class TargetCenter {
             throw new IllegalStateException();
         }
         synchronized (mObjects) {
-            ArrayList<Object> objects = mObjects.get(clazz);
+            LinkedList<Object> objects = mObjects.get(clazz);
             for (Object object : objects) {
                 try {
                     method.invoke(object, input);

@@ -47,7 +47,12 @@ public class Domino {
     private Object mLabel;
 
     public Domino(Object label) {
-        this(label, null);
+        this(label, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                return new DefaultScheduler();
+            }
+        });
     }
 
     private Domino(Object label, Player player) {
@@ -59,60 +64,7 @@ public class Domino {
         return mLabel;
     }
 
-    public Domino target(final Domino domino) {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                domino.play(input);
-                return new DefaultScheduler();
-            }
-        });
-    }
-
     public Domino target(final Class<?> clazz, final String target) {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                TARGET_CENTER.call(clazz, target, input);
-                return new DefaultScheduler();
-            }
-        });
-    }
-
-    public <T> Domino target(final Class<T> clazz, final TargetAction<T> targetAction) {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                List<Object> objects = TARGET_CENTER.getObjects(clazz);
-                for (Object object : objects) {
-                    targetAction.call((T) object, input);
-                }
-                return new DefaultScheduler();
-            }
-        });
-    }
-
-    public Domino target(final Action0 action0) {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                action0.call();
-                return new DefaultScheduler();
-            }
-        });
-    }
-
-    public Domino target(final Action1 action1) {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                action1.call(input);
-                return new DefaultScheduler();
-            }
-        });
-    }
-
-    public Domino then(final Domino domino) {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
@@ -120,7 +72,7 @@ public class Domino {
                 scheduler.play(new Player() {
                     @Override
                     public Scheduler play(Object input) {
-                        domino.play(input);
+                        TARGET_CENTER.call(clazz, target, input);
                         return scheduler;
                     }
                 }, input);
@@ -129,42 +81,56 @@ public class Domino {
         });
     }
 
-    public Domino cachedThread() {
+    public <T> Domino target(final Class<T> clazz, final TargetAction<T> targetAction) {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new CachedThreadScheduler();
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.play(new Player() {
+                    @Override
+                    public Scheduler play(Object input) {
+                        List<Object> objects = TARGET_CENTER.getObjects(clazz);
+                        for (Object object : objects) {
+                            targetAction.call((T) object, input);
+                        }
+                        return scheduler;
+                    }
+                }, input);
+                return scheduler;
             }
         });
     }
 
-    public Domino newThread() {
+    public Domino target(final Action0 action0) {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new NewThreadScheduler();
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.play(new Player() {
+                    @Override
+                    public Scheduler play(Object input) {
+                        action0.call();
+                        return scheduler;
+                    }
+                }, input);
+                return scheduler;
             }
         });
     }
 
-    public Domino uiThread() {
+    public Domino target(final Action1 action1) {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new UiThreadScheduler();
-            }
-        });
-    }
-
-    public Domino singleThread() {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new SingleThreadScheduler();
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.play(new Player() {
+                    @Override
+                    public Scheduler play(Object input) {
+                        action1.call(input);
+                        return scheduler;
+                    }
+                }, input);
+                return scheduler;
             }
         });
     }
@@ -240,6 +206,45 @@ public class Domino {
         });
     }
 
+    public Domino cachedThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new CachedThreadScheduler();
+            }
+        });
+    }
+
+    public Domino newThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new NewThreadScheduler();
+            }
+        });
+    }
+
+    public Domino uiThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new UiThreadScheduler();
+            }
+        });
+    }
+
+    public Domino singleThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new SingleThreadScheduler();
+            }
+        });
+    }
 
     public void play(Object input) {
         mPlayer.play(input);

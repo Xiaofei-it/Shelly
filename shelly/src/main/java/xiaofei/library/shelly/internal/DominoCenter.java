@@ -51,7 +51,7 @@ public class DominoCenter {
         }
     }
 
-    public void play(String label, Object input) {
+    public void play(Object label, Object input) {
         synchronized (mDominoes) {
             Domino domino = mDominoes.get(label);
             if (domino == null) {

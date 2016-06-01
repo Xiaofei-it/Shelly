@@ -146,5 +146,28 @@ public class Test01 {
                 })
                 .commit();
         Shelly.playDomino("case03", "ABC");
+
+        Shelly.createDomino("case04")
+                .singleThread()
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        try {
+                            Thread.sleep(10000);
+                            System.out.println("Case 04: target");
+                        } catch (InterruptedException e) {
+
+                        }
+                    }
+                })
+                .newThread()
+                .then(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("Case 04 : then");
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case04", "");
     }
 }

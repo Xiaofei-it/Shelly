@@ -26,8 +26,6 @@ import xiaofei.library.shelly.internal.TargetCenter;
  */
 public class Shelly {
 
-    //private static final Handler sHandler = new Handler(Looper.getMainLooper());
-
     private static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 
     private static final DominoCenter DOMINO_CENTER = DominoCenter.getInstance();
@@ -36,11 +34,15 @@ public class Shelly {
         TARGET_CENTER.register(object);
     }
 
+    public static void unregister(Object object) {
+        TARGET_CENTER.unregister(object);
+    }
+
     public static Domino createDomino(Object label) {
         return new Domino(label);
     }
 
-    public static void playDomino(String label, Object input) {
+    public static void playDomino(Object label, Object input) {
         DOMINO_CENTER.play(label, input);
     }
 }

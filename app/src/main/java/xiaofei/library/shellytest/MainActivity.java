@@ -20,15 +20,41 @@ package xiaofei.library.shellytest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import xiaofei.library.shelly.Shelly;
 
 /**
  * Created by Xiaofei on 16/5/26.
  */
 public class MainActivity extends AppCompatActivity {
 
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Shelly.register(this);
         setContentView(R.layout.activity_main);
+        Test.init();
+        button = (Button) findViewById(R.id.b);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Click", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Shelly.playDomino(1, "");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Shelly.unregister(this);
+    }
+
+    public void f() {
+        button.setText("receive");
     }
 }
