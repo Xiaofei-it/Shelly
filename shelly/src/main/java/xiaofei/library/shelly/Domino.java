@@ -30,6 +30,7 @@ import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.internal.TargetCenter;
 import xiaofei.library.shelly.scheduler.CachedThreadScheduler;
+import xiaofei.library.shelly.scheduler.SingleThreadScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 
 /**
@@ -154,6 +155,16 @@ public class Domino {
             public Scheduler play(Object input) {
                 mPlayer.play(input);
                 return new UiThreadScheduler();
+            }
+        });
+    }
+
+    public Domino singleThread() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new SingleThreadScheduler();
             }
         });
     }
