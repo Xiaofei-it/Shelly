@@ -106,7 +106,11 @@ public class TargetCenter {
             LinkedList<Object> objects = mObjects.get(clazz);
             for (Object object : objects) {
                 try {
-                    method.invoke(object, input);
+                    if (method.getParameterTypes().length == 0) {
+                        method.invoke(object);
+                    } else {
+                        method.invoke(object, input);
+                    }
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 } catch (InvocationTargetException e) {

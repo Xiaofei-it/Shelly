@@ -40,6 +40,9 @@ public class AnnotationUtils {
                 if (!method.isAccessible()) {
                     method.setAccessible(true);
                 }
+                if (method.getParameterTypes().length > 1) {
+                    throw new IllegalStateException("Methods annotated with @DominoTarget should have less than one parameter.");
+                }
                 result.put(value, method);
             }
         }
