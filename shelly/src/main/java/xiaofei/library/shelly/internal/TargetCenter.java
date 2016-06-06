@@ -95,12 +95,12 @@ public class TargetCenter {
         synchronized (mMethods) {
             HashMap<String, Method> methods = mMethods.get(clazz);
             if (methods == null) {
-                throw new IllegalStateException();
+                throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
             }
             method = methods.get(target);
         }
         if (method == null) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Class " + clazz.getName() + " has no method matching the target " + target);
         }
         synchronized (mObjects) {
             LinkedList<Object> objects = mObjects.get(clazz);

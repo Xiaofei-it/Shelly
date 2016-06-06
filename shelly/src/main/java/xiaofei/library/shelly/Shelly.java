@@ -45,4 +45,8 @@ public class Shelly {
     public static void playDomino(Object label, Object input) {
         DOMINO_CENTER.play(label, input);
     }
+
+    public static void playDomino(Object label) {
+        playDomino(label, null);
+    }
 }

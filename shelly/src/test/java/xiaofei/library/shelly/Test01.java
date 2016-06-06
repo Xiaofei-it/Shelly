@@ -20,10 +20,12 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
+import java.util.Objects;
+
 import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.action.Action0;
 import xiaofei.library.shelly.action.Action1;
-import xiaofei.library.shelly.action.TargetAction;
+import xiaofei.library.shelly.action.TargetAction1;
 
 /**
  * Created by Xiaofei on 16/5/30.
@@ -44,6 +46,13 @@ public class Test01 {
             System.out.println("A " + i + " g " + s);
         }
     }
+
+    private static class B {
+        @DominoTarget("t")
+        public void f() {
+            System.out.println("B f");
+        }
+    }
     @Test
     public void case01() {
         Shelly.register(new A(1));
@@ -62,7 +71,7 @@ public class Test01 {
                     }
                 })
                 .target(A.class, "target1")
-                .target(A.class, new TargetAction<A>() {
+                .target(A.class, new TargetAction1<A>() {
                     @Override
                     public void call(A a, Object input) {
                         a.g((String) input);
@@ -169,5 +178,32 @@ public class Test01 {
                 })
                 .commit();
         Shelly.playDomino("case04", "");
+
+        Shelly.register(new B());
+        Shelly.createDomino("case05")
+                .target(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("Case 05");
+                    }
+                })
+                .newThread()
+                .target(new Action1() {
+                    @Override
+                    public void call(Object object) {
+                        System.out.println("Case 05 " + object);
+                    }
+                })
+                .target(B.class, new TargetAction1<B>() {
+                    @Override
+                    public void call(B b, Object input) {
+                        System.out.println("Case 05 B " + input);
+                    }
+                })
+                .target(B.class, "t")
+                .commit();
+        Shelly.playDomino("case05");
+        Shelly.playDomino("case05", 8);
+        Shelly.playDomino("case05", "i");
     }
 }

@@ -22,7 +22,8 @@ import java.util.List;
 
 import xiaofei.library.shelly.action.Action0;
 import xiaofei.library.shelly.action.Action1;
-import xiaofei.library.shelly.action.TargetAction;
+import xiaofei.library.shelly.action.TargetAction0;
+import xiaofei.library.shelly.action.TargetAction1;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
@@ -81,7 +82,7 @@ public class Domino {
         });
     }
 
-    public <T> Domino target(final Class<T> clazz, final TargetAction<T> targetAction) {
+    public <T> Domino target(final Class<T> clazz, final TargetAction0<T> targetAction0) {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
@@ -91,7 +92,27 @@ public class Domino {
                     public Scheduler play(Object input) {
                         List<Object> objects = TARGET_CENTER.getObjects(clazz);
                         for (Object object : objects) {
-                            targetAction.call((T) object, input);
+                            targetAction0.call((T) object);
+                        }
+                        return scheduler;
+                    }
+                }, input);
+                return scheduler;
+            }
+        });
+    }
+
+    public <T> Domino target(final Class<T> clazz, final TargetAction1<T> targetAction1) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.play(new Player() {
+                    @Override
+                    public Scheduler play(Object input) {
+                        List<Object> objects = TARGET_CENTER.getObjects(clazz);
+                        for (Object object : objects) {
+                            targetAction1.call((T) object, input);
                         }
                         return scheduler;
                     }

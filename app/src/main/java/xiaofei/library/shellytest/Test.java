@@ -18,11 +18,9 @@
 
 package xiaofei.library.shellytest;
 
-import android.widget.Toast;
-
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.action.Action0;
-import xiaofei.library.shelly.action.TargetAction;
+import xiaofei.library.shelly.action.TargetAction1;
 
 /**
  * Created by Xiaofei on 16/6/1.
@@ -43,7 +41,7 @@ public class Test {
                     }
                 })
                 .uiThread()
-                .target(MainActivity.class, new TargetAction<MainActivity>() {
+                .target(MainActivity.class, new TargetAction1<MainActivity>() {
                     @Override
                     public void call(MainActivity mainActivity, Object input) {
                         mainActivity.f();
