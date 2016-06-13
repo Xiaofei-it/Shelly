@@ -156,44 +156,23 @@ public class Domino {
         });
     }
 
-    public Domino cachedThread() {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new CachedThreadScheduler();
-            }
-        });
+    public Domino background() {
+        return new Domino(mLabel, new SchedulerPlayer(new CachedThreadScheduler()));
     }
 
+    /**
+     * For unit test only
+     */
     public Domino newThread() {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new NewThreadScheduler();
-            }
-        });
+        return new Domino(mLabel, new SchedulerPlayer(new NewThreadScheduler()));
     }
 
     public Domino uiThread() {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new UiThreadScheduler();
-            }
-        });
+        return new Domino(mLabel, new SchedulerPlayer(new UiThreadScheduler()));
     }
 
-    public Domino singleThread() {
-        return new Domino(mLabel, new Player() {
-            @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new SingleThreadScheduler();
-            }
-        });
+    public Domino backgroundQueue() {
+        return new Domino(mLabel, new SchedulerPlayer(new SingleThreadScheduler()));
     }
 
     public void play(Object input) {
@@ -202,5 +181,19 @@ public class Domino {
 
     public void commit() {
         DOMINO_CENTER.commit(this);
+    }
+
+    private class SchedulerPlayer implements Player {
+
+        private Scheduler mScheduler;
+        SchedulerPlayer(Scheduler scheduler) {
+            mScheduler = scheduler;
+        }
+
+        @Override
+        public Scheduler play(Object input) {
+            mPlayer.play(input);
+            return mScheduler;
+        }
     }
 }

@@ -20,8 +20,6 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import java.util.Objects;
-
 import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.action.Action0;
 import xiaofei.library.shelly.action.Action1;
@@ -101,7 +99,7 @@ public class Test01 {
                         System.out.println("Target action0");
                     }
                 })
-                .cachedThread()
+                .background()
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -127,7 +125,7 @@ public class Test01 {
                         System.out.println("new Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .singleThread()
+                .backgroundQueue()
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -140,7 +138,7 @@ public class Test01 {
                         System.out.println("single Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .cachedThread()
+                .background()
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -157,7 +155,7 @@ public class Test01 {
         Shelly.playDomino("case03", "ABC");
 
         Shelly.createDomino("case04")
-                .singleThread()
+                .backgroundQueue()
                 .target(new Action0() {
                     @Override
                     public void call() {
