@@ -33,7 +33,7 @@ public class DominoCenter {
 
     private static DominoCenter sInstance = null;
 
-    private HashMap<Object, Domino> mDominoes;
+    private final HashMap<Object, Domino> mDominoes;
 
     private DominoCenter() {
         mDominoes = new HashMap<Object, Domino>();

@@ -24,13 +24,13 @@ import xiaofei.library.shelly.action.Action0;
 import xiaofei.library.shelly.action.Action1;
 import xiaofei.library.shelly.action.TargetAction0;
 import xiaofei.library.shelly.action.TargetAction1;
-import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.internal.DominoCenter;
-import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.internal.Player;
-import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.internal.TargetCenter;
 import xiaofei.library.shelly.scheduler.CachedThreadScheduler;
+import xiaofei.library.shelly.scheduler.DefaultScheduler;
+import xiaofei.library.shelly.scheduler.NewThreadScheduler;
+import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.scheduler.SingleThreadScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 
@@ -92,7 +92,7 @@ public class Domino {
                     public Scheduler play(Object input) {
                         List<Object> objects = TARGET_CENTER.getObjects(clazz);
                         for (Object object : objects) {
-                            targetAction0.call((T) object);
+                            targetAction0.call(clazz.cast(object));
                         }
                         return scheduler;
                     }
@@ -112,7 +112,7 @@ public class Domino {
                     public Scheduler play(Object input) {
                         List<Object> objects = TARGET_CENTER.getObjects(clazz);
                         for (Object object : objects) {
-                            targetAction1.call((T) object, input);
+                            targetAction1.call(clazz.cast(object), input);
                         }
                         return scheduler;
                     }
