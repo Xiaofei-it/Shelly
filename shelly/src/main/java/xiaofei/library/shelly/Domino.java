@@ -20,10 +20,12 @@ package xiaofei.library.shelly;
 
 import java.util.List;
 
-import xiaofei.library.shelly.action.Action0;
-import xiaofei.library.shelly.action.Action1;
-import xiaofei.library.shelly.action.TargetAction0;
-import xiaofei.library.shelly.action.TargetAction1;
+import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function0;
+import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.TargetAction0;
+import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.TargetCenter;
@@ -51,11 +53,10 @@ public class Domino {
         this(label, new Player() {
             @Override
             public Scheduler play(Object input) {
-                final Object finalInput = input;
-                return new DefaultScheduler(null) {
+                return new DefaultScheduler(input) {
                     @Override
                     protected Object onUpdate(Object input) {
-                        return finalInput;
+                        return input;
                     }
                 };
             }
@@ -237,6 +238,21 @@ public class Domino {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;
+                    }
+                };
+            }
+        });
+    }
+
+    public Domino map(final Function1 function1) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                mPlayer.play(input);
+                return new DefaultScheduler(input) {
+                    @Override
+                    protected Object onUpdate(Object input) {
+                        return function1.call(input);
                     }
                 };
             }

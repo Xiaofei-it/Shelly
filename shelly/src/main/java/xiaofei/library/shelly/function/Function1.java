@@ -16,11 +16,11 @@
  *
  */
 
-package xiaofei.library.shelly.action;
+package xiaofei.library.shelly.function;
 
 /**
- * Created by Xiaofei on 16/5/30.
+ * Created by Xiaofei on 16/6/14.
  */
-public interface TargetAction0<T> extends Action {
-    void call(T t);
+public interface Function1 extends Function {
+    Object call(Object input);
 }

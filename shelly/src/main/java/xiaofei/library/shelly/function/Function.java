@@ -16,11 +16,10 @@
  *
  */
 
-package xiaofei.library.shelly.action;
+package xiaofei.library.shelly.function;
 
 /**
- * Created by Xiaofei on 16/5/30.
+ * Created by Xiaofei on 16/6/14.
  */
-public interface Action1 {
-    void call(Object input);
+public interface Function {
 }

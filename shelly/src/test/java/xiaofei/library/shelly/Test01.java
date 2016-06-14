@@ -21,9 +21,9 @@ package xiaofei.library.shelly;
 import org.junit.Test;
 
 import xiaofei.library.shelly.annotation.DominoTarget;
-import xiaofei.library.shelly.action.Action0;
-import xiaofei.library.shelly.action.Action1;
-import xiaofei.library.shelly.action.TargetAction1;
+import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.TargetAction1;
 
 /**
  * Created by Xiaofei on 16/5/30.

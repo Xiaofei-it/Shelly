@@ -20,7 +20,9 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import xiaofei.library.shelly.action.Action0;
+import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function1;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,5 +58,37 @@ public class Test02 {
                 })
                 .commit();
         Shelly.playDomino(2, 2);
+
+        Shelly.createDomino(3)
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("action1 " + input);
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return input + "haha";
+                    }
+                })
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("after map " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(3, 2);
+
+        Shelly.createDomino(4)
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("action1 " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(4, 2);
     }
 }
