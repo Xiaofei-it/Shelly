@@ -161,9 +161,9 @@ public class Domino {
     public Domino background() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final Object finalInput) {
-                mPlayer.play(finalInput);
-                return new CachedThreadScheduler(finalInput);
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                return new CachedThreadScheduler(scheduler.getInput());
             }
         });
     }
@@ -174,9 +174,9 @@ public class Domino {
     Domino newThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final Object finalInput) {
-                mPlayer.play(finalInput);
-                return new NewThreadScheduler(finalInput);
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                return new NewThreadScheduler(scheduler.getInput());
             }
         });
     }
@@ -187,9 +187,9 @@ public class Domino {
     Domino defaultScheduler() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final Object finalInput) {
-                mPlayer.play(finalInput);
-                return new DefaultScheduler(finalInput);
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                return new DefaultScheduler(scheduler.getInput());
             }
         });
     }
@@ -197,9 +197,9 @@ public class Domino {
     public Domino uiThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final Object finalInput) {
-                mPlayer.play(finalInput);
-                return new UiThreadScheduler(finalInput);
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                return new UiThreadScheduler(scheduler.getInput());
             }
         });
     }
@@ -207,9 +207,9 @@ public class Domino {
     public Domino backgroundQueue() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final Object finalInput) {
-                mPlayer.play(finalInput);
-                return new SingleThreadScheduler(finalInput);
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                return new SingleThreadScheduler(scheduler.getInput());
             }
         });
     }

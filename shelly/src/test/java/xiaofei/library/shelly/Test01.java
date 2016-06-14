@@ -23,6 +23,8 @@ import org.junit.Test;
 import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function0;
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
 
 /**
@@ -75,6 +77,12 @@ public class Test01 {
                         a.g((String) input);
                     }
                 })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map1 " + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -82,6 +90,12 @@ public class Test01 {
                     }
                 })
                 .target(A.class, "target1")
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map2 " + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -106,10 +120,22 @@ public class Test01 {
                         System.out.println("cached thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map1" + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread2 : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map6" + input;
                     }
                 })
                 .newThread()
@@ -139,16 +165,34 @@ public class Test01 {
                     }
                 })
                 .background()
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map3" + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
+                .map(new Function0() {
+                    @Override
+                    public Object call() {
+                        return "map4";
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
                         System.out.println("cached thread4 : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map5" + input;
                     }
                 })
                 .commit();
