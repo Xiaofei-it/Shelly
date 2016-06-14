@@ -23,7 +23,26 @@ import xiaofei.library.shelly.internal.Player;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public interface Scheduler {
+public abstract class Scheduler {
 
-    void play(Player player, Object input);
+    private Object mInput;
+
+    public Scheduler(Object input) {
+        mInput = input;
+    }
+
+    protected abstract void onPlay(Player player, Object input);
+
+    public final void play(Player player) {
+        onPlay(player, mInput);
+    }
+
+    public void setInput(Object input) {
+        mInput = input;
+    }
+
+    public Object getInput() {
+        return mInput;
+    }
+
 }

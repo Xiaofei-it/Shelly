@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly.action;
+package xiaofei.library.shelly.function;
 
 /**
  * Created by Xiaofei on 16/5/30.
