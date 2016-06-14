@@ -203,5 +203,23 @@ public class Test01 {
         Shelly.playDomino("case05");
         Shelly.playDomino("case05", 8);
         Shelly.playDomino("case05", "i");
+
+        Shelly.createDomino("case06")
+                .defaultScheduler()
+                .target(new Action1() {
+                    @Override
+                    public void call(Object object) {
+                        System.out.println("Case 06 " + object);
+                    }
+                })
+                .target(B.class, new TargetAction1<B>() {
+                    @Override
+                    public void call(B b, Object input) {
+                        System.out.println("Case 06 B " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case06", 8);
+
     }
 }

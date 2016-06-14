@@ -52,7 +52,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 final Object finalInput = input;
-                return new DefaultScheduler() {
+                return new DefaultScheduler(null) {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;
@@ -165,10 +165,9 @@ public class Domino {
     public Domino background() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                final Object finalInput = input;
-                return new CachedThreadScheduler() {
+            public Scheduler play(final Object finalInput) {
+                mPlayer.play(finalInput);
+                return new CachedThreadScheduler(finalInput) {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;
@@ -179,15 +178,32 @@ public class Domino {
     }
 
     /**
-     * For unit test only
+     * For unit test only.
      */
-    public Domino newThread() {
+    Domino newThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                final Object finalInput = input;
-                return new NewThreadScheduler() {
+            public Scheduler play(final Object finalInput) {
+                mPlayer.play(finalInput);
+                return new NewThreadScheduler(finalInput) {
+                    @Override
+                    protected Object onUpdate(Object input) {
+                        return finalInput;
+                    }
+                };
+            }
+        });
+    }
+
+    /**
+     * For unit test only.
+     */
+    Domino defaultScheduler() {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(final Object finalInput) {
+                mPlayer.play(finalInput);
+                return new DefaultScheduler(finalInput) {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;
@@ -200,10 +216,9 @@ public class Domino {
     public Domino uiThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                final Object finalInput = input;
-                return new UiThreadScheduler() {
+            public Scheduler play(final Object finalInput) {
+                mPlayer.play(finalInput);
+                return new UiThreadScheduler(finalInput) {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;
@@ -216,10 +231,9 @@ public class Domino {
     public Domino backgroundQueue() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(Object input) {
-                mPlayer.play(input);
-                final Object finalInput = input;
-                return new SingleThreadScheduler() {
+            public Scheduler play(final Object finalInput) {
+                mPlayer.play(finalInput);
+                return new SingleThreadScheduler(finalInput) {
                     @Override
                     protected Object onUpdate(Object input) {
                         return finalInput;

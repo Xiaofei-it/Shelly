@@ -27,8 +27,8 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    public Scheduler() {
-        mInput = null;
+    public Scheduler(Object input) {
+        mInput = input;
     }
 
     protected abstract void onPlay(Player player, Object input);

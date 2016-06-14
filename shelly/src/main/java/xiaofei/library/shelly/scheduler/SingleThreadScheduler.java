@@ -30,8 +30,8 @@ public class SingleThreadScheduler extends Scheduler {
 
     private static ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
 
-    public SingleThreadScheduler() {
-        super();
+    public SingleThreadScheduler(Object input) {
+        super(input);
     }
 
     @Override

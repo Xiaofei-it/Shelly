@@ -30,8 +30,8 @@ public class UiThreadScheduler extends Scheduler {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    public UiThreadScheduler() {
-        super();
+    public UiThreadScheduler(Object input) {
+        super(input);
     }
 
     @Override

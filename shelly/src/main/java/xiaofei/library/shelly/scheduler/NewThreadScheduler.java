@@ -25,8 +25,8 @@ import xiaofei.library.shelly.internal.Player;
  */
 public class NewThreadScheduler extends Scheduler {
 
-    public NewThreadScheduler() {
-        super();
+    public NewThreadScheduler(Object input) {
+        super(input);
     }
 
     @Override

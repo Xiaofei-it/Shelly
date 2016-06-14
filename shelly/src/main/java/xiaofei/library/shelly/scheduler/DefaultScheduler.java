@@ -25,8 +25,8 @@ import xiaofei.library.shelly.internal.Player;
  */
 public class DefaultScheduler extends Scheduler {
 
-    public DefaultScheduler() {
-        super();
+    public DefaultScheduler(Object input) {
+        super(input);
     }
 
     @Override
