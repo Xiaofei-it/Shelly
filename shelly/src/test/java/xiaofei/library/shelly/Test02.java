@@ -78,10 +78,34 @@ public class Test02 {
                         System.out.println("after map " + input);
                     }
                 })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return input + "hihi";
+                    }
+                })
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("after map2 " + input);
+                    }
+                })
                 .commit();
         Shelly.playDomino(3, 2);
 
         Shelly.createDomino(4)
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("action1 " + input);
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "Map " + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {

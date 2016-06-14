@@ -53,12 +53,7 @@ public class Domino {
         this(label, new Player() {
             @Override
             public Scheduler play(Object input) {
-                return new DefaultScheduler(input) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return input;
-                    }
-                };
+                return new DefaultScheduler(input);
             }
         });
     }
@@ -168,12 +163,7 @@ public class Domino {
             @Override
             public Scheduler play(final Object finalInput) {
                 mPlayer.play(finalInput);
-                return new CachedThreadScheduler(finalInput) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return finalInput;
-                    }
-                };
+                return new CachedThreadScheduler(finalInput);
             }
         });
     }
@@ -186,12 +176,7 @@ public class Domino {
             @Override
             public Scheduler play(final Object finalInput) {
                 mPlayer.play(finalInput);
-                return new NewThreadScheduler(finalInput) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return finalInput;
-                    }
-                };
+                return new NewThreadScheduler(finalInput);
             }
         });
     }
@@ -204,12 +189,7 @@ public class Domino {
             @Override
             public Scheduler play(final Object finalInput) {
                 mPlayer.play(finalInput);
-                return new DefaultScheduler(finalInput) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return finalInput;
-                    }
-                };
+                return new DefaultScheduler(finalInput);
             }
         });
     }
@@ -219,12 +199,7 @@ public class Domino {
             @Override
             public Scheduler play(final Object finalInput) {
                 mPlayer.play(finalInput);
-                return new UiThreadScheduler(finalInput) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return finalInput;
-                    }
-                };
+                return new UiThreadScheduler(finalInput);
             }
         });
     }
@@ -234,12 +209,18 @@ public class Domino {
             @Override
             public Scheduler play(final Object finalInput) {
                 mPlayer.play(finalInput);
-                return new SingleThreadScheduler(finalInput) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return finalInput;
-                    }
-                };
+                return new SingleThreadScheduler(finalInput);
+            }
+        });
+    }
+
+    public Domino map(final Function0 function0) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(Object input) {
+                Scheduler scheduler = mPlayer.play(input);
+                scheduler.setInput(function0.call());
+                return scheduler;
             }
         });
     }
@@ -248,13 +229,9 @@ public class Domino {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                mPlayer.play(input);
-                return new DefaultScheduler(input) {
-                    @Override
-                    protected Object onUpdate(Object input) {
-                        return function1.call(input);
-                    }
-                };
+                Scheduler scheduler = mPlayer.play(input);
+                scheduler.setInput(function1.call(scheduler.getInput()));
+                return scheduler;
             }
         });
     }

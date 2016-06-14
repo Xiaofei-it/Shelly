@@ -35,10 +35,14 @@ public abstract class Scheduler {
 
     public final void play(Player player) {
         onPlay(player, mInput);
-        mInput = onUpdate(mInput);
     }
 
-    protected Object onUpdate(Object input) {
-        return input;
+    public void setInput(Object input) {
+        mInput = input;
     }
+
+    public Object getInput() {
+        return mInput;
+    }
+
 }
