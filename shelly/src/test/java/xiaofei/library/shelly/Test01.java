@@ -123,6 +123,7 @@ public class Test01 {
                 .map(new Function1() {
                     @Override
                     public Object call(Object input) {
+                        System.out.println("map1: " + Thread.currentThread().getName());
                         return "map1" + input;
                     }
                 })
@@ -135,6 +136,7 @@ public class Test01 {
                 .map(new Function1() {
                     @Override
                     public Object call(Object input) {
+                        System.out.println("map6: " + Thread.currentThread().getName());
                         return "map6" + input;
                     }
                 })
@@ -168,6 +170,7 @@ public class Test01 {
                 .map(new Function1() {
                     @Override
                     public Object call(Object input) {
+                        System.out.println("map3: " + Thread.currentThread().getName());
                         return "map3" + input;
                     }
                 })
@@ -180,6 +183,7 @@ public class Test01 {
                 .map(new Function0() {
                     @Override
                     public Object call() {
+                        System.out.println("map4: " + Thread.currentThread().getName());
                         return "map4";
                     }
                 })
@@ -192,6 +196,7 @@ public class Test01 {
                 .map(new Function1() {
                     @Override
                     public Object call(Object input) {
+                        System.out.println("map5: " + Thread.currentThread().getName());
                         return "map5" + input;
                     }
                 })
