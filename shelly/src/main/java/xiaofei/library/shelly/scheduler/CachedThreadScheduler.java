@@ -26,15 +26,16 @@ import xiaofei.library.shelly.internal.Player;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class CachedThreadScheduler implements Scheduler {
+public class CachedThreadScheduler extends Scheduler {
 
     private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
 
     public CachedThreadScheduler() {
-
+        super();
     }
 
-    public void play(final Player player, final Object input) {
+    @Override
+    protected void onPlay(final Player player, final Object input) {
         sExecutorService.execute(new Runnable() {
             @Override
             public void run() {

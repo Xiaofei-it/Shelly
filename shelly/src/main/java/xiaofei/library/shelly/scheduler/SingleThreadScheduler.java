@@ -26,15 +26,16 @@ import xiaofei.library.shelly.internal.Player;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class SingleThreadScheduler implements Scheduler {
+public class SingleThreadScheduler extends Scheduler {
 
     private static ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
 
     public SingleThreadScheduler() {
-
+        super();
     }
 
-    public void play(final Player player, final Object input) {
+    @Override
+    protected void onPlay(final Player player, final Object input) {
         sExecutorService.execute(new Runnable() {
             @Override
             public void run() {

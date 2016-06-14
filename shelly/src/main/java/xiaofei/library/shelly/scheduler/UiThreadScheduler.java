@@ -26,15 +26,16 @@ import xiaofei.library.shelly.internal.Player;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class UiThreadScheduler implements Scheduler {
+public class UiThreadScheduler extends Scheduler {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     public UiThreadScheduler() {
-
+        super();
     }
 
-    public void play(final Player player, final Object input) {
+    @Override
+    protected void onPlay(final Player player, final Object input) {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
