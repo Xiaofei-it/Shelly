@@ -219,12 +219,12 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 final Scheduler scheduler = mPlayer.play(input);
-                scheduler.block();
+                final int index = scheduler.block();
                 scheduler.schedule(new Runnable() {
                     @Override
                     public void run() {
                         scheduler.setInput(function0.call());
-                        scheduler.unblock();
+                        scheduler.unblock(index);
                     }
                 });
                 return scheduler;
@@ -237,12 +237,12 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 final Scheduler scheduler = mPlayer.play(input);
-                scheduler.block();
+                final int index = scheduler.block();
                 scheduler.schedule(new Runnable() {
                     @Override
                     public void run() {
                         scheduler.setInput(function1.call(scheduler.getInput()));
-                        scheduler.unblock();
+                        scheduler.unblock(index);
                     }
                 });
                 return scheduler;

@@ -18,10 +18,8 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.concurrent.SynchronousQueue;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.internal.Player;
 
@@ -32,7 +30,7 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    private AtomicBoolean mBlocked = new AtomicBoolean(false);
+    private final ArrayList<AtomicBoolean> mBlocked = new ArrayList<AtomicBoolean>();
 
     public Scheduler(Object input) {
         mInput = input;
@@ -40,9 +38,19 @@ public abstract class Scheduler {
 
     protected Runnable onPlay(final Player player) {
         return new Runnable() {
+            int last;
+            {
+                synchronized (mBlocked) {
+                    last = mBlocked.size() - 1;
+                }
+            }
             @Override
             public void run() {
-                while (mBlocked.get()) {
+                synchronized (mBlocked) {
+                    for (int i = 0; i <= last; ++i) {
+                        while (mBlocked.get(i).get()) {
+                        }
+                    }
                 }
                 player.play(mInput);
             }
@@ -55,12 +63,18 @@ public abstract class Scheduler {
         schedule(onPlay(player));
     }
 
-    public final void block() {
-        mBlocked.set(true);
+    public final int block() {
+        synchronized (mBlocked) {
+            AtomicBoolean atomicBoolean = new AtomicBoolean(true);
+            mBlocked.add(atomicBoolean);
+            return mBlocked.size() - 1;
+        }
     }
 
-    public final void unblock() {
-        mBlocked.set(false);
+    public final void unblock(int index) {
+        synchronized (mBlocked) {
+            mBlocked.get(index).set(false);
+        }
     }
 
     public void setInput(Object input) {
