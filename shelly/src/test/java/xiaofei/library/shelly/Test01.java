@@ -123,6 +123,11 @@ public class Test01 {
                 .map(new Function1() {
                     @Override
                     public Object call(Object input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
                         System.out.println("map1: " + Thread.currentThread().getName());
                         return "map1" + input;
                     }

@@ -21,8 +21,6 @@ package xiaofei.library.shelly.scheduler;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import xiaofei.library.shelly.internal.Player;
-
 /**
  * Created by Xiaofei on 16/5/31.
  */
@@ -35,12 +33,8 @@ public class CachedThreadScheduler extends Scheduler {
     }
 
     @Override
-    protected void onPlay(final Player player, final Object input) {
-        sExecutorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                player.play(input);
-            }
-        });
+    public void schedule(Runnable runnable) {
+        sExecutorService.execute(runnable);
     }
+
 }

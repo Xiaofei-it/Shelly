@@ -218,8 +218,15 @@ public class Domino {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                Scheduler scheduler = mPlayer.play(input);
-                scheduler.setInput(function0.call());
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.block();
+                scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        scheduler.setInput(function0.call());
+                        scheduler.unblock();
+                    }
+                });
                 return scheduler;
             }
         });
@@ -229,8 +236,15 @@ public class Domino {
         return new Domino(mLabel, new Player() {
             @Override
             public Scheduler play(Object input) {
-                Scheduler scheduler = mPlayer.play(input);
-                scheduler.setInput(function1.call(scheduler.getInput()));
+                final Scheduler scheduler = mPlayer.play(input);
+                scheduler.block();
+                scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        scheduler.setInput(function1.call(scheduler.getInput()));
+                        scheduler.unblock();
+                    }
+                });
                 return scheduler;
             }
         });
