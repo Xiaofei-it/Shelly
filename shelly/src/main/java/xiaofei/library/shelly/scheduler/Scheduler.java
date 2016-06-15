@@ -19,6 +19,10 @@
 package xiaofei.library.shelly.scheduler;
 
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.internal.Player;
 
@@ -28,6 +32,10 @@ import xiaofei.library.shelly.internal.Player;
 public abstract class Scheduler {
 
     private final CopyOnWriteArrayList<InputWrapper> mInputs;
+
+    private final Lock mLock = new ReentrantLock();
+
+    private final Condition mCondition = mLock.newCondition();
 
     public Scheduler(Object input) {
         mInputs = new CopyOnWriteArrayList<InputWrapper>();
@@ -64,7 +72,11 @@ public abstract class Scheduler {
     }
 
     public final void unblock(int index, Object object) {
+        mLock.lock();
         mInputs.set(index, new InputWrapper(object));
+        mCondition.signalAll();
+        mLock.unlock();
+        System.out.println("signal " + Thread.currentThread().getName());
     }
 
     public Object getInput(int index) {
@@ -88,9 +100,19 @@ public abstract class Scheduler {
 
         @Override
         public void run() {
-            for (int i = 0; i < mWaiting; ++i) {
-                while (mInputs.get(i) == null) {
+            mLock.lock();
+            try {
+                for (int i = 0; i < mWaiting; ++i) {
+                    while (mInputs.get(i) == null) {
+                        System.out.println(i + " before await " + Thread.currentThread().getName());
+                        mCondition.await();//1000, TimeUnit.MILLISECONDS);
+                        System.out.println(i + " after await " + Thread.currentThread().getName());
+                    }
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                mLock.unlock();
             }
             mRunnable.run();
         }
