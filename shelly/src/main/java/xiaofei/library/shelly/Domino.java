@@ -53,7 +53,7 @@ public class Domino {
         this(label, new Player() {
             @Override
             public Scheduler play(Object input) {
-                return new DefaultScheduler(input);
+                return new DefaultScheduler(input, null);
             }
         });
     }
@@ -163,7 +163,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new CachedThreadScheduler(scheduler.getInput());
+                return new CachedThreadScheduler(scheduler.getInput(-1), scheduler);
             }
         });
     }
@@ -176,7 +176,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new NewThreadScheduler(scheduler.getInput());
+                return new NewThreadScheduler(scheduler.getInput(-1), scheduler);
             }
         });
     }
@@ -189,7 +189,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new DefaultScheduler(scheduler.getInput());
+                return new DefaultScheduler(scheduler.getInput(-1), scheduler);
             }
         });
     }
@@ -199,7 +199,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new UiThreadScheduler(scheduler.getInput());
+                return new UiThreadScheduler(scheduler.getInput(-1), scheduler);
             }
         });
     }
@@ -209,7 +209,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new SingleThreadScheduler(scheduler.getInput());
+                return new SingleThreadScheduler(scheduler.getInput(-1), scheduler);
             }
         });
     }
@@ -223,8 +223,7 @@ public class Domino {
                 scheduler.schedule(new Runnable() {
                     @Override
                     public void run() {
-                        scheduler.setInput(function0.call());
-                        scheduler.unblock(index);
+                        scheduler.unblock(index, function0.call());
                     }
                 }, false);
                 return scheduler;
@@ -241,8 +240,7 @@ public class Domino {
                 scheduler.schedule(new Runnable() {
                     @Override
                     public void run() {
-                        scheduler.setInput(function1.call(scheduler.getInput()));
-                        scheduler.unblock(index);
+                        scheduler.unblock(index, function1.call(scheduler.getInput(index - 1)));
                     }
                 }, false);
                 return scheduler;

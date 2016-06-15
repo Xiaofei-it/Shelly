@@ -30,18 +30,30 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    private final CopyOnWriteArrayList<AtomicBoolean> mBlockedRunnables;
+    private final CopyOnWriteArrayList<Object> mBlockedRunnables;
 
-    public Scheduler(Object input) {
+    public Scheduler(Object input, Scheduler scheduler) {
         mInput = input;
-        mBlockedRunnables = new CopyOnWriteArrayList<AtomicBoolean>();
+        if (scheduler == null) {
+            mBlockedRunnables = new CopyOnWriteArrayList<Object>();
+        } else {
+            mBlockedRunnables = scheduler.mBlockedRunnables;
+        }
     }
 
     protected Runnable onPlay(final Player player) {
         return new Runnable() {
+            private int mIndex;
+            {
+                if (mBlockedRunnables.isEmpty()) {
+                    mIndex = -1;
+                } else {
+                    mIndex = mBlockedRunnables.size() - 1;
+                }
+            }
             @Override
             public void run() {
-                player.play(mInput);
+                player.play(mIndex == -1 ? mInput : mBlockedRunnables.get(mIndex));
             }
         };
     }
@@ -57,21 +69,20 @@ public abstract class Scheduler {
     }
 
     public final int block() {
-        AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-        mBlockedRunnables.add(atomicBoolean);
+        mBlockedRunnables.add(null);
         return mBlockedRunnables.size() - 1;
     }
 
-    public final void unblock(int index) {
-        mBlockedRunnables.get(index).set(false);
+    public final void unblock(int index, Object object) {
+        mBlockedRunnables.set(index, object);
     }
 
-    public void setInput(Object input) {
-        mInput = input;
-    }
-
-    public Object getInput() {
-        return mInput;
+    public Object getInput(int index) {
+        if (index == -1) {
+            return mInput;
+        } else {
+            return mBlockedRunnables.get(index);
+        }
     }
 
     private class ScheduledRunnable implements Runnable {
@@ -92,7 +103,7 @@ public abstract class Scheduler {
         @Override
         public void run() {
             for (int i = 0; i < mWaiting; ++i) {
-                while (mBlockedRunnables.get(i).get()) {
+                while (mBlockedRunnables.get(i) == null) {
                 }
             }
             mRunnable.run();

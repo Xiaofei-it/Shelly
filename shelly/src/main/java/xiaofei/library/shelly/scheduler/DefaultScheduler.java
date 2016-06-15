@@ -23,8 +23,8 @@ package xiaofei.library.shelly.scheduler;
  */
 public class DefaultScheduler extends Scheduler {
 
-    public DefaultScheduler(Object input) {
-        super(input);
+    public DefaultScheduler(Object input, Scheduler scheduler) {
+        super(input, scheduler);
     }
 
     @Override

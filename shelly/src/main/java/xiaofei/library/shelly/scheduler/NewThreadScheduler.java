@@ -23,8 +23,8 @@ package xiaofei.library.shelly.scheduler;
  */
 public class NewThreadScheduler extends Scheduler {
 
-    public NewThreadScheduler(Object input) {
-        super(input);
+    public NewThreadScheduler(Object input, Scheduler scheduler) {
+        super(input, scheduler);
     }
 
     @Override

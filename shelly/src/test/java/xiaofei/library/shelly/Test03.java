@@ -71,6 +71,41 @@ public class Test03 {
                 })
                 .commit();
         Shelly.playDomino(1, 2);
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+
+        }
+    }
+
+    @Test
+    public void g() {
+
+        Shelly.createDomino(2)
+                .backgroundQueue()
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("back queue : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        System.out.println("map1: " + Thread.currentThread().getName());
+                        return "map1" + input;
+                    }
+                })
+                .newThread()
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("new thread : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(2, 2);
         try {
             Thread.sleep(300000);
         } catch (InterruptedException e) {
