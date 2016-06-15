@@ -18,19 +18,18 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import xiaofei.library.shelly.internal.Player;
-
 /**
  * Created by Xiaofei on 16/5/31.
  */
 public class DefaultScheduler extends Scheduler {
 
-    public DefaultScheduler(Object input) {
-        super(input);
+    public DefaultScheduler(Object input, Scheduler scheduler) {
+        super(input, scheduler);
     }
 
     @Override
-    protected void onPlay(Player player, Object input) {
-        player.play(input);
+    protected void onSchedule(Runnable runnable) {
+        runnable.run();
     }
+
 }

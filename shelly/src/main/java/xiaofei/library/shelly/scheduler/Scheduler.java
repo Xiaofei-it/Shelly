@@ -18,6 +18,9 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import xiaofei.library.shelly.internal.Player;
 
 /**
@@ -27,22 +30,83 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    public Scheduler(Object input) {
+    private final CopyOnWriteArrayList<Object> mBlockedRunnables;
+
+    public Scheduler(Object input, Scheduler scheduler) {
         mInput = input;
+        if (scheduler == null) {
+            mBlockedRunnables = new CopyOnWriteArrayList<Object>();
+        } else {
+            mBlockedRunnables = scheduler.mBlockedRunnables;
+        }
     }
 
-    protected abstract void onPlay(Player player, Object input);
+    protected Runnable onPlay(final Player player) {
+        return new Runnable() {
+            private int mIndex;
+            {
+                if (mBlockedRunnables.isEmpty()) {
+                    mIndex = -1;
+                } else {
+                    mIndex = mBlockedRunnables.size() - 1;
+                }
+            }
+            @Override
+            public void run() {
+                player.play(mIndex == -1 ? mInput : mBlockedRunnables.get(mIndex));
+            }
+        };
+    }
+
+    protected abstract void onSchedule(Runnable runnable);
+
+    public void schedule(Runnable runnable, boolean lastIncluded) {
+        onSchedule(new ScheduledRunnable(runnable, lastIncluded));
+    }
 
     public final void play(Player player) {
-        onPlay(player, mInput);
+        schedule(onPlay(player), true);
     }
 
-    public void setInput(Object input) {
-        mInput = input;
+    public final int block() {
+        mBlockedRunnables.add(null);
+        return mBlockedRunnables.size() - 1;
     }
 
-    public Object getInput() {
-        return mInput;
+    public final void unblock(int index, Object object) {
+        mBlockedRunnables.set(index, object);
     }
 
+    public Object getInput(int index) {
+        if (index == -1) {
+            return mInput;
+        } else {
+            return mBlockedRunnables.get(index);
+        }
+    }
+
+    private class ScheduledRunnable implements Runnable {
+
+        private Runnable mRunnable;
+
+        private int mWaiting;
+
+        ScheduledRunnable(Runnable runnable, boolean lastIncluded) {
+            mRunnable = runnable;
+            if (lastIncluded) {
+                mWaiting = mBlockedRunnables.size();
+            } else {
+                mWaiting = mBlockedRunnables.size() - 1;
+            }
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < mWaiting; ++i) {
+                while (mBlockedRunnables.get(i) == null) {
+                }
+            }
+            mRunnable.run();
+        }
+    }
 }

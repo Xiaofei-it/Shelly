@@ -18,24 +18,17 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import xiaofei.library.shelly.internal.Player;
-
 /**
  * Created by Xiaofei on 16/5/31.
  */
 public class NewThreadScheduler extends Scheduler {
 
-    public NewThreadScheduler(Object input) {
-        super(input);
+    public NewThreadScheduler(Object input, Scheduler scheduler) {
+        super(input, scheduler);
     }
 
     @Override
-    protected void onPlay(final Player player, final Object input) {
-        new Thread() {
-            @Override
-            public void run() {
-                player.play(input);
-            }
-        }.start();
+    protected void onSchedule(Runnable runnable) {
+        new Thread(runnable).start();
     }
 }

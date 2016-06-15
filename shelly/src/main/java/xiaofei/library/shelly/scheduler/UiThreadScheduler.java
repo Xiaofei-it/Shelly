@@ -21,8 +21,6 @@ package xiaofei.library.shelly.scheduler;
 import android.os.Handler;
 import android.os.Looper;
 
-import xiaofei.library.shelly.internal.Player;
-
 /**
  * Created by Xiaofei on 16/5/31.
  */
@@ -30,17 +28,12 @@ public class UiThreadScheduler extends Scheduler {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    public UiThreadScheduler(Object input) {
-        super(input);
+    public UiThreadScheduler(Object input, Scheduler scheduler) {
+        super(input, scheduler);
     }
 
     @Override
-    protected void onPlay(final Player player, final Object input) {
-        sHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                player.play(input);
-            }
-        });
+    protected void onSchedule(Runnable runnable) {
+        sHandler.post(runnable);
     }
 }
