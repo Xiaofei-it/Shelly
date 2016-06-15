@@ -57,6 +57,18 @@ public class Test03 {
                         System.out.println("cached thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        return "map2" + input;
+                    }
+                })
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
                 .commit();
         Shelly.playDomino(1, 2);
         try {

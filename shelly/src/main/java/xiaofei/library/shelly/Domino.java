@@ -226,7 +226,7 @@ public class Domino {
                         scheduler.setInput(function0.call());
                         scheduler.unblock(index);
                     }
-                });
+                }, false);
                 return scheduler;
             }
         });
@@ -244,7 +244,7 @@ public class Domino {
                         scheduler.setInput(function1.call(scheduler.getInput()));
                         scheduler.unblock(index);
                     }
-                });
+                }, false);
                 return scheduler;
             }
         });

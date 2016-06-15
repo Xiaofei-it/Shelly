@@ -275,5 +275,10 @@ public class Test01 {
                 .commit();
         Shelly.playDomino("case06", 8);
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+
+        }
     }
 }

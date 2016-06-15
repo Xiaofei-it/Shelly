@@ -28,7 +28,7 @@ public class DefaultScheduler extends Scheduler {
     }
 
     @Override
-    public void schedule(Runnable runnable) {
+    protected void onSchedule(Runnable runnable) {
         runnable.run();
     }
 

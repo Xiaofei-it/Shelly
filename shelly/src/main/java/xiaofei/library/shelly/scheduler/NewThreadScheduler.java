@@ -28,7 +28,7 @@ public class NewThreadScheduler extends Scheduler {
     }
 
     @Override
-    public void schedule(Runnable runnable) {
+    protected void onSchedule(Runnable runnable) {
         new Thread(runnable).start();
     }
 }

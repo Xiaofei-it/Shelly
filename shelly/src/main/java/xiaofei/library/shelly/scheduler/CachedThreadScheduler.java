@@ -33,7 +33,7 @@ public class CachedThreadScheduler extends Scheduler {
     }
 
     @Override
-    public void schedule(Runnable runnable) {
+    protected void onSchedule(Runnable runnable) {
         sExecutorService.execute(runnable);
     }
 

@@ -18,7 +18,7 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import xiaofei.library.shelly.internal.Player;
@@ -30,51 +30,40 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    private final ArrayList<AtomicBoolean> mBlocked = new ArrayList<AtomicBoolean>();
+    private final CopyOnWriteArrayList<AtomicBoolean> mBlockedRunnables;
 
     public Scheduler(Object input) {
         mInput = input;
+        mBlockedRunnables = new CopyOnWriteArrayList<AtomicBoolean>();
     }
 
     protected Runnable onPlay(final Player player) {
         return new Runnable() {
-            int last;
-            {
-                synchronized (mBlocked) {
-                    last = mBlocked.size() - 1;
-                }
-            }
             @Override
             public void run() {
-                synchronized (mBlocked) {
-                    for (int i = 0; i <= last; ++i) {
-                        while (mBlocked.get(i).get()) {
-                        }
-                    }
-                }
                 player.play(mInput);
             }
         };
     }
 
-    public abstract void schedule(Runnable runnable);
+    protected abstract void onSchedule(Runnable runnable);
+
+    public void schedule(Runnable runnable, boolean lastIncluded) {
+        onSchedule(new ScheduledRunnable(runnable, lastIncluded));
+    }
 
     public final void play(Player player) {
-        schedule(onPlay(player));
+        schedule(onPlay(player), true);
     }
 
     public final int block() {
-        synchronized (mBlocked) {
-            AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-            mBlocked.add(atomicBoolean);
-            return mBlocked.size() - 1;
-        }
+        AtomicBoolean atomicBoolean = new AtomicBoolean(true);
+        mBlockedRunnables.add(atomicBoolean);
+        return mBlockedRunnables.size() - 1;
     }
 
     public final void unblock(int index) {
-        synchronized (mBlocked) {
-            mBlocked.get(index).set(false);
-        }
+        mBlockedRunnables.get(index).set(false);
     }
 
     public void setInput(Object input) {
@@ -85,4 +74,28 @@ public abstract class Scheduler {
         return mInput;
     }
 
+    private class ScheduledRunnable implements Runnable {
+
+        private Runnable mRunnable;
+
+        private int mWaiting;
+
+        ScheduledRunnable(Runnable runnable, boolean lastIncluded) {
+            mRunnable = runnable;
+            if (lastIncluded) {
+                mWaiting = mBlockedRunnables.size();
+            } else {
+                mWaiting = mBlockedRunnables.size() - 1;
+            }
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < mWaiting; ++i) {
+                while (mBlockedRunnables.get(i).get()) {
+                }
+            }
+            mRunnable.run();
+        }
+    }
 }

@@ -33,7 +33,7 @@ public class UiThreadScheduler extends Scheduler {
     }
 
     @Override
-    public void schedule(Runnable runnable) {
+    protected void onSchedule(Runnable runnable) {
         sHandler.post(runnable);
     }
 }
