@@ -105,7 +105,7 @@ public abstract class Scheduler {
                 for (int i = 0; i < mWaiting; ++i) {
                     while (mInputs.get(i) == null) {
                         System.out.println(i + " before await " + Thread.currentThread().getName());
-                        mCondition.await();//1000, TimeUnit.MILLISECONDS);
+                        mCondition.await(1000, TimeUnit.MILLISECONDS);
                         System.out.println(i + " after await " + Thread.currentThread().getName());
                     }
                 }
