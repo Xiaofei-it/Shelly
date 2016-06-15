@@ -19,7 +19,6 @@
 package xiaofei.library.shelly.scheduler;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import xiaofei.library.shelly.internal.Player;
 
@@ -30,12 +29,12 @@ public abstract class Scheduler {
 
     private Object mInput;
 
-    private final CopyOnWriteArrayList<Object> mBlockedRunnables;
+    private final CopyOnWriteArrayList<InputWrapper> mBlockedRunnables;
 
     public Scheduler(Object input, Scheduler scheduler) {
         mInput = input;
         if (scheduler == null) {
-            mBlockedRunnables = new CopyOnWriteArrayList<Object>();
+            mBlockedRunnables = new CopyOnWriteArrayList<InputWrapper>();
         } else {
             mBlockedRunnables = scheduler.mBlockedRunnables;
         }
@@ -53,7 +52,7 @@ public abstract class Scheduler {
             }
             @Override
             public void run() {
-                player.play(mIndex == -1 ? mInput : mBlockedRunnables.get(mIndex));
+                player.play(mIndex == -1 ? mInput : mBlockedRunnables.get(mIndex).getInput());
             }
         };
     }
@@ -74,14 +73,14 @@ public abstract class Scheduler {
     }
 
     public final void unblock(int index, Object object) {
-        mBlockedRunnables.set(index, object);
+        mBlockedRunnables.set(index, new InputWrapper(object));
     }
 
     public Object getInput(int index) {
         if (index == -1) {
             return mInput;
         } else {
-            return mBlockedRunnables.get(index);
+            return mBlockedRunnables.get(index).getInput();
         }
     }
 
@@ -107,6 +106,18 @@ public abstract class Scheduler {
                 }
             }
             mRunnable.run();
+        }
+    }
+
+    private static class InputWrapper {
+        private final Object mInput;
+
+        InputWrapper(Object input) {
+            mInput = input;
+        }
+
+        Object getInput() {
+            return mInput;
         }
     }
 }
