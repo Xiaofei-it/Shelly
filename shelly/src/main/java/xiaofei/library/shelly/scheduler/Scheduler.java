@@ -27,39 +27,30 @@ import xiaofei.library.shelly.internal.Player;
  */
 public abstract class Scheduler {
 
-    private Object mInput;
+    private final CopyOnWriteArrayList<InputWrapper> mInputs;
 
-    private final CopyOnWriteArrayList<InputWrapper> mBlockedRunnables;
+    public Scheduler(Object input) {
+        mInputs = new CopyOnWriteArrayList<InputWrapper>();
+        mInputs.add(new InputWrapper(input));
+    }
 
-    public Scheduler(Object input, Scheduler scheduler) {
-        mInput = input;
-        if (scheduler == null) {
-            mBlockedRunnables = new CopyOnWriteArrayList<InputWrapper>();
-        } else {
-            mBlockedRunnables = scheduler.mBlockedRunnables;
-        }
+    public Scheduler(Scheduler scheduler) {
+        mInputs = scheduler.mInputs;
     }
 
     protected Runnable onPlay(final Player player) {
         return new Runnable() {
-            private int mIndex;
-            {
-                if (mBlockedRunnables.isEmpty()) {
-                    mIndex = -1;
-                } else {
-                    mIndex = mBlockedRunnables.size() - 1;
-                }
-            }
+            private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.play(mIndex == -1 ? mInput : mBlockedRunnables.get(mIndex).getInput());
+                player.play(mInputs.get(mIndex).getInput());
             }
         };
     }
 
     protected abstract void onSchedule(Runnable runnable);
 
-    public void schedule(Runnable runnable, boolean lastIncluded) {
+    public final void schedule(Runnable runnable, boolean lastIncluded) {
         onSchedule(new ScheduledRunnable(runnable, lastIncluded));
     }
 
@@ -68,20 +59,16 @@ public abstract class Scheduler {
     }
 
     public final int block() {
-        mBlockedRunnables.add(null);
-        return mBlockedRunnables.size() - 1;
+        mInputs.add(null);
+        return mInputs.size() - 1;
     }
 
     public final void unblock(int index, Object object) {
-        mBlockedRunnables.set(index, new InputWrapper(object));
+        mInputs.set(index, new InputWrapper(object));
     }
 
     public Object getInput(int index) {
-        if (index == -1) {
-            return mInput;
-        } else {
-            return mBlockedRunnables.get(index).getInput();
-        }
+        return mInputs.get(index).getInput();
     }
 
     private class ScheduledRunnable implements Runnable {
@@ -93,16 +80,16 @@ public abstract class Scheduler {
         ScheduledRunnable(Runnable runnable, boolean lastIncluded) {
             mRunnable = runnable;
             if (lastIncluded) {
-                mWaiting = mBlockedRunnables.size();
+                mWaiting = mInputs.size();
             } else {
-                mWaiting = mBlockedRunnables.size() - 1;
+                mWaiting = mInputs.size() - 1;
             }
         }
 
         @Override
         public void run() {
             for (int i = 0; i < mWaiting; ++i) {
-                while (mBlockedRunnables.get(i) == null) {
+                while (mInputs.get(i) == null) {
                 }
             }
             mRunnable.run();
