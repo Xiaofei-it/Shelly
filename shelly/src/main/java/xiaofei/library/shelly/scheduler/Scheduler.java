@@ -63,8 +63,7 @@ public abstract class Scheduler {
     }
 
     public final int block() {
-        mInputs.append();
-        return mInputs.size() - 1;
+        return mInputs.append() - 1;
     }
 
     public final void unblock(int index, Object object) {
@@ -124,15 +123,18 @@ public abstract class Scheduler {
 
         Inputs() {}
 
-        void append() {
-            addInternal(null);
+        int append() {
+            return addInternal(null);
         }
 
-        void addInternal(InputWrapper inputWrapper) {
-            mInputs.add(inputWrapper);
-            ReentrantLock lock = new ReentrantLock();
-            mLocks.add(lock);
-            mConditions.add(lock.newCondition());
+        int addInternal(InputWrapper inputWrapper) {
+            synchronized (this) {
+                mInputs.add(inputWrapper);
+                ReentrantLock lock = new ReentrantLock();
+                mLocks.add(lock);
+                mConditions.add(lock.newCondition());
+                return mInputs.size();
+            }
         }
 
         void add(Object input) {

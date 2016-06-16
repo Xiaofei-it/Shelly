@@ -214,7 +214,7 @@ public class Test01 {
                     @Override
                     public void call() {
                         try {
-                            Thread.sleep(10000);
+                            Thread.sleep(2000);
                             System.out.println("Case 04: target");
                         } catch (InterruptedException e) {
 
