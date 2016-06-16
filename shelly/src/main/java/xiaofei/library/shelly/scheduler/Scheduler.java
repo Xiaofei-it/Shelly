@@ -20,9 +20,7 @@ package xiaofei.library.shelly.scheduler;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.internal.Player;
@@ -31,6 +29,8 @@ import xiaofei.library.shelly.internal.Player;
  * Created by Xiaofei on 16/5/31.
  */
 public abstract class Scheduler {
+
+    private static final boolean DEBUG = false;
 
     private final InputsWrapper mInputs;
 
@@ -97,9 +97,13 @@ public abstract class Scheduler {
                 try {
                     mInputs.lock(i);
                     while (mInputs.get(i) == null) {
-                        System.out.println(i + " before await " + Thread.currentThread().getName());
+                        if (DEBUG) {
+                            System.out.println(i + " before await " + Thread.currentThread().getName());
+                        }
                         mInputs.await(i);
-                        System.out.println(i + " after await " + Thread.currentThread().getName());
+                        if (DEBUG) {
+                            System.out.println(i + " after await " + Thread.currentThread().getName());
+                        }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -149,7 +153,9 @@ public abstract class Scheduler {
             mLocks.get(index).lock();
             mInputs.set(index, new InputWrapper(input));
             mConditions.get(index).signalAll();
-            System.out.println("signal " + Thread.currentThread().getName());
+            if (DEBUG) {
+                System.out.println("signal " + Thread.currentThread().getName());
+            }
             mLocks.get(index).unlock();
         }
 
