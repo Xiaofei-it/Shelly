@@ -89,9 +89,7 @@ public class TargetCenter {
     }
 
     public List<Object> getObjects(Class<?> clazz) {
-        synchronized (mObjects) {
-            return Collections.unmodifiableList(mObjects.get(clazz));
-        }
+        return mObjects.get(clazz);
     }
 
     public void call(Class<?> clazz, String target, Object input) {
