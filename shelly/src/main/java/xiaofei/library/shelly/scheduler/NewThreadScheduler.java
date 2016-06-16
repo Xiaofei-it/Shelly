@@ -20,6 +20,8 @@ package xiaofei.library.shelly.scheduler;
 
 /**
  * Created by Xiaofei on 16/5/31.
+ *
+ * For unit test only.
  */
 public class NewThreadScheduler extends Scheduler {
 

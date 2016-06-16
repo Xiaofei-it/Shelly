@@ -47,7 +47,7 @@ public abstract class Scheduler {
             private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.play(mInputs.get(mIndex).getInput());
+                player.play(mInputs.get(mIndex));
             }
         };
     }
@@ -71,7 +71,7 @@ public abstract class Scheduler {
     }
 
     public Object getInput(int index) {
-        return mInputs.get(index).getInput();
+        return mInputs.get(index);
     }
 
     private class ScheduledRunnable implements Runnable {
@@ -94,7 +94,7 @@ public abstract class Scheduler {
             for (int i = 0; i < mWaiting; ++i) {
                 try {
                     mInputs.lock(i);
-                    while (mInputs.get(i) == null) {
+                    while (!mInputs.inputSet(i)) {
                         if (DEBUG) {
                             System.out.println(i + " before await " + Thread.currentThread().getName());
                         }
@@ -141,12 +141,15 @@ public abstract class Scheduler {
             addInternal(new InputWrapper(input));
         }
 
+        boolean inputSet(int index) {
+            return mInputs.get(index) != null;
+        }
         int size() {
             return mInputs.size();
         }
 
-        InputWrapper get(int index) {
-            return mInputs.get(index);
+        Object get(int index) {
+            return mInputs.get(index).getInput();
         }
 
         void set(int index, Object input) {
