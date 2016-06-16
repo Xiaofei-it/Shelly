@@ -29,11 +29,11 @@ import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.TargetCenter;
-import xiaofei.library.shelly.scheduler.CachedThreadScheduler;
+import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
-import xiaofei.library.shelly.scheduler.SingleThreadScheduler;
+import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 
 /**
@@ -163,7 +163,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new CachedThreadScheduler(scheduler);
+                return new BackgroundScheduler(scheduler);
             }
         });
     }
@@ -209,7 +209,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new SingleThreadScheduler(scheduler);
+                return new BackgroundQueueScheduler(scheduler);
             }
         });
     }

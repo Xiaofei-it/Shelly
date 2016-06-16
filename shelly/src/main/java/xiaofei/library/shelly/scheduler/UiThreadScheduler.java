@@ -34,6 +34,11 @@ public class UiThreadScheduler extends Scheduler {
 
     @Override
     protected void onSchedule(Runnable runnable) {
-        sHandler.post(runnable);
+        boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
+        if (isMainThread) {
+            runnable.run();
+        } else {
+            sHandler.post(runnable);
+        }
     }
 }
