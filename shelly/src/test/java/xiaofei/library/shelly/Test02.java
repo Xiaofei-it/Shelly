@@ -24,8 +24,6 @@ import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 
-import static org.junit.Assert.assertEquals;
-
 /**
  * Created by Xiaofei on 16/5/30.
  */

@@ -61,7 +61,7 @@ public class TargetCenter {
         synchronized (mObjects) {
             LinkedList<Object> objects = mObjects.get(clazz);
             if (objects == null) {
-                objects = new LinkedList<>();
+                objects = new LinkedList<Object>();
                 mObjects.put(clazz, objects);
             }
             objects.add(object);

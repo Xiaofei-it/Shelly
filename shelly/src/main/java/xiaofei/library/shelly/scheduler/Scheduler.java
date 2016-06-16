@@ -117,9 +117,9 @@ public abstract class Scheduler {
 
         private final CopyOnWriteArrayList<InputWrapper> mInputs = new CopyOnWriteArrayList<InputWrapper>();
 
-        private final CopyOnWriteArrayList<ReentrantLock> mLocks = new CopyOnWriteArrayList<>();
+        private final CopyOnWriteArrayList<ReentrantLock> mLocks = new CopyOnWriteArrayList<ReentrantLock>();
 
-        private final CopyOnWriteArrayList<Condition> mConditions = new CopyOnWriteArrayList<>();
+        private final CopyOnWriteArrayList<Condition> mConditions = new CopyOnWriteArrayList<Condition>();
 
         Inputs() {}
 
