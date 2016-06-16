@@ -20,9 +20,7 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
-import xiaofei.library.shelly.function.Function0;
 import xiaofei.library.shelly.function.Function1;
 
 /**
@@ -136,7 +134,31 @@ public class Test03 {
                         System.out.println("Fuck: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .background()
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        System.out.println("map2: " + Thread.currentThread().getName());
+                        return "map2" + input;
+                    }
+                })
+                .newThread()
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        System.out.println("map3: " + Thread.currentThread().getName());
+                        return "map3" + input;
+                    }
+                })
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -146,7 +168,7 @@ public class Test03 {
                 .commit();
         Shelly.playDomino("case03", "ABC");
         try {
-            Thread.sleep(500000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

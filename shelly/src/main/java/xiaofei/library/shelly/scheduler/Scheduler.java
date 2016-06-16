@@ -29,7 +29,7 @@ import xiaofei.library.shelly.internal.Player;
  */
 public abstract class Scheduler {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private final Inputs mInputs;
 
