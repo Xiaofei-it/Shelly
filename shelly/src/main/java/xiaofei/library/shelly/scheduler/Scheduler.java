@@ -18,10 +18,9 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.internal.Player;
@@ -31,15 +30,13 @@ import xiaofei.library.shelly.internal.Player;
  */
 public abstract class Scheduler {
 
-    private final CopyOnWriteArrayList<InputWrapper> mInputs;
+    private static final boolean DEBUG = false;
 
-    private final Lock mLock = new ReentrantLock();
-
-    private final Condition mCondition = mLock.newCondition();
+    private final InputsWrapper mInputs;
 
     public Scheduler(Object input) {
-        mInputs = new CopyOnWriteArrayList<InputWrapper>();
-        mInputs.add(new InputWrapper(input));
+        mInputs = new InputsWrapper();
+        mInputs.add(input);
     }
 
     public Scheduler(Scheduler scheduler) {
@@ -67,16 +64,12 @@ public abstract class Scheduler {
     }
 
     public final int block() {
-        mInputs.add(null);
+        mInputs.append();
         return mInputs.size() - 1;
     }
 
     public final void unblock(int index, Object object) {
-        mLock.lock();
-        mInputs.set(index, new InputWrapper(object));
-        mCondition.signalAll();
-        mLock.unlock();
-        System.out.println("signal " + Thread.currentThread().getName());
+        mInputs.set(index, object);
     }
 
     public Object getInput(int index) {
@@ -100,22 +93,84 @@ public abstract class Scheduler {
 
         @Override
         public void run() {
-            mLock.lock();
-            try {
-                for (int i = 0; i < mWaiting; ++i) {
+            for (int i = 0; i < mWaiting; ++i) {
+                try {
+                    mInputs.lock(i);
                     while (mInputs.get(i) == null) {
-                        System.out.println(i + " before await " + Thread.currentThread().getName());
-                        mCondition.await(1000, TimeUnit.MILLISECONDS);
-                        System.out.println(i + " after await " + Thread.currentThread().getName());
+                        if (DEBUG) {
+                            System.out.println(i + " before await " + Thread.currentThread().getName());
+                        }
+                        mInputs.await(i);
+                        if (DEBUG) {
+                            System.out.println(i + " after await " + Thread.currentThread().getName());
+                        }
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    mInputs.unlock(i);
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                mLock.unlock();
             }
             mRunnable.run();
         }
+    }
+
+    private static class InputsWrapper {
+        private final CopyOnWriteArrayList<InputWrapper> mInputs = new CopyOnWriteArrayList<InputWrapper>();
+
+        private final ArrayList<ReentrantLock> mLocks = new ArrayList<ReentrantLock>();
+
+        private final ArrayList<Condition> mConditions = new ArrayList<Condition>();
+
+        InputsWrapper() {
+
+        }
+
+        void append() {
+            addInternal(null);
+        }
+
+        void addInternal(InputWrapper inputWrapper) {
+            mInputs.add(inputWrapper);
+            ReentrantLock lock = new ReentrantLock();
+            mLocks.add(lock);
+            mConditions.add(lock.newCondition());
+        }
+
+        void add(Object input) {
+            addInternal(new InputWrapper(input));
+        }
+
+        int size() {
+            return mInputs.size();
+        }
+
+        InputWrapper get(int index) {
+            return mInputs.get(index);
+        }
+
+        void set(int index, Object input) {
+            mLocks.get(index).lock();
+            mInputs.set(index, new InputWrapper(input));
+            mConditions.get(index).signalAll();
+            if (DEBUG) {
+                System.out.println("signal " + Thread.currentThread().getName());
+            }
+            mLocks.get(index).unlock();
+        }
+
+        void lock(int index) {
+            mLocks.get(index).lock();
+        }
+
+        void unlock(int index) {
+            mLocks.get(index).unlock();
+        }
+
+        void await(int index) throws InterruptedException {
+            mConditions.get(index).await();
+        }
+
     }
 
     private static class InputWrapper {
