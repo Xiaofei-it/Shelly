@@ -60,7 +60,8 @@ public class TargetCenter {
         Class<?> clazz = object.getClass();
         CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
         if (objects == null) {
-            objects = mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<>());
+            mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<>());
+            objects = mObjects.get(clazz);
         }
         objects.add(object);
         //The following must be in a synchronized block.
