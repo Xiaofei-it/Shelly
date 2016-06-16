@@ -21,6 +21,7 @@ package xiaofei.library.shelly.internal;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import xiaofei.library.shelly.Domino;
 
@@ -31,38 +32,38 @@ public class DominoCenter {
 
     private static final String TAG = "DominoCenter";
 
-    private static DominoCenter sInstance = null;
+    private static volatile DominoCenter sInstance = null;
 
-    private final HashMap<Object, Domino> mDominoes;
+    private final ConcurrentHashMap<Object, Domino> mDominoes;
 
     private DominoCenter() {
-        mDominoes = new HashMap<Object, Domino>();
+        mDominoes = new ConcurrentHashMap<>();
     }
 
-    public static synchronized DominoCenter getInstance() {
+    public static DominoCenter getInstance() {
         if (sInstance == null) {
-            sInstance = new DominoCenter();
+            synchronized (DominoCenter.class) {
+                if (sInstance == null) {
+                    sInstance = new DominoCenter();
+                }
+            }
         }
         return sInstance;
     }
 
     public void commit(Domino domino) {
         Object label = domino.getLabel();
-        synchronized (mDominoes) {
-            if (mDominoes.put(label, domino) != null) {
-                Log.w(TAG, "Domino name duplicate! Check whether you have commit a domino with the same label before.");
-            }
+        if (mDominoes.put(label, domino) != null) {
+            Log.w(TAG, "Domino name duplicate! Check whether you have commit a domino with the same label before.");
         }
     }
 
     public void play(Object label, Object input) {
-        synchronized (mDominoes) {
-            Domino domino = mDominoes.get(label);
-            if (domino == null) {
-                throw new IllegalStateException("There is no domino labeled '" + label + "'.");
-            }
-            domino.play(input);
+        Domino domino = mDominoes.get(label);
+        if (domino == null) {
+            throw new IllegalStateException("There is no domino labeled '" + label + "'.");
         }
+        domino.play(input);
     }
 
 }

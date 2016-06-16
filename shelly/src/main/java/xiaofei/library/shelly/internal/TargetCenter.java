@@ -24,6 +24,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.annotation.AnnotationUtils;
 
@@ -32,53 +34,55 @@ import xiaofei.library.shelly.annotation.AnnotationUtils;
  */
 public class TargetCenter {
 
-    private static TargetCenter sInstance = null;
+    private static volatile TargetCenter sInstance = null;
 
-    private final HashMap<Class<?>, HashMap<String, Method>> mMethods;
+    private final ConcurrentHashMap<Class<?>, ConcurrentHashMap<String, Method>> mMethods;
 
-    private final HashMap<Class<?>, LinkedList<Object>> mObjects;
+    private final ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>> mObjects;
 
     private TargetCenter() {
-        mMethods = new HashMap<Class<?>, HashMap<String, Method>>();
-        mObjects = new HashMap<Class<?>, LinkedList<Object>>();
+        mMethods = new ConcurrentHashMap<Class<?>, ConcurrentHashMap<String, Method>>();
+        mObjects = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>>();
     }
 
-    public static synchronized TargetCenter getInstance() {
+    public static TargetCenter getInstance() {
         if (sInstance == null) {
-            sInstance = new TargetCenter();
+            synchronized (TargetCenter.class) {
+                if (sInstance == null) {
+                    sInstance = new TargetCenter();
+                }
+            }
         }
         return sInstance;
     }
 
     public void register(Object object) {
         Class<?> clazz = object.getClass();
-        synchronized (mMethods) {
-            HashMap<String, Method> methods = mMethods.get(clazz);
-            if (methods == null) {
-                mMethods.put(clazz, AnnotationUtils.getTargetMethods(clazz));
-            }
+        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+        if (objects == null) {
+            objects = mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<>());
         }
-        synchronized (mObjects) {
-            LinkedList<Object> objects = mObjects.get(clazz);
-            if (objects == null) {
-                objects = new LinkedList<Object>();
-                mObjects.put(clazz, objects);
+        objects.add(object);
+        //The following must be in a synchronized block.
+        //The mMethods modification must follow the mObjects modification.
+        synchronized (mMethods) {
+            ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
+            if (methods == null) {
+                mMethods.putIfAbsent(clazz, new ConcurrentHashMap<String, Method>(AnnotationUtils.getTargetMethods(clazz)));
             }
-            objects.add(object);
         }
     }
 
     public void unregister(Object object) {
         Class<?> clazz = object.getClass();
-        synchronized (mObjects) {
-            LinkedList<Object> objects = mObjects.get(clazz);
-            if (objects == null || !objects.remove(object)) {
-                throw new IllegalArgumentException("Object " + object + " has not been registered.");
-            }
+        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+        if (objects == null || !objects.remove(object)) {
+            throw new IllegalArgumentException("Object " + object + " has not been registered.");
+        }
+        //The following must be in a synchronized block.
+        synchronized (mMethods) {
             if (objects.isEmpty()) {
-                synchronized (mMethods) {
-                    mMethods.remove(clazz);
-                }
+                mMethods.remove(clazz);
             }
         }
     }
@@ -90,31 +94,29 @@ public class TargetCenter {
     }
 
     public void call(Class<?> clazz, String target, Object input) {
-        Method method;
-        synchronized (mMethods) {
-            HashMap<String, Method> methods = mMethods.get(clazz);
-            if (methods == null) {
-                throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
-            }
-            method = methods.get(target);
+        ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
+        if (methods == null) {
+            throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
         }
+        Method method = methods.get(target);
         if (method == null) {
             throw new IllegalStateException("Class " + clazz.getName() + " has no method matching the target " + target);
         }
-        synchronized (mObjects) {
-            LinkedList<Object> objects = mObjects.get(clazz);
-            for (Object object : objects) {
-                try {
-                    if (method.getParameterTypes().length == 0) {
-                        method.invoke(object);
-                    } else {
-                        method.invoke(object, input);
-                    }
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
+        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+        if (objects == null) {
+            return;
+        }
+        for (Object object : objects) {
+            try {
+                if (method.getParameterTypes().length == 0) {
+                    method.invoke(object);
+                } else {
+                    method.invoke(object, input);
                 }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
             }
         }
     }

@@ -20,6 +20,7 @@ package xiaofei.library.shelly.annotation;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -30,8 +31,8 @@ public class AnnotationUtils {
 
     }
 
-    public static HashMap<String, Method> getTargetMethods(Class<?> clazz) {
-        HashMap<String, Method> result = new HashMap<String, Method>();
+    public static Map<String, Method> getTargetMethods(Class<?> clazz) {
+        Map<String, Method> result = new HashMap<String, Method>();
         Method[] methods = clazz.getMethods();
         for (Method method : methods) {
             DominoTarget dominoTarget = method.getAnnotation(DominoTarget.class);
