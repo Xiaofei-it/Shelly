@@ -18,7 +18,6 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -32,10 +31,10 @@ public abstract class Scheduler {
 
     private static final boolean DEBUG = false;
 
-    private final InputsWrapper mInputs;
+    private final Inputs mInputs;
 
     public Scheduler(Object input) {
-        mInputs = new InputsWrapper();
+        mInputs = new Inputs();
         mInputs.add(input);
     }
 
@@ -115,16 +114,15 @@ public abstract class Scheduler {
         }
     }
 
-    private static class InputsWrapper {
+    private static class Inputs {
+
         private final CopyOnWriteArrayList<InputWrapper> mInputs = new CopyOnWriteArrayList<InputWrapper>();
 
-        private final ArrayList<ReentrantLock> mLocks = new ArrayList<ReentrantLock>();
+        private final CopyOnWriteArrayList<ReentrantLock> mLocks = new CopyOnWriteArrayList<>();
 
-        private final ArrayList<Condition> mConditions = new ArrayList<Condition>();
+        private final CopyOnWriteArrayList<Condition> mConditions = new CopyOnWriteArrayList<>();
 
-        InputsWrapper() {
-
-        }
+        Inputs() {}
 
         void append() {
             addInternal(null);
