@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function0;
 import xiaofei.library.shelly.function.Function1;
 
 /**
@@ -83,7 +84,7 @@ public class Test03 {
     public void g() {
 
         Shelly.createDomino(2)
-                .backgroundQueue()
+                .background()
                 .target(new Action1() {
                     @Override
                     public void call(Object input) {
@@ -107,9 +108,47 @@ public class Test03 {
                 .commit();
         Shelly.playDomino(2, 2);
         try {
-            Thread.sleep(300000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
 
+        }
+    }
+
+    @Test
+    public void h() {
+        Shelly.createDomino("case03")
+                .background()
+                .map(new Function1() {
+                    @Override
+                    public Object call(Object input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        System.out.println("map1: " + Thread.currentThread().getName());
+                        return "map1" + input;
+                    }
+                })
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("Fuck: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .background()
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("new Thread1 : " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case03", "ABC");
+        try {
+            Thread.sleep(500000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

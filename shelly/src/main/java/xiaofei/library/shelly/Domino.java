@@ -53,7 +53,7 @@ public class Domino {
         this(label, new Player() {
             @Override
             public Scheduler play(Object input) {
-                return new DefaultScheduler(input, null);
+                return new DefaultScheduler(input);
             }
         });
     }
@@ -163,7 +163,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new CachedThreadScheduler(scheduler.getInput(-1), scheduler);
+                return new CachedThreadScheduler(scheduler);
             }
         });
     }
@@ -176,7 +176,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new NewThreadScheduler(scheduler.getInput(-1), scheduler);
+                return new NewThreadScheduler(scheduler);
             }
         });
     }
@@ -189,7 +189,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new DefaultScheduler(scheduler.getInput(-1), scheduler);
+                return new DefaultScheduler(scheduler);
             }
         });
     }
@@ -199,7 +199,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new UiThreadScheduler(scheduler.getInput(-1), scheduler);
+                return new UiThreadScheduler(scheduler);
             }
         });
     }
@@ -209,7 +209,7 @@ public class Domino {
             @Override
             public Scheduler play(Object input) {
                 Scheduler scheduler = mPlayer.play(input);
-                return new SingleThreadScheduler(scheduler.getInput(-1), scheduler);
+                return new SingleThreadScheduler(scheduler);
             }
         });
     }

@@ -28,8 +28,8 @@ public class CachedThreadScheduler extends Scheduler {
 
     private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
 
-    public CachedThreadScheduler(Object input, Scheduler scheduler) {
-        super(input, scheduler);
+    public CachedThreadScheduler(Scheduler scheduler) {
+        super(scheduler);
     }
 
     @Override
