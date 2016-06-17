@@ -18,6 +18,8 @@
 
 package xiaofei.library.shelly.internal;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import xiaofei.library.shelly.scheduler.Scheduler;
 
 /**
@@ -25,6 +27,6 @@ import xiaofei.library.shelly.scheduler.Scheduler;
  */
 public interface Player {
 
-    Scheduler play(Object input);
+    Scheduler play(CopyOnWriteArrayList<Object> input);
 
 }

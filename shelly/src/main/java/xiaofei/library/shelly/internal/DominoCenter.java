@@ -20,8 +20,8 @@ package xiaofei.library.shelly.internal;
 
 import android.util.Log;
 
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.Domino;
 
@@ -58,7 +58,7 @@ public class DominoCenter {
         }
     }
 
-    public void play(Object label, Object input) {
+    public void play(Object label, CopyOnWriteArrayList<Object> input) {
         Domino domino = mDominoes.get(label);
         if (domino == null) {
             throw new IllegalStateException("There is no domino labeled '" + label + "'.");

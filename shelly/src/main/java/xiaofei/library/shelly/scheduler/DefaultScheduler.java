@@ -18,12 +18,14 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 /**
  * Created by Xiaofei on 16/5/31.
  */
 public class DefaultScheduler extends Scheduler {
 
-    public DefaultScheduler(Object input) {
+    public DefaultScheduler(CopyOnWriteArrayList<Object> input) {
         super(input);
     }
 

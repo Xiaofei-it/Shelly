@@ -18,6 +18,9 @@
 
 package xiaofei.library.shelly;
 
+import java.util.Arrays;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.TargetCenter;
 
@@ -42,11 +45,17 @@ public class Shelly {
         return new Domino(label);
     }
 
-    public static void playDomino(Object label, Object input) {
-        DOMINO_CENTER.play(label, input);
+    public static void playDomino(Object label, Object... input) {
+        playDominoInternal(label, new CopyOnWriteArrayList<Object>(Arrays.asList(input)));
+        //TODO what if play(label, null)???
     }
 
+    //TODO Can these two be one???
     public static void playDomino(Object label) {
-        playDomino(label, null);
+        playDominoInternal(label, new CopyOnWriteArrayList<Object>());
+    }
+
+    private static void playDominoInternal(Object label, CopyOnWriteArrayList<Object> input) {
+        DOMINO_CENTER.play(label, input);
     }
 }

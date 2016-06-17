@@ -23,7 +23,6 @@ import org.junit.Test;
 import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
-import xiaofei.library.shelly.function.Function0;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
 
@@ -185,9 +184,9 @@ public class Test01 {
                         System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function0() {
+                .map(new Function1() {
                     @Override
-                    public Object call() {
+                    public Object call(Object input) {
                         System.out.println("map4: " + Thread.currentThread().getName());
                         return "map4";
                     }
