@@ -173,4 +173,19 @@ public class Test03 {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testNull() {
+        Shelly.createDomino("Null")
+                .target(new Action1() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("a " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("Null");
+        Shelly.playDomino("Null", null);
+        Shelly.playDomino("Null", 1);
+    }
 }

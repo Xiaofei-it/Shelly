@@ -46,11 +46,15 @@ public class Shelly {
     }
 
     public static void playDomino(Object label, Object... input) {
-        playDominoInternal(label, new CopyOnWriteArrayList<Object>(Arrays.asList(input)));
-        //TODO what if play(label, null)???
+        CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
+        if (input == null) {
+            newInput.add(null);
+        } else if (input.length > 0) {
+            newInput.addAll(Arrays.asList(input));
+        }
+        playDominoInternal(label, newInput);
     }
 
-    //TODO Can these two be one???
     public static void playDomino(Object label) {
         playDominoInternal(label, new CopyOnWriteArrayList<Object>());
     }
