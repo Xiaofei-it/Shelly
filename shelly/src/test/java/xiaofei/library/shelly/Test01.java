@@ -70,7 +70,7 @@ public class Test01 {
                     }
                 })
                 .target(A.class, "target1")
-                .target(A.class, new TargetAction1<A>() {
+                .target(A.class, new TargetAction1<A, Object>() {
                     @Override
                     public void call(A a, Object input) {
                         a.g((String) input);
@@ -245,7 +245,7 @@ public class Test01 {
                         System.out.println("Case 05 " + object);
                     }
                 })
-                .target(B.class, new TargetAction1<B>() {
+                .target(B.class, new TargetAction1<B, Object>() {
                     @Override
                     public void call(B b, Object input) {
                         System.out.println("Case 05 B " + input);
@@ -265,7 +265,7 @@ public class Test01 {
                         System.out.println("Case 06 " + object);
                     }
                 })
-                .target(B.class, new TargetAction1<B>() {
+                .target(B.class, new TargetAction1<B, Object>() {
                     @Override
                     public void call(B b, Object input) {
                         System.out.println("Case 06 B " + input);

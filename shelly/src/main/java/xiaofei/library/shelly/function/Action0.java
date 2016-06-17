@@ -21,6 +21,6 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/5/30.
  */
-public interface Action0 {
+public interface Action0 extends Action {
     void call();
 }
