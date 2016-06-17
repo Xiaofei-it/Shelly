@@ -71,4 +71,29 @@ public class Test04 {
         Shelly.playDomino(1, "A", "B");
 
     }
+
+    @Test
+    public void testFilter() {
+        Shelly.createDomino(2)
+                .target(new Action1<Object>() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("1: " + input);
+                    }
+                })
+                .filter(new Function1<String, Boolean>() {
+                    @Override
+                    public Boolean call(String input) {
+                        return input.length() == 1;
+                    }
+                })
+                .target(new Action1<Object>() {
+                    @Override
+                    public void call(Object input) {
+                        System.out.println("2: " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(2, "A", "B", "AB", "CD");
+    }
 }

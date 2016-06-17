@@ -262,6 +262,30 @@ public class Domino {
         });
     }
 
+    public <T> Domino filter(final Function1<T, Boolean> function1) {
+        return new Domino(mLabel, new Player() {
+            @Override
+            public Scheduler play(final List<Object> input) {
+                final Scheduler scheduler = mPlayer.play(input);
+                final int index = scheduler.block();
+                scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+                        CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
+                        for (Object singleInput : oldInput) {
+                            if (function1.call((T) singleInput)) {
+                                newInput.add(singleInput);
+                            }
+                        }
+                        scheduler.unblock(index, newInput);
+                    }
+                }, false);
+                return scheduler;
+            }
+        });
+    }
+
     public void play(CopyOnWriteArrayList<Object> input) {
         mPlayer.play(input);
     }
