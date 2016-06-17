@@ -18,6 +18,7 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -33,9 +34,13 @@ public abstract class Scheduler {
 
     private final Inputs mInputs;
 
-    public Scheduler(Object input) {
+    public Scheduler(List<Object> input) {
         mInputs = new Inputs();
-        mInputs.add(input);
+        if (input instanceof CopyOnWriteArrayList) {
+            mInputs.add((CopyOnWriteArrayList<Object>) input);
+        } else {
+            mInputs.addInternal(new CopyOnWriteArrayList<Object>(input));
+        }
     }
 
     public Scheduler(Scheduler scheduler) {
@@ -66,11 +71,11 @@ public abstract class Scheduler {
         return mInputs.append() - 1;
     }
 
-    public final void unblock(int index, Object object) {
+    public final void unblock(int index, CopyOnWriteArrayList<Object> object) {
         mInputs.set(index, object);
     }
 
-    public Object getInput(int index) {
+    public CopyOnWriteArrayList<Object> getInput(int index) {
         return mInputs.get(index);
     }
 
@@ -115,7 +120,7 @@ public abstract class Scheduler {
 
     private static class Inputs {
 
-        private final CopyOnWriteArrayList<InputWrapper> mInputs = new CopyOnWriteArrayList<InputWrapper>();
+        private final CopyOnWriteArrayList<CopyOnWriteArrayList<Object>> mInputs = new CopyOnWriteArrayList<CopyOnWriteArrayList<Object>>();
 
         private final CopyOnWriteArrayList<ReentrantLock> mLocks = new CopyOnWriteArrayList<ReentrantLock>();
 
@@ -127,9 +132,9 @@ public abstract class Scheduler {
             return addInternal(null);
         }
 
-        int addInternal(InputWrapper inputWrapper) {
+        int addInternal(CopyOnWriteArrayList<Object> input) {
             synchronized (this) {
-                mInputs.add(inputWrapper);
+                mInputs.add(input);
                 ReentrantLock lock = new ReentrantLock();
                 mLocks.add(lock);
                 mConditions.add(lock.newCondition());
@@ -137,8 +142,8 @@ public abstract class Scheduler {
             }
         }
 
-        void add(Object input) {
-            addInternal(new InputWrapper(input));
+        void add(CopyOnWriteArrayList<Object> input) {
+            addInternal(input);
         }
 
         boolean inputSet(int index) {
@@ -148,13 +153,13 @@ public abstract class Scheduler {
             return mInputs.size();
         }
 
-        Object get(int index) {
-            return mInputs.get(index).getInput();
+        CopyOnWriteArrayList<Object> get(int index) {
+            return mInputs.get(index);
         }
 
-        void set(int index, Object input) {
+        void set(int index, CopyOnWriteArrayList<Object> input) {
             mLocks.get(index).lock();
-            mInputs.set(index, new InputWrapper(input));
+            mInputs.set(index, input);
             mConditions.get(index).signalAll();
             if (DEBUG) {
                 System.out.println("signal " + Thread.currentThread().getName());
@@ -176,15 +181,4 @@ public abstract class Scheduler {
 
     }
 
-    private static class InputWrapper {
-        private final Object mInput;
-
-        InputWrapper(Object input) {
-            mInput = input;
-        }
-
-        Object getInput() {
-            return mInput;
-        }
-    }
 }

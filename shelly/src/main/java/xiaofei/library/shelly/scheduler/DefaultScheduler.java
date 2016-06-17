@@ -18,12 +18,14 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.List;
+
 /**
  * Created by Xiaofei on 16/5/31.
  */
 public class DefaultScheduler extends Scheduler {
 
-    public DefaultScheduler(Object input) {
+    public DefaultScheduler(List<Object> input) {
         super(input);
     }
 

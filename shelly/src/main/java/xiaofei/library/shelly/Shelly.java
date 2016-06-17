@@ -18,6 +18,9 @@
 
 package xiaofei.library.shelly;
 
+import java.util.Arrays;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.TargetCenter;
 
@@ -42,11 +45,21 @@ public class Shelly {
         return new Domino(label);
     }
 
-    public static void playDomino(Object label, Object input) {
-        DOMINO_CENTER.play(label, input);
+    public static void playDomino(Object label, Object... input) {
+        CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
+        if (input == null) {
+            newInput.add(null);
+        } else if (input.length > 0) {
+            newInput.addAll(Arrays.asList(input));
+        }
+        playDominoInternal(label, newInput);
     }
 
     public static void playDomino(Object label) {
-        playDomino(label, null);
+        playDominoInternal(label, new CopyOnWriteArrayList<Object>());
+    }
+
+    private static void playDominoInternal(Object label, CopyOnWriteArrayList<Object> input) {
+        DOMINO_CENTER.play(label, input);
     }
 }

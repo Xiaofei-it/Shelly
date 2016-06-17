@@ -89,7 +89,7 @@ public class Test02 {
                     }
                 })
                 .commit();
-        Shelly.playDomino(3, 2);
+        Shelly.playDomino(3, 2, 1);
 
         Shelly.createDomino(4)
                 .target(new Action1() {

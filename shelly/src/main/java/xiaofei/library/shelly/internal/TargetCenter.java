@@ -20,9 +20,6 @@ package xiaofei.library.shelly.internal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -60,7 +57,7 @@ public class TargetCenter {
         Class<?> clazz = object.getClass();
         CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
         if (objects == null) {
-            mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<>());
+            mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<Object>());
             objects = mObjects.get(clazz);
         }
         objects.add(object);
@@ -88,11 +85,11 @@ public class TargetCenter {
         }
     }
 
-    public List<Object> getObjects(Class<?> clazz) {
+    public CopyOnWriteArrayList<Object> getObjects(Class<?> clazz) {
         return mObjects.get(clazz);
     }
 
-    public void call(Class<?> clazz, String target, Object input) {
+    public void call(Class<?> clazz, String target, List<Object> input) {
         ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
         if (methods == null) {
             throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
@@ -105,12 +102,17 @@ public class TargetCenter {
         if (objects == null) {
             return;
         }
+        if (!(input instanceof CopyOnWriteArrayList)) {
+            throw new IllegalStateException("An error occurs! Please report this problem to Xiaofei!");
+        }
         for (Object object : objects) {
             try {
                 if (method.getParameterTypes().length == 0) {
                     method.invoke(object);
                 } else {
-                    method.invoke(object, input);
+                    for (Object singleInput : input) {
+                        method.invoke(object, singleInput);
+                    }
                 }
             } catch (IllegalAccessException e) {
                 throw new RuntimeException(e);
