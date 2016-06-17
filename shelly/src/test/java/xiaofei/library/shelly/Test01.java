@@ -103,7 +103,7 @@ public class Test01 {
                 })
                 .target(A.class, "target1")
                 .commit();
-        Shelly.playDomino("case01", "Haha");
+        Shelly.playDomino("case01", "Haha", "Hehe");
 
         Shelly.createDomino("case03")
                 .target(new Action0() {
@@ -205,7 +205,7 @@ public class Test01 {
                     }
                 })
                 .commit();
-        Shelly.playDomino("case03", "ABC");
+        Shelly.playDomino("case03", "ABC", "DEF");
 
         Shelly.createDomino("case04")
                 .backgroundQueue()
@@ -228,7 +228,7 @@ public class Test01 {
                     }
                 })
                 .commit();
-        Shelly.playDomino("case04", "");
+        Shelly.playDomino("case04");
 
         Shelly.register(new B());
         Shelly.createDomino("case05")
@@ -254,8 +254,8 @@ public class Test01 {
                 .target(B.class, "t")
                 .commit();
         Shelly.playDomino("case05");
-        Shelly.playDomino("case05", 8);
-        Shelly.playDomino("case05", "i");
+        Shelly.playDomino("case05", 8, 9);
+        Shelly.playDomino("case05", "i", "j");
 
         Shelly.createDomino("case06")
                 .defaultScheduler()
@@ -272,7 +272,7 @@ public class Test01 {
                     }
                 })
                 .commit();
-        Shelly.playDomino("case06", 8);
+        Shelly.playDomino("case06", 8, 9);
 
         try {
             Thread.sleep(5000);
