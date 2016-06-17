@@ -286,6 +286,8 @@ public class Domino {
         });
     }
 
+    //TODO add filterTarget and stash
+
     public void play(CopyOnWriteArrayList<Object> input) {
         mPlayer.play(input);
     }
