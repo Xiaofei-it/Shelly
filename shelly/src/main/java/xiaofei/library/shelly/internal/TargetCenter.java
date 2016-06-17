@@ -20,8 +20,10 @@ package xiaofei.library.shelly.internal;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.zip.CheckedOutputStream;
 
 import xiaofei.library.shelly.annotation.AnnotationUtils;
 
@@ -88,7 +90,7 @@ public class TargetCenter {
         return mObjects.get(clazz);
     }
 
-    public void call(Class<?> clazz, String target, CopyOnWriteArrayList<Object> input) {
+    public void call(Class<?> clazz, String target, List<Object> input) {
         ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
         if (methods == null) {
             throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
@@ -100,6 +102,9 @@ public class TargetCenter {
         CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
         if (objects == null) {
             return;
+        }
+        if (!(input instanceof CopyOnWriteArrayList)) {
+            throw new IllegalStateException("An error occurs! Please report this problem to Xiaofei!");
         }
         for (Object object : objects) {
             try {

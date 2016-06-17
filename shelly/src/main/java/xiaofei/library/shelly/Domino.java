@@ -18,6 +18,7 @@
 
 package xiaofei.library.shelly;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.function.Action0;
@@ -51,7 +52,7 @@ public class Domino {
     public Domino(Object label) {
         this(label, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 return new DefaultScheduler(input);
             }
         });
@@ -69,11 +70,11 @@ public class Domino {
     public Domino target(final Class<?> clazz, final String target) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 scheduler.play(new Player() {
                     @Override
-                    public Scheduler play(CopyOnWriteArrayList<Object> input) {
+                    public Scheduler play(List<Object> input) {
                         TARGET_CENTER.call(clazz, target, input);
                         return scheduler;
                     }
@@ -86,11 +87,11 @@ public class Domino {
     public <T> Domino target(final Class<T> clazz, final TargetAction0<T> targetAction0) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 scheduler.play(new Player() {
                     @Override
-                    public Scheduler play(CopyOnWriteArrayList<Object> input) {
+                    public Scheduler play(List<Object> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
                         for (Object object : objects) {
                             targetAction0.call(clazz.cast(object));
@@ -106,11 +107,11 @@ public class Domino {
     public <T> Domino target(final Class<T> clazz, final TargetAction1<T> targetAction1) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 scheduler.play(new Player() {
                     @Override
-                    public Scheduler play(CopyOnWriteArrayList<Object> input) {
+                    public Scheduler play(List<Object> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
                         for (Object object : objects) {
                             for (Object singleInput : input) {
@@ -128,11 +129,11 @@ public class Domino {
     public Domino target(final Action0 action0) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 scheduler.play(new Player() {
                     @Override
-                    public Scheduler play(CopyOnWriteArrayList<Object> input) {
+                    public Scheduler play(List<Object> input) {
                         action0.call();
                         return scheduler;
                     }
@@ -145,11 +146,11 @@ public class Domino {
     public Domino target(final Action1 action1) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 scheduler.play(new Player() {
                     @Override
-                    public Scheduler play(CopyOnWriteArrayList<Object> input) {
+                    public Scheduler play(List<Object> input) {
                         for (Object singleInput : input) {
                             action1.call(singleInput);
                         }
@@ -164,7 +165,7 @@ public class Domino {
     public Domino background() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 Scheduler scheduler = mPlayer.play(input);
                 return new BackgroundScheduler(scheduler);
             }
@@ -177,7 +178,7 @@ public class Domino {
     Domino newThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 Scheduler scheduler = mPlayer.play(input);
                 return new NewThreadScheduler(scheduler);
             }
@@ -190,7 +191,7 @@ public class Domino {
     Domino defaultScheduler() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 Scheduler scheduler = mPlayer.play(input);
                 return new DefaultScheduler(scheduler);
             }
@@ -200,7 +201,7 @@ public class Domino {
     public Domino uiThread() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 Scheduler scheduler = mPlayer.play(input);
                 return new UiThreadScheduler(scheduler);
             }
@@ -210,7 +211,7 @@ public class Domino {
     public Domino backgroundQueue() {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(List<Object> input) {
                 Scheduler scheduler = mPlayer.play(input);
                 return new BackgroundQueueScheduler(scheduler);
             }
@@ -220,7 +221,7 @@ public class Domino {
     public Domino map(final Function1 function1) {
         return new Domino(mLabel, new Player() {
             @Override
-            public Scheduler play(final CopyOnWriteArrayList<Object> input) {
+            public Scheduler play(final List<Object> input) {
                 final Scheduler scheduler = mPlayer.play(input);
                 final int index = scheduler.block();
                 scheduler.schedule(new Runnable() {
