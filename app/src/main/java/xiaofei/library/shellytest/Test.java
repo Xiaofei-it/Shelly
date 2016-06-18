@@ -27,7 +27,7 @@ import xiaofei.library.shelly.function.TargetAction1;
  */
 public class Test {
     public static void init() {
-        Shelly.createDomino(1)
+        Shelly.createDomino(1, String.class)
                 .backgroundQueue()
                 .target(new Action0() {
                     @Override
@@ -41,9 +41,9 @@ public class Test {
                     }
                 })
                 .uiThread()
-                .target(MainActivity.class, new TargetAction1<MainActivity>() {
+                .target(MainActivity.class, new TargetAction1<MainActivity, String>() {
                     @Override
-                    public void call(MainActivity mainActivity, Object input) {
+                    public void call(MainActivity mainActivity, String input) {
                         mainActivity.f();
                     }
                 }).commit();
