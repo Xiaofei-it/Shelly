@@ -40,24 +40,24 @@ public class Test04 {
                         System.out.println("1: " + input);
                     }
                 })
-                .flatMap(new Function1<String, List<String>>() {
+                .flatMap(new Function1<String, List<Integer>>() {
                     @Override
-                    public List<String> call(String input) {
-                        List<String> list = new ArrayList<String>();
-                        list.add("" + input + "flatMap1");
-                        list.add("" + input + "flatMap2");
+                    public List<Integer> call(String input) {
+                        List<Integer> list = new ArrayList<Integer>();
+                        list.add(input.charAt(0) - 'A');
+                        list.add(input.charAt(0) - 'A' + 10);
                         return list;
                     }
                 })
-                .target(new Action1<String>() {
+                .target(new Action1<Integer>() {
                     @Override
-                    public void call(String input) {
+                    public void call(Integer input) {
                         System.out.println("2: " + input);
                     }
                 })
-                .map(new Function1<String, String>() {
+                .map(new Function1<Integer, String>() {
                     @Override
-                    public String call(String input) {
+                    public String call(Integer input) {
                         return "" + input + "map";
                     }
                 })
