@@ -45,6 +45,7 @@ public class Shelly {
         return new Domino<T, T>(label);
     }
 
+    @SafeVarargs
     public static <T> void playDomino(Object label, T... input) {
         CopyOnWriteArrayList<T> newInput = new CopyOnWriteArrayList<T>();
         if (input == null) {

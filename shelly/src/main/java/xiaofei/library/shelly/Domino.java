@@ -52,13 +52,13 @@ public class Domino<T, R> {
     public Domino(Object label) {
         this(label, new Player<T>() {
             @Override
-            public Scheduler play(List<T> input) {
-                return new DefaultScheduler((List<Object>) input);
+            public Scheduler<T> play(List<T> input) {
+                return new DefaultScheduler<T>(input);
             }
         });
     }
 
-    private Domino(Object label, Player player) {
+    private Domino(Object label, Player<T> player) {
         mLabel = label;
         mPlayer = player;
     }
@@ -75,7 +75,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Player<T>() {
             @Override
             public Scheduler play(List<T> input) {
-                final Scheduler scheduler = mPlayer.play(input);
+                final Scheduler<R> scheduler = mPlayer.play(input);
                 scheduler.play(new Player<R>() {
                     @Override
                     public Scheduler play(List<R> input) {

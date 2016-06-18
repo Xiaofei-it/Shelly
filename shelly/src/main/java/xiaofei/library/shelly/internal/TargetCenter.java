@@ -110,7 +110,7 @@ public class TargetCenter {
                 if (method.getParameterTypes().length == 0) {
                     method.invoke(object);
                 } else {
-                    for (Object singleInput : input) {
+                    for (T singleInput : input) {
                         method.invoke(object, singleInput);
                     }
                 }
