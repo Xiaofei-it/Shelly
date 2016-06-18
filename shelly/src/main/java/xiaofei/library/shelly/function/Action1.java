@@ -21,6 +21,6 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/5/30.
  */
-public interface Action1 {
-    void call(Object input);
+public interface Action1<T> extends Action {
+    void call(T input);
 }

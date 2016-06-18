@@ -31,7 +31,7 @@ public class Test02 {
 
     @Test
     public void f() {
-        Shelly.createDomino(1)
+        Shelly.createDomino(1, Integer.class)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -41,7 +41,7 @@ public class Test02 {
                 .commit();
         Shelly.playDomino(1, 2);
 
-        Shelly.createDomino(2)
+        Shelly.createDomino(2, int.class)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -57,56 +57,56 @@ public class Test02 {
                 .commit();
         Shelly.playDomino(2, 2);
 
-        Shelly.createDomino(3)
-                .target(new Action1() {
+        Shelly.createDomino(3, int.class)
+                .target(new Action1<Integer>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(Integer input) {
                         System.out.println("action1 " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<Integer, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(Integer input) {
                         return input + "haha";
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("after map " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         return input + "hihi";
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("after map2 " + input);
                     }
                 })
                 .commit();
         Shelly.playDomino(3, 2, 1);
 
-        Shelly.createDomino(4)
-                .target(new Action1() {
+        Shelly.createDomino(4, int.class)
+                .target(new Action1<Integer>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(Integer input) {
                         System.out.println("action1 " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<Integer, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(Integer input) {
                         return "Map " + input;
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("action1 " + input);
                     }
                 })

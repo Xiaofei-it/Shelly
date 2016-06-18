@@ -24,11 +24,11 @@ import java.util.concurrent.Executors;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class BackgroundQueueScheduler extends Scheduler {
+public class BackgroundQueueScheduler<T> extends Scheduler<T> {
 
     private static ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
 
-    public BackgroundQueueScheduler(Scheduler scheduler) {
+    public <R> BackgroundQueueScheduler(Scheduler<R> scheduler) {
         super(scheduler);
     }
 

@@ -21,6 +21,6 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/6/14.
  */
-public interface Function1 extends Function {
-    Object call(Object input);
+public interface Function1<T, R> extends Function {
+    R call(T input);
 }
