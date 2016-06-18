@@ -56,48 +56,48 @@ public class Test01 {
     public void case01() {
         Shelly.register(new A(1));
         Shelly.register(new A(2));
-        Shelly.createDomino("case01")
+        Shelly.createDomino("case01", String.class)
                 .target(new Action0() {
                     @Override
                     public void call() {
                         System.out.println("Target action0");
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("Target action1 " + input);
                     }
                 })
                 .target(A.class, "target1")
-                .target(A.class, new TargetAction1<A, Object>() {
+                .target(A.class, new TargetAction1<A, String>() {
                     @Override
-                    public void call(A a, Object input) {
-                        a.g((String) input);
+                    public void call(A a, String input) {
+                        a.g(input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         return "map1 " + input;
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("After map : " + input);
                     }
                 })
                 .target(A.class, "target1")
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         return "map2 " + input;
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("After map2 : " + input);
                     }
                 })
@@ -105,7 +105,7 @@ public class Test01 {
                 .commit();
         Shelly.playDomino("case01", "Haha", "Hehe");
 
-        Shelly.createDomino("case03")
+        Shelly.createDomino("case03", String.class)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -113,15 +113,15 @@ public class Test01 {
                     }
                 })
                 .background()
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("cached thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -131,75 +131,75 @@ public class Test01 {
                         return "map1" + input;
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("cached thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         System.out.println("map6: " + Thread.currentThread().getName());
                         return "map6" + input;
                     }
                 })
                 .newThread()
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("new Thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("new Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .backgroundQueue()
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("single Thread1 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("single Thread2 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .background()
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         System.out.println("map3: " + Thread.currentThread().getName());
                         return "map3" + input;
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         System.out.println("map4: " + Thread.currentThread().getName());
                         return "map4";
                     }
                 })
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("cached thread4 : " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public Object call(Object input) {
+                    public String call(String input) {
                         System.out.println("map5: " + Thread.currentThread().getName());
                         return "map5" + input;
                     }
@@ -207,7 +207,7 @@ public class Test01 {
                 .commit();
         Shelly.playDomino("case03", "ABC", "DEF");
 
-        Shelly.createDomino("case04")
+        Shelly.createDomino("case04", String.class)
                 .backgroundQueue()
                 .target(new Action0() {
                     @Override
@@ -231,7 +231,7 @@ public class Test01 {
         Shelly.playDomino("case04");
 
         Shelly.register(new B());
-        Shelly.createDomino("case05")
+        Shelly.createDomino("case05", String.class)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -239,35 +239,35 @@ public class Test01 {
                     }
                 })
                 .newThread()
-                .target(new Action1() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object object) {
+                    public void call(String  object) {
                         System.out.println("Case 05 " + object);
                     }
                 })
-                .target(B.class, new TargetAction1<B, Object>() {
+                .target(B.class, new TargetAction1<B, String>() {
                     @Override
-                    public void call(B b, Object input) {
+                    public void call(B b, String input) {
                         System.out.println("Case 05 B " + input);
                     }
                 })
                 .target(B.class, "t")
                 .commit();
         Shelly.playDomino("case05");
-        Shelly.playDomino("case05", 8, 9);
+        Shelly.playDomino("case05", "8", "9");
         Shelly.playDomino("case05", "i", "j");
 
-        Shelly.createDomino("case06")
+        Shelly.createDomino("case06", int.class)
                 .defaultScheduler()
-                .target(new Action1() {
+                .target(new Action1<Integer>() {
                     @Override
-                    public void call(Object object) {
+                    public void call(Integer object) {
                         System.out.println("Case 06 " + object);
                     }
                 })
-                .target(B.class, new TargetAction1<B, Object>() {
+                .target(B.class, new TargetAction1<B, Integer>() {
                     @Override
-                    public void call(B b, Object input) {
+                    public void call(B b, Integer input) {
                         System.out.println("Case 06 B " + input);
                     }
                 })

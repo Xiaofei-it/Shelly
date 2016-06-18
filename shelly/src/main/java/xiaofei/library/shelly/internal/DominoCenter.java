@@ -58,8 +58,8 @@ public class DominoCenter {
         }
     }
 
-    public void play(Object label, CopyOnWriteArrayList<Object> input) {
-        Domino domino = mDominoes.get(label);
+    public <T, R> void play(Object label, CopyOnWriteArrayList<T> input) {
+        Domino<T, R> domino = (Domino<T, R>) mDominoes.get(label);
         if (domino == null) {
             throw new IllegalStateException("There is no domino labeled '" + label + "'.");
         }

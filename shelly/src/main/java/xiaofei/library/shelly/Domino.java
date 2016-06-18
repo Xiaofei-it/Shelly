@@ -108,7 +108,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino target(final Class<U> clazz, final TargetAction1<U, R> targetAction1) {
+    public <U> Domino<T, R> target(final Class<U> clazz, final TargetAction1<U, R> targetAction1) {
         return new Domino<T, R>(mLabel, new Player<T>() {
             @Override
             public Scheduler play(List<T> input) {

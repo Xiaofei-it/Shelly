@@ -33,37 +33,37 @@ public class Test04 {
 
     @Test
     public void testFlatMap() {
-        Shelly.createDomino(1)
-                .target(new Action1<Object>() {
+        Shelly.createDomino(1, String.class)
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("1: " + input);
                     }
                 })
-                .flatMap(new Function1<Object, List<String>>() {
+                .flatMap(new Function1<String, List<String>>() {
                     @Override
-                    public List<String> call(Object input) {
+                    public List<String> call(String input) {
                         List<String> list = new ArrayList<String>();
                         list.add("" + input + "flatMap1");
                         list.add("" + input + "flatMap2");
                         return list;
                     }
                 })
-                .target(new Action1<Object>() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("2: " + input);
                     }
                 })
-                .map(new Function1<Object, String>() {
+                .map(new Function1<String, String>() {
                     @Override
-                    public String call(Object input) {
+                    public String call(String input) {
                         return "" + input + "map";
                     }
                 })
-                .target(new Action1<Object>() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("3: " + input);
                     }
                 })
@@ -74,10 +74,10 @@ public class Test04 {
 
     @Test
     public void testFilter() {
-        Shelly.createDomino(2)
-                .target(new Action1<Object>() {
+        Shelly.createDomino(2, String.class)
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("1: " + input);
                     }
                 })
@@ -87,9 +87,9 @@ public class Test04 {
                         return input.length() == 1;
                     }
                 })
-                .target(new Action1<Object>() {
+                .target(new Action1<String>() {
                     @Override
-                    public void call(Object input) {
+                    public void call(String input) {
                         System.out.println("2: " + input);
                     }
                 })

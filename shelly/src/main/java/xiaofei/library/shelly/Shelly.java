@@ -41,12 +41,12 @@ public class Shelly {
         TARGET_CENTER.unregister(object);
     }
 
-    public static Domino createDomino(Object label) {
-        return new Domino(label);
+    public static <T> Domino<T, T> createDomino(Object label, Class<T> inputType) {
+        return new Domino<T, T>(label);
     }
 
-    public static void playDomino(Object label, Object... input) {
-        CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
+    public static <T> void playDomino(Object label, T... input) {
+        CopyOnWriteArrayList<T> newInput = new CopyOnWriteArrayList<T>();
         if (input == null) {
             newInput.add(null);
         } else if (input.length > 0) {
@@ -59,7 +59,7 @@ public class Shelly {
         playDominoInternal(label, new CopyOnWriteArrayList<Object>());
     }
 
-    private static void playDominoInternal(Object label, CopyOnWriteArrayList<Object> input) {
+    private static <T> void playDominoInternal(Object label, CopyOnWriteArrayList<T> input) {
         DOMINO_CENTER.play(label, input);
     }
 }
