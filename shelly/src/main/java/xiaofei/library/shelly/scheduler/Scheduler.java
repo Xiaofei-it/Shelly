@@ -47,7 +47,7 @@ public abstract class Scheduler<T> {
         mInputs = scheduler.mInputs;
     }
 
-    protected Runnable onPlay(final Player<T> player) {
+    protected Runnable onPlay(final Player<T, ?> player) {
         return new Runnable() {
             private int mIndex = mInputs.size() - 1;
             @Override
@@ -59,11 +59,12 @@ public abstract class Scheduler<T> {
 
     protected abstract void onSchedule(Runnable runnable);
 
-    public final void schedule(Runnable runnable, boolean lastIncluded) {
+    public final <R> Scheduler<R> schedule(Runnable runnable, boolean lastIncluded) {
         onSchedule(new ScheduledRunnable(runnable, lastIncluded));
+        return (Scheduler<R>) this;
     }
 
-    public final void play(Player<T> player) {
+    public final void play(Player<T, ?> player) {
         schedule(onPlay(player), true);
     }
 
