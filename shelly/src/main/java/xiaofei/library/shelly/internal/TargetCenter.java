@@ -89,7 +89,7 @@ public class TargetCenter {
         return mObjects.get(clazz);
     }
 
-    public void call(Class<?> clazz, String target, List<Object> input) {
+    public <T> void call(Class<?> clazz, String target, List<T> input) {
         ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
         if (methods == null) {
             throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
