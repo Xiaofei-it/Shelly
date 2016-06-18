@@ -20,6 +20,7 @@ package xiaofei.library.shelly;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -287,7 +288,15 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO add filterTarget and stash
+    //TODO
+    public Domino<T, R> delay(long delay, TimeUnit unit) {
+        return null;
+    }
+
+    //TODO
+    public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
+        return null;
+    }
 
     public void play(CopyOnWriteArrayList<T> input) {
         mPlayer.play(input);
