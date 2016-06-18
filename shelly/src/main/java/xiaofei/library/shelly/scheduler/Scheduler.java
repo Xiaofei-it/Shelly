@@ -76,6 +76,21 @@ public abstract class Scheduler<T> {
         mInputs.set(index, object);
     }
 
+    public final CopyOnWriteArrayList<Object> getResult() {
+        int index = mInputs.size() - 1;
+        try {
+            mInputs.lock(index);
+            while (!mInputs.inputSet(index)) {
+                mInputs.await(index);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            mInputs.unlock(index);
+        }
+        return mInputs.get(index);
+    }
+
     public CopyOnWriteArrayList<Object> getInput(int index) {
         return mInputs.get(index);
     }

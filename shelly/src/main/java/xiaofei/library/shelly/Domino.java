@@ -21,6 +21,10 @@ package xiaofei.library.shelly;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -163,6 +167,74 @@ public class Domino<T, R> {
                     }
                 });
                 return scheduler;
+            }
+        });
+    }
+
+    public <U> Domino<T, U> target(final Domino<R, U> domino) {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                final int index = scheduler.block();
+                return scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+                        Scheduler<U> anotherScheduler = domino.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
+                        scheduler.unblock(index, anotherScheduler.getResult());
+                    }
+                }, false);
+            }
+        });
+    }
+
+    public <U> Domino<T, U> merge(final Domino<R, U> domino1, final Domino<R, U> domino2) {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                final int index = scheduler.block();
+                final Lock lock = new ReentrantLock();
+                final CopyOnWriteArrayList<Object> result = new CopyOnWriteArrayList<Object>();
+                final AtomicInteger finish = new AtomicInteger();
+                final Condition condition = lock.newCondition();
+                scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+                        Scheduler<U> anotherScheduler = domino1.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
+                        lock.lock();
+                        result.addAll(anotherScheduler.getResult());
+                        finish.incrementAndGet();
+                        condition.signalAll();
+                        lock.unlock();
+                    }
+                }, false);
+                scheduler.schedule(new Runnable() {
+                    @Override
+                    public void run() {
+                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+                        Scheduler<U> anotherScheduler = domino2.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
+                        lock.lock();
+                        result.addAll(anotherScheduler.getResult());
+                        finish.incrementAndGet();
+                        condition.signalAll();
+                        lock.unlock();
+                    }
+                }, false);
+                try {
+                    lock.lock();
+                    while (finish.get() != 2) {
+                        condition.await();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    lock.unlock();
+                }
+                scheduler.unblock(index, result);
+                return (Scheduler<U>) scheduler;
             }
         });
     }

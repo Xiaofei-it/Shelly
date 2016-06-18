@@ -63,4 +63,8 @@ public class Shelly {
     private static <T> void playDominoInternal(Object label, CopyOnWriteArrayList<T> input) {
         DOMINO_CENTER.play(label, input);
     }
+
+    public static Domino<?, ?> getDominoByLabel(Object label) {
+        return DOMINO_CENTER.getDomino(label);
+    }
 }
