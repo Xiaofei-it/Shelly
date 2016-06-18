@@ -25,8 +25,8 @@ import xiaofei.library.shelly.scheduler.Scheduler;
 /**
  * Created by Xiaofei on 16/5/27.
  */
-public interface Player {
+public interface Player<T, R> {
 
-    Scheduler play(List<Object> input);
+    Scheduler<R> play(List<T> input);
 
 }

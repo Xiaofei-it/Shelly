@@ -24,11 +24,11 @@ import android.os.Looper;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class UiThreadScheduler extends Scheduler {
+public class UiThreadScheduler<T> extends Scheduler<T> {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    public UiThreadScheduler(Scheduler scheduler) {
+    public <R> UiThreadScheduler(Scheduler<R> scheduler) {
         super(scheduler);
     }
 

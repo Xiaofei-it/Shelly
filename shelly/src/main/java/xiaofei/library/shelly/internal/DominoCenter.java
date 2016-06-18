@@ -34,10 +34,10 @@ public class DominoCenter {
 
     private static volatile DominoCenter sInstance = null;
 
-    private final ConcurrentHashMap<Object, Domino> mDominoes;
+    private final ConcurrentHashMap<Object, Domino<?, ?>> mDominoes;
 
     private DominoCenter() {
-        mDominoes = new ConcurrentHashMap<>();
+        mDominoes = new ConcurrentHashMap<Object, Domino<?, ?>>();
     }
 
     public static DominoCenter getInstance() {
@@ -51,15 +51,15 @@ public class DominoCenter {
         return sInstance;
     }
 
-    public void commit(Domino domino) {
+    public void commit(Domino<?, ?> domino) {
         Object label = domino.getLabel();
         if (mDominoes.put(label, domino) != null) {
             Log.w(TAG, "Domino name duplicate! Check whether you have commit a domino with the same label before.");
         }
     }
 
-    public void play(Object label, CopyOnWriteArrayList<Object> input) {
-        Domino domino = mDominoes.get(label);
+    public <T> void play(Object label, CopyOnWriteArrayList<T> input) {
+        Domino<T, ?> domino = (Domino<T, ?>) mDominoes.get(label);
         if (domino == null) {
             throw new IllegalStateException("There is no domino labeled '" + label + "'.");
         }

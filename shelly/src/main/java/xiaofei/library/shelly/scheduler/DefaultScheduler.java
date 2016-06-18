@@ -23,13 +23,13 @@ import java.util.List;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class DefaultScheduler extends Scheduler {
+public class DefaultScheduler<T> extends Scheduler<T> {
 
-    public DefaultScheduler(List<Object> input) {
+    public DefaultScheduler(List<T> input) {
         super(input);
     }
 
-    public DefaultScheduler(Scheduler scheduler) {
+    public <R> DefaultScheduler(Scheduler<R> scheduler) {
         super(scheduler);
     }
 

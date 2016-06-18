@@ -28,13 +28,13 @@ import xiaofei.library.shelly.internal.Player;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public abstract class Scheduler {
+public abstract class Scheduler<T> {
 
     private static final boolean DEBUG = true;
 
     private final Inputs mInputs;
 
-    public Scheduler(List<Object> input) {
+    public Scheduler(List<T> input) {
         mInputs = new Inputs();
         if (input instanceof CopyOnWriteArrayList) {
             mInputs.add((CopyOnWriteArrayList<Object>) input);
@@ -43,27 +43,28 @@ public abstract class Scheduler {
         }
     }
 
-    public Scheduler(Scheduler scheduler) {
+    public <R> Scheduler(Scheduler<R> scheduler) {
         mInputs = scheduler.mInputs;
     }
 
-    protected Runnable onPlay(final Player player) {
+    protected Runnable onPlay(final Player<T, ?> player) {
         return new Runnable() {
             private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.play(mInputs.get(mIndex));
+                player.play((CopyOnWriteArrayList<T>) mInputs.get(mIndex));
             }
         };
     }
 
     protected abstract void onSchedule(Runnable runnable);
 
-    public final void schedule(Runnable runnable, boolean lastIncluded) {
+    public final <R> Scheduler<R> schedule(Runnable runnable, boolean lastIncluded) {
         onSchedule(new ScheduledRunnable(runnable, lastIncluded));
+        return (Scheduler<R>) this;
     }
 
-    public final void play(Player player) {
+    public final void play(Player<T, ?> player) {
         schedule(onPlay(player), true);
     }
 

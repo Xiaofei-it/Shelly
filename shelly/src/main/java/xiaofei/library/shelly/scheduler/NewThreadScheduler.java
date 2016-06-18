@@ -23,9 +23,9 @@ package xiaofei.library.shelly.scheduler;
  *
  * For unit test only.
  */
-public class NewThreadScheduler extends Scheduler {
+public class NewThreadScheduler<T> extends Scheduler<T> {
 
-    public NewThreadScheduler(Scheduler scheduler) {
+    public <R> NewThreadScheduler(Scheduler<R> scheduler) {
         super(scheduler);
     }
 
