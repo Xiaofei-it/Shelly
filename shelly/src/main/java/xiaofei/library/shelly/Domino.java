@@ -186,35 +186,26 @@ public class Domino<T, R> {
         });
     }
 
-//    public <U> Domino<T, U> merge(final Domino<R, U>... dominoes) {
-//        return new Domino<T, U>(mLabel, new Player<T, U>() {
-//            @Override
-//            public Scheduler<U> play(List<T> input) {
-//                final Scheduler<R> scheduler = mPlayer.play(input);
-//                //final int index = scheduler.block();
-//                List<Runnable> runnables = new ArrayList<Runnable>();
-//                runnables.add(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
-//                        Scheduler<U> anotherScheduler = domino1.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
-//                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
-//                    }
-//                });
-//                runnables.add(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
-//                        Scheduler<U> anotherScheduler = domino2.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
-//                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
-//                    }
-//                });
-//                scheduler.scheduleRunnable(runnables);
-//                scheduler.waitForFinishing();
-//                return (Scheduler<U>) scheduler;
-//            }
-//        });
-//    }
+    public <U> Domino<T, U> merge(Class<U> clazz, final Domino<R, U>... dominoes) {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                List<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>> functions =
+                        new ArrayList<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>>();
+                for (final Domino<R, U> domino : dominoes) {
+                    functions.add(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
+                        @Override
+                        public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                            Scheduler<U> scheduler = domino.mPlayer.play(input);
+                            return (CopyOnWriteArrayList<U>) scheduler.waitForFinishing();
+                        }
+                    });
+                }
+                return scheduler.scheduleFunction(functions);
+            }
+        });
+    }
 
     public Domino<T, R> background() {
         return new Domino<T, R>(mLabel, new Player<T, R>() {

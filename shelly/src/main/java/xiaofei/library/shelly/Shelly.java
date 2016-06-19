@@ -64,7 +64,7 @@ public class Shelly {
         DOMINO_CENTER.play(label, input);
     }
 
-    public static Domino<?, ?> getDominoByLabel(Object label) {
+    public static <T, R> Domino<T, R> getDominoByLabel(Object label, Class<T> tClass, Class<R> rClass) {
         return DOMINO_CENTER.getDomino(label);
     }
 }

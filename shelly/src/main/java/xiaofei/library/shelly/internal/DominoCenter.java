@@ -66,8 +66,8 @@ public class DominoCenter {
         domino.play(input);
     }
 
-    public Domino<?, ?> getDomino(Object label) {
-        return mDominoes.get(label);
+    public <T, R> Domino<T, R> getDomino(Object label) {
+        return (Domino<T, R>) mDominoes.get(label);
     }
 
 }
