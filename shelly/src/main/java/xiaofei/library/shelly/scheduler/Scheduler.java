@@ -83,9 +83,9 @@ public abstract class Scheduler<T> {
 
     public final <R> Scheduler<R> schedule(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
-            for (Function1 function : functions) {
+            for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
                 int size = mInputs.size();
-                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function), size - 1));
+                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function), size));
             }
             return (Scheduler<R>) this;
         }
