@@ -169,54 +169,52 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> target(final Domino<R, U> domino) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
+    public <U> Domino<T, R> target(final Domino<R, U> domino) {
+        return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
-            public Scheduler<U> play(List<T> input) {
+            public Scheduler<R> play(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
-                final int index = scheduler.block();
-                return scheduler.scheduleRunnable(
-                        Collections.singletonList(new Runnable() {
-                            @Override
-                            public void run() {
-                                CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
-                                Scheduler<U> anotherScheduler = domino.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
-                                scheduler.unblock(index, anotherScheduler.waitForFinishing());
-                            }
-                        }));
+                scheduler.play(new Player<R, R>() {
+                    @Override
+                    public Scheduler<R> play(List<R> input) {
+                        domino.mPlayer.play(input);
+                        return scheduler;
+                    }
+                });
+                return scheduler;
             }
         });
     }
 
-    public <U> Domino<T, U> merge(final Domino<R, U> domino1, final Domino<R, U> domino2) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
-            @Override
-            public Scheduler<U> play(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.play(input);
-                final int index = scheduler.block();
-                List<Runnable> runnables = new ArrayList<Runnable>();
-                runnables.add(new Runnable() {
-                    @Override
-                    public void run() {
-                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
-                        Scheduler<U> anotherScheduler = domino1.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
-                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
-                    }
-                });
-                runnables.add(new Runnable() {
-                    @Override
-                    public void run() {
-                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
-                        Scheduler<U> anotherScheduler = domino2.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
-                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
-                    }
-                });
-                scheduler.scheduleRunnable(runnables);
-                scheduler.waitForFinishing();
-                return (Scheduler<U>) scheduler;
-            }
-        });
-    }
+//    public <U> Domino<T, U> merge(final Domino<R, U>... dominoes) {
+//        return new Domino<T, U>(mLabel, new Player<T, U>() {
+//            @Override
+//            public Scheduler<U> play(List<T> input) {
+//                final Scheduler<R> scheduler = mPlayer.play(input);
+//                //final int index = scheduler.block();
+//                List<Runnable> runnables = new ArrayList<Runnable>();
+//                runnables.add(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+//                        Scheduler<U> anotherScheduler = domino1.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
+//                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
+//                    }
+//                });
+//                runnables.add(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        CopyOnWriteArrayList<Object> oldInput = scheduler.getInput(index - 1);
+//                        Scheduler<U> anotherScheduler = domino2.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
+//                        scheduler.unblock(index, anotherScheduler.waitForFinishing());
+//                    }
+//                });
+//                scheduler.scheduleRunnable(runnables);
+//                scheduler.waitForFinishing();
+//                return (Scheduler<U>) scheduler;
+//            }
+//        });
+//    }
 
     public Domino<T, R> background() {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
