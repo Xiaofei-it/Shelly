@@ -18,8 +18,11 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -33,6 +36,10 @@ public abstract class Scheduler<T> {
     private static final boolean DEBUG = true;
 
     private final Inputs mInputs;
+
+    private AtomicInteger mScheduledRunnableNumber = new AtomicInteger(0);
+
+    private AtomicInteger mFinishedScheduledRunnableNumber = new AtomicInteger(-1);
 
     public Scheduler(List<T> input) {
         mInputs = new Inputs();
@@ -59,13 +66,23 @@ public abstract class Scheduler<T> {
 
     protected abstract void onSchedule(Runnable runnable);
 
-    public final <R> Scheduler<R> schedule(Runnable runnable, boolean lastIncluded) {
-        onSchedule(new ScheduledRunnable(runnable, lastIncluded));
-        return (Scheduler<R>) this;
+    //This method is not thread-safe! But we always call this in a single thread.
+    public final <R> Scheduler<R> schedule(List<? extends Runnable> runnables, boolean lastIncluded) {
+        synchronized (this) {
+            for (Runnable runnable : runnables) {
+                int size = mInputs.size();
+                int waiting = lastIncluded ? size : size - 1;
+                onSchedule(new ScheduledRunnable(runnable, waiting));
+            }
+            return (Scheduler<R>) this;
+        }
     }
 
+    //This method is not thread-safe! But we always call this in a single thread.
     public final void play(Player<T, ?> player) {
-        schedule(onPlay(player), true);
+        synchronized (this) {
+            schedule(Collections.singletonList(onPlay(player)), true);
+        }
     }
 
     public final int block() {
@@ -76,7 +93,7 @@ public abstract class Scheduler<T> {
         mInputs.set(index, object);
     }
 
-    public final CopyOnWriteArrayList<Object> getResult() {
+    public final CopyOnWriteArrayList<Object> waitForFinishing() {
         int index = mInputs.size() - 1;
         try {
             mInputs.lock(index);
@@ -101,13 +118,9 @@ public abstract class Scheduler<T> {
 
         private int mWaiting;
 
-        ScheduledRunnable(Runnable runnable, boolean lastIncluded) {
+        ScheduledRunnable(Runnable runnable, int waiting) {
             mRunnable = runnable;
-            if (lastIncluded) {
-                mWaiting = mInputs.size();
-            } else {
-                mWaiting = mInputs.size() - 1;
-            }
+            mWaiting = waiting;
         }
 
         @Override
