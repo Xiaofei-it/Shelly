@@ -183,7 +183,7 @@ public class Domino<T, R> {
                                 Scheduler<U> anotherScheduler = domino.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
                                 scheduler.unblock(index, anotherScheduler.waitForFinishing());
                             }
-                        }), false);
+                        }), true);
             }
         });
     }
@@ -211,7 +211,7 @@ public class Domino<T, R> {
                         scheduler.unblock(index, anotherScheduler.waitForFinishing());
                     }
                 });
-                scheduler.schedule(runnables, false);
+                scheduler.schedule(runnables, true);
                 scheduler.waitForFinishing();
                 return (Scheduler<U>) scheduler;
             }
@@ -280,17 +280,16 @@ public class Domino<T, R> {
             public Scheduler<U> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
                 return scheduler.schedule(
-                        Collections.singletonList(new BlockingRunnable<R>(scheduler) {
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                             @Override
-                            protected void onRun() {
-                                CopyOnWriteArrayList<Object> oldInput = getPreviousInput();
-                                CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
-                                for (Object singleInput : oldInput) {
-                                    newInput.add(function1.call((R) singleInput));
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
+                                for (R singleInput : input) {
+                                    result.add(function1.call(singleInput));
                                 }
-                                setCurrentInput(newInput);
+                                return result;
                             }
-                        }), false);
+                        }));
             }
         });
     }
@@ -301,17 +300,16 @@ public class Domino<T, R> {
             public Scheduler<U> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
                 return scheduler.schedule(
-                        Collections.singletonList(new BlockingRunnable<R>(scheduler) {
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                             @Override
-                            protected void onRun() {
-                                CopyOnWriteArrayList<Object> oldInput = getPreviousInput();
-                                CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
-                                for (Object singleInput : oldInput) {
-                                    newInput.addAll(function1.call((R) singleInput));
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
+                                for (R singleInput : input) {
+                                    result.addAll(function1.call(singleInput));
                                 }
-                                setCurrentInput(newInput);
+                                return result;
                             }
-                        }), false);
+                        }));
             }
         });
     }
@@ -322,19 +320,18 @@ public class Domino<T, R> {
             public Scheduler<R> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
                 return scheduler.schedule(
-                        Collections.singletonList(new BlockingRunnable<R>(scheduler) {
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<R>>() {
                             @Override
-                            protected void onRun() {
-                                CopyOnWriteArrayList<Object> oldInput = getPreviousInput();
-                                CopyOnWriteArrayList<Object> newInput = new CopyOnWriteArrayList<Object>();
-                                for (Object singleInput : oldInput) {
-                                    if (function1.call((R) singleInput)) {
-                                        newInput.add(singleInput);
+                            public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<R> input) {
+                                CopyOnWriteArrayList<R> result = new CopyOnWriteArrayList<R>();
+                                for (R singleInput : input) {
+                                    if (function1.call(singleInput)) {
+                                        result.add(singleInput);
                                     }
                                 }
-                                setCurrentInput(newInput);
+                                return result;
                             }
-                        }), false);
+                        }));
             }
         });
     }
@@ -357,36 +354,4 @@ public class Domino<T, R> {
         DOMINO_CENTER.commit(this);
     }
 
-    private static abstract class BlockingRunnable<R> implements Runnable {
-
-        private Scheduler<R> mScheduler;
-
-        private int mIndex;
-
-        private CopyOnWriteArrayList<Object> mInput;
-
-        BlockingRunnable(Scheduler<R> scheduler) {
-            mScheduler = scheduler;
-            mIndex = scheduler.block();
-        }
-
-        protected final CopyOnWriteArrayList<Object> getPreviousInput() {
-            return mScheduler.getInput(mIndex - 1);
-        }
-
-        protected final void setCurrentInput(CopyOnWriteArrayList<Object> input) {
-            mInput = input;
-        }
-
-        protected abstract void onRun();
-
-        @Override
-        public final void run() {
-            onRun();
-            if (mInput == null) {
-                throw new IllegalStateException();
-            }
-            mScheduler.unblock(mIndex, mInput);
-        }
-    }
 }

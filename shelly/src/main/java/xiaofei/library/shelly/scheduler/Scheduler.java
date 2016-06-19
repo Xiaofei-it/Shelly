@@ -18,7 +18,6 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.internal.Player;
 
 /**
@@ -67,12 +67,25 @@ public abstract class Scheduler<T> {
     protected abstract void onSchedule(Runnable runnable);
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final <R> Scheduler<R> schedule(List<? extends Runnable> runnables, boolean lastIncluded) {
+    public final <R> Scheduler<R> schedule(List<? extends Runnable> runnables, boolean blocking) {
         synchronized (this) {
             for (Runnable runnable : runnables) {
                 int size = mInputs.size();
-                int waiting = lastIncluded ? size : size - 1;
-                onSchedule(new ScheduledRunnable(runnable, waiting));
+                if (blocking) {
+                    //onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(runnable), size - 1));
+                } else {
+                    onSchedule(new ScheduledRunnable(runnable, size));
+                }
+            }
+            return (Scheduler<R>) this;
+        }
+    }
+
+    public final <R> Scheduler<R> schedule(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
+        synchronized (this) {
+            for (Function1 function : functions) {
+                int size = mInputs.size();
+                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function), size - 1));
             }
             return (Scheduler<R>) this;
         }
@@ -81,7 +94,7 @@ public abstract class Scheduler<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final void play(Player<T, ?> player) {
         synchronized (this) {
-            schedule(Collections.singletonList(onPlay(player)), true);
+            schedule(Collections.singletonList(onPlay(player)), false);
         }
     }
 
@@ -144,6 +157,33 @@ public abstract class Scheduler<T> {
                 }
             }
             mRunnable.run();
+        }
+    }
+
+    private class BlockingRunnable<R> implements Runnable {
+
+        private int mIndex;
+
+        private CopyOnWriteArrayList<R> mInput;
+
+        private Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> mFunction;
+
+        BlockingRunnable(Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function) {
+            mFunction = function;
+            mIndex = block();
+        }
+
+        protected final CopyOnWriteArrayList<T> getPreviousInput() {
+            return (CopyOnWriteArrayList<T>) getInput(mIndex - 1);
+        }
+
+        @Override
+        public final void run() {
+            mInput = mFunction.call(getPreviousInput());
+            if (mInput == null) {
+                throw new IllegalStateException();
+            }
+            unblock(mIndex, (CopyOnWriteArrayList<Object>) mInput);
         }
     }
 
