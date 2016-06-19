@@ -175,7 +175,7 @@ public class Domino<T, R> {
             public Scheduler<U> play(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
                 final int index = scheduler.block();
-                return scheduler.schedule(
+                return scheduler.scheduleRunnable(
                         Collections.singletonList(new Runnable() {
                             @Override
                             public void run() {
@@ -183,7 +183,7 @@ public class Domino<T, R> {
                                 Scheduler<U> anotherScheduler = domino.mPlayer.play((CopyOnWriteArrayList<R>) oldInput);
                                 scheduler.unblock(index, anotherScheduler.waitForFinishing());
                             }
-                        }), true);
+                        }));
             }
         });
     }
@@ -211,7 +211,7 @@ public class Domino<T, R> {
                         scheduler.unblock(index, anotherScheduler.waitForFinishing());
                     }
                 });
-                scheduler.schedule(runnables, true);
+                scheduler.scheduleRunnable(runnables);
                 scheduler.waitForFinishing();
                 return (Scheduler<U>) scheduler;
             }
@@ -279,7 +279,7 @@ public class Domino<T, R> {
             @Override
             public Scheduler<U> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
-                return scheduler.schedule(
+                return scheduler.scheduleFunction(
                         Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                             @Override
                             public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
@@ -299,7 +299,7 @@ public class Domino<T, R> {
             @Override
             public Scheduler<U> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
-                return scheduler.schedule(
+                return scheduler.scheduleFunction(
                         Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                             @Override
                             public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
@@ -319,7 +319,7 @@ public class Domino<T, R> {
             @Override
             public Scheduler<R> play(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.play(input);
-                return scheduler.schedule(
+                return scheduler.scheduleFunction(
                         Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<R>>() {
                             @Override
                             public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<R> input) {

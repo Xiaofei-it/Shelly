@@ -67,21 +67,17 @@ public abstract class Scheduler<T> {
     protected abstract void onSchedule(Runnable runnable);
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final <R> Scheduler<R> schedule(List<? extends Runnable> runnables, boolean blocking) {
+    public final <R> Scheduler<R> scheduleRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
             for (Runnable runnable : runnables) {
                 int size = mInputs.size();
-                if (blocking) {
-                    //onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(runnable), size - 1));
-                } else {
-                    onSchedule(new ScheduledRunnable(runnable, size));
-                }
+                onSchedule(new ScheduledRunnable(runnable, size));
             }
             return (Scheduler<R>) this;
         }
     }
 
-    public final <R> Scheduler<R> schedule(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
+    public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
             for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
                 int size = mInputs.size();
@@ -94,7 +90,7 @@ public abstract class Scheduler<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final void play(Player<T, ?> player) {
         synchronized (this) {
-            schedule(Collections.singletonList(onPlay(player)), false);
+            scheduleRunnable(Collections.singletonList(onPlay(player)));
         }
     }
 
