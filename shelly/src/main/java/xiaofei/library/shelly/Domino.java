@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -35,6 +38,7 @@ import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.TargetCenter;
+import xiaofei.library.shelly.internal.Task;
 import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
@@ -71,6 +75,10 @@ public class Domino<T, R> {
 
     public Object getLabel() {
         return mLabel;
+    }
+
+    protected Player<T, R> getPlayer() {
+        return mPlayer;
     }
 
     /**
@@ -414,6 +422,26 @@ public class Domino<T, R> {
         });
     }
 
+    public <U> Domino<T, U> clear() {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(final List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                return scheduler.scheduleFunction(
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
+                            @Override
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                return new CopyOnWriteArrayList<U>();
+                            }
+                        }));
+            }
+        });
+    }
+
+    public <U, S> TaskDomino<T, U, S> beginTask(Task<R, U, S> task) {
+        return new TaskDomino<T, U, S>(map(new TaskFunction<R, U, S>(task)));
+    }
+
     //TODO task, success, fail, endTask
     public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
         return null;
@@ -426,6 +454,129 @@ public class Domino<T, R> {
 
     public void commit() {
         DOMINO_CENTER.commit(this);
+    }
+
+    private static class TaskFunction<T, R, U> implements Function1<T, Pair<R, U>>, Task.TaskListener<R, U> {
+
+        private Task<T, R, U> mTask;
+
+        private volatile R mResult;
+
+        private volatile U mError;
+
+        private Lock mLock = new ReentrantLock();
+
+        private Condition mCondition = mLock.newCondition();
+
+        TaskFunction(Task<T, R, U> task) {
+            task.setListener(this);
+            mTask = task;
+        }
+
+        @Override
+        public void onFailure(U error) {
+            mLock.lock();
+            mError = error;
+            mCondition.signalAll();
+            mLock.unlock();
+        }
+
+        @Override
+        public void onSuccess(R result) {
+            mLock.lock();
+            mResult = result;
+            mCondition.signalAll();
+            mLock.unlock();
+        }
+
+        @Override
+        public Pair<R, U> call(T input) {
+            mTask.execute(input);
+            try {
+                mLock.lock();
+                while (mError == null && mResult == null) {
+                    mCondition.await();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                mLock.unlock();
+            }
+            return new Pair<R, U>(mResult, mError);
+        }
+
+    }
+
+    private static class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
+
+        TaskDomino(Domino<T, Pair<R, U>> domino) {
+            super(domino.mLabel, domino.mPlayer);
+        }
+
+        public TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
+            return new TaskDomino<T, R, U>(
+                    new Domino<T, Pair<R, U>>(getLabel(),
+                            new Player<T, Pair<R, U>>() {
+                                @Override
+                                public Scheduler<Pair<R, U>> play(List<T> input) {
+                                    final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                    scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                        @Override
+                                        public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                            CopyOnWriteArrayList<R> newInput = new CopyOnWriteArrayList<R>();
+                                            for (Pair<R, U> pair : input) {
+                                                if (pair.first != null) {
+                                                    newInput.add(pair.first);
+                                                }
+                                            }
+                                            domino.mPlayer.play(newInput);
+                                            return scheduler;
+                                        }
+                                    });
+                                    return scheduler;
+                                }
+                            }
+                    ));
+        }
+
+        public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
+            return new TaskDomino<T, R, U>(
+                    new Domino<T, Pair<R, U>>(getLabel(),
+                            new Player<T, Pair<R, U>>() {
+                                @Override
+                                public Scheduler<Pair<R, U>> play(List<T> input) {
+                                    final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                    scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                        @Override
+                                        public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                            CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
+                                            for (Pair<R, U> pair : input) {
+                                                if (pair.second != null) {
+                                                    newInput.add(pair.second);
+                                                }
+                                            }
+                                            domino.mPlayer.play(newInput);
+                                            return scheduler;
+                                        }
+                                    });
+                                    return scheduler;
+                                }
+                            }
+                    ));
+        }
+
+        private Domino<T, Pair<R, U>> toDomino() {
+            return new Domino<T, Pair<R, U>>(getLabel(), getPlayer());
+        }
+
+        public <S> Domino<T, S> endTask() {
+            return toDomino().clear();
+        }
+
+        public <S> Domino<T, S> endTask(Function1<List<Pair<R, U>>, S> reducer) {
+            return toDomino().reduce(reducer);
+        }
+
     }
 
 }
