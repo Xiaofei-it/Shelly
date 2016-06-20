@@ -65,8 +65,32 @@ public class Test05 {
                         System.out.println("3: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        return input + "hi";
+                    }
+                })
                 .commit();
         Shelly.playDomino(2, "A", "B");
+        Shelly.createDomino(3, String.class)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("4: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .background()
+                .merge((Domino<String, String>) Shelly.getDominoByLabel(1), (Domino<String, String>) Shelly.getDominoByLabel(2))
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("5: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(3, "C", "D");
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {

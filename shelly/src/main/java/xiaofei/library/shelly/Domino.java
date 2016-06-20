@@ -190,6 +190,14 @@ public class Domino<T, R> {
         return merge((Domino<R, U>[]) new Domino[]{domino});
     }
 
+    public <U> Domino<T, U> merge(Domino<R, U> domino1, Domino<R, U> domino2) {
+        return merge((Domino<R, U>[]) new Domino[]{domino1, domino2});
+    }
+
+    public <U> Domino<T, U> merge(Domino<R, U> domino1, Domino<R, U> domino2, Domino<R, U> domino3) {
+        return merge((Domino<R, U>[]) new Domino[]{domino1, domino2, domino3});
+    }
+
     public <U> Domino<T, U> merge(final Domino<R, U>[] dominoes) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
