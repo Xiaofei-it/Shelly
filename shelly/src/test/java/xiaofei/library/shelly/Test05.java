@@ -18,7 +18,6 @@
 
 package xiaofei.library.shelly;
 
-import org.hamcrest.core.StringContains;
 import org.junit.Test;
 
 import xiaofei.library.shelly.function.Action1;
@@ -123,15 +122,15 @@ public class Test05 {
                         System.out.println("1: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1<String, String>() {
+                .map(new Function1<String, Integer>() {
                     @Override
-                    public String call(String input) {
+                    public Integer call(String input) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
 
                         }
-                        return input + "ha";
+                        return input.charAt(0) - 'A';
                     }
                 })
                 .commit();
@@ -143,25 +142,25 @@ public class Test05 {
                         System.out.println("2: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .map(new Function1<String, String>() {
+                .map(new Function1<String, Boolean>() {
                     @Override
-                    public String call(String input) {
+                    public Boolean call(String input) {
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
 
                         }
-                        return input + "hi";
+                        return input.equals("A");
                     }
                 })
                 .commit();
         Shelly.createDomino(7, String.class)
-                .combine((Domino<String, String>) Shelly.getDominoByLabel(5),
-                        (Domino<String, String>) Shelly.getDominoByLabel(6),
-                        new Function2<String, String, String>() {
+                .combine((Domino<String, Integer>) Shelly.getDominoByLabel(5),
+                        (Domino<String, Boolean>) Shelly.getDominoByLabel(6),
+                        new Function2<Integer, Boolean, String>() {
                             @Override
-                            public String call(String input1, String input2) {
-                                return input1 + input2;
+                            public String call(Integer input1, Boolean input2) {
+                                return "" + input1 + input2;
                             }
                         })
                 .target(new Action1<String>() {

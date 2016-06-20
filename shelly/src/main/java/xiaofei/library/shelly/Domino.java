@@ -224,7 +224,7 @@ public class Domino<T, R> {
 
     //TODO null consideration, what's more? maybe function returns null.
 
-    public <U, S, V> Domino<T, V> combine(final Domino<R, U> domino1, Domino<R, S> domino2,
+    public <U, S, V> Domino<T, V> combine(Domino<R, U> domino1, Domino<R, S> domino2,
                                           final Function2<U, S, V> combiner) {
         /**
          * 想实现的效果是domino1和domino2分开运行，结果经过combiner结合，得到一堆新的结果
