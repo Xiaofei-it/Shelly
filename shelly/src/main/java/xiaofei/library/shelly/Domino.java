@@ -18,6 +18,8 @@
 
 package xiaofei.library.shelly;
 
+import android.support.v4.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.DominoCenter;
@@ -219,6 +222,62 @@ public class Domino<T, R> {
         });
     }
 
+    //TODO null consideration, what's more? maybe function returns null.
+
+    public <U, S, V> Domino<T, V> combine(final Domino<R, U> domino1, Domino<R, S> domino2,
+                                          final Function2<U, S, V> combiner) {
+        /**
+         * 想实现的效果是domino1和domino2分开运行，结果经过combiner结合，得到一堆新的结果
+         * 为了实现方便，做如下变化：
+         * 1、将domino1与domino2分开运行，返回结果变为一个list，这个单独作为一个结果：domino->reduce->merge
+         * 2、将这个结果进行合并：reduce
+         * 3、将这个结果展开：flatMap
+         */
+        return merge(
+                domino1.reduce(new Function1<List<U>, Pair<Integer, List<Object>>>() {
+                    @Override
+                    public Pair<Integer, List<Object>> call(List<U> input) {
+                        return new Pair<Integer, List<Object>>(1, (List<Object>) input);
+                    }
+                }),
+                domino2.reduce(new Function1<List<S>, Pair<Integer, List<Object>>>() {
+                    @Override
+                    public Pair<Integer, List<Object>> call(List<S> input) {
+                        return new Pair<Integer, List<Object>>(1, (List<Object>) input);
+                    }
+                }))
+                .reduce(new Function1<List<Pair<Integer, List<Object>>>, List<V>>() {
+                    @Override
+                    public List<V> call(List<Pair<Integer, List<Object>>> input) {
+                        if (input.size() != 2) {
+                            throw new IllegalStateException("Unknown error! Please report this to Xiaofei.");
+                        }
+                        List<V> result = new ArrayList<V>();
+                        List<Object> input1, input2;
+                        if (input.get(0).first == 1) {
+                            input1 = input.get(0).second;
+                            input2 = input.get(1).second;
+                        } else {
+                            input1 = input.get(1).second;
+                            input2 = input.get(0).second;
+                        }
+                        for (Object o1 : input1) {
+                            for (Object o2 : input2) {
+                                result.add(combiner.call((U) o1, (S) o2));
+                            }
+                        }
+                        return result;
+                    }
+                })
+                .flatMap(new Function1<List<V>, List<V>>() {
+                    @Override
+                    public List<V> call(List<V> input) {
+                        return input;
+                    }
+                });
+
+    }
+
     public Domino<T, R> background() {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
@@ -275,7 +334,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> map(final Function1<R, U> function1) {
+    public <U> Domino<T, U> map(final Function1<R, U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> play(final List<T> input) {
@@ -286,7 +345,7 @@ public class Domino<T, R> {
                             public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
                                 CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
                                 for (R singleInput : input) {
-                                    result.add(function1.call(singleInput));
+                                    result.add(map.call(singleInput));
                                 }
                                 return result;
                             }
@@ -295,7 +354,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> flatMap(final Function1<R, List<U>> function1) {
+    public <U> Domino<T, U> flatMap(final Function1<R, List<U>> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> play(final List<T> input) {
@@ -306,7 +365,7 @@ public class Domino<T, R> {
                             public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
                                 CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
                                 for (R singleInput : input) {
-                                    result.addAll(function1.call(singleInput));
+                                    result.addAll(map.call(singleInput));
                                 }
                                 return result;
                             }
@@ -315,7 +374,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> filter(final Function1<R, Boolean> function1) {
+    public Domino<T, R> filter(final Function1<R, Boolean> filter) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> play(final List<T> input) {
@@ -326,7 +385,7 @@ public class Domino<T, R> {
                             public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<R> input) {
                                 CopyOnWriteArrayList<R> result = new CopyOnWriteArrayList<R>();
                                 for (R singleInput : input) {
-                                    if (function1.call(singleInput)) {
+                                    if (filter.call(singleInput)) {
                                         result.add(singleInput);
                                     }
                                 }
@@ -337,15 +396,29 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO
-    public Domino<T, R> delay(long delay, TimeUnit unit) {
-        return null;
+    public <U> Domino<T, U> reduce(final Function1<List<R>, U> reducer) {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(final List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                return scheduler.scheduleFunction(
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
+                            @Override
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
+                                result.add(reducer.call(input));
+                                return result;
+                            }
+                        }));
+            }
+        });
     }
 
-    //TODO
+    //TODO task, success, fail, endTask
     public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
         return null;
     }
+
 
     public void play(CopyOnWriteArrayList<T> input) {
         mPlayer.play(input);

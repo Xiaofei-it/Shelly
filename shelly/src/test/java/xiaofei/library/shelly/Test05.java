@@ -18,10 +18,12 @@
 
 package xiaofei.library.shelly;
 
+import org.hamcrest.core.StringContains;
 import org.junit.Test;
 
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.Function2;
 
 /**
  * Created by Xiaofei on 16/6/20.
@@ -109,6 +111,67 @@ public class Test05 {
                 .commit();
         Shelly.playDomino(4, "E", "F");
 
+    }
+
+    @Test
+    public void testCombine() {
+        Shelly.createDomino(5, String.class)
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("1: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        return input + "ha";
+                    }
+                })
+                .commit();
+        Shelly.createDomino(6, String.class)
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("2: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        return input + "hi";
+                    }
+                })
+                .commit();
+        Shelly.createDomino(7, String.class)
+                .combine((Domino<String, String>) Shelly.getDominoByLabel(5),
+                        (Domino<String, String>) Shelly.getDominoByLabel(6),
+                        new Function2<String, String, String>() {
+                            @Override
+                            public String call(String input1, String input2) {
+                                return input1 + input2;
+                            }
+                        })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("3: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(7, "A", "B");
     }
 
 }
