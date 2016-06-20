@@ -96,4 +96,23 @@ public class Test04 {
                 .commit();
         Shelly.playDomino(2, "A", "B", "AB", "CD");
     }
+
+    @Test
+    public void small() {
+        Shelly.createDomino(3, String.class)
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        return input;
+                    }
+                })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("3: " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(3, "A");
+    }
 }

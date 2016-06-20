@@ -174,7 +174,6 @@ public class Test03 {
         }
     }
 
-
     @Test
     public void i() {
         Shelly.createDomino("case04", String.class)
@@ -213,6 +212,38 @@ public class Test03 {
         Shelly.playDomino("case04", "ABC");
         try {
             Thread.sleep(100000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void j() {
+        Shelly.createDomino("case05", String.class)
+                .newThread()
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+
+                        }
+                        System.out.println("map1: " + Thread.currentThread().getName());
+                        return "map1" + input;
+                    }
+                })
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        System.out.println("map2: " + Thread.currentThread().getName());
+                        return "map2" + input;
+                    }
+                })
+                .commit();
+        Shelly.playDomino("case05", "ABC");
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

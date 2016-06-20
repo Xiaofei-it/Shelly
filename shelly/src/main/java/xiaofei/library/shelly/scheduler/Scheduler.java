@@ -33,20 +33,16 @@ import xiaofei.library.shelly.internal.Player;
  */
 public abstract class Scheduler<T> {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private final Inputs mInputs;
-
-    private AtomicInteger mScheduledRunnableNumber = new AtomicInteger(0);
-
-    private AtomicInteger mFinishedScheduledRunnableNumber = new AtomicInteger(-1);
 
     public Scheduler(List<T> input) {
         mInputs = new Inputs();
         if (input instanceof CopyOnWriteArrayList) {
             mInputs.add((CopyOnWriteArrayList<Object>) input);
         } else {
-            mInputs.addInternal(new CopyOnWriteArrayList<Object>(input));
+            mInputs.add(new CopyOnWriteArrayList<Object>(input));
         }
     }
 
@@ -69,8 +65,8 @@ public abstract class Scheduler<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final <R> Scheduler<R> scheduleRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
+            int size = mInputs.size();
             for (Runnable runnable : runnables) {
-                int size = mInputs.size();
                 onSchedule(new ScheduledRunnable(runnable, size));
             }
             return (Scheduler<R>) this;
@@ -79,9 +75,9 @@ public abstract class Scheduler<T> {
 
     public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
+            int index = block(functions.size());
             for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
-                int size = mInputs.size();
-                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function), size));
+                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function, index), index));
             }
             return (Scheduler<R>) this;
         }
@@ -94,8 +90,8 @@ public abstract class Scheduler<T> {
         }
     }
 
-    public final int block() {
-        return mInputs.append() - 1;
+    private int block(int functionNumber) {
+        return mInputs.append(functionNumber) - 1;
     }
 
     public final void unblock(int index, CopyOnWriteArrayList<Object> object) {
@@ -164,9 +160,9 @@ public abstract class Scheduler<T> {
 
         private Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> mFunction;
 
-        BlockingRunnable(Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function) {
+        BlockingRunnable(Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function, int index) {
             mFunction = function;
-            mIndex = block();
+            mIndex = index;
         }
 
         protected final CopyOnWriteArrayList<T> getPreviousInput() {
@@ -191,29 +187,36 @@ public abstract class Scheduler<T> {
 
         private final CopyOnWriteArrayList<Condition> mConditions = new CopyOnWriteArrayList<Condition>();
 
+        private final CopyOnWriteArrayList<Integer> mFunctionNumber = new CopyOnWriteArrayList<Integer>();
+
+        private final CopyOnWriteArrayList<AtomicInteger> mFinishedNumber = new CopyOnWriteArrayList<AtomicInteger>();
+
         Inputs() {}
 
-        int append() {
-            return addInternal(null);
+        int append(int functionNumber) {
+            return addInternal(new CopyOnWriteArrayList<Object>(), functionNumber);
         }
 
-        int addInternal(CopyOnWriteArrayList<Object> input) {
+        private int addInternal(CopyOnWriteArrayList<Object> input, int functionNumber) {
             synchronized (this) {
                 mInputs.add(input);
                 ReentrantLock lock = new ReentrantLock();
                 mLocks.add(lock);
                 mConditions.add(lock.newCondition());
+                mFunctionNumber.add(functionNumber);
+                mFinishedNumber.add(new AtomicInteger(0));
                 return mInputs.size();
             }
         }
 
         void add(CopyOnWriteArrayList<Object> input) {
-            addInternal(input);
+            addInternal(input, 0);
         }
 
         boolean inputSet(int index) {
-            return mInputs.get(index) != null;
+            return mFinishedNumber.get(index).get() == mFunctionNumber.get(index);
         }
+
         int size() {
             return mInputs.size();
         }
@@ -223,13 +226,15 @@ public abstract class Scheduler<T> {
         }
 
         void set(int index, CopyOnWriteArrayList<Object> input) {
-            mLocks.get(index).lock();
-            mInputs.set(index, input);
-            mConditions.get(index).signalAll();
+            lock(index);
+            mInputs.get(index).addAll(input);
+            if (mFinishedNumber.get(index).incrementAndGet() == mFunctionNumber.get(index)) {
+                mConditions.get(index).signalAll();
+            }
             if (DEBUG) {
                 System.out.println("signal " + Thread.currentThread().getName());
             }
-            mLocks.get(index).unlock();
+            unlock(index);
         }
 
         void lock(int index) {
