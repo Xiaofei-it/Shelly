@@ -186,7 +186,11 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> merge(Class<U> clazz, final Domino<R, U>... dominoes) {
+    public <U> Domino<T, U> merge(final Domino<R, U> domino) {
+        return merge((Domino<R, U>[]) new Domino[]{domino});
+    }
+
+    public <U> Domino<T, U> merge(final Domino<R, U>[] dominoes) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> play(List<T> input) {

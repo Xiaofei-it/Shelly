@@ -20,9 +20,6 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 
@@ -61,7 +58,7 @@ public class Test05 {
                     }
                 })
                 .background()
-                .merge(String.class, Shelly.getDominoByLabel(1, String.class, String.class))
+                .merge((Domino<String, String>) Shelly.getDominoByLabel(1))
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -70,7 +67,11 @@ public class Test05 {
                 })
                 .commit();
         Shelly.playDomino(2, "A", "B");
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
