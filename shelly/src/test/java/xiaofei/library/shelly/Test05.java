@@ -58,7 +58,7 @@ public class Test05 {
                     }
                 })
                 .background()
-                .merge((Domino<String, String>) Shelly.getDominoByLabel(1))
+                .dominoMap((Domino<String, String>) Shelly.getDominoByLabel(1))
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -96,6 +96,19 @@ public class Test05 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Shelly.createDomino(4, String.class)
+                .newThread()
+                .target((Domino<String, String>) Shelly.getDominoByLabel(1))
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("6: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(4, "E", "F");
+
     }
 
 }

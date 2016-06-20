@@ -186,7 +186,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> merge(final Domino<R, U> domino) {
+    public <U> Domino<T, U> dominoMap(final Domino<R, U> domino) {
         return merge((Domino<R, U>[]) new Domino[]{domino});
     }
 
