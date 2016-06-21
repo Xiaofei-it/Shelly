@@ -64,6 +64,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                 ));
     }
 
+    //TODO 其实是player的高阶函数
     public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Pair<R, U>>(getLabel(),
@@ -74,6 +75,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                                 scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
                                     @Override
                                     public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        //TODO 此处不必
                                         CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
                                         for (Pair<R, U> pair : input) {
                                             if (pair.second != null) {

@@ -353,6 +353,7 @@ public class Domino<T, R> {
         });
     }
 
+    //TODO
     public <U> Domino<T, U> map(final Function1<R, U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
@@ -415,6 +416,7 @@ public class Domino<T, R> {
         });
     }
 
+    //TODO scheduler的函数是一个高阶函数
     public <U> Domino<T, U> reduce(final Function1<List<R>, U> reducer) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
