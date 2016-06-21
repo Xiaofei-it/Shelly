@@ -144,7 +144,7 @@ public abstract class Scheduler<T> {
         return mInputs.get(index);
     }
 
-    private class ScheduledRunnable implements Runnable {
+    protected class ScheduledRunnable implements Runnable {
 
         private Runnable mRunnable;
 
@@ -155,8 +155,11 @@ public abstract class Scheduler<T> {
             mWaiting = waiting;
         }
 
-        @Override
-        public void run() {
+        protected Runnable getRunnable() {
+            return mRunnable;
+        }
+
+        protected void waitForInput() {
             int waitingIndex = mWaiting - 1;
             try {
                 mInputs.lock(waitingIndex);
@@ -174,6 +177,15 @@ public abstract class Scheduler<T> {
             } finally {
                 mInputs.unlock(waitingIndex);
             }
+        }
+
+        protected boolean inputSet() {
+            return mInputs.inputSet(mWaiting - 1);
+        }
+
+        @Override
+        public void run() {
+            waitForInput();
             mRunnable.run();
         }
     }
