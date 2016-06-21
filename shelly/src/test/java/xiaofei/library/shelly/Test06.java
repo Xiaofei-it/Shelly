@@ -65,17 +65,23 @@ public class Test06 {
                                     System.out.println("4: " + Thread.currentThread().getName() + " " + input);
                                 }
                             }))
+                .finallyDo(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("5: " + Thread.currentThread().getName());
+                    }
+                })
                 .endTask()
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
-                        System.out.println("5: " + Thread.currentThread().getName() + " " + input);
+                        System.out.println("6: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .target(new Action0() {
                     @Override
                     public void call() {
-                        System.out.println("6: " + Thread.currentThread().getName());
+                        System.out.println("7: " + Thread.currentThread().getName());
                     }
                 })
                 .commit();

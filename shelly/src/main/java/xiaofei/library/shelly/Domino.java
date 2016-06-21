@@ -442,7 +442,6 @@ public class Domino<T, R> {
         return new TaskDomino<T, U, S>(map(new TaskFunction<R, U, S>(task)));
     }
 
-    //TODO task, success, fail, endTask
     public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
         return null;
     }
@@ -567,6 +566,14 @@ public class Domino<T, R> {
                     ));
         }
 
+        public TaskDomino<T, R, U> finallyDo(Action0 action0) {
+            return new TaskDomino<T, R, U>(target(action0));
+        }
+
+        public <S> TaskDomino<T, R, U> finallyDo(Class<S> clazz, TargetAction0<S> targetAction0) {
+            return new TaskDomino<T, R, U>(target(clazz, targetAction0));
+        }
+
         private Domino<T, Pair<R, U>> toDomino() {
             return new Domino<T, Pair<R, U>>(getLabel(), getPlayer());
         }
@@ -584,6 +591,6 @@ public class Domino<T, R> {
         }
 
     }
-    //TODO map起个名字，lift，super与extend。uithread会阻塞
+    //TODO lift，onSuccess增加api，super与extend。uithread会阻塞
 
 }
