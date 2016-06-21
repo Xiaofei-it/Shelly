@@ -68,7 +68,7 @@ public class Domino<T, R> {
         });
     }
 
-    private Domino(Object label, Player<T, R> player) {
+    Domino(Object label, Player<T, R> player) {
         mLabel = label;
         mPlayer = player;
     }
@@ -342,6 +342,16 @@ public class Domino<T, R> {
         });
     }
 
+    public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
+        return new Domino<T, R>(mLabel, new Player<T, R>() {
+            @Override
+            public Scheduler<R> play(List<T> input) {
+                Scheduler<R> scheduler = mPlayer.play(input);
+                return new BackgroundQueueScheduler<R>(scheduler);
+            }
+        });
+    }
+
     public <U> Domino<T, U> map(final Function1<R, U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
@@ -442,11 +452,6 @@ public class Domino<T, R> {
         return new TaskDomino<T, U, S>(map(new TaskFunction<R, U, S>(task)));
     }
 
-    public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
-        return null;
-    }
-
-
     public void play(CopyOnWriteArrayList<T> input) {
         mPlayer.play(input);
     }
@@ -508,89 +513,6 @@ public class Domino<T, R> {
 
     }
 
-    public static class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
-
-        TaskDomino(Domino<T, Pair<R, U>> domino) {
-            super(domino.mLabel, domino.mPlayer);
-        }
-
-        public TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
-            return new TaskDomino<T, R, U>(
-                    new Domino<T, Pair<R, U>>(getLabel(),
-                            new Player<T, Pair<R, U>>() {
-                                @Override
-                                public Scheduler<Pair<R, U>> play(List<T> input) {
-                                    final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
-                                    scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
-                                        @Override
-                                        public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
-                                            CopyOnWriteArrayList<R> newInput = new CopyOnWriteArrayList<R>();
-                                            for (Pair<R, U> pair : input) {
-                                                if (pair.first != null) {
-                                                    newInput.add(pair.first);
-                                                }
-                                            }
-                                            domino.mPlayer.play(newInput);
-                                            return scheduler;
-                                        }
-                                    });
-                                    return scheduler;
-                                }
-                            }
-                    ));
-        }
-
-        public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
-            return new TaskDomino<T, R, U>(
-                    new Domino<T, Pair<R, U>>(getLabel(),
-                            new Player<T, Pair<R, U>>() {
-                                @Override
-                                public Scheduler<Pair<R, U>> play(List<T> input) {
-                                    final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
-                                    scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
-                                        @Override
-                                        public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
-                                            CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
-                                            for (Pair<R, U> pair : input) {
-                                                if (pair.second != null) {
-                                                    newInput.add(pair.second);
-                                                }
-                                            }
-                                            domino.mPlayer.play(newInput);
-                                            return scheduler;
-                                        }
-                                    });
-                                    return scheduler;
-                                }
-                            }
-                    ));
-        }
-
-        public TaskDomino<T, R, U> finallyDo(Action0 action0) {
-            return new TaskDomino<T, R, U>(target(action0));
-        }
-
-        public <S> TaskDomino<T, R, U> finallyDo(Class<S> clazz, TargetAction0<S> targetAction0) {
-            return new TaskDomino<T, R, U>(target(clazz, targetAction0));
-        }
-
-        private Domino<T, Pair<R, U>> toDomino() {
-            return new Domino<T, Pair<R, U>>(getLabel(), getPlayer());
-        }
-
-        public Domino<T, T> endTask() {
-            return ((Domino<T, T>) toDomino()).clear();
-        }
-
-        public <S> Domino<T, S> endTask(Class<S> clazz) {
-            return toDomino().clear();
-        }
-
-        public <S> Domino<T, S> endTask(Function1<List<Pair<R, U>>, S> reducer) {
-            return toDomino().reduce(reducer);
-        }
-
-    }
     //TODO lift，onSuccess增加api，super与extend。uithread会阻塞
 
 }
