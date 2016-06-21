@@ -44,6 +44,7 @@ import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 
 /**
@@ -342,12 +343,12 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
+    public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> play(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.play(input);
-                return new BackgroundQueueScheduler<R>(scheduler);
+                return new ThrottleScheduler<R>(scheduler, mLabel, windowDuration, unit);
             }
         });
     }

@@ -31,7 +31,7 @@ public class Test05 {
 
     @Test
     public void testMerge() {
-        Shelly.createDomino(1, String.class)
+        Shelly.<String>createDomino(1)
                 .newThread()
                 .target(new Action1<String>() {
                     @Override
@@ -51,7 +51,7 @@ public class Test05 {
                     }
                 })
                 .commit();
-        Shelly.createDomino(2, String.class)
+        Shelly.<String>createDomino(2)
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -59,7 +59,7 @@ public class Test05 {
                     }
                 })
                 .background()
-                .dominoMap((Domino<String, String>) Shelly.getDominoByLabel(1))
+                .dominoMap(Shelly.<String, String>getDominoByLabel(1))
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -74,7 +74,7 @@ public class Test05 {
                 })
                 .commit();
         Shelly.playDomino(2, "A", "B");
-        Shelly.createDomino(3, String.class)
+        Shelly.<String>createDomino(3)
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -82,7 +82,7 @@ public class Test05 {
                     }
                 })
                 .background()
-                .merge((Domino<String, String>) Shelly.getDominoByLabel(1), (Domino<String, String>) Shelly.getDominoByLabel(2))
+                .merge(Shelly.<String, String>getDominoByLabel(1), Shelly.<String, String>getDominoByLabel(2))
                 .newThread()
                 .target(new Action1<String>() {
                     @Override
@@ -98,9 +98,9 @@ public class Test05 {
             e.printStackTrace();
         }
 
-        Shelly.createDomino(4, String.class)
+        Shelly.<String>createDomino(4)
                 .newThread()
-                .target((Domino<String, String>) Shelly.getDominoByLabel(1))
+                .target(Shelly.<String, String>getDominoByLabel(1))
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -114,7 +114,7 @@ public class Test05 {
 
     @Test
     public void testCombine() {
-        Shelly.createDomino(5, String.class)
+        Shelly.<String>createDomino(5)
                 .newThread()
                 .target(new Action1<String>() {
                     @Override
@@ -134,7 +134,7 @@ public class Test05 {
                     }
                 })
                 .commit();
-        Shelly.createDomino(6, String.class)
+        Shelly.<String>createDomino(6)
                 .newThread()
                 .target(new Action1<String>() {
                     @Override
@@ -154,9 +154,9 @@ public class Test05 {
                     }
                 })
                 .commit();
-        Shelly.createDomino(7, String.class)
-                .combine((Domino<String, Integer>) Shelly.getDominoByLabel(5),
-                        (Domino<String, Boolean>) Shelly.getDominoByLabel(6),
+        Shelly.<String>createDomino(7)
+                .combine(Shelly.<String, Integer>getDominoByLabel(5),
+                        Shelly.<String, Boolean>getDominoByLabel(6),
                         new Function2<Integer, Boolean, String>() {
                             @Override
                             public String call(Integer input1, Boolean input2) {

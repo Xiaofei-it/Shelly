@@ -30,10 +30,19 @@ import xiaofei.library.shelly.internal.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
+ *
+ * Not thread-safe!!!
  */
 public abstract class Scheduler<T> {
 
     private static final boolean DEBUG = false;
+
+    private static final int STATE_RUNNING = 0;
+
+    private static final int STATE_PAUSE = 1;
+
+    //This field will be accessed from different threads. So access it in a synchronized block instead of using volatile.
+    private int mState;
 
     private final Inputs mInputs;
 
@@ -44,10 +53,22 @@ public abstract class Scheduler<T> {
         } else {
             mInputs.add(new CopyOnWriteArrayList<Object>(input));
         }
+        mState = STATE_RUNNING;
     }
 
     public <R> Scheduler(Scheduler<R> scheduler) {
         mInputs = scheduler.mInputs;
+        mState = scheduler.mState;
+    }
+
+    public void pause() {
+        synchronized (this) {
+            mState = STATE_PAUSE;
+        }
+    }
+
+    protected boolean isRunning() {
+        return mState == STATE_RUNNING;
     }
 
     protected Runnable onPlay(final Player<T, ?> player) {
@@ -65,9 +86,11 @@ public abstract class Scheduler<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final <R> Scheduler<R> scheduleRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
-            int size = mInputs.size();
-            for (Runnable runnable : runnables) {
-                onSchedule(new ScheduledRunnable(runnable, size));
+            if (isRunning()) {
+                int size = mInputs.size();
+                for (Runnable runnable : runnables) {
+                    onSchedule(new ScheduledRunnable(runnable, size));
+                }
             }
             return (Scheduler<R>) this;
         }
@@ -75,9 +98,11 @@ public abstract class Scheduler<T> {
 
     public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
-            int index = block(functions.size());
-            for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
-                onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function, index), index));
+            if (isRunning()) {
+                int index = block(functions.size());
+                for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
+                    onSchedule(new ScheduledRunnable(new BlockingRunnable<R>(function, index), index));
+                }
             }
             return (Scheduler<R>) this;
         }
@@ -86,7 +111,9 @@ public abstract class Scheduler<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final void play(Player<T, ?> player) {
         synchronized (this) {
-            scheduleRunnable(Collections.singletonList(onPlay(player)));
+            if (isRunning()) {
+                scheduleRunnable(Collections.singletonList(onPlay(player)));
+            }
         }
     }
 
@@ -94,7 +121,7 @@ public abstract class Scheduler<T> {
         return mInputs.append(functionNumber) - 1;
     }
 
-    public final void unblock(int index, CopyOnWriteArrayList<Object> object) {
+    private void unblock(int index, CopyOnWriteArrayList<Object> object) {
         mInputs.set(index, object);
     }
 
@@ -113,7 +140,7 @@ public abstract class Scheduler<T> {
         return mInputs.get(index);
     }
 
-    public CopyOnWriteArrayList<Object> getInput(int index) {
+    private CopyOnWriteArrayList<Object> getInput(int index) {
         return mInputs.get(index);
     }
 

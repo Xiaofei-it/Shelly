@@ -38,8 +38,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
         super(domino.getLabel(), domino.getPlayer());
     }
 
-    public xiaofei.library.shelly.TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
-        return new xiaofei.library.shelly.TaskDomino<T, R, U>(
+    public TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
+        return new TaskDomino<T, R, U>(
                 new Domino<T, Pair<R, U>>(getLabel(),
                         new Player<T, Pair<R, U>>() {
                             @Override
@@ -64,8 +64,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                 ));
     }
 
-    public xiaofei.library.shelly.TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
-        return new xiaofei.library.shelly.TaskDomino<T, R, U>(
+    public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
+        return new TaskDomino<T, R, U>(
                 new Domino<T, Pair<R, U>>(getLabel(),
                         new Player<T, Pair<R, U>>() {
                             @Override
@@ -90,23 +90,19 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                 ));
     }
 
-    public xiaofei.library.shelly.TaskDomino<T, R, U> finallyDo(Action0 action0) {
-        return new xiaofei.library.shelly.TaskDomino<T, R, U>(target(action0));
+    public TaskDomino<T, R, U> finallyDo(Action0 action0) {
+        return new TaskDomino<T, R, U>(target(action0));
     }
 
-    public <S> xiaofei.library.shelly.TaskDomino<T, R, U> finallyDo(Class<S> clazz, TargetAction0<S> targetAction0) {
-        return new xiaofei.library.shelly.TaskDomino<T, R, U>(target(clazz, targetAction0));
+    public <S> TaskDomino<T, R, U> finallyDo(Class<S> clazz, TargetAction0<S> targetAction0) {
+        return new TaskDomino<T, R, U>(target(clazz, targetAction0));
     }
 
     private Domino<T, Pair<R, U>> toDomino() {
         return new Domino<T, Pair<R, U>>(getLabel(), getPlayer());
     }
 
-    public Domino<T, T> endTask() {
-        return ((Domino<T, T>) toDomino()).clear();
-    }
-
-    public <S> Domino<T, S> endTask(Class<S> clazz) {
+    public <S> Domino<T, S> endTask() {
         return toDomino().clear();
     }
 

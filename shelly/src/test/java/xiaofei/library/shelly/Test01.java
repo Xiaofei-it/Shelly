@@ -56,7 +56,7 @@ public class Test01 {
     public void case01() {
         Shelly.register(new A(1));
         Shelly.register(new A(2));
-        Shelly.createDomino("case01", String.class)
+        Shelly.<String>createDomino("case01")
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -105,7 +105,7 @@ public class Test01 {
                 .commit();
         Shelly.playDomino("case01", "Haha", "Hehe");
 
-        Shelly.createDomino("case03", String.class)
+        Shelly.<String>createDomino("case03")
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -207,7 +207,7 @@ public class Test01 {
                 .commit();
         Shelly.playDomino("case03", "ABC", "DEF");
 
-        Shelly.createDomino("case04", String.class)
+        Shelly.<String>createDomino("case04")
                 .backgroundQueue()
                 .target(new Action0() {
                     @Override
@@ -231,7 +231,7 @@ public class Test01 {
         Shelly.playDomino("case04");
 
         Shelly.register(new B());
-        Shelly.createDomino("case05", String.class)
+        Shelly.<String>createDomino("case05")
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -257,7 +257,7 @@ public class Test01 {
         Shelly.playDomino("case05", "8", "9");
         Shelly.playDomino("case05", "i", "j");
 
-        Shelly.createDomino("case06", int.class)
+        Shelly.<Integer>createDomino("case06")
                 .defaultScheduler()
                 .target(new Action1<Integer>() {
                     @Override

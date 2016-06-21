@@ -31,7 +31,7 @@ public class Test02 {
 
     @Test
     public void f() {
-        Shelly.createDomino(1, Integer.class)
+        Shelly.<Integer>createDomino(1)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -41,7 +41,7 @@ public class Test02 {
                 .commit();
         Shelly.playDomino(1, 2);
 
-        Shelly.createDomino(2, int.class)
+        Shelly.<Integer>createDomino(2)
                 .target(new Action0() {
                     @Override
                     public void call() {
@@ -57,7 +57,7 @@ public class Test02 {
                 .commit();
         Shelly.playDomino(2, 2);
 
-        Shelly.createDomino(3, int.class)
+        Shelly.<Integer>createDomino(3)
                 .target(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
@@ -91,7 +91,7 @@ public class Test02 {
                 .commit();
         Shelly.playDomino(3, 2, 1);
 
-        Shelly.createDomino(4, int.class)
+        Shelly.<Integer>createDomino(4)
                 .target(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {

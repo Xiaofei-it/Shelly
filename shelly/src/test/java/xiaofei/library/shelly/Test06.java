@@ -20,6 +20,8 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.internal.Task;
@@ -31,7 +33,7 @@ public class Test06 {
 
     @Test
     public void testMerge() {
-        Shelly.createDomino(1, String.class)
+        Shelly.<String>createDomino(1)
                 .beginTask(new Task<String, Character, Integer>() {
                     @Override
                     protected void onExecute(String input) {
@@ -49,7 +51,7 @@ public class Test06 {
                         }
                     }
                 })
-                .onSuccess(Shelly.createDomino(Character.class)
+                .onSuccess(Shelly.<Character>createDomino()
                             .background()
                             .target(new Action1<Character>() {
                                 @Override
@@ -57,7 +59,7 @@ public class Test06 {
                                     System.out.println("3: " + Thread.currentThread().getName() + " " + input);
                                 }
                             }))
-                .onFailure(Shelly.createDomino(Integer.class)
+                .onFailure(Shelly.<Integer>createDomino()
                             .newThread()
                             .target(new Action1<Integer>() {
                                 @Override
@@ -71,7 +73,7 @@ public class Test06 {
                         System.out.println("5: " + Thread.currentThread().getName());
                     }
                 })
-                .endTask()
+                .<String>endTask()
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -88,4 +90,73 @@ public class Test06 {
         Shelly.playDomino(1, "A", "BD", "BG");
     }
 
+    @Test
+    public void testThrottle() {
+        Shelly.<String>createDomino(2)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("1: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .newThread()
+                .throttle(1, TimeUnit.SECONDS)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("2: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(3)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("3: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("4: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(4)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("5: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .newThread()
+                .throttle(1, TimeUnit.SECONDS)
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("6: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(2, "A");
+        Shelly.playDomino(3, "A");
+        Shelly.playDomino(4, "A");
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Shelly.playDomino(2, "B");
+        Shelly.playDomino(3, "B");
+        Shelly.playDomino(4, "B");
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Shelly.playDomino(2, "C");
+        Shelly.playDomino(3, "C");
+        Shelly.playDomino(4, "C");
+    }
 }
