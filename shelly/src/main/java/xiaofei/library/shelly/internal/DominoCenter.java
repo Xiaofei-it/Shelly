@@ -53,6 +53,11 @@ public class DominoCenter {
 
     public void commit(Domino<?, ?> domino) {
         Object label = domino.getLabel();
+        if (label == null) {
+            throw new UnsupportedOperationException("Domino label cannot be null. "
+                    + "Please note that Domino created by Shelly.createDomino(Class<T>) can only "
+                    + "be used temporarily and cannot be committed.");
+        }
         if (mDominoes.put(label, domino) != null) {
             Log.w(TAG, "Domino name duplicate! Check whether you have commit a domino with the same label before.");
         }

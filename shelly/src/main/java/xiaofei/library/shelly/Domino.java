@@ -59,7 +59,7 @@ public class Domino<T, R> {
 
     private Object mLabel;
 
-    public Domino(Object label) {
+    Domino(Object label) {
         this(label, new Player<T, R>() {
             @Override
             public Scheduler<R> play(List<T> input) {
@@ -491,6 +491,8 @@ public class Domino<T, R> {
 
         @Override
         public Pair<R, U> call(T input) {
+            mResult = null;
+            mError = null;
             mTask.execute(input);
             try {
                 mLock.lock();
@@ -507,7 +509,7 @@ public class Domino<T, R> {
 
     }
 
-    private static class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
+    public static class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
 
         TaskDomino(Domino<T, Pair<R, U>> domino) {
             super(domino.mLabel, domino.mPlayer);
@@ -569,7 +571,11 @@ public class Domino<T, R> {
             return new Domino<T, Pair<R, U>>(getLabel(), getPlayer());
         }
 
-        public <S> Domino<T, S> endTask() {
+        public Domino<T, T> endTask() {
+            return ((Domino<T, T>) toDomino()).clear();
+        }
+
+        public <S> Domino<T, S> endTask(Class<S> clazz) {
             return toDomino().clear();
         }
 
@@ -578,5 +584,6 @@ public class Domino<T, R> {
         }
 
     }
+    //TODO map起个名字，lift，super与extend。uithread会阻塞
 
 }

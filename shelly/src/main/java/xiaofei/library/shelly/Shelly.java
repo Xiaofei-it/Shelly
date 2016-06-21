@@ -45,6 +45,10 @@ public class Shelly {
         return new Domino<T, T>(label);
     }
 
+    public static <T> Domino<T, T> createDomino(Class<T> inputType) {
+        return new Domino<T, T>(null);
+    }
+
     @SafeVarargs
     public static <T> void playDomino(Object label, T... input) {
         CopyOnWriteArrayList<T> newInput = new CopyOnWriteArrayList<T>();
