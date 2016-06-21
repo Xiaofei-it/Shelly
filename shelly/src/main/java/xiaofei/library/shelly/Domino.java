@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
@@ -35,11 +38,13 @@ import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.TargetCenter;
+import xiaofei.library.shelly.internal.Task;
 import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 
 /**
@@ -55,7 +60,7 @@ public class Domino<T, R> {
 
     private Object mLabel;
 
-    public Domino(Object label) {
+    Domino(Object label) {
         this(label, new Player<T, R>() {
             @Override
             public Scheduler<R> play(List<T> input) {
@@ -64,13 +69,17 @@ public class Domino<T, R> {
         });
     }
 
-    private Domino(Object label, Player<T, R> player) {
+    Domino(Object label, Player<T, R> player) {
         mLabel = label;
         mPlayer = player;
     }
 
     public Object getLabel() {
         return mLabel;
+    }
+
+    protected Player<T, R> getPlayer() {
+        return mPlayer;
     }
 
     /**
@@ -334,6 +343,16 @@ public class Domino<T, R> {
         });
     }
 
+    public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
+        return new Domino<T, R>(mLabel, new Player<T, R>() {
+            @Override
+            public Scheduler<R> play(List<T> input) {
+                Scheduler<R> scheduler = mPlayer.play(input);
+                return new ThrottleScheduler<R>(scheduler, mLabel, windowDuration, unit);
+            }
+        });
+    }
+
     public <U> Domino<T, U> map(final Function1<R, U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
@@ -414,11 +433,25 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO task, success, fail, endTask
-    public Domino<T, R> throttle(long windowDuration, TimeUnit unit) {
-        return null;
+    public <U> Domino<T, U> clear() {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> play(final List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.play(input);
+                return scheduler.scheduleFunction(
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
+                            @Override
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                return new CopyOnWriteArrayList<U>();
+                            }
+                        }));
+            }
+        });
     }
 
+    public <U, S> TaskDomino<T, U, S> beginTask(Task<R, U, S> task) {
+        return new TaskDomino<T, U, S>(map(new TaskFunction<R, U, S>(task)));
+    }
 
     public void play(CopyOnWriteArrayList<T> input) {
         mPlayer.play(input);
@@ -427,5 +460,60 @@ public class Domino<T, R> {
     public void commit() {
         DOMINO_CENTER.commit(this);
     }
+
+    private static class TaskFunction<T, R, U> implements Function1<T, Pair<R, U>>, Task.TaskListener<R, U> {
+
+        private Task<T, R, U> mTask;
+
+        private volatile R mResult;
+
+        private volatile U mError;
+
+        private Lock mLock = new ReentrantLock();
+
+        private Condition mCondition = mLock.newCondition();
+
+        TaskFunction(Task<T, R, U> task) {
+            task.setListener(this);
+            mTask = task;
+        }
+
+        @Override
+        public void onFailure(U error) {
+            mLock.lock();
+            mError = error;
+            mCondition.signalAll();
+            mLock.unlock();
+        }
+
+        @Override
+        public void onSuccess(R result) {
+            mLock.lock();
+            mResult = result;
+            mCondition.signalAll();
+            mLock.unlock();
+        }
+
+        @Override
+        public Pair<R, U> call(T input) {
+            mResult = null;
+            mError = null;
+            mTask.execute(input);
+            try {
+                mLock.lock();
+                while (mError == null && mResult == null) {
+                    mCondition.await();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                mLock.unlock();
+            }
+            return new Pair<R, U>(mResult, mError);
+        }
+
+    }
+
+    //TODO lift，onSuccess增加api，super与extend。uithread会阻塞
 
 }

@@ -30,7 +30,7 @@ public class Test03 {
 
     @Test
     public void f() {
-        Shelly.createDomino(1, Integer.class)
+        Shelly.<Integer>createDomino(1)
                 .backgroundQueue()
                 .target(new Action1<Integer>() {
                     @Override
@@ -81,7 +81,7 @@ public class Test03 {
     @Test
     public void g() {
 
-        Shelly.createDomino(2, Integer.class)
+        Shelly.<Integer>createDomino(2)
                 .background()
                 .target(new Action1<Integer>() {
                     @Override
@@ -114,7 +114,7 @@ public class Test03 {
 
     @Test
     public void h() {
-        Shelly.createDomino("case03", String.class)
+        Shelly.<String>createDomino("case03")
                 .background()
                 .map(new Function1<String, String>() {
                     @Override
@@ -176,7 +176,7 @@ public class Test03 {
 
     @Test
     public void i() {
-        Shelly.createDomino("case04", String.class)
+        Shelly.<String>createDomino("case04")
                 .newThread()
                 .map(new Function1<String, String>() {
                     @Override
@@ -219,7 +219,7 @@ public class Test03 {
 
     @Test
     public void j() {
-        Shelly.createDomino("case05", String.class)
+        Shelly.<String>createDomino("case05")
                 .newThread()
                 .map(new Function1<String, String>() {
                     @Override
@@ -251,7 +251,7 @@ public class Test03 {
 
     @Test
     public void testNull() {
-        Shelly.createDomino("Null", Integer.class)
+        Shelly.<Integer>createDomino("Null")
                 .target(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {

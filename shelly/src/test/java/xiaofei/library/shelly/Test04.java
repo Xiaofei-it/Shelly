@@ -33,7 +33,7 @@ public class Test04 {
 
     @Test
     public void testFlatMap() {
-        Shelly.createDomino(1, String.class)
+        Shelly.<String>createDomino(1)
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -74,7 +74,7 @@ public class Test04 {
 
     @Test
     public void testFilter() {
-        Shelly.createDomino(2, String.class)
+        Shelly.<String>createDomino(2)
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
@@ -99,7 +99,7 @@ public class Test04 {
 
     @Test
     public void small() {
-        Shelly.createDomino(3, String.class)
+        Shelly.<String>createDomino(3)
                 .map(new Function1<String, String>() {
                     @Override
                     public String call(String input) {
