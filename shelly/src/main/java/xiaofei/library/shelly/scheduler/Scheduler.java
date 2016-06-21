@@ -157,23 +157,22 @@ public abstract class Scheduler<T> {
 
         @Override
         public void run() {
-            for (int i = 0; i < mWaiting; ++i) {
-                try {
-                    mInputs.lock(i);
-                    while (!mInputs.inputSet(i)) {
-                        if (DEBUG) {
-                            System.out.println(i + " before await " + Thread.currentThread().getName());
-                        }
-                        mInputs.await(i);
-                        if (DEBUG) {
-                            System.out.println(i + " after await " + Thread.currentThread().getName());
-                        }
+            int waitingIndex = mWaiting - 1;
+            try {
+                mInputs.lock(waitingIndex);
+                while (!mInputs.inputSet(waitingIndex)) {
+                    if (DEBUG) {
+                        System.out.println(waitingIndex + " before await " + Thread.currentThread().getName());
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    mInputs.unlock(i);
+                    mInputs.await(waitingIndex);
+                    if (DEBUG) {
+                        System.out.println(waitingIndex + " after await " + Thread.currentThread().getName());
+                    }
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                mInputs.unlock(waitingIndex);
             }
             mRunnable.run();
         }
