@@ -27,7 +27,7 @@ import xiaofei.library.shelly.function.TargetAction1;
  */
 public class Test {
     public static void init() {
-        Shelly.createDomino(1, String.class)
+        Shelly.<String>createDomino(1)
                 .backgroundQueue()
                 .target(new Action0() {
                     @Override
