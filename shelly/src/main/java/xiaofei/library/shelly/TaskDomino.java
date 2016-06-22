@@ -24,8 +24,10 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction0;
+import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.scheduler.Scheduler;
 
@@ -64,6 +66,96 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                 ));
     }
 
+    public <S> TaskDomino<T, R, U> onSuccess(final Class<S> clazz, final TargetAction0<S> targetAction0) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                                        for (Object object : objects) {
+                                            targetAction0.call(clazz.cast(object));
+                                        }
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public TaskDomino<T, R, U> onSuccess(final Class<U> clazz, final TargetAction1<U, R> targetAction1) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                                        for (Object object : objects) {
+                                            for (Pair<R, U> singleInput : input) {
+                                                targetAction1.call(clazz.cast(object), singleInput.first);
+                                            }
+                                        }
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public TaskDomino<T, R, U> onSuccess(final Action0 action0) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        action0.call();
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public TaskDomino<T, R, U> onSuccess(final Action1<R> action1) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        for (Pair<R, U> singleInput : input) {
+                                            action1.call(singleInput.first);
+                                        }
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
     //TODO 其实是player的高阶函数
     public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
         return new TaskDomino<T, R, U>(
@@ -75,7 +167,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                                 scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
                                     @Override
                                     public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
-                                        //TODO 此处不必
+                                        //TODO 此处不必Copy
                                         CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
                                         for (Pair<R, U> pair : input) {
                                             if (pair.second != null) {
@@ -83,6 +175,96 @@ public class TaskDomino<T, R, U> extends Domino<T, Pair<R, U>> {
                                             }
                                         }
                                         domino.getPlayer().play(newInput);
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public <S> TaskDomino<T, R, U> onFailure(final Class<S> clazz, final TargetAction0<S> targetAction0) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                                        for (Object object : objects) {
+                                            targetAction0.call(clazz.cast(object));
+                                        }
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public <S> TaskDomino<T, R, U> onFailure(final Class<S> clazz, final TargetAction1<S, U> targetAction1) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                                        for (Object object : objects) {
+                                            for (Pair<R, U> singleInput : input) {
+                                                targetAction1.call(clazz.cast(object), singleInput.second);
+                                            }
+                                        }
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public TaskDomino<T, R, U> onFailure(final Action0 action0) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        action0.call();
+                                        return scheduler;
+                                    }
+                                });
+                                return scheduler;
+                            }
+                        }
+                ));
+    }
+
+    public TaskDomino<T, R, U> onFailure(final Action1<U> action1) {
+        return new TaskDomino<T, R, U>(
+                new Domino<T, Pair<R, U>>(getLabel(),
+                        new Player<T, Pair<R, U>>() {
+                            @Override
+                            public Scheduler<Pair<R, U>> play(List<T> input) {
+                                final Scheduler<Pair<R, U>> scheduler = getPlayer().play(input);
+                                scheduler.play(new Player<Pair<R, U>, Pair<R, U>>() {
+                                    @Override
+                                    public Scheduler<Pair<R, U>> play(List<Pair<R, U>> input) {
+                                        for (Pair<R, U> singleInput : input) {
+                                            action1.call(singleInput.second);
+                                        }
                                         return scheduler;
                                     }
                                 });

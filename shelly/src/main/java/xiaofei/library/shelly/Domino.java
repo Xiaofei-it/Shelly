@@ -52,9 +52,9 @@ import xiaofei.library.shelly.scheduler.UiThreadScheduler;
  */
 public class Domino<T, R> {
 
-    private static final DominoCenter DOMINO_CENTER = DominoCenter.getInstance();
+    protected static final DominoCenter DOMINO_CENTER = DominoCenter.getInstance();
 
-    private static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
+    protected static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 
     private Player<T, R> mPlayer;
 
@@ -86,6 +86,7 @@ public class Domino<T, R> {
      * T是原本输入的参数类型，R是将传给下面的参数类型！
      *
      */
+    @Deprecated
     public Domino<T, R> target(final Class<?> clazz, final String target) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
@@ -516,6 +517,6 @@ public class Domino<T, R> {
 
     }
 
-    //TODO lift，onSuccess增加api，super与extend。uithread会阻塞
+    //TODO lift，super与extend。uithread会阻塞
 
 }
