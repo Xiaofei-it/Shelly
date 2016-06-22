@@ -24,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.TargetAction0;
+import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.internal.Task;
 
 /**
@@ -32,7 +34,16 @@ import xiaofei.library.shelly.internal.Task;
 public class Test06 {
 
     @Test
-    public void testMerge() {
+    public void testTask() {
+        class A {
+            public void f(Character s) {
+                System.out.println("A f: " + Thread.currentThread().getName() + " " + s);
+            }
+            public void g(int s) {
+                System.out.println("A g: " + Thread.currentThread().getName() + " " + s);
+            }
+        }
+        Shelly.register(new A());
         Shelly.<String>createDomino(1)
                 .beginTask(new Task<String, Character, Integer>() {
                     @Override
@@ -59,35 +70,90 @@ public class Test06 {
                                     System.out.println("3: " + Thread.currentThread().getName() + " " + input);
                                 }
                             }))
+                .newThread()
+                .onSuccess(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("4: " + Thread.currentThread().getName());
+                    }
+                })
+                .onSuccess(new Action1<Character>() {
+                    @Override
+                    public void call(Character input) {
+                        System.out.println("5: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .background()
+                .onSuccess(A.class, new TargetAction0<A>() {
+                    @Override
+                    public void call(A a) {
+                        System.out.println("6: " + Thread.currentThread().getName());
+                        a.f('T');
+                    }
+                })
+                .backgroundQueue()
                 .onFailure(Shelly.<Integer>createDomino()
                             .newThread()
                             .target(new Action1<Integer>() {
                                 @Override
                                 public void call(Integer input) {
-                                    System.out.println("4: " + Thread.currentThread().getName() + " " + input);
+                                    System.out.println("7: " + Thread.currentThread().getName() + " " + input);
                                 }
                             }))
+                .onFailure(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer input) {
+                        System.out.println("8: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .onFailure(new Action0() {
+                    @Override
+                    public void call() {
+                        System.out.println("9: " + Thread.currentThread().getName());
+                    }
+                })
+                .onSuccess(A.class, new TargetAction1<A, Character>() {
+                    @Override
+                    public void call(A a, Character input) {
+                        System.out.println("10: " + Thread.currentThread().getName() + " " + input);
+                        a.f(input);
+                    }
+                })
+                .onFailure(A.class, new TargetAction0<A>() {
+                    @Override
+                    public void call(A a) {
+                        System.out.println("11: " + Thread.currentThread().getName());
+                        a.g(1000);
+                    }
+                })
+                .onFailure(A.class, new TargetAction1<A, Integer>() {
+                    @Override
+                    public void call(A a, Integer input) {
+                        System.out.println("12: " + Thread.currentThread().getName() + " " + input);
+                        a.g(input);
+                    }
+                })
                 .finallyDo(new Action0() {
                     @Override
                     public void call() {
-                        System.out.println("5: " + Thread.currentThread().getName());
+                        System.out.println("13: " + Thread.currentThread().getName());
                     }
                 })
                 .<String>endTask()
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
-                        System.out.println("6: " + Thread.currentThread().getName() + " " + input);
+                        System.out.println("14: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .target(new Action0() {
                     @Override
                     public void call() {
-                        System.out.println("7: " + Thread.currentThread().getName());
+                        System.out.println("15: " + Thread.currentThread().getName());
                     }
                 })
                 .commit();
-        Shelly.playDomino(1, "A", "BD", "BG");
+        Shelly.playDomino(1, "A", "BD", "CG");
     }
 
     @Test

@@ -39,6 +39,7 @@ import xiaofei.library.shelly.internal.DominoCenter;
 import xiaofei.library.shelly.internal.Player;
 import xiaofei.library.shelly.internal.TargetCenter;
 import xiaofei.library.shelly.internal.Task;
+import xiaofei.library.shelly.internal.Triple;
 import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
@@ -464,13 +465,15 @@ public class Domino<T, R> {
         DOMINO_CENTER.commit(this);
     }
 
-    private static class TaskFunction<T, R, U> implements Function1<T, Pair<R, U>>, Task.TaskListener<R, U> {
+    private static class TaskFunction<T, R, U> implements Function1<T, Triple<Boolean, R, U>>, Task.TaskListener<R, U> {
 
         private Task<T, R, U> mTask;
 
         private volatile R mResult;
 
         private volatile U mError;
+
+        private volatile int mFlag;
 
         private Lock mLock = new ReentrantLock();
 
@@ -485,6 +488,7 @@ public class Domino<T, R> {
         public void onFailure(U error) {
             mLock.lock();
             mError = error;
+            mFlag = 0;
             mCondition.signalAll();
             mLock.unlock();
         }
@@ -493,18 +497,20 @@ public class Domino<T, R> {
         public void onSuccess(R result) {
             mLock.lock();
             mResult = result;
+            mFlag = 1;
             mCondition.signalAll();
             mLock.unlock();
         }
 
         @Override
-        public Pair<R, U> call(T input) {
+        public Triple<Boolean, R, U> call(T input) {
             mResult = null;
             mError = null;
+            mFlag = -1;
             mTask.execute(input);
             try {
                 mLock.lock();
-                while (mError == null && mResult == null) {
+                while (mFlag == -1) {
                     mCondition.await();
                 }
             } catch (InterruptedException e) {
@@ -512,7 +518,7 @@ public class Domino<T, R> {
             } finally {
                 mLock.unlock();
             }
-            return new Pair<R, U>(mResult, mError);
+            return new Triple<Boolean, R, U>(mFlag == 1, mResult, mError);
         }
 
     }
