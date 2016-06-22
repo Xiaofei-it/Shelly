@@ -37,6 +37,10 @@ public class Shelly {
         TARGET_CENTER.register(object);
     }
 
+    public static boolean isRegistered(Object object) {
+        return TARGET_CENTER.isRegistered(object);
+    }
+
     public static void unregister(Object object) {
         TARGET_CENTER.unregister(object);
     }

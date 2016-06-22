@@ -54,35 +54,55 @@ public class TargetCenter {
     }
 
     public void register(Object object) {
-        Class<?> clazz = object.getClass();
-        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-        if (objects == null) {
-            mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<Object>());
-            objects = mObjects.get(clazz);
-        }
-        objects.add(object);
-        //The following must be in a synchronized block.
-        //The mMethods modification must follow the mObjects modification.
-        synchronized (mMethods) {
-            ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
-            if (methods == null) {
-                mMethods.putIfAbsent(clazz, new ConcurrentHashMap<String, Method>(AnnotationUtils.getTargetMethods(clazz)));
+        synchronized (mObjects) {
+            for (Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+                CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+                if (objects == null) {
+                    mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<Object>());
+                    objects = mObjects.get(clazz);
+                }
+                objects.add(object);
+                //The following must be in a synchronized block.
+                //The mMethods modification must follow the mObjects modification.
+                synchronized (mMethods) {
+                    ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
+                    if (methods == null) {
+                        mMethods.putIfAbsent(clazz, new ConcurrentHashMap<String, Method>(AnnotationUtils.getTargetMethods(clazz)));
+                    }
+                }
             }
         }
     }
 
     public void unregister(Object object) {
-        Class<?> clazz = object.getClass();
-        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-        if (objects == null || !objects.remove(object)) {
-            throw new IllegalArgumentException("Object " + object + " has not been registered.");
-        }
-        //The following must be in a synchronized block.
-        synchronized (mMethods) {
-            if (objects.isEmpty()) {
-                mMethods.remove(clazz);
+        synchronized (mObjects) {
+            for (Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+                CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+                if (objects == null) {
+                    return;
+                }
+                int size = objects.size();
+                for (int i = 0; i < size; ++i) {
+                    if (objects.get(i) == object) {
+                        objects.remove(i);
+                        --i;
+                        --size;
+                    }
+                }
+                //The following must be in a synchronized block.
+                synchronized (mMethods) {
+                    if (objects.isEmpty()) {
+                        mMethods.remove(clazz);
+                    }
+                }
             }
         }
+    }
+
+    public boolean isRegistered(Object object) {
+        Class<?> clazz = object.getClass();
+        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
+        return objects != null && objects.contains(object);
     }
 
     public CopyOnWriteArrayList<Object> getObjects(Class<?> clazz) {
