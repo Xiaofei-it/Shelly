@@ -26,7 +26,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.internal.Player;
+import xiaofei.library.shelly.function.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
@@ -76,7 +76,7 @@ public abstract class Scheduler<T> {
             private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.play((CopyOnWriteArrayList<T>) mInputs.get(mIndex));
+                player.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex));
             }
         };
     }

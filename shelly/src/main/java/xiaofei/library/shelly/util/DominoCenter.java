@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly.internal;
+package xiaofei.library.shelly.util;
 
 import android.util.Log;
 

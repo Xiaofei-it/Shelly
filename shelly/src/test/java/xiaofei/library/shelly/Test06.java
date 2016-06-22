@@ -26,7 +26,7 @@ import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
-import xiaofei.library.shelly.internal.Task;
+import xiaofei.library.shelly.util.Task;
 
 /**
  * Created by Xiaofei on 16/6/21.

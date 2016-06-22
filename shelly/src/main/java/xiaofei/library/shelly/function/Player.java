@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly.internal;
+package xiaofei.library.shelly.function;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ import xiaofei.library.shelly.scheduler.Scheduler;
 /**
  * Created by Xiaofei on 16/5/27.
  */
-public interface Player<T, R> {
+public interface Player<T, R> extends Function1<List<T>, Scheduler<R>> {
 
-    Scheduler<R> play(List<T> input);
+    Scheduler<R> call(List<T> input);
 
 }

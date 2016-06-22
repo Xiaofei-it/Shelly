@@ -20,12 +20,7 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
-
-import xiaofei.library.shelly.function.Action0;
-import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.TargetAction1;
-import xiaofei.library.shelly.internal.Task;
 
 /**
  * Created by Xiaofei on 16/6/22.
@@ -49,7 +44,7 @@ public class Test07 {
 
     }
     @Test
-    public void testMerge() {
+    public void testRegister() {
         A a1 = new A(1), a2 = new B(2);
         Shelly.register(a1);
         Shelly.register(a1);

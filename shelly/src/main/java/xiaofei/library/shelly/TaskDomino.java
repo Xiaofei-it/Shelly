@@ -26,8 +26,8 @@ import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
-import xiaofei.library.shelly.internal.Player;
-import xiaofei.library.shelly.internal.Triple;
+import xiaofei.library.shelly.function.Player;
+import xiaofei.library.shelly.util.Triple;
 import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
@@ -49,11 +49,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         CopyOnWriteArrayList<R> newInput = new CopyOnWriteArrayList<R>();
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (triple.first) {
@@ -61,7 +61,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                                             }
                                         }
                                         if (!newInput.isEmpty()) {
-                                            domino.getPlayer().play(newInput);
+                                            domino.getPlayer().call(newInput);
                                         }
                                         return scheduler;
                                     }
@@ -77,11 +77,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean,R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean,R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         boolean success = false;
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (triple.first) {
@@ -109,11 +109,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
                                         for (Object object : objects) {
                                             for (Triple<Boolean, R, U> singleInput : input) {
@@ -136,11 +136,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         boolean success = false;
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (triple.first) {
@@ -165,11 +165,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         for (Triple<Boolean, R, U> singleInput : input) {
                                             if (singleInput.first) {
                                                 action1.call(singleInput.second);
@@ -190,11 +190,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         //TODO 此处不必Copy
                                         CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
                                         for (Triple<Boolean, R, U> triple : input) {
@@ -203,7 +203,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                                             }
                                         }
                                         if (!newInput.isEmpty()) {
-                                            domino.getPlayer().play(newInput);
+                                            domino.getPlayer().call(newInput);
                                         }
                                         return scheduler;
                                     }
@@ -219,11 +219,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         boolean failure = false;
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (!triple.first) {
@@ -251,11 +251,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
                                         for (Object object : objects) {
                                             for (Triple<Boolean, R, U> singleInput : input) {
@@ -278,11 +278,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         boolean failure = false;
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (!triple.first) {
@@ -307,11 +307,11 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
                             @Override
-                            public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                            public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                                final Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
-                                    public Scheduler<Triple<Boolean, R, U>> play(List<Triple<Boolean, R, U>> input) {
+                                    public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
                                         for (Triple<Boolean, R, U> singleInput : input) {
                                             if (!singleInput.first) {
                                                 action1.call(singleInput.third);
@@ -351,8 +351,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(), new Player<T, Triple<Boolean, R, U>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                    public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                         return new BackgroundScheduler<Triple<Boolean, R, U>>(scheduler);
                     }
         }));
@@ -366,8 +366,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(), new Player<T, Triple<Boolean, R, U>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                    public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                         return new NewThreadScheduler<Triple<Boolean, R, U>>(scheduler);
                     }
                 }));
@@ -381,8 +381,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(), new Player<T, Triple<Boolean, R, U>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                    public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                         return new DefaultScheduler<Triple<Boolean, R, U>>(scheduler);
                     }
                 }));
@@ -393,8 +393,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(), new Player<T, Triple<Boolean, R, U>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                    public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                         return new UiThreadScheduler<Triple<Boolean, R, U>>(scheduler);
                     }
                 }));
@@ -405,8 +405,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(), new Player<T, Triple<Boolean, R, U>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, R, U>> play(List<T> input) {
-                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().play(input);
+                    public Scheduler<Triple<Boolean, R, U>> call(List<T> input) {
+                        Scheduler<Triple<Boolean, R, U>> scheduler = getPlayer().call(input);
                         return new BackgroundQueueScheduler<Triple<Boolean, R, U>>(scheduler);
                     }
                 }));

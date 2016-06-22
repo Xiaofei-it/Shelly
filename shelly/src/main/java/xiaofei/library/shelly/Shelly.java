@@ -21,8 +21,8 @@ package xiaofei.library.shelly;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import xiaofei.library.shelly.internal.DominoCenter;
-import xiaofei.library.shelly.internal.TargetCenter;
+import xiaofei.library.shelly.util.DominoCenter;
+import xiaofei.library.shelly.util.TargetCenter;
 
 /**
  * Created by Xiaofei on 16/5/26.
