@@ -72,7 +72,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onSuccess(final Class<S> clazz, final TargetAction0<S> targetAction0) {
+    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -104,7 +104,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onSuccess(final Class<S> clazz, final TargetAction1<S, R> targetAction1) {
+    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> clazz, final TargetAction1<? super S, ? super R> targetAction1) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -160,7 +160,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public TaskDomino<T, R, U> onSuccess(final Action1<R> action1) {
+    public TaskDomino<T, R, U> onSuccess(final Action1<? super R> action1) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -214,7 +214,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onFailure(final Class<S> clazz, final TargetAction0<S> targetAction0) {
+    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -246,7 +246,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onFailure(final Class<S> clazz, final TargetAction1<S, U> targetAction1) {
+    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> clazz, final TargetAction1<? super S, ? super U> targetAction1) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -302,7 +302,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public TaskDomino<T, R, U> onFailure(final Action1<U> action1) {
+    public TaskDomino<T, R, U> onFailure(final Action1<? super U> action1) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
                         new Player<T, Triple<Boolean, R, U>>() {
@@ -330,7 +330,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(target(action0));
     }
 
-    public <S> TaskDomino<T, R, U> finallyDo(Class<S> clazz, TargetAction0<S> targetAction0) {
+    public <S> TaskDomino<T, R, U> finallyDo(Class<? extends S> clazz, TargetAction0<? super S> targetAction0) {
         return new TaskDomino<T, R, U>(target(clazz, targetAction0));
     }
 
