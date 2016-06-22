@@ -105,7 +105,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, R> target(final Class<U> clazz, final TargetAction0<U> targetAction0) {
+    public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -125,7 +125,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, R> target(final Class<U> clazz, final TargetAction1<U, R> targetAction1) {
+    public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -164,7 +164,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> target(final Action1<R> action1) {
+    public Domino<T, R> target(final Action1<? super R> action1) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -183,7 +183,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, R> target(final Domino<R, U> domino) {
+    public Domino<T, R> target(final Domino<R, ?> domino) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -236,7 +236,7 @@ public class Domino<T, R> {
     //TODO null consideration, what's more? maybe function returns null.
 
     public <U, S, V> Domino<T, V> combine(Domino<R, U> domino1, Domino<R, S> domino2,
-                                          final Function2<U, S, V> combiner) {
+                                          final Function2<? super U, ? super S, ? extends V> combiner) {
         /**
          * 想实现的效果是domino1和domino2分开运行，结果经过combiner结合，得到一堆新的结果
          * 为了实现方便，做如下变化：
@@ -356,7 +356,7 @@ public class Domino<T, R> {
     }
 
     //TODO
-    public <U> Domino<T, U> map(final Function1<R, U> map) {
+    public <U> Domino<T, U> map(final Function1<? super R, ? extends U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
@@ -376,7 +376,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> flatMap(final Function1<R, List<U>> map) {
+    public <U> Domino<T, U> flatMap(final Function1<? super R, List<U>> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
@@ -396,7 +396,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> filter(final Function1<R, Boolean> filter) {
+    public Domino<T, R> filter(final Function1<? super R, Boolean> filter) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(final List<T> input) {
@@ -419,7 +419,7 @@ public class Domino<T, R> {
     }
 
     //TODO scheduler的函数是一个高阶函数
-    public <U> Domino<T, U> reduce(final Function1<List<R>, U> reducer) {
+    public <U> Domino<T, U> reduce(final Function1<List<R>, ? extends U> reducer) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
