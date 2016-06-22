@@ -92,6 +92,7 @@ public class TargetCenter {
                 //The following must be in a synchronized block.
                 synchronized (mMethods) {
                     if (objects.isEmpty()) {
+                        mObjects.remove(clazz);
                         mMethods.remove(clazz);
                     }
                 }
