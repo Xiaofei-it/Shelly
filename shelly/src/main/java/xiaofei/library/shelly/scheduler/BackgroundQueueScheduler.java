@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
  */
 public class BackgroundQueueScheduler<T> extends Scheduler<T> {
 
-    private static ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
+    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
 
     public <R> BackgroundQueueScheduler(Scheduler<R> scheduler) {
         super(scheduler);
@@ -34,7 +34,7 @@ public class BackgroundQueueScheduler<T> extends Scheduler<T> {
 
     @Override
     protected void onSchedule(Runnable runnable) {
-        sExecutorService.execute(runnable);
+        mExecutorService.execute(runnable);
     }
 
 }

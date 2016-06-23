@@ -546,6 +546,6 @@ public class Domino<T, R> {
 
     }
 
-    //TODO lift，uithread会阻塞
+    //TODO lift
 
 }

@@ -34,7 +34,7 @@ public class Test {
                     @Override
                     public void call() {
                         try {
-                            Thread.sleep(10000);
+                            Thread.sleep(20000);
                             System.out.println("Haha");
                         } catch (InterruptedException e) {
 
@@ -44,7 +44,23 @@ public class Test {
                 .map(new Function1<String, String>() {
                     @Override
                     public String call(String input) {
-                        return input + "map";
+                        return input + "map1";
+                    }
+                })
+                .uiThread()
+                .target(MainActivity.class, new TargetAction1<MainActivity, String>() {
+                    @Override
+                    public void call(MainActivity mainActivity, String input) {
+                        mainActivity.f(input);
+                    }
+                }).commit();
+
+        Shelly.<String>createDomino(2)
+                .backgroundQueue()
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        return input + "map2";
                     }
                 })
                 .uiThread()
