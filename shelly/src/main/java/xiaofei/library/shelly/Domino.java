@@ -35,6 +35,12 @@ import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
+import xiaofei.library.shelly.operator.EmptyOperator;
+import xiaofei.library.shelly.operator.FilterOperator;
+import xiaofei.library.shelly.operator.FlatMapOperator;
+import xiaofei.library.shelly.operator.MapOperator;
+import xiaofei.library.shelly.operator.MapOperator2;
+import xiaofei.library.shelly.operator.ReducerOperator;
 import xiaofei.library.shelly.util.DominoCenter;
 import xiaofei.library.shelly.function.Player;
 import xiaofei.library.shelly.util.TargetCenter;
@@ -355,125 +361,39 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO
-    public <U> Domino<T, U> map(final Function1<? super R, ? extends U> map) {
+    public <U> Domino<T, U> lift(final Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>> function) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
-                            @Override
-                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
-                                for (R singleInput : input) {
-                                    result.add(map.call(singleInput));
-                                }
-                                return result;
-                            }
-                        }));
+                return scheduler.scheduleFunction(Collections.singletonList(function));
             }
         });
     }
 
-    public <U, S> Domino<T, U> map(final Class<S> clazz, final Function2<? super S, ? super R, ? extends U> map) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
-            @Override
-            public Scheduler<U> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
-                            @Override
-                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
-                                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                                for (Object o : objects) {
-                                    for (R singleInput : input) {
-                                        result.add(map.call((S) o, singleInput));
-                                    }
-                                }
-                                return result;
-                            }
-                        }));
-            }
-        });
+    public <U> Domino<T, U> map(Function1<? super R, ? extends U> map) {
+        return lift(new MapOperator<R, U>(map));
     }
 
-    public <U> Domino<T, U> flatMap(final Function1<? super R, List<U>> map) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
-            @Override
-            public Scheduler<U> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
-                            @Override
-                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
-                                for (R singleInput : input) {
-                                    result.addAll(map.call(singleInput));
-                                }
-                                return result;
-                            }
-                        }));
-            }
-        });
+    public <U, S> Domino<T, U> map(Class<S> clazz, Function2<? super S, ? super R, ? extends U> map) {
+        return lift(new MapOperator2<R, U, S>(clazz, map));
     }
 
-    public Domino<T, R> filter(final Function1<? super R, Boolean> filter) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
-            @Override
-            public Scheduler<R> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<R>>() {
-                            @Override
-                            public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<R> input) {
-                                CopyOnWriteArrayList<R> result = new CopyOnWriteArrayList<R>();
-                                for (R singleInput : input) {
-                                    if (filter.call(singleInput)) {
-                                        result.add(singleInput);
-                                    }
-                                }
-                                return result;
-                            }
-                        }));
-            }
-        });
+    public <U> Domino<T, U> flatMap(Function1<? super R, List<U>> map) {
+        return lift(new FlatMapOperator<R, U>(map));
+    }
+
+    public Domino<T, R> filter(Function1<? super R, Boolean> filter) {
+        return lift(new FilterOperator<R>(filter));
     }
 
     //TODO scheduler的函数是一个高阶函数
     public <U> Domino<T, U> reduce(final Function1<List<R>, ? extends U> reducer) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
-            @Override
-            public Scheduler<U> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
-                            @Override
-                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
-                                result.add(reducer.call(input));
-                                return result;
-                            }
-                        }));
-            }
-        });
+        return lift(new ReducerOperator<R, U>(reducer));
     }
 
     public <U> Domino<T, U> clear() {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
-            @Override
-            public Scheduler<U> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(
-                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
-                            @Override
-                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                                return new CopyOnWriteArrayList<U>();
-                            }
-                        }));
-            }
-        });
+        return lift(new EmptyOperator<R, U>());
     }
 
     public <U, S> TaskDomino<T, U, S> beginTask(Task<R, U, S> task) {
@@ -545,7 +465,5 @@ public class Domino<T, R> {
         }
 
     }
-
-    //TODO lift
 
 }
