@@ -26,7 +26,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.function.Player;
+import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
