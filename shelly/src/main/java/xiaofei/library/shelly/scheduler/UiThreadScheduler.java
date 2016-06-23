@@ -24,6 +24,8 @@ import android.os.Looper;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import xiaofei.library.shelly.util.ScheduledRunnable;
+
 /**
  * Created by Xiaofei on 16/5/31.
  */
@@ -48,8 +50,8 @@ public class UiThreadScheduler<T> extends Scheduler<T> {
 
     @Override
     protected void onSchedule(Runnable runnable) {
-        if (runnable instanceof UiThreadScheduler.ScheduledRunnable) {
-            final UiThreadScheduler.ScheduledRunnable scheduledRunnable = (UiThreadScheduler.ScheduledRunnable) runnable;
+        if (runnable instanceof ScheduledRunnable) {
+            final ScheduledRunnable scheduledRunnable = (ScheduledRunnable) runnable;
             if (!scheduledRunnable.inputSet()) {
                 sExecutor.execute(new Runnable() {
                     @Override
