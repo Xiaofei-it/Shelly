@@ -35,8 +35,6 @@ import xiaofei.library.shelly.util.SchedulerInputs;
  */
 public abstract class Scheduler<T> {
 
-    private static final boolean DEBUG = false;
-
     private static final int STATE_RUNNING = 0;
 
     private static final int STATE_PAUSE = 1;

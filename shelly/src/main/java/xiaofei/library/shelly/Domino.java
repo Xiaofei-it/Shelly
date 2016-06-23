@@ -466,4 +466,6 @@ public class Domino<T, R> {
 
     }
 
+    //TODO 上面结构重构
+
 }
