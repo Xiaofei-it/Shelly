@@ -376,6 +376,30 @@ public class Domino<T, R> {
         });
     }
 
+    //TODO check
+    public <U, S> Domino<T, U> map(final Class<S> clazz, final Function2<? super S, ? super R, ? extends U> map) {
+        return new Domino<T, U>(mLabel, new Player<T, U>() {
+            @Override
+            public Scheduler<U> call(final List<T> input) {
+                final Scheduler<R> scheduler = mPlayer.call(input);
+                return scheduler.scheduleFunction(
+                        Collections.singletonList(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
+                            @Override
+                            public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
+                                CopyOnWriteArrayList<U> result = new CopyOnWriteArrayList<U>();
+                                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                                for (Object o : objects) {
+                                    for (R singleInput : input) {
+                                        result.add(map.call((S) o, singleInput));
+                                    }
+                                }
+                                return result;
+                            }
+                        }));
+            }
+        });
+    }
+
     public <U> Domino<T, U> flatMap(final Function1<? super R, List<U>> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
@@ -419,7 +443,7 @@ public class Domino<T, R> {
     }
 
     //TODO scheduler的函数是一个高阶函数
-    public <U> Domino<T, U> reduce(final Function1<List<R>, ? extends U> reducer) {
+    public <U> Domino<T, U> reduce(final Function1<? super List<R>, ? extends U> reducer) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
@@ -523,6 +547,6 @@ public class Domino<T, R> {
 
     }
 
-    //TODO lift，uithread会阻塞 new map
+    //TODO lift，uithread会阻塞
 
 }
