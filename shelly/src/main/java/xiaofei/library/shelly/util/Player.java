@@ -16,10 +16,11 @@
  *
  */
 
-package xiaofei.library.shelly.function;
+package xiaofei.library.shelly.util;
 
 import java.util.List;
 
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.scheduler.Scheduler;
 
 /**

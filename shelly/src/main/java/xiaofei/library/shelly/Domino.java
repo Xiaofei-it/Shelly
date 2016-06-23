@@ -42,7 +42,7 @@ import xiaofei.library.shelly.operator.MapOperator;
 import xiaofei.library.shelly.operator.MapOperator2;
 import xiaofei.library.shelly.operator.ReducerOperator;
 import xiaofei.library.shelly.util.DominoCenter;
-import xiaofei.library.shelly.function.Player;
+import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.TargetCenter;
 import xiaofei.library.shelly.util.Task;
 import xiaofei.library.shelly.util.Triple;
