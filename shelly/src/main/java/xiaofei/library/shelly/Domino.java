@@ -376,7 +376,6 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO check
     public <U, S> Domino<T, U> map(final Class<S> clazz, final Function2<? super S, ? super R, ? extends U> map) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
@@ -443,7 +442,7 @@ public class Domino<T, R> {
     }
 
     //TODO scheduler的函数是一个高阶函数
-    public <U> Domino<T, U> reduce(final Function1<? super List<R>, ? extends U> reducer) {
+    public <U> Domino<T, U> reduce(final Function1<List<R>, ? extends U> reducer) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {

@@ -20,6 +20,8 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction1;
 
 /**
@@ -34,6 +36,9 @@ public class Test07 {
         }
         void f(String a) {
             System.out.println("A: " + a + " x = " + x);
+        }
+        int getX() {
+            return x;
         }
     }
 
@@ -68,6 +73,34 @@ public class Test07 {
         System.out.println(Shelly.isRegistered(a1));
         System.out.println(Shelly.isRegistered(a2));
         Shelly.playDomino(1, "G");
+    }
+
+    @Test
+    public void testMap() {
+        A a1 = new A(1), a2 = new B(2);
+        Shelly.register(a1);
+        Shelly.register(a2);
+        Shelly.<A>createDomino(2)
+                .target(new Action1<A>() {
+                    @Override
+                    public void call(A input) {
+                        System.out.println("1: " + input.getX());
+                    }
+                })
+                .map(A.class, new Function2<A, A, String>() {
+                    @Override
+                    public String call(A input1, A input2) {
+                        return "" + input1.getX() + " " + input2.getX();
+                    }
+                })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("2: " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(2, a1, a2);
     }
 
 }

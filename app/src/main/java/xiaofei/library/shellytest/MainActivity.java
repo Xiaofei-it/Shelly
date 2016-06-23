@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Click", Toast.LENGTH_SHORT).show();
             }
         });
-        Shelly.playDomino(1, "");
+        Shelly.playDomino(1, "Hello");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Shelly.unregister(this);
     }
 
-    public void f() {
-        button.setText("receive");
+    public void f(String s) {
+        button.setText("receive: " + s);
     }
 }

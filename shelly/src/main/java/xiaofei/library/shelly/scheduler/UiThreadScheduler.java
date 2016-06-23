@@ -70,14 +70,4 @@ public class UiThreadScheduler<T> extends Scheduler<T> {
             scheduleInternal(runnable);
         }
     }
-//
-//    @Override
-//    protected void onSchedule(Runnable runnable) {
-//        boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
-//        if (isMainThread) {
-//            runnable.run();
-//        } else {
-//            sHandler.post(runnable);
-//        }
-//    }
 }

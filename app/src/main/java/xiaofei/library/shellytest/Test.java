@@ -20,6 +20,7 @@ package xiaofei.library.shellytest;
 
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
 
 /**
@@ -40,11 +41,17 @@ public class Test {
                         }
                     }
                 })
+                .map(new Function1<String, String>() {
+                    @Override
+                    public String call(String input) {
+                        return input + "map";
+                    }
+                })
                 .uiThread()
                 .target(MainActivity.class, new TargetAction1<MainActivity, String>() {
                     @Override
                     public void call(MainActivity mainActivity, String input) {
-                        mainActivity.f();
+                        mainActivity.f(input);
                     }
                 }).commit();
     }
