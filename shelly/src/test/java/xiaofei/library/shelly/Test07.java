@@ -103,4 +103,63 @@ public class Test07 {
         Shelly.playDomino(2, a1, a2);
     }
 
+    @Test
+    public void testBackgroundQueue() {
+        Shelly.<String>createDomino(3)
+                .backgroundQueue()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("1: " + Thread.currentThread().getName() + " " + input);
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("2: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .backgroundQueue()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("3: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("4: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(4)
+                .backgroundQueue()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("5: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("6: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(3, "A");
+        Shelly.playDomino(4, "B");
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
