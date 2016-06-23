@@ -183,7 +183,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> target(final Domino<R, ?> domino) {
+    public Domino<T, R> target(final Domino<? super R, ?> domino) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -191,7 +191,7 @@ public class Domino<T, R> {
                 scheduler.play(new Player<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
-                        domino.mPlayer.call(input);
+                        ((Domino<R, ?>) domino).mPlayer.call(input);
                         return scheduler;
                     }
                 });
@@ -200,30 +200,30 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, U> dominoMap(final Domino<R, U> domino) {
+    public <U> Domino<T, U> dominoMap(final Domino<? super R, ? extends U> domino) {
         return merge((Domino<R, U>[]) new Domino[]{domino});
     }
 
-    public <U> Domino<T, U> merge(Domino<R, U> domino1, Domino<R, U> domino2) {
+    public <U> Domino<T, U> merge(Domino<? super R, ? extends U> domino1, Domino<? super R, ? extends U> domino2) {
         return merge((Domino<R, U>[]) new Domino[]{domino1, domino2});
     }
 
-    public <U> Domino<T, U> merge(Domino<R, U> domino1, Domino<R, U> domino2, Domino<R, U> domino3) {
+    public <U> Domino<T, U> merge(Domino<? super R, ? extends U> domino1, Domino<? super R, ? extends U> domino2, Domino<? super R, ? extends U> domino3) {
         return merge((Domino<R, U>[]) new Domino[]{domino1, domino2, domino3});
     }
 
-    public <U> Domino<T, U> merge(final Domino<R, U>[] dominoes) {
+    public <U> Domino<T, U> merge(final Domino<? super R, ? extends U>[] dominoes) {
         return new Domino<T, U>(mLabel, new Player<T, U>() {
             @Override
             public Scheduler<U> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
                 List<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>> functions =
                         new ArrayList<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>>();
-                for (final Domino<R, U> domino : dominoes) {
+                for (final Domino<? super R, ? extends U> domino : dominoes) {
                     functions.add(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                         @Override
                         public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                            Scheduler<U> scheduler = domino.mPlayer.call(input);
+                            Scheduler<U> scheduler = ((Domino<R, U>) domino).mPlayer.call(input);
                             return (CopyOnWriteArrayList<U>) scheduler.waitForFinishing();
                         }
                     });
@@ -235,7 +235,7 @@ public class Domino<T, R> {
 
     //TODO null consideration, what's more? maybe function returns null.
 
-    public <U, S, V> Domino<T, V> combine(Domino<R, U> domino1, Domino<R, S> domino2,
+    public <U, S, V> Domino<T, V> combine(Domino<? super R, U> domino1, Domino<? super R, S> domino2,
                                           final Function2<? super U, ? super S, ? extends V> combiner) {
         /**
          * 想实现的效果是domino1和domino2分开运行，结果经过combiner结合，得到一堆新的结果
@@ -523,6 +523,6 @@ public class Domino<T, R> {
 
     }
 
-    //TODO lift，uithread会阻塞
+    //TODO lift，uithread会阻塞 new map
 
 }
