@@ -32,8 +32,6 @@ public class BlockingRunnable<T, R> implements Runnable {
 
     private int mIndex;
 
-    private CopyOnWriteArrayList<R> mInput;
-
     private Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> mFunction;
 
     public BlockingRunnable(Scheduler<T> scheduler, Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function, int index) {
@@ -48,10 +46,10 @@ public class BlockingRunnable<T, R> implements Runnable {
 
     @Override
     public final void run() {
-        mInput = mFunction.call(getPreviousInput());
-        if (mInput == null) {
+        CopyOnWriteArrayList<R> input = mFunction.call(getPreviousInput());
+        if (input == null) {
             throw new IllegalStateException();
         }
-        mScheduler.unblock(mIndex, (CopyOnWriteArrayList<Object>) mInput);
+        mScheduler.unblock(mIndex, (CopyOnWriteArrayList<Object>) input);
     }
 }
