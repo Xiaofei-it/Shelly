@@ -11,8 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,39 +43,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Domino.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.4097035">
-              <caret line="280" column="50" selection-start-line="280" selection-start-column="50" selection-end-line="280" selection-end-column="50" />
+            <state vertical-scroll-proportion="41.148148">
+              <caret line="391" column="27" selection-start-line="391" selection-start-column="27" selection-end-line="391" selection-end-column="27" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#9844#10137#0" expanded="true" />
-                <element signature="e#10136#10137#0" expanded="true" />
-                <element signature="e#10171#10464#0" expanded="true" />
-                <element signature="e#10463#10464#0" expanded="true" />
-                <element signature="e#10491#11628#0" expanded="true" />
-                <element signature="e#11627#11628#0" expanded="true" />
-                <element signature="e#11655#11855#0" expanded="true" />
-                <element signature="e#11854#11855#0" expanded="true" />
-                <element signature="e#14502#14746#0" expanded="true" />
-                <element signature="e#14745#14746#0" expanded="true" />
-                <element signature="e#17792#17793#0" expanded="true" />
-                <element signature="e#17846#17847#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Task.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
-              <folding>
-                <element signature="e#841#842#0" expanded="true" />
-                <element signature="e#877#878#0" expanded="true" />
+                <element signature="e#2591#2781#0" expanded="true" />
+                <element signature="e#2780#2781#0" expanded="true" />
+                <element signature="e#3217#3733#0" expanded="true" />
+                <element signature="e#3413#3673#0" expanded="true" />
+                <element signature="e#3672#3673#0" expanded="true" />
+                <element signature="e#3732#3733#0" expanded="true" />
+                <element signature="e#3898#4594#0" expanded="true" />
+                <element signature="e#4094#4534#0" expanded="true" />
+                <element signature="e#4533#4534#0" expanded="true" />
+                <element signature="e#4593#4594#0" expanded="true" />
+                <element signature="e#4966#5511#0" expanded="true" />
+                <element signature="e#5510#5511#0" expanded="true" />
+                <element signature="e#5677#6167#0" expanded="true" />
+                <element signature="e#5873#6107#0" expanded="true" />
+                <element signature="e#6106#6107#0" expanded="true" />
+                <element signature="e#6166#6167#0" expanded="true" />
+                <element signature="e#6284#6869#0" expanded="true" />
+                <element signature="e#6480#6809#0" expanded="true" />
+                <element signature="e#6808#6809#0" expanded="true" />
+                <element signature="e#6868#6869#0" expanded="true" />
+                <element signature="e#6987#7506#0" expanded="true" />
+                <element signature="e#7183#7446#0" expanded="true" />
+                <element signature="e#7445#7446#0" expanded="true" />
+                <element signature="e#7505#7506#0" expanded="true" />
+                <element signature="e#8527#8588#0" expanded="true" />
+                <element signature="e#8705#9136#0" expanded="true" />
+                <element signature="e#9135#9136#0" expanded="true" />
+                <element signature="e#10097#10390#0" expanded="true" />
+                <element signature="e#10389#10390#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+              <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/BlockingRunnable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="36" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="36" />
+              <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -103,126 +110,90 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test06.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test06.java">
+      <file leaf-file-name="ReducerOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/ReducerOperator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="120" column="13" selection-start-line="120" selection-start-column="13" selection-end-line="120" selection-end-column="13" />
-              <folding>
-                <element signature="e#4639#4942#0" expanded="true" />
-              </folding>
+              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="197" column="42" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.33139536">
+              <caret line="258" column="46" selection-start-line="258" selection-start-column="40" selection-end-line="258" selection-end-column="46" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#1863#3235#0" expanded="true" />
+                <element signature="e#2187#3127#0" expanded="true" />
+                <element signature="e#3126#3127#0" expanded="true" />
+                <element signature="e#3234#3235#0" expanded="true" />
+                <element signature="e#7373#8305#0" expanded="true" />
+                <element signature="e#8304#8305#0" expanded="true" />
+                <element signature="e#13912#14867#0" expanded="true" />
+                <element signature="e#14866#14867#0" expanded="true" />
+                <element signature="e#15522#16455#0" expanded="true" />
+                <element signature="e#16454#16455#0" expanded="true" />
+                <element signature="e#17121#17804#0" expanded="true" />
+                <element signature="e#17803#17804#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test05.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java">
+      <file leaf-file-name="EmptyOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/EmptyOperator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="159" column="24" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilterOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FilterOperator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FlatMapOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FlatMapOperator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MapOperator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
               <folding>
-                <element signature="e#5721#5738#0" expanded="true" />
-                <element signature="e#5852#6131#0" expanded="true" />
-                <element signature="e#6130#6131#0" expanded="true" />
-                <element signature="e#6157#6403#0" expanded="true" />
-                <element signature="e#6402#6403#0" expanded="true" />
+                <element signature="e#1000#1001#0" expanded="true" />
+                <element signature="e#1030#1031#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test04.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test04.java">
+      <file leaf-file-name="MapOperator2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator2.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#593#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1078#1079#0" expanded="false" />
-                <element signature="e#1159#1160#0" expanded="false" />
-                <element signature="e#1737#1738#0" expanded="false" />
-                <element signature="e#1818#1819#0" expanded="false" />
-                <element signature="e#1979#1980#0" expanded="false" />
-                <element signature="e#2052#2053#0" expanded="false" />
-                <element signature="e#2202#2203#0" expanded="false" />
-                <element signature="e#2283#2284#0" expanded="false" />
-                <element signature="e#2588#2589#0" expanded="false" />
-                <element signature="e#2669#2670#0" expanded="false" />
-                <element signature="e#2833#2834#0" expanded="false" />
-                <element signature="e#2907#2908#0" expanded="false" />
-                <element signature="e#3057#3058#0" expanded="false" />
-                <element signature="e#3138#3139#0" expanded="false" />
-                <element signature="e#3458#3459#0" expanded="false" />
-                <element signature="e#3518#3519#0" expanded="false" />
-                <element signature="e#3668#3669#0" expanded="false" />
-                <element signature="e#3749#3750#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test03.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test03.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#593#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#2118#2119#0" expanded="false" />
-                <element signature="e#2187#2188#0" expanded="false" />
-                <element signature="e#9080#9081#0" expanded="false" />
-                <element signature="e#9160#9161#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test02.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test02.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="38" selection-start-line="93" selection-start-column="38" selection-end-line="93" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#593#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1045#1046#0" expanded="false" />
-                <element signature="e#1128#1129#0" expanded="false" />
-                <element signature="e#1359#1360#0" expanded="false" />
-                <element signature="e#1444#1445#0" expanded="false" />
-                <element signature="e#1574#1575#0" expanded="false" />
-                <element signature="e#1659#1660#0" expanded="false" />
-                <element signature="e#1912#1913#0" expanded="false" />
-                <element signature="e#1998#1999#0" expanded="false" />
-                <element signature="e#2159#2160#0" expanded="false" />
-                <element signature="e#2228#2229#0" expanded="false" />
-                <element signature="e#2378#2379#0" expanded="false" />
-                <element signature="e#2466#2467#0" expanded="false" />
-                <element signature="e#2625#2626#0" expanded="false" />
-                <element signature="e#2694#2695#0" expanded="false" />
-                <element signature="e#2844#2845#0" expanded="false" />
-                <element signature="e#2933#2934#0" expanded="false" />
-                <element signature="e#3189#3190#0" expanded="false" />
-                <element signature="e#3275#3276#0" expanded="false" />
-                <element signature="e#3436#3437#0" expanded="false" />
-                <element signature="e#3505#3506#0" expanded="false" />
-                <element signature="e#3655#3656#0" expanded="false" />
-                <element signature="e#3741#3742#0" expanded="false" />
-              </folding>
+              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2850,18 +2821,14 @@
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/internal/Player.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/Player.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Triple.java" />
-        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test04.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/UiThreadScheduler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/MainActivity.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundQueueScheduler.java" />
         <option value="$PROJECT_DIR$/shelly/build.gradle" />
-        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test07.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/ReducerOperator.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator2.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FlatMapOperator.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FilterOperator.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/EmptyOperator.java" />
@@ -2870,9 +2837,13 @@
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Config.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/ScheduledRunnable.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/BlockingRunnable.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Task.java" />
+        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test07.java" />
+        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/BlockingRunnable.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" />
       </list>
     </option>
   </component>
@@ -3106,6 +3077,74 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="operator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="function" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3227,7 +3266,7 @@
       <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Test03">
+  <component name="RunManager" selected="JUnit.Test05.testCombineNull">
     <configuration default="false" name="Test01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -3240,32 +3279,6 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="xiaofei.library.shelly" />
       <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.Test01" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="Test04" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="xiaofei.library.shelly.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="shelly" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="xiaofei.library.shelly" />
-      <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.Test04" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -3346,6 +3359,32 @@
       <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.Test03" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test05.testCombineNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="xiaofei.library.shelly.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="shelly" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="xiaofei.library.shelly" />
+      <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.Test05" />
+      <option name="METHOD_NAME" value="testCombineNull" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -3607,18 +3646,18 @@
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android Application.app" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.Test01" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.Test04" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.Test06" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.Test02" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.Test03" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.Test06" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.Test02" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.Test03" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.Test05.testCombineNull" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.Test03" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.Test02" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.Test01" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.Test06" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.Test04" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.Test05.testCombineNull" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.Test03" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.Test02" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.Test01" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.Test06" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -3648,11 +3687,11 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test01 - 2016.06.23 at 23h 50m 00s.xml">
-      <configuration name="Test01" configurationId="JUnit" />
+    <history-entry file="Test05_testCombineNull - 2016.06.24 at 20h 22m 55s.xml">
+      <configuration name="Test05.testCombineNull" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Test02 - 2016.06.23 at 23h 50m 39s.xml">
-      <configuration name="Test02" configurationId="JUnit" />
+    <history-entry file="Test05_testCombineNull - 2016.06.24 at 20h 24m 09s.xml">
+      <configuration name="Test05.testCombineNull" configurationId="JUnit" />
     </history-entry>
     <history-entry file="Test06 - 2016.06.23 at 22h 18m 55s.xml">
       <configuration name="Test06" configurationId="JUnit" />
@@ -3692,7 +3731,7 @@
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3707,7 +3746,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -3790,8 +3829,14 @@
           <properties />
           <option name="timeStamp" value="87" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java</url>
+          <line>278</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="88" />
+      <option name="time" value="90" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -3852,20 +3897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/NewThreadScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/DefaultScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/annotation/DominoTarget.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3878,13 +3909,6 @@
         <state vertical-scroll-proportion="0.1212938">
           <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="67" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Triple.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.92741936">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -3917,24 +3941,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundQueueScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="23" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/android-sdk-macosx/platforms/android-23/android.jar!/android/os/Looper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.7037037">
           <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/TargetCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3975,75 +3985,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FlatMapOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FilterOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#593#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/EmptyOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.032258064">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7258065">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/ReducerOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7258065">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4851752">
           <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test07.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1024258">
-          <caret line="151" column="45" selection-start-line="151" selection-start-column="45" selection-end-line="151" selection-end-column="45" />
-          <folding>
-            <element signature="e#3218#3226#0" expanded="false" />
-            <element signature="e#4654#4662#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4054,26 +4000,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/DominoCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#593#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#593#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/SchedulerInputs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4081,31 +4007,6 @@
           <folding>
             <element signature="e#0#593#0" expanded="false" />
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/ThrottleScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7258065">
-          <caret line="18" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/UiThreadScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/ScheduledRunnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#593#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4205,13 +4106,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="197" column="42" selection-start-line="197" selection-start-column="42" selection-end-line="197" selection-end-column="42" />
+          <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
           <folding>
-            <element signature="e#0#593#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#5721#5738#0" expanded="true" />
+            <element signature="e#5852#6131#0" expanded="true" />
+            <element signature="e#6130#6131#0" expanded="true" />
+            <element signature="e#6157#6403#0" expanded="true" />
+            <element signature="e#6402#6403#0" expanded="true" />
+            <element signature="e#6618#6864#0" expanded="true" />
+            <element signature="e#6863#6864#0" expanded="true" />
+            <element signature="e#6887#7084#0" expanded="true" />
+            <element signature="e#7083#7084#0" expanded="true" />
+            <element signature="e#7205#7451#0" expanded="true" />
+            <element signature="e#7450#7451#0" expanded="true" />
+            <element signature="e#7474#7671#0" expanded="true" />
+            <element signature="e#7670#7671#0" expanded="true" />
+            <element signature="e#7772#7789#0" expanded="true" />
+            <element signature="e#7841#7858#0" expanded="true" />
+            <element signature="e#7903#8182#0" expanded="true" />
+            <element signature="e#8181#8182#0" expanded="true" />
+            <element signature="e#8208#8454#0" expanded="true" />
+            <element signature="e#8453#8454#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test07.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="162" column="5" selection-start-line="162" selection-start-column="5" selection-end-line="162" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundQueueScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#979#980#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/DefaultScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding>
+            <element signature="e#1019#1020#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/NewThreadScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#921#922#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/ThrottleScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/UiThreadScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="27" selection-start-line="53" selection-start-column="27" selection-end-line="53" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Config.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/DominoCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/ScheduledRunnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
+          <folding>
+            <element signature="e#1937#1938#0" expanded="true" />
+            <element signature="e#2005#2006#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/TargetCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <folding>
+            <element signature="e#4002#4003#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4219,7 +4237,7 @@
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Task.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
           <folding>
             <element signature="e#841#842#0" expanded="true" />
             <element signature="e#877#878#0" expanded="true" />
@@ -4227,10 +4245,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Triple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/EmptyOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FilterOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/FlatMapOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/ReducerOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/BlockingRunnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="36" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="36" />
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -4241,46 +4307,83 @@
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java">
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="24" selection-start-line="159" selection-start-column="24" selection-end-line="159" selection-end-column="24" />
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
           <folding>
-            <element signature="e#5721#5738#0" expanded="true" />
-            <element signature="e#5852#6131#0" expanded="true" />
-            <element signature="e#6130#6131#0" expanded="true" />
-            <element signature="e#6157#6403#0" expanded="true" />
-            <element signature="e#6402#6403#0" expanded="true" />
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.4097035">
-          <caret line="280" column="50" selection-start-line="280" selection-start-column="50" selection-end-line="280" selection-end-column="50" />
+        <state vertical-scroll-proportion="41.148148">
+          <caret line="391" column="27" selection-start-line="391" selection-start-column="27" selection-end-line="391" selection-end-column="27" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#9844#10137#0" expanded="true" />
-            <element signature="e#10136#10137#0" expanded="true" />
-            <element signature="e#10171#10464#0" expanded="true" />
-            <element signature="e#10463#10464#0" expanded="true" />
-            <element signature="e#10491#11628#0" expanded="true" />
-            <element signature="e#11627#11628#0" expanded="true" />
-            <element signature="e#11655#11855#0" expanded="true" />
-            <element signature="e#11854#11855#0" expanded="true" />
-            <element signature="e#14502#14746#0" expanded="true" />
-            <element signature="e#14745#14746#0" expanded="true" />
-            <element signature="e#17792#17793#0" expanded="true" />
-            <element signature="e#17846#17847#0" expanded="true" />
+            <element signature="e#2591#2781#0" expanded="true" />
+            <element signature="e#2780#2781#0" expanded="true" />
+            <element signature="e#3217#3733#0" expanded="true" />
+            <element signature="e#3413#3673#0" expanded="true" />
+            <element signature="e#3672#3673#0" expanded="true" />
+            <element signature="e#3732#3733#0" expanded="true" />
+            <element signature="e#3898#4594#0" expanded="true" />
+            <element signature="e#4094#4534#0" expanded="true" />
+            <element signature="e#4533#4534#0" expanded="true" />
+            <element signature="e#4593#4594#0" expanded="true" />
+            <element signature="e#4966#5511#0" expanded="true" />
+            <element signature="e#5510#5511#0" expanded="true" />
+            <element signature="e#5677#6167#0" expanded="true" />
+            <element signature="e#5873#6107#0" expanded="true" />
+            <element signature="e#6106#6107#0" expanded="true" />
+            <element signature="e#6166#6167#0" expanded="true" />
+            <element signature="e#6284#6869#0" expanded="true" />
+            <element signature="e#6480#6809#0" expanded="true" />
+            <element signature="e#6808#6809#0" expanded="true" />
+            <element signature="e#6868#6869#0" expanded="true" />
+            <element signature="e#6987#7506#0" expanded="true" />
+            <element signature="e#7183#7446#0" expanded="true" />
+            <element signature="e#7445#7446#0" expanded="true" />
+            <element signature="e#7505#7506#0" expanded="true" />
+            <element signature="e#8527#8588#0" expanded="true" />
+            <element signature="e#8705#9136#0" expanded="true" />
+            <element signature="e#9135#9136#0" expanded="true" />
+            <element signature="e#10097#10390#0" expanded="true" />
+            <element signature="e#10389#10390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33139536">
+          <caret line="258" column="46" selection-start-line="258" selection-start-column="40" selection-end-line="258" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#593#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1863#3235#0" expanded="true" />
+            <element signature="e#2187#3127#0" expanded="true" />
+            <element signature="e#3126#3127#0" expanded="true" />
+            <element signature="e#3234#3235#0" expanded="true" />
+            <element signature="e#7373#8305#0" expanded="true" />
+            <element signature="e#8304#8305#0" expanded="true" />
+            <element signature="e#13912#14867#0" expanded="true" />
+            <element signature="e#14866#14867#0" expanded="true" />
+            <element signature="e#15522#16455#0" expanded="true" />
+            <element signature="e#16454#16455#0" expanded="true" />
+            <element signature="e#17121#17804#0" expanded="true" />
+            <element signature="e#17803#17804#0" expanded="true" />
           </folding>
         </state>
       </provider>

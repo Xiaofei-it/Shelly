@@ -173,4 +173,56 @@ public class Test05 {
         Shelly.playDomino(7, "A", "B");
     }
 
+
+    @Test
+    public void testCombineNull() {
+        Shelly.<String>createDomino(8)
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("1: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1<String, Integer>() {
+                    @Override
+                    public Integer call(String input) {
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(9)
+                .newThread()
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("2: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .map(new Function1<String, Boolean>() {
+                    @Override
+                    public Boolean call(String input) {
+                        return true;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(10)
+                .combine(Shelly.<String, Integer>getDominoByLabel(8),
+                        Shelly.<String, Boolean>getDominoByLabel(9),
+                        new Function2<Integer, Boolean, String>() {
+                            @Override
+                            public String call(Integer input1, Boolean input2) {
+                                return "" + input1 + input2;
+                            }
+                        })
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println("3: " + Thread.currentThread().getName() + " " + input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(10, "A");
+    }
+
 }

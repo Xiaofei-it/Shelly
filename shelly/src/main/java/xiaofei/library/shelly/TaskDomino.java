@@ -18,6 +18,7 @@
 
 package xiaofei.library.shelly;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -54,7 +55,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
                                     public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
-                                        CopyOnWriteArrayList<R> newInput = new CopyOnWriteArrayList<R>();
+                                        ArrayList<R> newInput = new ArrayList<R>();
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (triple.first) {
                                                 newInput.add(triple.second);
@@ -184,7 +185,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    //TODO 其实是player的高阶函数
+    //其实是player的高阶函数
     public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
         return new TaskDomino<T, R, U>(
                 new Domino<T, Triple<Boolean, R, U>>(getLabel(),
@@ -195,8 +196,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                                 scheduler.play(new Player<Triple<Boolean, R, U>, Triple<Boolean, R, U>>() {
                                     @Override
                                     public Scheduler<Triple<Boolean, R, U>> call(List<Triple<Boolean, R, U>> input) {
-                                        //TODO 此处不必Copy
-                                        CopyOnWriteArrayList<U> newInput = new CopyOnWriteArrayList<U>();
+                                        ArrayList<U> newInput = new ArrayList<U>();
                                         for (Triple<Boolean, R, U> triple : input) {
                                             if (!triple.first) {
                                                 newInput.add(triple.third);

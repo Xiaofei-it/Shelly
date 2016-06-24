@@ -239,8 +239,6 @@ public class Domino<T, R> {
         });
     }
 
-    //TODO null consideration, what's more? maybe function returns null.
-
     public <S1, S2, V> Domino<T, V> combine(Domino<? super R, S1> domino1, Domino<? super R, S2> domino2,
                                             final Function2<? super S1, ? super S2, ? extends V> combiner) {
         /**
@@ -406,7 +404,7 @@ public class Domino<T, R> {
         return lift(new FilterOperator<R>(filter));
     }
 
-    //TODO scheduler的函数是一个高阶函数
+    //scheduler的函数是一个高阶函数
     public <U> Domino<T, U> reduce(final Function1<List<R>, ? extends U> reducer) {
         return lift(new ReducerOperator<R, U>(reducer));
     }
