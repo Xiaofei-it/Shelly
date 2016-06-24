@@ -20,7 +20,6 @@ package xiaofei.library.shelly;
 
 import org.junit.Test;
 
-import xiaofei.library.shelly.annotation.DominoTarget;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
@@ -36,10 +35,6 @@ public class Test01 {
         A(int i) {
             this.i = i;
         }
-        @DominoTarget("target1")
-        public void f(String s) {
-            System.out.println("A " + i + " f " + s);
-        }
 
         public void g(String s) {
             System.out.println("A " + i + " g " + s);
@@ -47,10 +42,6 @@ public class Test01 {
     }
 
     private static class B {
-        @DominoTarget("t")
-        public void f() {
-            System.out.println("B f");
-        }
     }
     @Test
     public void case01() {
@@ -69,7 +60,6 @@ public class Test01 {
                         System.out.println("Target action1 " + input);
                     }
                 })
-                .target(A.class, "target1")
                 .target(A.class, new TargetAction1<A, String>() {
                     @Override
                     public void call(A a, String input) {
@@ -88,7 +78,6 @@ public class Test01 {
                         System.out.println("After map : " + input);
                     }
                 })
-                .target(A.class, "target1")
                 .map(new Function1<String, String>() {
                     @Override
                     public String call(String input) {
@@ -101,7 +90,6 @@ public class Test01 {
                         System.out.println("After map2 : " + input);
                     }
                 })
-                .target(A.class, "target1")
                 .commit();
         Shelly.playDomino("case01", "Haha", "Hehe");
 
@@ -251,7 +239,6 @@ public class Test01 {
                         System.out.println("Case 05 B " + input);
                     }
                 })
-                .target(B.class, "t")
                 .commit();
         Shelly.playDomino("case05");
         Shelly.playDomino("case05", "8", "9");

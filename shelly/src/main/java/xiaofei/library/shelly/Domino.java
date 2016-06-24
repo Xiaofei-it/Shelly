@@ -93,23 +93,6 @@ public class Domino<T, R> {
      * T是原本输入的参数类型，R是将传给下面的参数类型！
      *
      */
-    @Deprecated
-    public Domino<T, R> target(final Class<?> clazz, final String target) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
-            @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
-                    @Override
-                    public Scheduler<R> call(List<R> input) {
-                        TARGET_CENTER.call(clazz, target, input);
-                        return scheduler;
-                    }
-                });
-                return scheduler;
-            }
-        });
-    }
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
         return new Domino<T, R>(mLabel, new Player<T, R>() {

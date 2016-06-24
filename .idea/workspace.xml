@@ -13,9 +13,6 @@
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/Test05.java" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Domino.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="41.148148">
-              <caret line="391" column="27" selection-start-line="391" selection-start-column="27" selection-end-line="391" selection-end-column="27" />
+            <state vertical-scroll-proportion="-1.349711">
+              <caret line="427" column="29" selection-start-line="427" selection-start-column="29" selection-end-line="427" selection-end-column="29" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -120,10 +117,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33139536">
+            <state vertical-scroll-proportion="-0.33333334">
               <caret line="258" column="46" selection-start-line="258" selection-start-column="40" selection-end-line="258" selection-end-column="46" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
@@ -3729,9 +3726,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -3740,7 +3737,7 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3237774" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3237774" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -4285,11 +4282,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
+          <folding>
+            <element signature="e#1000#1001#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.33333334">
+          <caret line="258" column="46" selection-start-line="258" selection-start-column="40" selection-end-line="258" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#593#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1863#3235#0" expanded="true" />
+            <element signature="e#2187#3127#0" expanded="true" />
+            <element signature="e#3126#3127#0" expanded="true" />
+            <element signature="e#3234#3235#0" expanded="true" />
+            <element signature="e#7373#8305#0" expanded="true" />
+            <element signature="e#8304#8305#0" expanded="true" />
+            <element signature="e#13912#14867#0" expanded="true" />
+            <element signature="e#14866#14867#0" expanded="true" />
+            <element signature="e#15522#16455#0" expanded="true" />
+            <element signature="e#16454#16455#0" expanded="true" />
+            <element signature="e#17121#17804#0" expanded="true" />
+            <element signature="e#17803#17804#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/ReducerOperator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -4304,31 +4345,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/operator/MapOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
-          <folding>
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1030#1031#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="41.148148">
-          <caret line="391" column="27" selection-start-line="391" selection-start-column="27" selection-end-line="391" selection-end-column="27" />
+        <state vertical-scroll-proportion="-1.349711">
+          <caret line="427" column="29" selection-start-line="427" selection-start-column="29" selection-end-line="427" selection-end-column="29" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -4361,29 +4381,6 @@
             <element signature="e#9135#9136#0" expanded="true" />
             <element signature="e#10097#10390#0" expanded="true" />
             <element signature="e#10389#10390#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/TaskDomino.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33139536">
-          <caret line="258" column="46" selection-start-line="258" selection-start-column="40" selection-end-line="258" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#593#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#1863#3235#0" expanded="true" />
-            <element signature="e#2187#3127#0" expanded="true" />
-            <element signature="e#3126#3127#0" expanded="true" />
-            <element signature="e#3234#3235#0" expanded="true" />
-            <element signature="e#7373#8305#0" expanded="true" />
-            <element signature="e#8304#8305#0" expanded="true" />
-            <element signature="e#13912#14867#0" expanded="true" />
-            <element signature="e#14866#14867#0" expanded="true" />
-            <element signature="e#15522#16455#0" expanded="true" />
-            <element signature="e#16454#16455#0" expanded="true" />
-            <element signature="e#17121#17804#0" expanded="true" />
-            <element signature="e#17803#17804#0" expanded="true" />
           </folding>
         </state>
       </provider>

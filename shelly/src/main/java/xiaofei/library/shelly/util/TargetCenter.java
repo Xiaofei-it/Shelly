@@ -18,13 +18,8 @@
 
 package xiaofei.library.shelly.util;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import xiaofei.library.shelly.annotation.AnnotationUtils;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -33,12 +28,9 @@ public class TargetCenter {
 
     private static volatile TargetCenter sInstance = null;
 
-    private final ConcurrentHashMap<Class<?>, ConcurrentHashMap<String, Method>> mMethods;
-
     private final ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>> mObjects;
 
     private TargetCenter() {
-        mMethods = new ConcurrentHashMap<Class<?>, ConcurrentHashMap<String, Method>>();
         mObjects = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>>();
     }
 
@@ -62,14 +54,6 @@ public class TargetCenter {
                     objects = mObjects.get(clazz);
                 }
                 objects.add(object);
-                //The following must be in a synchronized block.
-                //The mMethods modification must follow the mObjects modification.
-                synchronized (mMethods) {
-                    ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
-                    if (methods == null) {
-                        mMethods.putIfAbsent(clazz, new ConcurrentHashMap<String, Method>(AnnotationUtils.getTargetMethods(clazz)));
-                    }
-                }
             }
         }
     }
@@ -89,12 +73,8 @@ public class TargetCenter {
                         --size;
                     }
                 }
-                //The following must be in a synchronized block.
-                synchronized (mMethods) {
-                    if (objects.isEmpty()) {
-                        mObjects.remove(clazz);
-                        mMethods.remove(clazz);
-                    }
+                if (objects.isEmpty()) {
+                    mObjects.remove(clazz);
                 }
             }
         }
@@ -108,38 +88,5 @@ public class TargetCenter {
 
     public CopyOnWriteArrayList<Object> getObjects(Class<?> clazz) {
         return mObjects.get(clazz);
-    }
-
-    public <T> void call(Class<?> clazz, String target, List<T> input) {
-        ConcurrentHashMap<String, Method> methods = mMethods.get(clazz);
-        if (methods == null) {
-            throw new IllegalStateException("Class " + clazz.getName() + " has not been registered.");
-        }
-        Method method = methods.get(target);
-        if (method == null) {
-            throw new IllegalStateException("Class " + clazz.getName() + " has no method matching the target " + target);
-        }
-        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-        if (objects == null) {
-            return;
-        }
-        if (!(input instanceof CopyOnWriteArrayList)) {
-            throw new IllegalStateException("An error occurs! Please report this problem to Xiaofei!");
-        }
-        for (Object object : objects) {
-            try {
-                if (method.getParameterTypes().length == 0) {
-                    method.invoke(object);
-                } else {
-                    for (T singleInput : input) {
-                        method.invoke(object, singleInput);
-                    }
-                }
-            } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
