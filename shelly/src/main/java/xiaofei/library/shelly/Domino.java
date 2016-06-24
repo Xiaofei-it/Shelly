@@ -241,8 +241,8 @@ public class Domino<T, R> {
 
     //TODO null consideration, what's more? maybe function returns null.
 
-    public <U, S, V> Domino<T, V> combine(Domino<? super R, U> domino1, Domino<? super R, S> domino2,
-                                          final Function2<? super U, ? super S, ? extends V> combiner) {
+    public <S1, S2, V> Domino<T, V> combine(Domino<? super R, S1> domino1, Domino<? super R, S2> domino2,
+                                            final Function2<? super S1, ? super S2, ? extends V> combiner) {
         /**
          * 想实现的效果是domino1和domino2分开运行，结果经过combiner结合，得到一堆新的结果
          * 为了实现方便，做如下变化：
@@ -251,16 +251,16 @@ public class Domino<T, R> {
          * 3、将这个结果展开：flatMap
          */
         return merge(
-                domino1.reduce(new Function1<List<U>, Pair<Integer, List<Object>>>() {
+                domino1.reduce(new Function1<List<S1>, Pair<Integer, List<Object>>>() {
                     @Override
-                    public Pair<Integer, List<Object>> call(List<U> input) {
+                    public Pair<Integer, List<Object>> call(List<S1> input) {
                         return new Pair<Integer, List<Object>>(1, (List<Object>) input);
                     }
                 }),
-                domino2.reduce(new Function1<List<S>, Pair<Integer, List<Object>>>() {
+                domino2.reduce(new Function1<List<S2>, Pair<Integer, List<Object>>>() {
                     @Override
-                    public Pair<Integer, List<Object>> call(List<S> input) {
-                        return new Pair<Integer, List<Object>>(1, (List<Object>) input);
+                    public Pair<Integer, List<Object>> call(List<S2> input) {
+                        return new Pair<Integer, List<Object>>(2, (List<Object>) input);
                     }
                 }))
                 .reduce(new Function1<List<Pair<Integer, List<Object>>>, List<V>>() {
@@ -280,7 +280,7 @@ public class Domino<T, R> {
                         }
                         for (Object o1 : input1) {
                             for (Object o2 : input2) {
-                                result.add(combiner.call((U) o1, (S) o2));
+                                result.add(combiner.call((S1) o1, (S2) o2));
                             }
                         }
                         return result;
@@ -292,7 +292,26 @@ public class Domino<T, R> {
                         return input;
                     }
                 });
+    }
 
+    public <S1, S2, U1, U2, V> Domino<T, V> combineTask(
+            TaskDomino<? super R, S1, U1> taskDomino1,
+            TaskDomino<? super R, S2, U2> taskDomino2,
+            final Function2<? super S1, ? super S2, ? extends V> combiner) {
+        return combine(
+                taskDomino1.map(new Function1<Triple<Boolean,S1,U1>, S1>() {
+                    @Override
+                    public S1 call(Triple<Boolean, S1, U1> input) {
+                        return input.first ? input.second : null;
+                    }
+                }),
+                taskDomino2.map(new Function1<Triple<Boolean,S2,U2>, S2>() {
+                    @Override
+                    public S2 call(Triple<Boolean, S2, U2> input) {
+                        return input.first ? input.second : null;
+                    }
+                }),
+                combiner);
     }
 
     public Domino<T, R> background() {
