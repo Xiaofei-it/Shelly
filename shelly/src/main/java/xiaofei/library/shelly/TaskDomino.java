@@ -338,12 +338,32 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new Domino<T, Triple<Boolean, R, U>>(getLabel(), getPlayer());
     }
 
-    public <S> Domino<T, S> endTask() {
+    public Domino<T, R> endTask() {
+        return endTask(new Function1<List<Triple<Boolean, R, U>>, List<R>>() {
+            @Override
+            public List<R> call(List<Triple<Boolean, R, U>> input) {
+                List<R> result = new ArrayList<R>();
+                for (Triple<Boolean, R, U> triple : input) {
+                    if (triple.first) {
+                        result.add(triple.second);
+                    }
+                }
+                return result;
+            }
+        });
+    }
+
+    public <S> Domino<T, S> endTaskEmpty() {
         return toDomino().clear();
     }
 
-    public <S> Domino<T, S> endTask(Function1<List<Triple<Boolean, R, U>>, S> reducer) {
-        return toDomino().reduce(reducer);
+    public <S> Domino<T, S> endTask(Function1<List<Triple<Boolean, R, U>>, List<S>> reducer) {
+        return toDomino().reduce(reducer).flatMap(new Function1<List<S>, List<S>>() {
+            @Override
+            public List<S> call(List<S> input) {
+                return input;
+            }
+        });
     }
 
     @Override
