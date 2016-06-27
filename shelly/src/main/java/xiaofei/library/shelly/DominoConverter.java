@@ -21,6 +21,6 @@ package xiaofei.library.shelly;
 /**
  * Created by Xiaofei on 16/6/27.
  */
-public interface DominoConverter<T, R> {
-    <S extends Domino<T, R>> S convert(Domino<T, R> domino);
+public interface DominoConverter<T, R, S extends Domino<T, R>> {
+    S convert(Domino<T, R> domino);
 }
