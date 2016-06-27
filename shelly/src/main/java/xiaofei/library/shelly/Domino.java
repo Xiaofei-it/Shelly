@@ -397,7 +397,8 @@ public class Domino<T, R> {
     }
 
     public <U, S> TaskDomino<T, U, S> beginTask(Task<R, U, S> task) {
-        return new TaskDomino<T, U, S>(map(new TaskFunction<R, U, S>(task)));
+        Domino<T, Triple<Boolean, U, S>> domino = map(new TaskFunction<R, U, S>(task));
+        return new TaskDomino<T, U, S>(domino.getLabel(), domino.getPlayer());
     }
 
     public void play(CopyOnWriteArrayList<T> input) {
