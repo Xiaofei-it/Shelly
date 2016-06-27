@@ -8,7 +8,7 @@ ext {
     libraryName = 'Shelly'
     artifact = 'shelly'
 
-    libraryDescription = 'A smart and easy-to-use alternative to RxJava and EventBus.'
+    libraryDescription = 'An Android library for business-logic-oriented functional co-reactive programming.'
 
     siteUrl = 'https://github.com/Xiaofei-it/Shelly'
     gitUrl = 'https://github.com/Xiaofei-it/Shelly.git'
