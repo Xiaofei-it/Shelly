@@ -85,8 +85,12 @@ public class Domino<T, R> {
         return mLabel;
     }
 
-    protected Player<T, R> getPlayer() {
+    public Player<T, R> getPlayer() {
         return mPlayer;
+    }
+
+    public <S extends Domino<T, R>> S convert(DominoConverter<T, R> converter) {
+        return converter.convert(this);
     }
 
     /**
