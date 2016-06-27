@@ -41,7 +41,7 @@ import xiaofei.library.shelly.scheduler.UiThreadScheduler;
  */
 public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
 
-    TaskDomino(Domino<T, Triple<Boolean, R, U>> domino) {
+    protected TaskDomino(Domino<T, Triple<Boolean, R, U>> domino) {
         super(domino.getLabel(), domino.getPlayer());
     }
 
