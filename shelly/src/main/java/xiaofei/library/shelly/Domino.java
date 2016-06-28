@@ -416,6 +416,20 @@ public class Domino<T, R> {
         return new TaskDomino<T, U2, S2>(domino.getLabel(), domino.getPlayer());
     }
 
+    public <U, S> TaskDomino<T, Pair<R, U>, S> beginTaskKeepingInput(Task<R, U, S> task) {
+        Domino<T, Triple<Boolean, Pair<R, U>, S>> domino = map(
+                new TaskFunction<R, U, Pair<R, U>, S, S>(
+                        task,
+                        new Function2<R, U, Pair<R, U>>() {
+                            @Override
+                            public Pair<R, U> call(R input1, U input2) {
+                                return new Pair<R, U>(input1, input2);
+                            }
+                        },
+                        new RightRefinementOperator<R, S>()));
+        return new TaskDomino<T, Pair<R, U>, S>(domino.getLabel(), domino.getPlayer());
+    }
+
     public void play(CopyOnWriteArrayList<T> input) {
         mPlayer.call(input);
     }
