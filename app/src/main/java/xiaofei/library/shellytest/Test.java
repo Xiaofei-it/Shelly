@@ -18,10 +18,17 @@
 
 package xiaofei.library.shellytest;
 
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Retrofit;
 import xiaofei.library.shelly.Shelly;
+import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
+import xiaofei.library.shelly.task.AsyncRetrofitTask;
 
 /**
  * Created by Xiaofei on 16/6/1.
@@ -70,5 +77,32 @@ public class Test {
                         mainActivity.f(input);
                     }
                 }).commit();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
+                .baseUrl("http://www.weather.com.cn/")
+                .build();
+        final NetInterface netInterface = retrofit.create(NetInterface.class);
+        Shelly.<String>createDomino(3)
+                .background()
+                .beginTask(new AsyncRetrofitTask<String, ResponseBody>() {
+                    @Override
+                    protected Call<ResponseBody> getCall(String s) {
+                        return netInterface.test(s);
+                    }
+                })
+                .convert(new RetrofitDominoConverter<String, ResponseBody>())
+                .uiThread()
+                .onResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
+                    @Override
+                    public void call(MainActivity mainActivity, ResponseBody input) {
+                        try {
+                            mainActivity.toast(input.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .commit();
     }
 }
