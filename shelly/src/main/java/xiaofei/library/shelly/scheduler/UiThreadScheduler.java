@@ -32,10 +32,9 @@ import xiaofei.library.shelly.util.Config;
  */
 public class UiThreadScheduler<T> extends Scheduler<T> {
 
-    //TODO 下面要static和cached吗？back会出现这个问题吗？dominoMap到底怎么回事？and？
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    //TODO 下面这个改变比较重要！！！
+    //下面这个改变比较重要！！！
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     public <R> UiThreadScheduler(Scheduler<R> scheduler) {
