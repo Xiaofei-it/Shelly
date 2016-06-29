@@ -16,10 +16,11 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.domino;
 
 import org.junit.Test;
 
+import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;

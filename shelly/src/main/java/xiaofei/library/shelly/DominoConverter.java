@@ -18,6 +18,8 @@
 
 package xiaofei.library.shelly;
 
+import xiaofei.library.shelly.domino.Domino;
+
 /**
  * Created by Xiaofei on 16/6/27.
  */

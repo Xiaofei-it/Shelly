@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.domino;
 
 import android.support.v4.util.Pair;
 
@@ -29,6 +29,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import xiaofei.library.shelly.DominoConverter;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
@@ -68,7 +69,7 @@ public class Domino<T, R> {
 
     private Object mLabel;
 
-    Domino(Object label) {
+    public Domino(Object label) {
         this(label, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {

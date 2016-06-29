@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.domino;
 
 import java.util.ArrayList;
 import java.util.List;

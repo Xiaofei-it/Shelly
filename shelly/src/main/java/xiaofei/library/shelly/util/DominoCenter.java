@@ -23,7 +23,7 @@ import android.util.Log;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import xiaofei.library.shelly.Domino;
+import xiaofei.library.shelly.domino.Domino;
 
 /**
  * Created by Xiaofei on 16/5/26.
