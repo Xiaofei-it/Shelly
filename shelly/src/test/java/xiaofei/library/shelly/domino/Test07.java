@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction1;
 
@@ -156,6 +157,41 @@ public class Test07 {
                 .commit();
         Shelly.playDomino(3, "A");
         Shelly.playDomino(4, "B");
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testBugOfHandler() {
+        Shelly.<String>createDomino(5)
+                .merge(new Domino[]{Shelly.<String>createDomino()
+                        .background()
+                        .map(new Function1<String, Integer>() {
+                            @Override
+                            public Integer call(String input) {
+                                System.out.println("Map1 " + Thread.currentThread().getName());
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                return 3;
+                            }
+                        })
+                        .uiThread()
+                        .map(new Function1<Integer, Integer>() {
+                            @Override
+                            public Integer call(Integer input) {
+                                System.out.println("Map2 " + Thread.currentThread().getName());
+                                return input;
+                            }
+                        })}
+                )
+                .commit();
+        Shelly.playDomino(5, "A");
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {

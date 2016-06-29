@@ -26,6 +26,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import xiaofei.library.shelly.Shelly;
+import xiaofei.library.shelly.domino.Domino;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter2;
 import xiaofei.library.shelly.function.Action0;
@@ -115,6 +116,7 @@ public class Test {
                         Log.e("Eric Zhao", "Error", input);
                     }
                 })
+                .endTask()
                 .commit();
         Shelly.<String>createDomino(4)
                 .background()
@@ -153,6 +155,34 @@ public class Test {
                         Log.e("EricZhao", "Error", input);
                     }
                 })
+                .endTask()
                 .commit();
+
+        Shelly.<String>createDomino(5)
+                .merge(new Domino[]{Shelly.<String>createDomino()
+                                .background()
+                                .map(new Function1<String, Integer>() {
+                                    @Override
+                                    public Integer call(String input) {
+                                        System.out.println("Map1 " + Thread.currentThread().getName());
+                                        try {
+                                            Thread.sleep(100);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        return 3;
+                                    }
+                                })
+                                .uiThread()
+                                .map(new Function1<Integer, Integer>() {
+                            @Override
+                            public Integer call(Integer input) {
+                                System.out.println("Map2 " + Thread.currentThread().getName());
+                                return input;
+                            }
+                        })}
+                )
+                .commit();
+
     }
 }
