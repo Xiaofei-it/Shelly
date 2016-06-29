@@ -17,11 +17,16 @@
         android:id="@+id/b2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send1" />
+        android:text="send by retrofit" />
     <Button
         android:id="@+id/b3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send2" />
+        android:text="send by retrofit domino" />
+    <Button
+        android:id="@+id/b4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send by retrofit domino II" />
 
 </LinearLayout>

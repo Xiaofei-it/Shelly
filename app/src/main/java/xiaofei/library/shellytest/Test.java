@@ -25,9 +25,11 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
+import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter2;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
+import xiaofei.library.shelly.function.TargetAction2;
 import xiaofei.library.shelly.task.AsyncRetrofitTask;
 
 /**
@@ -98,6 +100,27 @@ public class Test {
                     public void call(MainActivity mainActivity, ResponseBody input) {
                         try {
                             mainActivity.toast(input.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino(4)
+                .background()
+                .beginTaskKeepingInput(new AsyncRetrofitTask<String, ResponseBody>() {
+                    @Override
+                    protected Call<ResponseBody> getCall(String s) {
+                        return netInterface.test(s);
+                    }
+                })
+                .convert(new RetrofitDominoConverter2<String, ResponseBody>())
+                .uiThread()
+                .onResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
+                    @Override
+                    public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
+                        try {
+                            mainActivity.toast(input2.string());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
