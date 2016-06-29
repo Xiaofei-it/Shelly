@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly.util;
+package xiaofei.library.shelly.task;
 
 /**
  * Created by Xiaofei on 16/6/20.

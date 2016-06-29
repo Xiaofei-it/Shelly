@@ -29,7 +29,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import xiaofei.library.shelly.DominoConverter;
+import xiaofei.library.shelly.domino.converter.DominoConverter;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
@@ -53,7 +53,7 @@ import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 import xiaofei.library.shelly.util.DominoCenter;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.TargetCenter;
-import xiaofei.library.shelly.util.Task;
+import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.util.Triple;
 
 /**
@@ -92,7 +92,7 @@ public class Domino<T, R> {
     }
 
     public <S extends Domino<T, R>> S convert(DominoConverter<T, R, S> converter) {
-        return converter.convert(this);
+        return converter.call(this);
     }
 
     /**

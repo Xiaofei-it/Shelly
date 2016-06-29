@@ -16,13 +16,17 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.task;
 
-import xiaofei.library.shelly.domino.Domino;
+import retrofit2.Call;
 
 /**
  * Created by Xiaofei on 16/6/27.
  */
-public interface DominoConverter<T, R, S extends Domino<T, R>> {
-    S convert(Domino<T, R> domino);
+public abstract class AsyncRetrofitTask<T, R> extends RetrofitTask<T, R> {
+    @Override
+    protected void call(Call<R> call) {
+        call.enqueue(getCallback());
+    }
+
 }
