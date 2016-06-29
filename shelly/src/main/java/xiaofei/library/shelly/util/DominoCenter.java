@@ -75,7 +75,4 @@ public class DominoCenter {
         return (Domino<T, R>) mDominoes.get(label);
     }
 
-    public boolean containsDomino(Object label) {
-        return mDominoes.containsKey(label);
-    }
 }

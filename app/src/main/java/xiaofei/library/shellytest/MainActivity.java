@@ -20,6 +20,7 @@ package xiaofei.library.shellytest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
+                            Log.v("EricZhao", "Response: " + response.body().string());
                             toast(response.body().string());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                        Log.e("EricZhao", "Error", t);
                     }
                 });
             }

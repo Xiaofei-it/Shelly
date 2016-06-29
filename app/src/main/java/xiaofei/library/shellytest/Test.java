@@ -18,6 +18,8 @@
 
 package xiaofei.library.shellytest;
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
@@ -27,6 +29,8 @@ import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter2;
 import xiaofei.library.shelly.function.Action0;
+import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Action2;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
@@ -105,6 +109,12 @@ public class Test {
                         }
                     }
                 })
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+                        Log.e("Eric Zhao", "Error", input);
+                    }
+                })
                 .commit();
         Shelly.<String>createDomino(4)
                 .background()
@@ -120,10 +130,27 @@ public class Test {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
                             mainActivity.toast(input2.string());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
+                })
+                .onResult(new Action2<String, ResponseBody>() {
+                    @Override
+                    public void call(String input1, ResponseBody input2) {
+                        try {
+                            Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+                        Log.e("EricZhao", "Error", input);
                     }
                 })
                 .commit();
