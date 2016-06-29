@@ -96,13 +96,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(4, "101010100");
+                Shelly.playDomino(4, 101010100l);
             }
         });
         findViewById(R.id.b5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Shelly.playDomino(5, "A");
+            }
+        });
+        findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Shelly.playDomino(6, "101010100");
+            }
+        });
+        findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Shelly.playDomino(7, 101010100l);
             }
         });
         Shelly.playDomino(1, "Hello1");

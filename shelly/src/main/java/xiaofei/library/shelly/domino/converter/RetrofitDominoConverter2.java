@@ -28,10 +28,10 @@ import xiaofei.library.shelly.util.Triple;
 /**
  * Created by Xiaofei on 16/6/28.
  */
-public class RetrofitDominoConverter2<T, R> implements
-        DominoConverter<T, Triple<Boolean, Pair<T, Response<R>>, Throwable>, RetrofitDomino2<T, R>> {
+public class RetrofitDominoConverter2<T, R, S> implements
+        DominoConverter<T, Triple<Boolean, Pair<R, Response<S>>, Throwable>, RetrofitDomino2<T, R, S>> {
     @Override
-    public RetrofitDomino2<T, R> call(Domino<T, Triple<Boolean, Pair<T, Response<R>>, Throwable>> domino) {
-        return new RetrofitDomino2<T, R>(domino.getLabel(), domino.getPlayer());
+    public RetrofitDomino2<T, R, S> call(Domino<T, Triple<Boolean, Pair<R, Response<S>>, Throwable>> domino) {
+        return new RetrofitDomino2<T, R, S>(domino.getLabel(), domino.getPlayer());
     }
 }

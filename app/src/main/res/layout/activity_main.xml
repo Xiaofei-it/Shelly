@@ -34,4 +34,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test block" />
+    <Button
+        android:id="@+id/b6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send by retrofit domino new" />
+    <Button
+        android:id="@+id/b7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send by retrofit domino II new" />
 </LinearLayout>

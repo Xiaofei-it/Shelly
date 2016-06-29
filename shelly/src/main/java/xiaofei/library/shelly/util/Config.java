@@ -22,5 +22,5 @@ package xiaofei.library.shelly.util;
  * Created by Xiaofei on 16/6/23.
  */
 public class Config {
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 }

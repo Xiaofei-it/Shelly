@@ -118,7 +118,13 @@ public class Test {
                 })
                 .endTask()
                 .commit();
-        Shelly.<String>createDomino(4)
+        Shelly.<Long>createDomino(4)
+                .map(new Function1<Long, String>() {
+                    @Override
+                    public String call(Long input) {
+                        return Long.toString(input);
+                    }
+                })
                 .background()
                 .beginTaskKeepingInput(new AsyncRetrofitTask<String, ResponseBody>() {
                     @Override
@@ -126,7 +132,7 @@ public class Test {
                         return netInterface.test(s);
                     }
                 })
-                .convert(new RetrofitDominoConverter2<String, ResponseBody>())
+                .convert(new RetrofitDominoConverter2<Long, String, ResponseBody>())
                 .uiThread()
                 .onResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
                     @Override
@@ -182,6 +188,78 @@ public class Test {
                             }
                         })}
                 )
+                .commit();
+        Shelly.<String>createDomino(6)
+                .background()
+                .beginRetrofitTask(new AsyncRetrofitTask<String, ResponseBody>() {
+                    @Override
+                    protected Call<ResponseBody> getCall(String s) {
+                        return netInterface.test(s);
+                    }
+                })
+                .uiThread()
+                .onResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
+                    @Override
+                    public void call(MainActivity mainActivity, ResponseBody input) {
+                        try {
+                            mainActivity.toast(input.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+                        Log.e("Eric Zhao", "Error", input);
+                    }
+                })
+                .endTask()
+                .commit();
+
+        Shelly.<Long>createDomino(7)
+                .map(new Function1<Long, String>() {
+                    @Override
+                    public String call(Long input) {
+                        return Long.toString(input);
+                    }
+                })
+                .background()
+                .beginRetrofitTaskKeepingInput(new AsyncRetrofitTask<String, ResponseBody>() {
+                    @Override
+                    protected Call<ResponseBody> getCall(String s) {
+                        return netInterface.test(s);
+                    }
+                })
+                .uiThread()
+                .onResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
+                    @Override
+                    public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
+                        try {
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
+                            mainActivity.toast(input2.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onResult(new Action2<String, ResponseBody>() {
+                    @Override
+                    public void call(String input1, ResponseBody input2) {
+                        try {
+                            Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+                        Log.e("EricZhao", "Error", input);
+                    }
+                })
+                .endTask()
                 .commit();
 
     }
