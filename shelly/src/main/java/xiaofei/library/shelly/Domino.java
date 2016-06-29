@@ -41,11 +41,7 @@ import xiaofei.library.shelly.operator.FlatMapOperator;
 import xiaofei.library.shelly.operator.MapOperator;
 import xiaofei.library.shelly.operator.MapOperator2;
 import xiaofei.library.shelly.operator.ReducerOperator;
-import xiaofei.library.shelly.util.DominoCenter;
-import xiaofei.library.shelly.util.Player;
-import xiaofei.library.shelly.util.TargetCenter;
-import xiaofei.library.shelly.util.Task;
-import xiaofei.library.shelly.util.Triple;
+import xiaofei.library.shelly.operator.RightRefinementOperator;
 import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
@@ -53,6 +49,11 @@ import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
+import xiaofei.library.shelly.util.DominoCenter;
+import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.TargetCenter;
+import xiaofei.library.shelly.util.Task;
+import xiaofei.library.shelly.util.Triple;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -401,8 +402,32 @@ public class Domino<T, R> {
     }
 
     public <U, S> TaskDomino<T, U, S> beginTask(Task<R, U, S> task) {
-        Domino<T, Triple<Boolean, U, S>> domino = map(new TaskFunction<R, U, S>(task));
+        Domino<T, Triple<Boolean, U, S>> domino = map(
+                new TaskFunction<R, U, U, S, S>(
+                        task,
+                        new RightRefinementOperator<R, U>(),
+                        new RightRefinementOperator<R, S>()));
         return new TaskDomino<T, U, S>(domino.getLabel(), domino.getPlayer());
+    }
+
+    public <U1, U2, S1, S2> TaskDomino<T, U2, S2> beginTask(
+            Task<R, U1, S1> task, Function2<R, U1, U2> func1, Function2<R, S1, S2> func2) {
+        Domino<T, Triple<Boolean, U2, S2>> domino = map(new TaskFunction<R, U1, U2, S1, S2>(task, func1, func2));
+        return new TaskDomino<T, U2, S2>(domino.getLabel(), domino.getPlayer());
+    }
+
+    public <U, S> TaskDomino<T, Pair<R, U>, S> beginTaskKeepingInput(Task<R, U, S> task) {
+        Domino<T, Triple<Boolean, Pair<R, U>, S>> domino = map(
+                new TaskFunction<R, U, Pair<R, U>, S, S>(
+                        task,
+                        new Function2<R, U, Pair<R, U>>() {
+                            @Override
+                            public Pair<R, U> call(R input1, U input2) {
+                                return new Pair<R, U>(input1, input2);
+                            }
+                        },
+                        new RightRefinementOperator<R, S>()));
+        return new TaskDomino<T, Pair<R, U>, S>(domino.getLabel(), domino.getPlayer());
     }
 
     public void play(CopyOnWriteArrayList<T> input) {
@@ -413,13 +438,19 @@ public class Domino<T, R> {
         DOMINO_CENTER.commit(this);
     }
 
-    private static class TaskFunction<T, R, U> implements Function1<T, Triple<Boolean, R, U>>, Task.TaskListener<R, U> {
+    private static class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Boolean, R2, U2>>, Task.TaskListener<R1, U1> {
 
-        private Task<T, R, U> mTask;
+        private Task<T, R1, U1> mTask;
 
-        private volatile R mResult;
+        private Function2<T, R1, R2> mFunc1;
 
-        private volatile U mError;
+        private Function2<T, U1, U2> mFunc2;
+
+        private T mInput;
+
+        private volatile R2 mResult;
+
+        private volatile U2 mError;
 
         private volatile int mFlag;
 
@@ -427,31 +458,34 @@ public class Domino<T, R> {
 
         private Condition mCondition = mLock.newCondition();
 
-        TaskFunction(Task<T, R, U> task) {
+        TaskFunction(Task<T, R1, U1> task, Function2<T, R1, R2> func1, Function2<T, U1, U2> func2) {
             task.setListener(this);
             mTask = task;
+            mFunc1 = func1;
+            mFunc2 = func2;
         }
 
         @Override
-        public void onFailure(U error) {
+        public void onFailure(U1 error) {
             mLock.lock();
-            mError = error;
+            mError = mFunc2.call(mInput, error);
             mFlag = 0;
             mCondition.signalAll();
             mLock.unlock();
         }
 
         @Override
-        public void onSuccess(R result) {
+        public void onSuccess(R1 result) {
             mLock.lock();
-            mResult = result;
+            mResult = mFunc1.call(mInput, result);
             mFlag = 1;
             mCondition.signalAll();
             mLock.unlock();
         }
 
         @Override
-        public Triple<Boolean, R, U> call(T input) {
+        public Triple<Boolean, R2, U2> call(T input) {
+            mInput = input;
             mResult = null;
             mError = null;
             mFlag = -1;
@@ -466,7 +500,7 @@ public class Domino<T, R> {
             } finally {
                 mLock.unlock();
             }
-            return new Triple<Boolean, R, U>(mFlag == 1, mResult, mError);
+            return new Triple<Boolean, R2, U2>(mFlag == 1, mResult, mError);
         }
 
     }
