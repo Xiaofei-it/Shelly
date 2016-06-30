@@ -114,7 +114,7 @@ public abstract class Scheduler<T> {
         }
     }
 
-    public void unblock(int index, final CopyOnWriteArrayList<Object> object) {
+    public void appendAt(int index, final CopyOnWriteArrayList<Object> object) {
         mInputs.action(index, new Action<SchedulerInputs>() {
             @Override
             public void call(SchedulerInputs o) {

@@ -39,11 +39,7 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
 
     private T mInput;
 
-    private volatile R2 mResult;
-
-    private volatile U2 mError;
-
-    private volatile int mFlag;
+    private volatile ResultWrapper<R2, U2> mResultWrapper;
 
     private Lock mLock = new ReentrantLock();
 
@@ -59,8 +55,7 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
     @Override
     public void onFailure(U1 error) {
         mLock.lock();
-        mError = mFunc2.call(mInput, error);
-        mFlag = 0;
+        mResultWrapper.setError(mFunc2.call(mInput, error));
         mCondition.signalAll();
         mLock.unlock();
     }
@@ -68,8 +63,7 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
     @Override
     public void onSuccess(R1 result) {
         mLock.lock();
-        mResult = mFunc1.call(mInput, result);
-        mFlag = 1;
+        mResultWrapper.setResult(mFunc1.call(mInput, result));
         mCondition.signalAll();
         mLock.unlock();
     }
@@ -77,13 +71,11 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
     @Override
     public Triple<Boolean, R2, U2> call(T input) {
         mInput = input;
-        mResult = null;
-        mError = null;
-        mFlag = -1;
+        mResultWrapper = new ResultWrapper<R2, U2>();
         mTask.execute(input);
         try {
             mLock.lock();
-            while (mFlag == -1) {
+            while (mResultWrapper.getFlag() == -1) {
                 mCondition.await();
             }
         } catch (InterruptedException e) {
@@ -91,7 +83,40 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
         } finally {
             mLock.unlock();
         }
-        return new Triple<Boolean, R2, U2>(mFlag == 1, mResult, mError);
+        return new Triple<Boolean, R2, U2>(mResultWrapper.getFlag() == 1, mResultWrapper.getResult(), mResultWrapper.getError());
     }
 
+    private static class ResultWrapper<T, R> {
+        private volatile int mFlag;
+        private volatile T mResult;
+        private volatile R mError;
+
+        ResultWrapper() {
+            mFlag = -1;
+            mResult = null;
+            mError = null;
+        }
+
+        public void setError(R error) {
+            mError = error;
+            mFlag = 0;
+        }
+
+        public void setResult(T result) {
+            mResult = result;
+            mFlag = 1;
+        }
+
+        public R getError() {
+            return mError;
+        }
+
+        public int getFlag() {
+            return mFlag;
+        }
+
+        public T getResult() {
+            return mResult;
+        }
+    }
 }

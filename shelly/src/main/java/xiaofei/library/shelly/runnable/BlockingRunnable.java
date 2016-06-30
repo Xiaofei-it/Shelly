@@ -50,6 +50,6 @@ public class BlockingRunnable<T, R> implements Runnable {
         if (input == null) {
             throw new IllegalStateException();
         }
-        mScheduler.unblock(mIndex, (CopyOnWriteArrayList<Object>) input);
+        mScheduler.appendAt(mIndex, (CopyOnWriteArrayList<Object>) input);
     }
 }
