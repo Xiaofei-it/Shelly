@@ -18,13 +18,12 @@
 
 package xiaofei.library.shelly.util;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.task.Task;
+import xiaofei.library.shelly.util.inner.Action;
+import xiaofei.library.shelly.util.inner.Function;
+import xiaofei.library.shelly.util.inner.VariableCanary;
 
 /**
  * Created by Xiaofei on 16/6/30.
@@ -39,51 +38,66 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
 
     private T mInput;
 
-    private volatile ResultWrapper<R2, U2> mResultWrapper;
-
-    private Lock mLock = new ReentrantLock();
-
-    private Condition mCondition = mLock.newCondition();
+    private volatile VariableCanary<ResultWrapper<R2, U2>> mResultWrapper;
 
     public TaskFunction(Task<T, R1, U1> task, Function2<T, R1, R2> func1, Function2<T, U1, U2> func2) {
         task.setListener(this);
         mTask = task;
         mFunc1 = func1;
         mFunc2 = func2;
+        mResultWrapper = new VariableCanary<ResultWrapper<R2, U2>>();
     }
 
     @Override
-    public void onFailure(U1 error) {
-        mLock.lock();
-        mResultWrapper.setError(mFunc2.call(mInput, error));
-        mCondition.signalAll();
-        mLock.unlock();
+    public void onFailure(final U1 error) {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
+            @Override
+            public void call(ResultWrapper<R2, U2> o) {
+                o.setError(mFunc2.call(mInput, error));
+            }
+        });
     }
 
     @Override
-    public void onSuccess(R1 result) {
-        mLock.lock();
-        mResultWrapper.setResult(mFunc1.call(mInput, result));
-        mCondition.signalAll();
-        mLock.unlock();
+    public void onSuccess(final R1 result) {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
+            @Override
+            public void call(ResultWrapper<R2, U2> o) {
+                o.setResult(mFunc1.call(mInput, result));
+            }
+        });
     }
 
     @Override
     public Triple<Boolean, R2, U2> call(T input) {
         mInput = input;
-        mResultWrapper = new ResultWrapper<R2, U2>();
+        mResultWrapper.set(new ResultWrapper<R2, U2>());
         mTask.execute(input);
-        try {
-            mLock.lock();
-            while (mResultWrapper.getFlag() == -1) {
-                mCondition.await();
+        mResultWrapper.wait(new xiaofei.library.shelly.util.inner.Condition<ResultWrapper<R2, U2>>() {
+            @Override
+            public boolean satisfy(ResultWrapper<R2, U2> o) {
+                return o.getFlag() != -1;
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            mLock.unlock();
-        }
-        return new Triple<Boolean, R2, U2>(mResultWrapper.getFlag() == 1, mResultWrapper.getResult(), mResultWrapper.getError());
+        });
+        return new Triple<Boolean, R2, U2>(
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, Boolean>() {
+                    @Override
+                    public Boolean call(ResultWrapper<R2, U2> o) {
+                        return o.getFlag() == 1;
+                    }
+                }),
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, R2>() {
+                    @Override
+                    public R2 call(ResultWrapper<R2, U2> o) {
+                        return o.getResult();
+                    }
+                }),
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, U2>() {
+                    @Override
+                    public U2 call(ResultWrapper<R2, U2> o) {
+                        return o.getError();
+                    }
+                }));
     }
 
     private static class ResultWrapper<T, R> {
