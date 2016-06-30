@@ -449,3 +449,4 @@ public class Domino<T, R> {
     }
 
 }
+//// TODO: 16/6/30 加上包裹类，这时候begintask会怎么样

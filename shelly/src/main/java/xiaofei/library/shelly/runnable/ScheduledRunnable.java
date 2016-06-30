@@ -19,8 +19,8 @@
 package xiaofei.library.shelly.runnable;
 
 import xiaofei.library.shelly.scheduler.Scheduler;
-import xiaofei.library.shelly.util.Config;
 import xiaofei.library.shelly.util.SchedulerInputs;
+import xiaofei.library.shelly.util.inner.Condition;
 
 /**
  * Created by Xiaofei on 16/6/23.
@@ -45,27 +45,21 @@ public class ScheduledRunnable<R> implements Runnable {
 
     public void waitForInput() {
         int waitingIndex = mWaiting - 1;
-        SchedulerInputs inputs = mScheduler.getInputs();
-        try {
-            inputs.lock(waitingIndex);
-            while (!inputs.inputSet(waitingIndex)) {
-                if (Config.DEBUG) {
-                    System.out.println(waitingIndex + " before await " + Thread.currentThread().getName());
-                }
-                inputs.await(waitingIndex);
-                if (Config.DEBUG) {
-                    System.out.println(waitingIndex + " after await " + Thread.currentThread().getName());
-                }
+        mScheduler.getInputs().wait(waitingIndex, new Condition<SchedulerInputs>() {
+            @Override
+            public boolean satisfy(SchedulerInputs o) {
+                return o.getFinishedNumber().get() == o.getFunctionNumber();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            inputs.unlock(waitingIndex);
-        }
+        });
     }
 
     public boolean inputSet() {
-        return mScheduler.getInputs().inputSet(mWaiting - 1);
+        return mScheduler.getInputs().satisfy(mWaiting - 1, new Condition<SchedulerInputs>() {
+            @Override
+            public boolean satisfy(SchedulerInputs o) {
+                return o.getFinishedNumber().get() == o.getFunctionNumber();
+            }
+        });
     }
 
     @Override

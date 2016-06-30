@@ -34,13 +34,6 @@ public class AugmentedListCanary<T> {
         }
     };
 
-    private final Condition<T> trueCondition = new Condition<T>() {
-        @Override
-        public boolean satisfy(T o) {
-            return true;
-        }
-    };
-
     private volatile CopyOnWriteArrayList<T> list;
 
     private final CopyOnWriteArrayList<Lock> locks;
@@ -53,13 +46,18 @@ public class AugmentedListCanary<T> {
         conditions = new CopyOnWriteArrayList<java.util.concurrent.locks.Condition>();
     }
 
-    public void add(T o) {
+    public int add(T o) {
         synchronized (this) {
             list.add(o);
             Lock lock = new ReentrantLock();
             locks.add(lock);
             conditions.add(lock.newCondition());
+            return list.size();
         }
+    }
+
+    public int size() {
+        return list.size();
     }
 
     public T getNonNull(int index) {
@@ -81,9 +79,29 @@ public class AugmentedListCanary<T> {
         return result;
     }
 
-    public void set(int index, T o) {
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    public <R extends T> void set(int index, R o) {
         locks.get(index).lock();
         list.set(index, o);
+        conditions.get(index).signalAll();
+        locks.get(index).unlock();
+    }
+
+    public T getAndSet(int index, Function<? super T, ? extends T> function) {
+        T result;
+        locks.get(index).lock();
+        list.set(index, function.call(result = list.get(index)));
+        conditions.get(index).signalAll();
+        locks.get(index).unlock();
+        return result;
+    }
+
+    public void action(int index, Action<? super T> action) {
+        locks.get(index).lock();
+        action.call(list.get(index));
         conditions.get(index).signalAll();
         locks.get(index).unlock();
     }
@@ -101,7 +119,7 @@ public class AugmentedListCanary<T> {
         }
     }
 
-    public boolean satisfy(int index, Condition<T> condition) {
+    public boolean satisfy(int index, Condition<? super T> condition) {
         locks.get(index).lock();
         boolean result = condition.satisfy(list.get(index));
         locks.get(index).unlock();

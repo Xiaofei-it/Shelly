@@ -199,4 +199,23 @@ public class Test07 {
         }
     }
 
+    @Test
+    public void test() {
+        Shelly.<String>createDomino(8)
+                .map(new Function1<String, Integer>() {
+                    @Override
+                    public Integer call(String input) {
+                        return 3;
+                    }
+                })
+                .target(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer input) {
+                        System.out.println(input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino(8, "A");
+    }
+
 }
