@@ -24,7 +24,8 @@ import android.os.Looper;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import xiaofei.library.shelly.util.ScheduledRunnable;
+import xiaofei.library.shelly.runnable.ScheduledRunnable;
+import xiaofei.library.shelly.util.Config;
 
 /**
  * Created by Xiaofei on 16/5/31.
@@ -33,7 +34,8 @@ public class UiThreadScheduler<T> extends Scheduler<T> {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
-    private static ExecutorService sExecutor = Executors.newCachedThreadPool();
+    //下面这个改变比较重要！！！
+    private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     public <R> UiThreadScheduler(Scheduler<R> scheduler) {
         super(scheduler);
@@ -42,8 +44,14 @@ public class UiThreadScheduler<T> extends Scheduler<T> {
     private void scheduleInternal(Runnable runnable) {
         boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
         if (isMainThread) {
+            if (Config.DEBUG) {
+                System.out.println("post ui0 " + Thread.currentThread().getName());
+            }
             runnable.run();
         } else {
+            if (Config.DEBUG) {
+                System.out.println("post ui1 " + Thread.currentThread().getName());
+            }
             sHandler.post(runnable);
         }
     }
@@ -53,13 +61,22 @@ public class UiThreadScheduler<T> extends Scheduler<T> {
         if (runnable instanceof ScheduledRunnable) {
             final ScheduledRunnable scheduledRunnable = (ScheduledRunnable) runnable;
             if (!scheduledRunnable.inputSet()) {
-                sExecutor.execute(new Runnable() {
+                mExecutor.execute(new Runnable() {
                     @Override
                     public void run() {
+                        if (Config.DEBUG) {
+                            System.out.println("before wait in ui " + Thread.currentThread().getName());
+                        }
                         scheduledRunnable.waitForInput();
+                        if (Config.DEBUG) {
+                            System.out.println("after wait in ui " + Thread.currentThread().getName());
+                        }
                         sHandler.post(new Runnable() {
                             @Override
                             public void run() {
+                                if (Config.DEBUG) {
+                                    System.out.println("post ui2 " + Thread.currentThread().getName());
+                                }
                                 scheduledRunnable.getRunnable().run();
                             }
                         });

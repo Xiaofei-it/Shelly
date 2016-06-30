@@ -16,17 +16,18 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.domino;
 
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
-import xiaofei.library.shelly.util.Task;
+import xiaofei.library.shelly.task.Task;
 
 /**
  * Created by Xiaofei on 16/6/21.

@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/Xiaofei-it/Shelly'
     gitUrl = 'https://github.com/Xiaofei-it/Shelly.git'
 
-    libraryVersion = '0.2.4-alpha3'
+    libraryVersion = '0.2.4-alpha5'
 
     developerId = 'Xiaofei-it'
     developerName = 'Eric Zhao'
@@ -32,7 +32,7 @@ android {
         minSdkVersion 8
         targetSdkVersion 23
         versionCode 8
-        versionName "0.2.4-alpha3"
+        versionName "0.2.4-alpha5"
     }
     buildTypes {
         release {
@@ -49,6 +49,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'

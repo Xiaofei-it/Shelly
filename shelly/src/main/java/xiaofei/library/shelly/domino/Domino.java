@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly;
+package xiaofei.library.shelly.domino;
 
 import android.support.v4.util.Pair;
 
@@ -29,6 +29,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import xiaofei.library.shelly.domino.converter.DominoConverter;
+import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
+import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter2;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
@@ -49,10 +52,11 @@ import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
+import xiaofei.library.shelly.task.RetrofitTask;
 import xiaofei.library.shelly.util.DominoCenter;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.TargetCenter;
-import xiaofei.library.shelly.util.Task;
+import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.util.Triple;
 
 /**
@@ -68,7 +72,7 @@ public class Domino<T, R> {
 
     private Object mLabel;
 
-    Domino(Object label) {
+    public Domino(Object label) {
         this(label, new Player<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
@@ -91,7 +95,7 @@ public class Domino<T, R> {
     }
 
     public <S extends Domino<T, R>> S convert(DominoConverter<T, R, S> converter) {
-        return converter.convert(this);
+        return converter.call(this);
     }
 
     /**
@@ -428,6 +432,14 @@ public class Domino<T, R> {
                         },
                         new RightRefinementOperator<R, S>()));
         return new TaskDomino<T, Pair<R, U>, S>(domino.getLabel(), domino.getPlayer());
+    }
+
+    public <U> RetrofitDomino<T, U> beginRetrofitTask(RetrofitTask<R, U> task) {
+        return beginTask(task).convert(new RetrofitDominoConverter<T, U>());
+    }
+
+    public <U> RetrofitDomino2<T, R, U> beginRetrofitTaskKeepingInput(RetrofitTask<R, U> task) {
+        return beginTaskKeepingInput(task).convert(new RetrofitDominoConverter2<T, R, U>());
     }
 
     public void play(CopyOnWriteArrayList<T> input) {

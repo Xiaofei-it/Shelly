@@ -21,6 +21,7 @@ package xiaofei.library.shelly;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import xiaofei.library.shelly.domino.Domino;
 import xiaofei.library.shelly.util.DominoCenter;
 import xiaofei.library.shelly.util.TargetCenter;
 
@@ -46,15 +47,11 @@ public class Shelly {
     }
 
     public static <T> Domino<T, T> createDomino(Object label) {
-        if (label != null && DOMINO_CENTER.containsDomino(label)) {
-            throw new IllegalArgumentException("Domino labeled with " + label
-                    + " have been committed before. Please specify another label.");
-        }
         return new Domino<T, T>(label);
     }
 
     public static <T> Domino<T, T> createDomino() {
-        return new Domino<T, T>(null);
+        return createDomino(null);
     }
 
     @SafeVarargs
