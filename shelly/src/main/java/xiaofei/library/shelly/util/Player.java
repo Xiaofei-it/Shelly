@@ -28,6 +28,4 @@ import xiaofei.library.shelly.scheduler.Scheduler;
  */
 public interface Player<T, R> extends Function1<List<T>, Scheduler<R>> {
 
-    Scheduler<R> call(List<T> input);
-
 }
