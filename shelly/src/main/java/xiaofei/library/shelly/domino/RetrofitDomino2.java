@@ -18,8 +18,6 @@
 
 package xiaofei.library.shelly.domino;
 
-import android.support.v4.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -33,8 +31,9 @@ import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
 import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.tuple.Pair;
+import xiaofei.library.shelly.tuple.Triple;
 import xiaofei.library.shelly.util.Player;
-import xiaofei.library.shelly.util.Triple;
 
 /**
  * Created by Xiaofei on 16/6/28.

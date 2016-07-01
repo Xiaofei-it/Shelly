@@ -18,7 +18,6 @@
 
 package xiaofei.library.shelly.domino;
 
-import android.support.v4.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,12 +49,13 @@ import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 import xiaofei.library.shelly.task.RetrofitTask;
+import xiaofei.library.shelly.task.Task;
+import xiaofei.library.shelly.tuple.Pair;
+import xiaofei.library.shelly.tuple.Triple;
 import xiaofei.library.shelly.util.DominoCenter;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.TargetCenter;
-import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.util.TaskFunction;
-import xiaofei.library.shelly.util.Triple;
 
 /**
  * Created by Xiaofei on 16/5/26.
@@ -242,13 +242,13 @@ public class Domino<T, R> {
                 domino1.reduce(new Function1<List<S1>, Pair<Integer, List<Object>>>() {
                     @Override
                     public Pair<Integer, List<Object>> call(List<S1> input) {
-                        return new Pair<Integer, List<Object>>(1, (List<Object>) input);
+                        return Pair.create(1, (List<Object>) input);
                     }
                 }),
                 domino2.reduce(new Function1<List<S2>, Pair<Integer, List<Object>>>() {
                     @Override
                     public Pair<Integer, List<Object>> call(List<S2> input) {
-                        return new Pair<Integer, List<Object>>(2, (List<Object>) input);
+                        return Pair.create(2, (List<Object>) input);
                     }
                 }))
                 .reduce(new Function1<List<Pair<Integer, List<Object>>>, List<V>>() {
@@ -449,3 +449,4 @@ public class Domino<T, R> {
     }
 
 }
+//// TODO: 16/6/30 加上包裹类，这时候begintask会怎么样

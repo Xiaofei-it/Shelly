@@ -22,10 +22,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import xiaofei.library.concurrentutils.AugmentedListCanary;
+import xiaofei.library.concurrentutils.util.Action;
+import xiaofei.library.concurrentutils.util.Condition;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
-import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
+import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.SchedulerInputs;
 
 /**
@@ -42,15 +45,11 @@ public abstract class Scheduler<T> {
     //This field will be accessed from different threads. So access it in a synchronized block instead of using volatile.
     private int mState;
 
-    private final SchedulerInputs mInputs;
+    private final AugmentedListCanary<SchedulerInputs> mInputs;
 
     public Scheduler(List<T> input) {
-        mInputs = new SchedulerInputs();
-        if (input instanceof CopyOnWriteArrayList) {
-            mInputs.add((CopyOnWriteArrayList<Object>) input);
-        } else {
-            mInputs.add(new CopyOnWriteArrayList<Object>(input));
-        }
+        mInputs = new AugmentedListCanary<SchedulerInputs>();
+        mInputs.add(new SchedulerInputs((List<Object>) input, 0));
         mState = STATE_RUNNING;
     }
 
@@ -74,7 +73,7 @@ public abstract class Scheduler<T> {
             private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex));
+                player.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex).getInputs());
             }
         };
     }
@@ -97,7 +96,7 @@ public abstract class Scheduler<T> {
     public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
             if (isRunning()) {
-                int index = block(functions.size());
+                int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
                 for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
                     onSchedule(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
                 }
@@ -115,35 +114,33 @@ public abstract class Scheduler<T> {
         }
     }
 
-    private int block(int functionNumber) {
-        return mInputs.append(functionNumber) - 1;
-    }
-
-    public void unblock(int index, CopyOnWriteArrayList<Object> object) {
-        mInputs.set(index, object);
+    public void appendAt(int index, final CopyOnWriteArrayList<Object> object) {
+        mInputs.action(index, new Action<SchedulerInputs>() {
+            @Override
+            public void call(SchedulerInputs o) {
+                o.getInputs().addAll(object);
+                o.getFinishedNumber().getAndIncrement();
+            }
+        });
     }
 
     public final CopyOnWriteArrayList<Object> waitForFinishing() {
         int index = mInputs.size() - 1;
-        try {
-            mInputs.lock(index);
-            while (!mInputs.inputSet(index)) {
-                mInputs.await(index);
+        return mInputs.get(index, new Condition<SchedulerInputs>() {
+            @Override
+            public boolean satisfy(SchedulerInputs o) {
+                return o.getFinishedNumber().get() == o.getFunctionNumber();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            mInputs.unlock(index);
-        }
-        return mInputs.get(index);
+        }).getInputs();
     }
 
     public CopyOnWriteArrayList<Object> getInput(int index) {
-        return mInputs.get(index);
+        return mInputs.get(index).getInputs();
     }
 
-    public SchedulerInputs getInputs() {
+    public AugmentedListCanary<SchedulerInputs> getInputs() {
         return mInputs;
     }
 
 }
+

@@ -16,19 +16,29 @@
  *
  */
 
-package xiaofei.library.shelly.util;
+package xiaofei.library.shelly.tuple;
 
 /**
- * Created by Xiaofei on 16/6/22.
+ * Created by Xiaofei on 16/7/1.
  */
-public class Triple<F, S, T> {
-    public final F first;
-    public final S second;
-    public final T third;
+public class Quintuple<T1, T2, T3, T4, T5> {
+    public final T1 first;
+    public final T2 second;
+    public final T3 third;
+    public final T4 fourth;
+    public final T5 fifth;
 
-    public Triple(F first, S second, T third) {
+    @Deprecated
+    public Quintuple(T1 first, T2 second, T3 third, T4 fourth, T5 fifth) {
         this.first = first;
         this.second = second;
         this.third = third;
+        this.fourth = fourth;
+        this.fifth = fifth;
+    }
+
+    public static <T1, T2, T3, T4, T5> Quintuple<T1, T2, T3, T4, T5> create(
+            T1 first, T2 second, T3 third, T4 fourth, T5 fifth) {
+        return new Quintuple<T1, T2, T3, T4, T5>(first, second, third, fourth, fifth);
     }
 }

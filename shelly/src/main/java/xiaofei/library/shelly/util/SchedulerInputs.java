@@ -18,83 +18,46 @@
 
 package xiaofei.library.shelly.util;
 
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by Xiaofei on 16/6/23.
  */
 public class SchedulerInputs {
 
-    private final CopyOnWriteArrayList<CopyOnWriteArrayList<Object>> mInputs = new CopyOnWriteArrayList<CopyOnWriteArrayList<Object>>();
+    private final CopyOnWriteArrayList<Object> mInputs;
 
-    private final CopyOnWriteArrayList<ReentrantLock> mLocks = new CopyOnWriteArrayList<ReentrantLock>();
+    private final int mFunctionNumber;
 
-    private final CopyOnWriteArrayList<Condition> mConditions = new CopyOnWriteArrayList<Condition>();
+    private final AtomicInteger mFinishedNumber;
 
-    private final CopyOnWriteArrayList<Integer> mFunctionNumber = new CopyOnWriteArrayList<Integer>();
-
-    private final CopyOnWriteArrayList<AtomicInteger> mFinishedNumber = new CopyOnWriteArrayList<AtomicInteger>();
-
-    public SchedulerInputs() {
-    }
-
-    public int append(int functionNumber) {
-        return addInternal(new CopyOnWriteArrayList<Object>(), functionNumber);
-    }
-
-    private int addInternal(CopyOnWriteArrayList<Object> input, int functionNumber) {
-        synchronized (this) {
-            mInputs.add(input);
-            ReentrantLock lock = new ReentrantLock();
-            mLocks.add(lock);
-            mConditions.add(lock.newCondition());
-            mFunctionNumber.add(functionNumber);
-            mFinishedNumber.add(new AtomicInteger(0));
-            return mInputs.size();
+    public SchedulerInputs(List<Object> list, int functionNumber) {
+        if (list instanceof CopyOnWriteArrayList<?>) {
+            mInputs = (CopyOnWriteArrayList<Object>) list;
+        } else {
+            mInputs = new CopyOnWriteArrayList<Object>(list);
         }
+        mFunctionNumber = functionNumber;
+        mFinishedNumber = new AtomicInteger();
     }
 
-    public void add(CopyOnWriteArrayList<Object> input) {
-        addInternal(input, 0);
+    public SchedulerInputs(int functionNumber) {
+        mInputs = new CopyOnWriteArrayList<Object>();
+        mFunctionNumber = functionNumber;
+        mFinishedNumber = new AtomicInteger();
     }
 
-    public boolean inputSet(int index) {
-        return mFinishedNumber.get(index).get() == mFunctionNumber.get(index);
+    public AtomicInteger getFinishedNumber() {
+        return mFinishedNumber;
     }
 
-    public int size() {
-        return mInputs.size();
+    public int getFunctionNumber() {
+        return mFunctionNumber;
     }
 
-    public CopyOnWriteArrayList<Object> get(int index) {
-        return mInputs.get(index);
+    public CopyOnWriteArrayList<Object> getInputs() {
+        return mInputs;
     }
-
-    public void set(int index, CopyOnWriteArrayList<Object> input) {
-        lock(index);
-        mInputs.get(index).addAll(input);
-        if (mFinishedNumber.get(index).incrementAndGet() == mFunctionNumber.get(index)) {
-            mConditions.get(index).signalAll();
-        }
-        if (Config.DEBUG) {
-            System.out.println("signal " + Thread.currentThread().getName());
-        }
-        unlock(index);
-    }
-
-    public void lock(int index) {
-        mLocks.get(index).lock();
-    }
-
-    public void unlock(int index) {
-        mLocks.get(index).unlock();
-    }
-
-    public void await(int index) throws InterruptedException {
-        mConditions.get(index).await();
-    }
-
 }

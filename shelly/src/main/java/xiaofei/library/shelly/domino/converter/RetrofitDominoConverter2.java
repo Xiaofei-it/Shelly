@@ -18,12 +18,11 @@
 
 package xiaofei.library.shelly.domino.converter;
 
-import android.support.v4.util.Pair;
-
 import retrofit2.Response;
 import xiaofei.library.shelly.domino.Domino;
 import xiaofei.library.shelly.domino.RetrofitDomino2;
-import xiaofei.library.shelly.util.Triple;
+import xiaofei.library.shelly.tuple.Pair;
+import xiaofei.library.shelly.tuple.Triple;
 
 /**
  * Created by Xiaofei on 16/6/28.

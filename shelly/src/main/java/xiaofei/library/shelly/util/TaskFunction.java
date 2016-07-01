@@ -18,13 +18,15 @@
 
 package xiaofei.library.shelly.util;
 
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
+import xiaofei.library.concurrentutils.ObjectCanary;
+import xiaofei.library.concurrentutils.util.Action;
+import xiaofei.library.concurrentutils.util.Condition;
+import xiaofei.library.concurrentutils.util.Function;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.task.Task;
+import xiaofei.library.shelly.tuple.Triple;
+
 
 /**
  * Created by Xiaofei on 16/6/30.
@@ -39,59 +41,99 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
 
     private T mInput;
 
-    private volatile R2 mResult;
-
-    private volatile U2 mError;
-
-    private volatile int mFlag;
-
-    private Lock mLock = new ReentrantLock();
-
-    private Condition mCondition = mLock.newCondition();
+    private volatile ObjectCanary<ResultWrapper<R2, U2>> mResultWrapper;
 
     public TaskFunction(Task<T, R1, U1> task, Function2<T, R1, R2> func1, Function2<T, U1, U2> func2) {
         task.setListener(this);
         mTask = task;
         mFunc1 = func1;
         mFunc2 = func2;
+        mResultWrapper = new ObjectCanary<ResultWrapper<R2, U2>>();
     }
 
     @Override
-    public void onFailure(U1 error) {
-        mLock.lock();
-        mError = mFunc2.call(mInput, error);
-        mFlag = 0;
-        mCondition.signalAll();
-        mLock.unlock();
+    public void onFailure(final U1 error) {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
+            @Override
+            public void call(ResultWrapper<R2, U2> o) {
+                o.setError(mFunc2.call(mInput, error));
+            }
+        });
     }
 
     @Override
-    public void onSuccess(R1 result) {
-        mLock.lock();
-        mResult = mFunc1.call(mInput, result);
-        mFlag = 1;
-        mCondition.signalAll();
-        mLock.unlock();
+    public void onSuccess(final R1 result) {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
+            @Override
+            public void call(ResultWrapper<R2, U2> o) {
+                o.setResult(mFunc1.call(mInput, result));
+            }
+        });
     }
 
     @Override
     public Triple<Boolean, R2, U2> call(T input) {
         mInput = input;
-        mResult = null;
-        mError = null;
-        mFlag = -1;
+        mResultWrapper.set(new ResultWrapper<R2, U2>());
         mTask.execute(input);
-        try {
-            mLock.lock();
-            while (mFlag == -1) {
-                mCondition.await();
+        mResultWrapper.wait(new Condition<ResultWrapper<R2, U2>>() {
+            @Override
+            public boolean satisfy(ResultWrapper<R2, U2> o) {
+                return o.getFlag() != -1;
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            mLock.unlock();
-        }
-        return new Triple<Boolean, R2, U2>(mFlag == 1, mResult, mError);
+        });
+        return Triple.create(
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, Boolean>() {
+                    @Override
+                    public Boolean call(ResultWrapper<R2, U2> o) {
+                        return o.getFlag() == 1;
+                    }
+                }),
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, R2>() {
+                    @Override
+                    public R2 call(ResultWrapper<R2, U2> o) {
+                        return o.getResult();
+                    }
+                }),
+                mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, U2>() {
+                    @Override
+                    public U2 call(ResultWrapper<R2, U2> o) {
+                        return o.getError();
+                    }
+                }));
     }
 
+    private static class ResultWrapper<T, R> {
+        private volatile int mFlag;
+        private volatile T mResult;
+        private volatile R mError;
+
+        ResultWrapper() {
+            mFlag = -1;
+            mResult = null;
+            mError = null;
+        }
+
+        public void setError(R error) {
+            mError = error;
+            mFlag = 0;
+        }
+
+        public void setResult(T result) {
+            mResult = result;
+            mFlag = 1;
+        }
+
+        public R getError() {
+            return mError;
+        }
+
+        public int getFlag() {
+            return mFlag;
+        }
+
+        public T getResult() {
+            return mResult;
+        }
+    }
 }
