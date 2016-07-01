@@ -18,12 +18,14 @@
 
 package xiaofei.library.shelly.util;
 
+import xiaofei.library.concurrentutils.ObjectCanary;
+import xiaofei.library.concurrentutils.util.Action;
+import xiaofei.library.concurrentutils.util.Condition;
+import xiaofei.library.concurrentutils.util.Function;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.task.Task;
-import xiaofei.library.shelly.util.inner.Action;
-import xiaofei.library.shelly.util.inner.Function;
-import xiaofei.library.shelly.util.inner.VariableCanary;
+
 
 /**
  * Created by Xiaofei on 16/6/30.
@@ -38,14 +40,14 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
 
     private T mInput;
 
-    private volatile VariableCanary<ResultWrapper<R2, U2>> mResultWrapper;
+    private volatile ObjectCanary<ResultWrapper<R2, U2>> mResultWrapper;
 
     public TaskFunction(Task<T, R1, U1> task, Function2<T, R1, R2> func1, Function2<T, U1, U2> func2) {
         task.setListener(this);
         mTask = task;
         mFunc1 = func1;
         mFunc2 = func2;
-        mResultWrapper = new VariableCanary<ResultWrapper<R2, U2>>();
+        mResultWrapper = new ObjectCanary<ResultWrapper<R2, U2>>();
     }
 
     @Override
@@ -73,7 +75,7 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
         mInput = input;
         mResultWrapper.set(new ResultWrapper<R2, U2>());
         mTask.execute(input);
-        mResultWrapper.wait(new xiaofei.library.shelly.util.inner.Condition<ResultWrapper<R2, U2>>() {
+        mResultWrapper.wait(new Condition<ResultWrapper<R2, U2>>() {
             @Override
             public boolean satisfy(ResultWrapper<R2, U2> o) {
                 return o.getFlag() != -1;

@@ -22,14 +22,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import xiaofei.library.concurrentutils.AugmentedListCanary;
+import xiaofei.library.concurrentutils.util.Action;
+import xiaofei.library.concurrentutils.util.Condition;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.SchedulerInputs;
-import xiaofei.library.shelly.util.inner.Action;
-import xiaofei.library.shelly.util.inner.AugmentedListCanary;
-import xiaofei.library.shelly.util.inner.Condition;
 
 /**
  * Created by Xiaofei on 16/5/31.

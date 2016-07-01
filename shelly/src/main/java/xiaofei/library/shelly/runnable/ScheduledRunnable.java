@@ -18,9 +18,9 @@
 
 package xiaofei.library.shelly.runnable;
 
+import xiaofei.library.concurrentutils.util.Condition;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.util.SchedulerInputs;
-import xiaofei.library.shelly.util.inner.Condition;
 
 /**
  * Created by Xiaofei on 16/6/23.
