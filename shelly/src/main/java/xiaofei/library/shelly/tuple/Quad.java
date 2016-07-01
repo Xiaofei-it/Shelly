@@ -16,20 +16,26 @@
  *
  */
 
-package xiaofei.library.shelly.domino.converter;
-
-import retrofit2.Response;
-import xiaofei.library.shelly.domino.Domino;
-import xiaofei.library.shelly.domino.RetrofitDomino;
-import xiaofei.library.shelly.tuple.Triple;
+package xiaofei.library.shelly.tuple;
 
 /**
- * Created by Xiaofei on 16/6/27.
+ * Created by Xiaofei on 16/7/1.
  */
-public class RetrofitDominoConverter<T, R> implements
-        DominoConverter<T, Triple<Boolean, Response<R>, Throwable>, RetrofitDomino<T, R>> {
-    @Override
-    public RetrofitDomino<T, R> call(Domino<T, Triple<Boolean, Response<R>, Throwable>> domino) {
-        return new RetrofitDomino<T, R>(domino.getLabel(), domino.getPlayer());
+public class Quad<T1, T2, T3, T4> {
+    public final T1 first;
+    public final T2 second;
+    public final T3 third;
+    public final T4 fourth;
+
+    @Deprecated
+    public Quad(T1 first, T2 second, T3 third, T4 fourth) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
+        this.fourth = fourth;
+    }
+
+    public static <T1, T2, T3, T4> Quad<T1, T2, T3, T4> create(T1 first, T2 second, T3 third, T4 fourth) {
+        return new Quad<T1, T2, T3, T4>(first, second, third, fourth);
     }
 }

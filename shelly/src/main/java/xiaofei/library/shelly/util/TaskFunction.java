@@ -25,6 +25,7 @@ import xiaofei.library.concurrentutils.util.Function;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.task.Task;
+import xiaofei.library.shelly.tuple.Triple;
 
 
 /**
@@ -81,7 +82,7 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
                 return o.getFlag() != -1;
             }
         });
-        return new Triple<Boolean, R2, U2>(
+        return Triple.create(
                 mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, Boolean>() {
                     @Override
                     public Boolean call(ResultWrapper<R2, U2> o) {

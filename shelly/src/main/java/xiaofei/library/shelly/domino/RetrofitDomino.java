@@ -30,7 +30,7 @@ import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.util.Player;
-import xiaofei.library.shelly.util.Triple;
+import xiaofei.library.shelly.tuple.Triple;
 
 /**
  * Created by Xiaofei on 16/6/27.
