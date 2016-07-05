@@ -45,8 +45,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
 
     public TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
         return new TaskDomino<T, R, U>(
-                target(Shelly.<Triple<Boolean,R,U>>createDomino()
-                        .reduce(new Function1<List<Triple<Boolean,R,U>>, List<R>>() {
+                target(Shelly.<Triple<Boolean, R, U>>createDomino()
+                        .reduce(new Function1<List<Triple<Boolean, R, U>>, List<R>>() {
                             @Override
                             public List<R> call(List<Triple<Boolean, R, U>> input) {
                                 List<R> result= new ArrayList<R>();
