@@ -100,7 +100,7 @@ public class Test {
                 })
                 .convert(new RetrofitDominoConverter<String, ResponseBody>())
                 .uiThread()
-                .onResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
+                .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
                     @Override
                     public void call(MainActivity mainActivity, ResponseBody input) {
                         try {
@@ -198,7 +198,7 @@ public class Test {
                     }
                 })
                 .uiThread()
-                .onResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
+                .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
                     @Override
                     public void call(MainActivity mainActivity, ResponseBody input) {
                         try {
