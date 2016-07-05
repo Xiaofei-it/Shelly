@@ -53,36 +53,22 @@ public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Bool
 
     @Override
     public void onFailure(final U1 error) {
-//        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
-//            @Override
-//            public void call(ResultWrapper<R2, U2> o) {
-//                o.setError(mFunc2.call(mInput, error));
-//            }
-//        });
-        mResultWrapper.set(mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, ResultWrapper<R2, U2>>() {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
             @Override
-            public ResultWrapper<R2, U2> call(ResultWrapper<R2, U2> o) {
+            public void call(ResultWrapper<R2, U2> o) {
                 o.setError(mFunc2.call(mInput, error));
-                return o;
             }
-        }));
+        });
     }
 
     @Override
     public void onSuccess(final R1 result) {
-//        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
-//            @Override
-//            public void call(ResultWrapper<R2, U2> o) {
-//                o.setResult(mFunc1.call(mInput, result));
-//            }
-//        });
-        mResultWrapper.set(mResultWrapper.calculate(new Function<ResultWrapper<R2, U2>, ResultWrapper<R2, U2>>() {
+        mResultWrapper.action(new Action<ResultWrapper<R2, U2>>() {
             @Override
-            public ResultWrapper<R2, U2> call(ResultWrapper<R2, U2> o) {
+            public void call(ResultWrapper<R2, U2> o) {
                 o.setResult(mFunc1.call(mInput, result));
-                return o;
             }
-        }));
+        });
     }
 
     @Override
