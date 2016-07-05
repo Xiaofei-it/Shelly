@@ -41,7 +41,7 @@ public class RetrofitDomino<T, R> extends TaskDomino<T, Response<R>, Throwable> 
         super(label, player);
     }
 
-    private RetrofitDomino(TaskDomino<T, Response<R>, Throwable> domino) {
+    private RetrofitDomino(Domino<T, Triple<Boolean, Response<R>, Throwable>> domino) {
         //can use getPlayer(), but not here!
         this(domino.getLabel(), domino.getPlayer());
     }
@@ -143,86 +143,78 @@ public class RetrofitDomino<T, R> extends TaskDomino<T, Response<R>, Throwable> 
         return triple.first && triple.second.isSuccessful() && triple.second.body() != null;
     }
 
-    public RetrofitDomino<T, R> onResult(final Action0 action0) {
-        return new RetrofitDomino<T, R>(getLabel(),
-                new Player<T, Triple<Boolean, Response<R>, Throwable>>() {
+    public RetrofitDomino<T, R> onSuccessResult(final Action0 action0) {
+        return new RetrofitDomino<T, R>(
+                reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<T> input) {
-                        final Scheduler<Triple<Boolean, Response<R>, Throwable>> scheduler = getPlayer().call(input);
-                        scheduler.play(new Player<Triple<Boolean, Response<R>, Throwable>, Triple<Boolean, Response<R>, Throwable>>() {
-                            @Override
-                            public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
-                                boolean hasResult = false;
-                                for (Triple<Boolean, Response<R>, Throwable> triple : input) {
-                                    if (responseSuccess(triple)) {
-                                        hasResult = true;
-                                        break;
-                                    }
-                                }
-                                if (hasResult) {
-                                    action0.call();
-                                }
-                                return scheduler;
-                            }
-                        });
-                        return scheduler;
+                    public List<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        return input;
                     }
-                });
+                }).target(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
+                    @Override
+                    public void call(List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        boolean hasResult = false;
+                        for (Triple<Boolean, Response<R>, Throwable> triple : input) {
+                            if (responseSuccess(triple)) {
+                                hasResult = true;
+                                break;
+                            }
+                        }
+                        if (hasResult) {
+                            action0.call();
+                        }
+                    }
+                }).flatMap(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                    @Override
+                    public List<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        return input;
+                    }
+                }));
     }
 
-    public RetrofitDomino<T, R> onResult(final Action1<R> action1) {
-        return new RetrofitDomino<T, R>(getLabel(),
-                new Player<T, Triple<Boolean, Response<R>, Throwable>>() {
+    public RetrofitDomino<T, R> onSuccessResult(final Action1<R> action1) {
+        return new RetrofitDomino<T, R>(
+                target(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<T> input) {
-                        final Scheduler<Triple<Boolean, Response<R>, Throwable>> scheduler = getPlayer().call(input);
-                        scheduler.play(new Player<Triple<Boolean, Response<R>, Throwable>, Triple<Boolean, Response<R>, Throwable>>() {
-                            @Override
-                            public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
-                                for (Triple<Boolean, Response<R>, Throwable> triple : input) {
-                                    if (responseSuccess(triple)) {
-                                        action1.call(triple.second.body());
-                                    }
-                                }
-                                return scheduler;
-                            }
-                        });
-                        return scheduler;
+                    public void call(Triple<Boolean, Response<R>, Throwable> input) {
+                        if (responseSuccess(input)) {
+                            action1.call(input.second.body());
+                        }
                     }
-                });
+                })
+        );
     }
 
-    public <S> RetrofitDomino<T, R> onResult(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
-        return new RetrofitDomino<T, R>(getLabel(),
-                new Player<T, Triple<Boolean, Response<R>, Throwable>>() {
+    public <S> RetrofitDomino<T, R> onSuccessResult(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
+        return new RetrofitDomino<T, R>(
+                reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
-                    public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<T> input) {
-                        final Scheduler<Triple<Boolean, Response<R>, Throwable>> scheduler = getPlayer().call(input);
-                        scheduler.play(new Player<Triple<Boolean, Response<R>, Throwable>, Triple<Boolean, Response<R>, Throwable>>() {
-                            @Override
-                            public Scheduler<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
-                                boolean hasResult = false;
-                                for (Triple<Boolean, Response<R>, Throwable> triple : input) {
-                                    if (responseSuccess(triple)) {
-                                        hasResult = true;
-                                        break;
-                                    }
-                                }
-                                if (hasResult) {
-                                    CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                                    for (Object object : objects) {
-                                        targetAction0.call(clazz.cast(object));
-                                    }
-                                }
-                                return scheduler;
-                            }
-                        });
-                        return scheduler;
+                    public List<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        return input;
                     }
-                });
+                }).target(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                    @Override
+                    public void call(S s, List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        boolean success = false;
+                        for (Triple<Boolean, Response<R>, Throwable> triple : input) {
+                            if (responseSuccess(triple)) {
+                                success = true;
+                                break;
+                            }
+                        }
+                        if (success) {
+                            targetAction0.call(s);
+                        }
+                    }
+                }).flatMap(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                    @Override
+                    public List<Triple<Boolean, Response<R>, Throwable>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
+                        return input;
+                    }
+                }));
     }
 
-    public <S> RetrofitDomino<T, R> onResult(final Class<? extends S> clazz, final TargetAction1<? super S, R> targetAction1) {
+    public <S> RetrofitDomino<T, R> onSuccessResult(final Class<? extends S> clazz, final TargetAction1<? super S, R> targetAction1) {
         return new RetrofitDomino<T, R>(getLabel(),
                 new Player<T, Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
@@ -247,7 +239,7 @@ public class RetrofitDomino<T, R> extends TaskDomino<T, Response<R>, Throwable> 
                 });
     }
 
-    public RetrofitDomino<T, R> onResult(final Domino<R, ?> domino) {
+    public RetrofitDomino<T, R> onSuccessResult(final Domino<R, ?> domino) {
         return new RetrofitDomino<T, R>(getLabel(),
                 new Player<T, Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
