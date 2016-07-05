@@ -19,35 +19,14 @@
 package xiaofei.library.shelly.task;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Xiaofei on 16/6/27.
  */
-@Deprecated
-public abstract class RetrofitTask<T, R> extends Task<T, Response<R>, Throwable> {
-
-    protected abstract Call<R> getCall(T t);
-
-    protected Callback<R> getCallback() {
-        return new Callback<R>() {
-            @Override
-            public void onResponse(Call<R> call, Response<R> response) {
-                notifySuccess(response);
-            }
-
-            @Override
-            public void onFailure(Call<R> call, Throwable t) {
-                notifyFailure(t);
-            }
-        };
-    }
-
-    protected abstract void call(Call<R> call);
-
+public abstract class RetrofitTask<T, R> extends AbstractRetrofitTask<T, R> {
     @Override
-    protected void onExecute(T input) {
-        call(getCall(input));
+    protected void call(Call<R> call) {
+        call.enqueue(getCallback());
     }
+
 }

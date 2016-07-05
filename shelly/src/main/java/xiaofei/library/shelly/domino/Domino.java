@@ -48,7 +48,7 @@ import xiaofei.library.shelly.scheduler.NewThreadScheduler;
 import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
-import xiaofei.library.shelly.task.RetrofitTask;
+import xiaofei.library.shelly.task.AbstractRetrofitTask;
 import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
 import xiaofei.library.shelly.tuple.Triple;
@@ -432,11 +432,11 @@ public class Domino<T, R> {
         return new TaskDomino<T, Pair<R, U>, S>(domino.getLabel(), domino.getPlayer());
     }
 
-    public <U> RetrofitDomino<T, U> beginRetrofitTask(RetrofitTask<R, U> task) {
+    public <U> RetrofitDomino<T, U> beginRetrofitTask(AbstractRetrofitTask<R, U> task) {
         return beginTask(task).convert(new RetrofitDominoConverter<T, U>());
     }
 
-    public <U> RetrofitDomino2<T, R, U> beginRetrofitTaskKeepingInput(RetrofitTask<R, U> task) {
+    public <U> RetrofitDomino2<T, R, U> beginRetrofitTaskKeepingInput(AbstractRetrofitTask<R, U> task) {
         return beginTaskKeepingInput(task).convert(new RetrofitDominoConverter2<T, R, U>());
     }
 

@@ -35,7 +35,7 @@ import xiaofei.library.shelly.function.Action2;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
-import xiaofei.library.shelly.task.AsyncRetrofitTask;
+import xiaofei.library.shelly.task.RetrofitTask;
 
 /**
  * Created by Xiaofei on 16/6/1.
@@ -92,7 +92,7 @@ public class Test {
         final NetInterface netInterface = retrofit.create(NetInterface.class);
         Shelly.<String>createDomino(3)
                 .background()
-                .beginTask(new AsyncRetrofitTask<String, ResponseBody>() {
+                .beginTask(new RetrofitTask<String, ResponseBody>() {
                     @Override
                     protected Call<ResponseBody> getCall(String s) {
                         return netInterface.test(s);
@@ -126,7 +126,7 @@ public class Test {
                     }
                 })
                 .background()
-                .beginTaskKeepingInput(new AsyncRetrofitTask<String, ResponseBody>() {
+                .beginTaskKeepingInput(new RetrofitTask<String, ResponseBody>() {
                     @Override
                     protected Call<ResponseBody> getCall(String s) {
                         return netInterface.test(s);
@@ -134,7 +134,7 @@ public class Test {
                 })
                 .convert(new RetrofitDominoConverter2<Long, String, ResponseBody>())
                 .uiThread()
-                .onResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
+                .onSuccessResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
@@ -145,7 +145,7 @@ public class Test {
                         }
                     }
                 })
-                .onResult(new Action2<String, ResponseBody>() {
+                .onSuccessResult(new Action2<String, ResponseBody>() {
                     @Override
                     public void call(String input1, ResponseBody input2) {
                         try {
@@ -191,7 +191,7 @@ public class Test {
                 .commit();
         Shelly.<String>createDomino(6)
                 .background()
-                .beginRetrofitTask(new AsyncRetrofitTask<String, ResponseBody>() {
+                .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
                     @Override
                     protected Call<ResponseBody> getCall(String s) {
                         return netInterface.test(s);
@@ -225,14 +225,14 @@ public class Test {
                     }
                 })
                 .background()
-                .beginRetrofitTaskKeepingInput(new AsyncRetrofitTask<String, ResponseBody>() {
+                .beginRetrofitTaskKeepingInput(new RetrofitTask<String, ResponseBody>() {
                     @Override
                     protected Call<ResponseBody> getCall(String s) {
                         return netInterface.test(s);
                     }
                 })
                 .uiThread()
-                .onResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
+                .onSuccessResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
@@ -243,7 +243,7 @@ public class Test {
                         }
                     }
                 })
-                .onResult(new Action2<String, ResponseBody>() {
+                .onSuccessResult(new Action2<String, ResponseBody>() {
                     @Override
                     public void call(String input1, ResponseBody input2) {
                         try {
