@@ -25,7 +25,7 @@ import retrofit2.Response;
 /**
  * Created by Xiaofei on 16/6/27.
  */
-abstract class AbstractRetrofitTask<T, R> extends Task<T, Response<R>, Throwable> {
+public abstract class AbstractRetrofitTask<T, R> extends Task<T, Response<R>, Throwable> {
 
     protected abstract Call<R> getCall(T t);
 
