@@ -169,6 +169,7 @@ public class Test06 {
         }
         Shelly.register(new A());
         Shelly.<String>createDomino(3)
+                .background()
                 .beginTask(new Task<String, Character, Integer>() {
                     @Override
                     protected void onExecute(String input) {
@@ -278,6 +279,11 @@ public class Test06 {
                 })
                 .commit();
         Shelly.playDomino(3, "A", "BD", "CG");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
