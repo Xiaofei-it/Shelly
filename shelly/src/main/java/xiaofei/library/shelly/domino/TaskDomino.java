@@ -130,8 +130,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
     //其实是player的高阶函数
     public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
         return new TaskDomino<T, R, U>(
-                target(Shelly.<Triple<Boolean,R,U>>createDomino()
-                        .reduce(new Function1<List<Triple<Boolean,R,U>>, List<U>>() {
+                target(Shelly.<Triple<Boolean, R, U>>createDomino()
+                        .reduce(new Function1<List<Triple<Boolean, R, U>>, List<U>>() {
                             @Override
                             public List<U> call(List<Triple<Boolean, R, U>> input) {
                                 List<U> result= new ArrayList<U>();
@@ -143,12 +143,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                                 return result;
                             }
                         })
-                        .flatMap(new Function1<List<U>, List<U>>() {
-                            @Override
-                            public List<U> call(List<U> input) {
-                                return input;
-                            }
-                        })
+                        .flatMap(new IdentityOperator<List<U>>())
                         .target(domino)
                 ));
     }
@@ -247,12 +242,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
     }
 
     public <S> Domino<T, S> endTask(Function1<List<Triple<Boolean, R, U>>, List<S>> reducer) {
-        return toDomino().reduce(reducer).flatMap(new Function1<List<S>, List<S>>() {
-            @Override
-            public List<S> call(List<S> input) {
-                return input;
-            }
-        });
+        return toDomino().reduce(reducer).flatMap(new IdentityOperator<List<S>>());
     }
 
     @Override
