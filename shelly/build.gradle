@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/Xiaofei-it/Shelly'
     gitUrl = 'https://github.com/Xiaofei-it/Shelly.git'
 
-    libraryVersion = '0.2.5-alpha2'
+    libraryVersion = '0.2.5-alpha3'
 
     developerId = 'Xiaofei-it'
     developerName = 'Eric Zhao'
