@@ -92,7 +92,7 @@ public class Domino<T, R> {
         return mPlayer;
     }
 
-    public <S extends Domino<T, R>> S convert(DominoConverter<T, R, S> converter) {
+    public <S extends Domino<T, ?>> S convert(DominoConverter<T, R, S> converter) {
         return converter.call(this);
     }
 
