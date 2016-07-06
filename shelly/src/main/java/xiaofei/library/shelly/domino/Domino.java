@@ -79,7 +79,7 @@ public class Domino<T, R> {
         });
     }
 
-    protected Domino(Object label, Player<T, R> player) {
+    public Domino(Object label, Player<T, R> player) {
         mLabel = label;
         mPlayer = player;
     }
