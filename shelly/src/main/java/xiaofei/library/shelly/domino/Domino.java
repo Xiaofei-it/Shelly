@@ -37,6 +37,7 @@ import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.operator.EmptyOperator;
 import xiaofei.library.shelly.operator.FilterOperator;
 import xiaofei.library.shelly.operator.FlatMapOperator;
+import xiaofei.library.shelly.operator.ListIdentityOperator;
 import xiaofei.library.shelly.operator.MapOperator;
 import xiaofei.library.shelly.operator.MapOperator2;
 import xiaofei.library.shelly.operator.ReducerOperator;
@@ -274,12 +275,7 @@ public class Domino<T, R> {
                         return result;
                     }
                 })
-                .flatMap(new Function1<List<V>, List<V>>() {
-                    @Override
-                    public List<V> call(List<V> input) {
-                        return input;
-                    }
-                });
+                .flatMap(new ListIdentityOperator<V>());
     }
 
     public <S1, S2, U1, U2, V> Domino<T, V> combineTask(
@@ -425,7 +421,7 @@ public class Domino<T, R> {
                         new Function2<R, U, Pair<R, U>>() {
                             @Override
                             public Pair<R, U> call(R input1, U input2) {
-                                return new Pair<R, U>(input1, input2);
+                                return Pair.create(input1, input2);
                             }
                         },
                         new RightRefinementOperator<R, S>()));

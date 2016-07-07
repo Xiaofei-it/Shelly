@@ -42,8 +42,7 @@ public abstract class Scheduler<T> {
 
     private static final int STATE_PAUSE = 1;
 
-    //This field will be accessed from different threads. So access it in a synchronized block instead of using volatile.
-    private int mState;
+    private volatile int mState;
 
     private final AugmentedListCanary<SchedulerInputs> mInputs;
 
@@ -59,9 +58,7 @@ public abstract class Scheduler<T> {
     }
 
     public void pause() {
-        synchronized (this) {
-            mState = STATE_PAUSE;
-        }
+        mState = STATE_PAUSE;
     }
 
     protected boolean isRunning() {
