@@ -117,6 +117,12 @@ public class MainActivity extends AppCompatActivity {
                 Shelly.playDomino(7, 101010100l);
             }
         });
+        findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Shelly.playDomino(8, 101010100l);
+            }
+        });
         Shelly.playDomino(1, "Hello1");
         Shelly.playDomino(2, "Hello2");
     }

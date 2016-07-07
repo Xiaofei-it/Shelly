@@ -262,5 +262,56 @@ public class Test {
                 .endTask()
                 .commit();
 
+        Shelly.<Long>createDomino(8)
+                .map(new Function1<Long, String>() {
+                    @Override
+                    public String call(Long input) {
+                        return Long.toString(input);
+                    }
+                })
+                .background()
+                .beginRetrofitTaskKeepingInput(new RetrofitTask<String, ResponseBody>() {
+                    @Override
+                    protected Call<ResponseBody> getCall(String s) {
+                        return netInterface.test(s);
+                    }
+                })
+                .uiThread()
+                .onSuccessResult(MainActivity.class, new TargetAction2<MainActivity, String, ResponseBody>() {
+                    @Override
+                    public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
+                        try {
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
+                            mainActivity.toast(input2.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onSuccessResult(new Action2<String, ResponseBody>() {
+                    @Override
+                    public void call(String input1, ResponseBody input2) {
+                        try {
+                            Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .onSuccessResult(new Action2<String, ResponseBody>() {
+                    @Override
+                    public void call(String input1, ResponseBody input2) {
+                        Shelly.playDomino(6, input1);
+                    }
+                })
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+                        Log.e("EricZhao", "Error", input);
+                    }
+                })
+                .endTask()
+                .commit();
+
     }
 }

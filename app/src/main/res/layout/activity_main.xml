@@ -44,4 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="send by retrofit domino II new" />
+    <Button
+        android:id="@+id/b8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send one after another by retrofit domino II new" />
 </LinearLayout>
