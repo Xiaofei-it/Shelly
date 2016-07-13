@@ -50,3 +50,11 @@ Domino class, so I continued to write code. Some days ago, I thought of an idea 
 more features such as flatMap, merge, etc into my project.
 
 After I finish this project, I will write a project named RetrofitShelly to add Retrofit in.
+
+##Sadness
+
+I do not know whether I should promote this library in the name of the company. Most of my work on
+this project is done on my own and has nothing to do with the company. I write code after work and
+think of the idea out of company, even at weekends.
+
+Nobody sees my work until it works.
