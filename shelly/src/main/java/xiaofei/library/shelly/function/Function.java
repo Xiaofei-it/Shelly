@@ -22,4 +22,5 @@ package xiaofei.library.shelly.function;
  * Created by Xiaofei on 16/6/14.
  */
 public interface Function {
+    //TODO add stash here!
 }
