@@ -27,7 +27,7 @@ import xiaofei.library.shelly.util.TargetCenter;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class MapOperator2<T, R, U> implements Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
+public class MapOperator2<T, R, U> extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
 
     private static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 

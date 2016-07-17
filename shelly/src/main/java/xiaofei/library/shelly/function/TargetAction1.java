@@ -21,6 +21,6 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/5/30.
  */
-public interface TargetAction1<T, R> extends Action {
-    void call(T t, R input);
+public abstract class TargetAction1<T, R> extends Action {
+    public abstract void call(T t, R input);
 }

@@ -24,7 +24,7 @@ import xiaofei.library.shelly.function.Function2;
 /**
  * Created by Xiaofei on 16/6/28.
  */
-public class LeftRefinementOperator<T, R> implements Function2<T, R, T> {
+public class LeftRefinementOperator<T, R> extends Function2<T, R, T> {
     @Override
     public T call(T input1, R input2) {
         return input1;

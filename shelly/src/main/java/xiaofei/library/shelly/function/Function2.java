@@ -21,6 +21,6 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/6/20.
  */
-public interface Function2<T, R, S> extends Function {
-    S call(T input1, R input2);
+public abstract class Function2<T, R, S> extends Function {
+    public abstract S call(T input1, R input2);
 }

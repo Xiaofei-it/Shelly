@@ -23,7 +23,7 @@ import xiaofei.library.shelly.function.Function2;
 /**
  * Created by Xiaofei on 16/6/28.
  */
-public class RightRefinementOperator<T, R> implements Function2<T, R, R> {
+public class RightRefinementOperator<T, R> extends Function2<T, R, R> {
     @Override
     public R call(T input1, R input2) {
         return input2;

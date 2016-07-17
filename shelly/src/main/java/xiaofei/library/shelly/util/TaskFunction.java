@@ -31,7 +31,9 @@ import xiaofei.library.shelly.tuple.Triple;
 /**
  * Created by Xiaofei on 16/6/30.
  */
-public class TaskFunction<T, R1, R2, U1, U2> implements Function1<T, Triple<Boolean, R2, U2>>, Task.TaskListener<R1, U1> {
+public class TaskFunction<T, R1, R2, U1, U2>
+        extends Function1<T, Triple<Boolean, R2, U2>>
+        implements Task.TaskListener<R1, U1> {
 
     private Task<T, R1, U1> mTask;
 

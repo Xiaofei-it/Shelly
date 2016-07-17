@@ -23,7 +23,7 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/28.
  */
-public class IdentityOperator<T> implements Function1<T, T> {
+public class IdentityOperator<T> extends Function1<T, T> {
     @Override
     public T call(T input) {
         return input;

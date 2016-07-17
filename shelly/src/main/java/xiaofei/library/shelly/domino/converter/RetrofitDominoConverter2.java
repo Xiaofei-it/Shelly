@@ -27,7 +27,7 @@ import xiaofei.library.shelly.tuple.Triple;
 /**
  * Created by Xiaofei on 16/6/28.
  */
-public class RetrofitDominoConverter2<T, R, S> implements
+public class RetrofitDominoConverter2<T, R, S> extends
         DominoConverter<T, Triple<Boolean, Pair<R, Response<S>>, Throwable>, RetrofitDomino2<T, R, S>> {
     @Override
     public RetrofitDomino2<T, R, S> call(Domino<T, Triple<Boolean, Pair<R, Response<S>>, Throwable>> domino) {

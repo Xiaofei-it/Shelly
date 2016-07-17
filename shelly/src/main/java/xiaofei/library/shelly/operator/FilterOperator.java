@@ -25,7 +25,7 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class FilterOperator<T> implements Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<T>> {
+public class FilterOperator<T> extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<T>> {
 
     private Function1<? super T, Boolean> filter;
 
