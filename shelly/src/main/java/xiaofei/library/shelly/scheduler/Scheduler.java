@@ -25,6 +25,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import xiaofei.library.concurrentutils.AugmentedListCanary;
 import xiaofei.library.concurrentutils.util.Action;
 import xiaofei.library.concurrentutils.util.Condition;
+import xiaofei.library.shelly.function.Function;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
@@ -60,6 +61,10 @@ public abstract class Scheduler<T> {
         mInputs = scheduler.mInputs;
         mState = scheduler.mState;
         mStash = scheduler.mStash;
+    }
+
+    public void prepare(Function function) {
+        function.setStash(mStash);
     }
 
     public void pause() {

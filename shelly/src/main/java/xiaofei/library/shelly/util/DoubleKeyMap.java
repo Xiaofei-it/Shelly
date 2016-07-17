@@ -47,4 +47,21 @@ public class DoubleKeyMap {
             return map.get(key2);
         }
     }
+
+    public void remove(Object key1) {
+        mMap.remove(key1);
+    }
+
+    public Object remove(Object key1, Object key2) {
+        HashMap<Object, Object> map = mMap.get(key1);
+        if (map == null) {
+            return null;
+        } else {
+            Object result = map.remove(key2);
+            if (map.isEmpty()) {
+                mMap.remove(key1);
+            }
+            return result;
+        }
+    }
 }
