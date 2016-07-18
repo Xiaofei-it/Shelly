@@ -48,10 +48,6 @@ public class DoubleKeyMap {
         }
     }
 
-    public void remove(Object key1) {
-        mMap.remove(key1);
-    }
-
     public Object remove(Object key1, Object key2) {
         HashMap<Object, Object> map = mMap.get(key1);
         if (map == null) {

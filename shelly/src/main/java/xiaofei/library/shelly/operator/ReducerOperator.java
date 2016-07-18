@@ -26,7 +26,7 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class ReducerOperator<T, R> extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
+public class ReducerOperator<T, R> implements Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
 
     private Function1<List<T>, ? extends R> reducer;
 

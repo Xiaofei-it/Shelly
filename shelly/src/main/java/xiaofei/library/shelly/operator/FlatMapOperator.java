@@ -26,7 +26,7 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class FlatMapOperator<T, R> extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
+public class FlatMapOperator<T, R> implements Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
 
     private Function1<? super T, List<R>> map;
 

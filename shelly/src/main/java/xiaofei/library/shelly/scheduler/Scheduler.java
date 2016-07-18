@@ -27,6 +27,7 @@ import xiaofei.library.concurrentutils.util.Action;
 import xiaofei.library.concurrentutils.util.Condition;
 import xiaofei.library.shelly.function.Function;
 import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.stashfunction.StashFunction;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
 import xiaofei.library.shelly.util.DoubleKeyMap;
@@ -64,7 +65,9 @@ public abstract class Scheduler<T> {
     }
 
     public void prepare(Function function) {
-        function.setStash(mStash);
+        if (function instanceof StashFunction) {
+            ((StashFunction) function).setStash(mStash);
+        }
     }
 
     public void pause() {

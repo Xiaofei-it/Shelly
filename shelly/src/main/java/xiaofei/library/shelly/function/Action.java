@@ -21,5 +21,5 @@ package xiaofei.library.shelly.function;
 /**
  * Created by Xiaofei on 16/5/30.
  */
-public abstract class Action extends Function {
+public interface Action extends Function {
 }

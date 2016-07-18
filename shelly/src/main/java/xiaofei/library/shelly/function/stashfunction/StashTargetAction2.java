@@ -16,16 +16,12 @@
  *
  */
 
-package xiaofei.library.shelly.operator;
+package xiaofei.library.shelly.function.stashfunction;
 
-import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.TargetAction2;
 
 /**
- * Created by Xiaofei on 16/6/28.
+ * Created by Xiaofei on 16/7/18.
  */
-public class IdentityOperator<T> implements Function1<T, T> {
-    @Override
-    public T call(T input) {
-        return input;
-    }
+public abstract class StashTargetAction2<T, R, S> extends StashAction implements TargetAction2<T, R, S> {
 }

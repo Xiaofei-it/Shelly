@@ -24,6 +24,5 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/27.
  */
-public abstract class DominoConverter<T, R, S extends Domino<T, ?>> extends Function1<Domino<T, R>, S> {
-    public abstract S call(Domino<T, R> domino);
+public interface DominoConverter<T, R, S extends Domino<T, ?>> extends Function1<Domino<T, R>, S> {
 }

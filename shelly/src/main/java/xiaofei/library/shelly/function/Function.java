@@ -18,44 +18,9 @@
 
 package xiaofei.library.shelly.function;
 
-import xiaofei.library.shelly.util.DoubleKeyMap;
-
 /**
  * Created by Xiaofei on 16/6/14.
  */
-public abstract class Function {
+public interface Function {
 
-    //Initialized by setStash(DoubleKeyMap), otherwise NPE will be thrown.
-    private DoubleKeyMap mStash;
-
-    public DoubleKeyMap getStash() {
-        return mStash;
-    }
-
-    public void setStash(DoubleKeyMap stash) {
-        mStash = stash;
-    }
-    public void stash(Object key, Object value) {
-        stash(key, key, value);
-    }
-
-    public void stash(Object key1, Object key2, Object value) {
-        mStash.put(key1, key2, value);
-    }
-
-    public Object get(Object key) {
-        return get(key, key);
-    }
-
-    public Object get(Object key1, Object key2) {
-        return mStash.get(key1, key2);
-    }
-
-    public Object remove(Object key) {
-        return remove(key, key);
-    }
-
-    public Object remove(Object key1, Object key2) {
-        return mStash.remove(key1, key2);
-    }
 }

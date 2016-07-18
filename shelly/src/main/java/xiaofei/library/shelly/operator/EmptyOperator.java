@@ -25,7 +25,7 @@ import xiaofei.library.shelly.function.Function1;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class EmptyOperator<T, R> extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
+public class EmptyOperator<T, R> implements Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> {
 
     public EmptyOperator() {}
 
