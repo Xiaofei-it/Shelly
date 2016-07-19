@@ -16,21 +16,12 @@
  *
  */
 
-package xiaofei.library.shelly.operator;
+package xiaofei.library.shelly.function.stashfunction;
 
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.Action0;
 
 /**
- * Created by Xiaofei on 16/6/23.
+ * Created by Xiaofei on 16/7/18.
  */
-public class EmptyOperator<T, R> implements CopyOnWriteArrayListFunction1<T, R> {
-
-    public EmptyOperator() {}
-
-    @Override
-    public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<T> input) {
-        return new CopyOnWriteArrayList<R>();
-    }
+public abstract class StashAction0 extends StashAction implements Action0 {
 }

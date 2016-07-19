@@ -25,9 +25,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import xiaofei.library.concurrentutils.AugmentedListCanary;
 import xiaofei.library.concurrentutils.util.Action;
 import xiaofei.library.concurrentutils.util.Condition;
+import xiaofei.library.shelly.function.Function;
 import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.stashfunction.StashFunction;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
+import xiaofei.library.shelly.util.DoubleKeyMap;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.SchedulerInputs;
 
@@ -46,15 +49,25 @@ public abstract class Scheduler<T> {
 
     private final AugmentedListCanary<SchedulerInputs> mInputs;
 
+    private final DoubleKeyMap mStash;
+
     public Scheduler(List<T> input) {
         mInputs = new AugmentedListCanary<SchedulerInputs>();
         mInputs.add(new SchedulerInputs((List<Object>) input, 0));
         mState = STATE_RUNNING;
+        mStash = new DoubleKeyMap();
     }
 
     public <R> Scheduler(Scheduler<R> scheduler) {
         mInputs = scheduler.mInputs;
         mState = scheduler.mState;
+        mStash = scheduler.mStash;
+    }
+
+    public void prepare(Function function) {
+        if (function instanceof StashFunction) {
+            ((StashFunction) function).setStash(mStash);
+        }
     }
 
     public void pause() {

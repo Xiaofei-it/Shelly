@@ -25,5 +25,4 @@ import xiaofei.library.shelly.function.Function1;
  * Created by Xiaofei on 16/6/27.
  */
 public interface DominoConverter<T, R, S extends Domino<T, ?>> extends Function1<Domino<T, R>, S> {
-    S call(Domino<T, R> domino);
 }

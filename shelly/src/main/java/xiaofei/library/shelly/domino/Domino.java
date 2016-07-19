@@ -111,6 +111,7 @@ public class Domino<T, R> {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                        scheduler.prepare(targetAction0);
                         for (Object object : objects) {
                             targetAction0.call(clazz.cast(object));
                         }
@@ -131,6 +132,7 @@ public class Domino<T, R> {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                        scheduler.prepare(targetAction1);
                         for (Object object : objects) {
                             for (R singleInput : input) {
                                 targetAction1.call(clazz.cast(object), singleInput);
@@ -152,6 +154,7 @@ public class Domino<T, R> {
                 scheduler.play(new Player<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
+                        scheduler.prepare(action0);
                         action0.call();
                         return scheduler;
                     }
@@ -169,6 +172,7 @@ public class Domino<T, R> {
                 scheduler.play(new Player<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
+                        scheduler.prepare(action1);
                         for (R singleInput : input) {
                             action1.call(singleInput);
                         }
@@ -188,6 +192,7 @@ public class Domino<T, R> {
                 scheduler.play(new Player<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
+                        //TODO How about stash here?
                         ((Domino<R, ?>) domino).mPlayer.call(input);
                         return scheduler;
                     }
