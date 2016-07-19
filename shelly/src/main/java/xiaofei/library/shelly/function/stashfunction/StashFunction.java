@@ -56,4 +56,6 @@ public abstract class StashFunction implements Function {
     public Object remove(Object key1, Object key2) {
         return mStash.remove(key1, key2);
     }
+
+    //TODO First refactor scheduler, then add stash in lift!
 }
