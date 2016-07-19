@@ -29,13 +29,10 @@ public abstract class StashFunction implements Function {
     //Initialized by setStash(DoubleKeyMap), otherwise NPE will be thrown.
     private DoubleKeyMap mStash;
 
-    public DoubleKeyMap getStash() {
-        return mStash;
-    }
-
     public void setStash(DoubleKeyMap stash) {
         mStash = stash;
     }
+
     public void stash(Object key, Object value) {
         stash(key, key, value);
     }
