@@ -453,4 +453,5 @@ public class Domino<T, R> {
 //// TODO: 16/6/30 加上包裹类，这时候begintask会怎么样
 
 // TODO 加上stash，整个传进来map；之后参数可以传入map
-// refactor
+// TODO 重构所有target
+// TODO 加上onSuccessBeginTask，参考其他
