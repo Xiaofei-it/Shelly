@@ -85,8 +85,8 @@
       <file leaf-file-name="Scheduler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56395346">
-              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4113475">
+              <caret line="122" column="12" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="12" />
               <folding>
                 <element signature="e#2276#2277#0" expanded="true" />
                 <element signature="e#2312#2313#0" expanded="true" />
@@ -2726,7 +2726,6 @@
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Player.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/converter/RetrofitDominoConverter.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/converter/RetrofitDominoConverter2.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction0.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction1.java" />
@@ -2752,6 +2751,7 @@
         <option value="$PROJECT_DIR$/app/src/test/java/xiaofei/library/shellytest/Test01.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/xiaofei/library/shellytest/Test02.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java" />
       </list>
     </option>
   </component>
@@ -3937,13 +3937,13 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -4527,8 +4527,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56395346">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4113475">
+          <caret line="122" column="12" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="12" />
           <folding>
             <element signature="e#2276#2277#0" expanded="true" />
             <element signature="e#2312#2313#0" expanded="true" />

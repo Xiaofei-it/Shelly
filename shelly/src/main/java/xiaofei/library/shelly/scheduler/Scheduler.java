@@ -154,4 +154,4 @@ public abstract class Scheduler<T> {
 
 }
 
-//TODO 貌似input应该放在player里！
+//TODO 这个应该做成player，里面包含scheduler。本来的player要换个名字！
