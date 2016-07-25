@@ -157,3 +157,5 @@ public abstract class Scheduler<T> {
 //TODO 这个应该做成player，里面包含scheduler。本来的player要换个名字！
 
 //TODO 下周完成所有的！！！
+
+//TODO 这个想法可以。文档可以写了。
