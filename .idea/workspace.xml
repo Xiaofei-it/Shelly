@@ -49,10 +49,12 @@
       <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.5555556">
               <caret line="191" column="31" selection-start-line="191" selection-start-column="31" selection-end-line="191" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7204#7520#0" expanded="true" />
+                <element signature="e#7519#7520#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,10 +63,12 @@
       <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.5555556">
               <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
+                <element signature="e#4911#5156#0" expanded="true" />
+                <element signature="e#5155#5156#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,8 +77,8 @@
       <file leaf-file-name="Scheduler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.9574468">
-              <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+            <state vertical-scroll-proportion="11.063829">
+              <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -4478,30 +4482,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java">
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
+        <state vertical-scroll-proportion="-0.5555556">
+          <caret line="191" column="31" selection-start-line="191" selection-start-column="31" selection-end-line="191" selection-end-column="31" />
           <folding>
-            <element signature="e#0#593#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#7204#7520#0" expanded="true" />
+            <element signature="e#7519#7520#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="191" column="31" selection-start-line="191" selection-start-column="31" selection-end-line="191" selection-end-column="31" />
+        <state vertical-scroll-proportion="-0.5555556">
+          <caret line="119" column="46" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#593#0" expanded="true" />
+            <element signature="e#4911#5156#0" expanded="true" />
+            <element signature="e#5155#5156#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Scheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.9574468">
-          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        <state vertical-scroll-proportion="11.063829">
+          <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
           <folding />
         </state>
       </provider>
