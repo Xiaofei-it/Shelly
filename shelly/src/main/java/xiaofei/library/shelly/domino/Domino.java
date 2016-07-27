@@ -54,7 +54,7 @@ import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
 import xiaofei.library.shelly.tuple.Triple;
 import xiaofei.library.shelly.util.DominoCenter;
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.Tile;
 import xiaofei.library.shelly.util.TargetCenter;
 import xiaofei.library.shelly.util.TaskFunction;
 
@@ -67,12 +67,12 @@ public class Domino<T, R> {
 
     protected static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 
-    private Player<T, R> mPlayer;
+    private Tile<T, R> mPlayer;
 
     private Object mLabel;
 
     public Domino(Object label) {
-        this(label, new Player<T, R>() {
+        this(label, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 return (Scheduler<R>) new DefaultScheduler<T>(input);
@@ -80,7 +80,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino(Object label, Player<T, R> player) {
+    public Domino(Object label, Tile<T, R> player) {
         mLabel = label;
         mPlayer = player;
     }
@@ -89,7 +89,7 @@ public class Domino<T, R> {
         return mLabel;
     }
 
-    public Player<T, R> getPlayer() {
+    public Tile<T, R> getPlayer() {
         return mPlayer;
     }
 
@@ -103,11 +103,11 @@ public class Domino<T, R> {
      */
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+                scheduler.play(new Tile<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
@@ -124,11 +124,11 @@ public class Domino<T, R> {
     }
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+                scheduler.play(new Tile<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
@@ -147,11 +147,11 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> target(final Action0 action0) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+                scheduler.play(new Tile<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         scheduler.prepare(action0);
@@ -165,11 +165,11 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> target(final Action1<? super R> action1) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+                scheduler.play(new Tile<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         scheduler.prepare(action1);
@@ -185,11 +185,11 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> target(final Domino<? super R, ?> domino) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+                scheduler.play(new Tile<R, R>() {
                     @Override
                     public Scheduler<R> call(List<R> input) {
                         //TODO How about stash here?
@@ -215,7 +215,7 @@ public class Domino<T, R> {
     }
 
     public <U> Domino<T, U> merge(final Domino<? super R, ? extends U>[] dominoes) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
+        return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
             public Scheduler<U> call(List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);
@@ -304,7 +304,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> background() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -317,7 +317,7 @@ public class Domino<T, R> {
      * For unit test only.
      */
     Domino<T, R> newThread() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -330,7 +330,7 @@ public class Domino<T, R> {
      * For unit test only.
      */
     Domino<T, R> defaultScheduler() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -340,7 +340,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> uiThread() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -350,7 +350,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> backgroundQueue() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -360,7 +360,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Scheduler<R> call(List<T> input) {
                 Scheduler<R> scheduler = mPlayer.call(input);
@@ -370,7 +370,7 @@ public class Domino<T, R> {
     }
 
     public <U> Domino<T, U> lift(final Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>> function) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
+        return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
             public Scheduler<U> call(final List<T> input) {
                 final Scheduler<R> scheduler = mPlayer.call(input);

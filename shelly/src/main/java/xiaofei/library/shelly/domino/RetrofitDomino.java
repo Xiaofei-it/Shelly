@@ -30,14 +30,14 @@ import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.operator.ListIdentityOperator;
 import xiaofei.library.shelly.tuple.Triple;
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.Tile;
 
 /**
  * Created by Xiaofei on 16/6/27.
  */
 public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>, Throwable>> {
 
-    public RetrofitDomino(Object label, Player<T, Triple<Boolean, Response<R>, Throwable>> player) {
+    public RetrofitDomino(Object label, Tile<T, Triple<Boolean, Response<R>, Throwable>> player) {
         super(label, player);
     }
 

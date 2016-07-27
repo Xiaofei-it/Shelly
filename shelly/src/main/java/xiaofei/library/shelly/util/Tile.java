@@ -26,6 +26,6 @@ import xiaofei.library.shelly.scheduler.Scheduler;
 /**
  * Created by Xiaofei on 16/5/27.
  */
-public interface Player<T, R> extends Function1<List<T>, Scheduler<R>> {
+public interface Tile<T, R> extends Function1<List<T>, Scheduler<R>> {
 
 }

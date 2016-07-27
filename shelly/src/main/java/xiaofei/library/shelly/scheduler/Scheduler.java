@@ -31,7 +31,7 @@ import xiaofei.library.shelly.function.stashfunction.StashFunction;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
 import xiaofei.library.shelly.util.DoubleKeyMap;
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.Tile;
 import xiaofei.library.shelly.util.SchedulerInputs;
 
 /**
@@ -78,7 +78,7 @@ public abstract class Scheduler<T> {
         return mState == STATE_RUNNING;
     }
 
-    protected Runnable onPlay(final Player<T, ?> player) {
+    protected Runnable onPlay(final Tile<T, ?> player) {
         return new Runnable() {
             private int mIndex = mInputs.size() - 1;
             @Override
@@ -116,7 +116,7 @@ public abstract class Scheduler<T> {
     }
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final void play(Player<T, ?> player) {
+    public final void play(Tile<T, ?> player) {
         synchronized (this) {
             if (isRunning()) {
                 scheduleRunnable(Collections.singletonList(onPlay(player)));
