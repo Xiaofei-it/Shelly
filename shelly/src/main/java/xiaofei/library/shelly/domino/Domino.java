@@ -230,7 +230,7 @@ public class Domino<T, R> {
                         }
                     });
                 }
-                return player.scheduleFunction(functions);
+                return player.playFunction(functions);
             }
         });
     }
@@ -380,7 +380,7 @@ public class Domino<T, R> {
             @Override
             public Player<U> call(final List<T> input) {
                 final Player<R> player = mTile.call(input);
-                return player.scheduleFunction(Collections.singletonList(function));
+                return player.playFunction(Collections.singletonList(function));
             }
         });
     }

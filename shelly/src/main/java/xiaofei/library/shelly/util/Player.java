@@ -67,7 +67,7 @@ public class Player<T> {
         }
     }
 
-    protected Runnable onPlay(final Tile<T, ?> tile) {
+    protected Runnable getRunnable(final Tile<T, ?> tile) {
         return new Runnable() {
             private int mIndex = mInputs.size() - 1;
             @Override
@@ -78,7 +78,7 @@ public class Player<T> {
     }
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final <R> Player<R> scheduleRunnable(List<? extends Runnable> runnables) {
+    public final <R> Player<R> playRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
             if (mScheduler.isRunning()) {
                 int size = mInputs.size();
@@ -90,7 +90,7 @@ public class Player<T> {
         }
     }
 
-    public final <R> Player<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
+    public final <R> Player<R> playFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
             if (mScheduler.isRunning()) {
                 int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
@@ -106,7 +106,7 @@ public class Player<T> {
     public final void play(Tile<T, ?> tile) {
         synchronized (this) {
             if (mScheduler.isRunning()) {
-                scheduleRunnable(Collections.singletonList(onPlay(tile)));
+                playRunnable(Collections.singletonList(getRunnable(tile)));
             }
         }
     }
@@ -140,11 +140,3 @@ public class Player<T> {
     }
 
 }
-
-//TODO 这个应该做成player，里面包含scheduler。本来的player要换个名字！
-
-//TODO 下周完成所有的！！！
-
-//TODO 这个想法可以。文档可以写了。
-
-//TODO 好忧伤
