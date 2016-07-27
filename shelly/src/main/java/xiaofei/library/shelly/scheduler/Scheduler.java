@@ -18,30 +18,37 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import android.os.Handler;
 import android.os.Looper;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import xiaofei.library.concurrentutils.util.Action;
+import xiaofei.library.shelly.runnable.ScheduledRunnable;
+import xiaofei.library.shelly.util.Config;
+import xiaofei.library.shelly.util.Player;
+
 /**
- * Created by Xiaofei on 16/5/31.
+ * Created by Xiaofei on 16/7/27.
  */
-public class BackgroundPlayer<T> extends Player<T> {
+public abstract class Scheduler implements Action<Runnable> {
 
-    private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
+    private static final int STATE_RUNNING = 0;
 
-    public <R> BackgroundPlayer(Player<R> player) {
-        super(player);
+    private static final int STATE_PAUSE = 1;
+
+    private volatile int mState;
+
+    public Scheduler() {
+        mState = STATE_RUNNING;
     }
 
-    @Override
-    protected void onSchedule(Runnable runnable) {
-        boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
-        if (isMainThread) {
-            sExecutorService.execute(runnable);
-        } else {
-            runnable.run();
-        }
+    public final void pause() {
+        mState = STATE_PAUSE;
     }
 
+    public final boolean isRunning() {
+        return mState == STATE_RUNNING;
+    }
 }

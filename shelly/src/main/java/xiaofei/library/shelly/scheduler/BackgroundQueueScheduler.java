@@ -18,19 +18,21 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import xiaofei.library.shelly.util.Player;
+
 /**
  * Created by Xiaofei on 16/5/31.
- *
- * For unit test only.
  */
-public class NewThreadPlayer<T> extends Player<T> {
+public class BackgroundQueueScheduler extends Scheduler {
 
-    public <R> NewThreadPlayer(Player<R> player) {
-        super(player);
-    }
+    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
 
     @Override
-    protected void onSchedule(Runnable runnable) {
-        new Thread(runnable).start();
+    public void call(Runnable runnable) {
+        mExecutorService.execute(runnable);
     }
+
 }

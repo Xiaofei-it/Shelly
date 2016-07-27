@@ -21,7 +21,7 @@ package xiaofei.library.shelly.runnable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.scheduler.Player;
+import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/6/23.

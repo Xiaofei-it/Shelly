@@ -26,20 +26,17 @@ import java.util.concurrent.Executors;
 
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
 import xiaofei.library.shelly.util.Config;
+import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class UiThreadPlayer<T> extends Player<T> {
+public class UiThreadScheduler extends Scheduler {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     //下面这个改变比较重要！！！
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
-
-    public <R> UiThreadPlayer(Player<R> player) {
-        super(player);
-    }
 
     private void scheduleInternal(Runnable runnable) {
         boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
@@ -57,7 +54,7 @@ public class UiThreadPlayer<T> extends Player<T> {
     }
 
     @Override
-    protected void onSchedule(Runnable runnable) {
+    public void call(Runnable runnable) {
         if (runnable instanceof ScheduledRunnable) {
             final ScheduledRunnable scheduledRunnable = (ScheduledRunnable) runnable;
             if (!scheduledRunnable.inputSet()) {

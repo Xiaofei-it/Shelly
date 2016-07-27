@@ -18,23 +18,18 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
+
+import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class BackgroundQueuePlayer<T> extends Player<T> {
-
-    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
-
-    public <R> BackgroundQueuePlayer(Player<R> player) {
-        super(player);
-    }
+public class DefaultScheduler extends Scheduler {
 
     @Override
-    protected void onSchedule(Runnable runnable) {
-        mExecutorService.execute(runnable);
+    public void call(Runnable runnable) {
+        runnable.run();
     }
 
 }

@@ -42,13 +42,13 @@ import xiaofei.library.shelly.operator.MapOperator;
 import xiaofei.library.shelly.operator.MapOperator2;
 import xiaofei.library.shelly.operator.ReducerOperator;
 import xiaofei.library.shelly.operator.RightRefinementOperator;
-import xiaofei.library.shelly.scheduler.BackgroundQueuePlayer;
-import xiaofei.library.shelly.scheduler.BackgroundPlayer;
-import xiaofei.library.shelly.scheduler.DefaultPlayer;
-import xiaofei.library.shelly.scheduler.NewThreadPlayer;
-import xiaofei.library.shelly.scheduler.Player;
-import xiaofei.library.shelly.scheduler.ThrottlePlayer;
-import xiaofei.library.shelly.scheduler.UiThreadPlayer;
+import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
+import xiaofei.library.shelly.scheduler.BackgroundScheduler;
+import xiaofei.library.shelly.scheduler.DefaultScheduler;
+import xiaofei.library.shelly.scheduler.NewThreadScheduler;
+import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.scheduler.ThrottleScheduler;
+import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 import xiaofei.library.shelly.task.AbstractRetrofitTask;
 import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
@@ -75,7 +75,7 @@ public class Domino<T, R> {
         this(label, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                return (Player<R>) new DefaultPlayer<T>(input);
+                return (Player<R>) new Player<T>(input);
             }
         });
     }
@@ -308,7 +308,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new BackgroundPlayer<R>(player);
+                player.setScheduler(new BackgroundScheduler());
+                return player;
             }
         });
     }
@@ -321,7 +322,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new NewThreadPlayer<R>(player);
+                player.setScheduler(new NewThreadScheduler());
+                return player;
             }
         });
     }
@@ -334,7 +336,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new DefaultPlayer<R>(player);
+                player.setScheduler(new DefaultScheduler());
+                return player;
             }
         });
     }
@@ -344,7 +347,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new UiThreadPlayer<R>(player);
+                player.setScheduler(new UiThreadScheduler());
+                return player;
             }
         });
     }
@@ -354,7 +358,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new BackgroundQueuePlayer<R>(player);
+                player.setScheduler(new BackgroundQueueScheduler());
+                return player;
             }
         });
     }
@@ -364,7 +369,8 @@ public class Domino<T, R> {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                return new ThrottlePlayer<R>(player, mLabel, windowDuration, unit);
+                player.setScheduler(new ThrottleScheduler(player.getScheduler(), mLabel, windowDuration, unit));
+                return player;
             }
         });
     }

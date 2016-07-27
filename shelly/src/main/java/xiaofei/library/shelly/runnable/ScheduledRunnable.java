@@ -19,7 +19,7 @@
 package xiaofei.library.shelly.runnable;
 
 import xiaofei.library.concurrentutils.util.Condition;
-import xiaofei.library.shelly.scheduler.Player;
+import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.SchedulerInputs;
 
 /**

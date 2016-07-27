@@ -16,15 +16,18 @@
  *
  */
 
-package xiaofei.library.shelly.util;
+package xiaofei.library.shelly.scheduler;
 
-import java.util.List;
-
-import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.util.Player;
 
 /**
- * Created by Xiaofei on 16/5/27.
+ * Created by Xiaofei on 16/5/31.
+ *
+ * For unit test only.
  */
-public interface Tile<T, R> extends Function1<List<T>, Player<R>> {
-
+public class NewThreadScheduler extends Scheduler {
+    @Override
+    public void call(Runnable runnable) {
+        new Thread(runnable).start();
+    }
 }

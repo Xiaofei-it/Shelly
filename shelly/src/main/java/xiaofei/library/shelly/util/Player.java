@@ -16,7 +16,7 @@
  *
  */
 
-package xiaofei.library.shelly.scheduler;
+package xiaofei.library.shelly.util;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,52 +30,41 @@ import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.stashfunction.StashFunction;
 import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
-import xiaofei.library.shelly.util.DoubleKeyMap;
-import xiaofei.library.shelly.util.Tile;
-import xiaofei.library.shelly.util.SchedulerInputs;
+import xiaofei.library.shelly.scheduler.DefaultScheduler;
+import xiaofei.library.shelly.scheduler.Scheduler;
 
 /**
  * Created by Xiaofei on 16/5/31.
  *
  * Not thread-safe!!!
  */
-public abstract class Player<T> {
-
-    private static final int STATE_RUNNING = 0;
-
-    private static final int STATE_PAUSE = 1;
-
-    private volatile int mState;
+public class Player<T> {
 
     private final AugmentedListCanary<SchedulerInputs> mInputs;
 
     private final DoubleKeyMap mStash;
 
+    private Scheduler mScheduler;
+
     public Player(List<T> input) {
         mInputs = new AugmentedListCanary<SchedulerInputs>();
         mInputs.add(new SchedulerInputs((List<Object>) input, 0));
-        mState = STATE_RUNNING;
         mStash = new DoubleKeyMap();
+        mScheduler = new DefaultScheduler();
     }
 
-    public <R> Player(Player<R> player) {
-        mInputs = player.mInputs;
-        mState = player.mState;
-        mStash = player.mStash;
+    public void setScheduler(Scheduler scheduler) {
+        mScheduler = scheduler;
+    }
+
+    public Scheduler getScheduler() {
+        return mScheduler;
     }
 
     public void prepare(Function function) {
         if (function instanceof StashFunction) {
             ((StashFunction) function).setStash(mStash);
         }
-    }
-
-    public void pause() {
-        mState = STATE_PAUSE;
-    }
-
-    protected boolean isRunning() {
-        return mState == STATE_RUNNING;
     }
 
     protected Runnable onPlay(final Tile<T, ?> tile) {
@@ -88,15 +77,13 @@ public abstract class Player<T> {
         };
     }
 
-    protected abstract void onSchedule(Runnable runnable);
-
     //This method is not thread-safe! But we always call this in a single thread.
     public final <R> Player<R> scheduleRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
-            if (isRunning()) {
+            if (mScheduler.isRunning()) {
                 int size = mInputs.size();
                 for (Runnable runnable : runnables) {
-                    onSchedule(new ScheduledRunnable<T>(this, runnable, size));
+                    mScheduler.call(new ScheduledRunnable<T>(this, runnable, size));
                 }
             }
             return (Player<R>) this;
@@ -105,10 +92,10 @@ public abstract class Player<T> {
 
     public final <R> Player<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
-            if (isRunning()) {
+            if (mScheduler.isRunning()) {
                 int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
                 for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
-                    onSchedule(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
+                    mScheduler.call(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
                 }
             }
             return (Player<R>) this;
@@ -118,7 +105,7 @@ public abstract class Player<T> {
     //This method is not thread-safe! But we always call this in a single thread.
     public final void play(Tile<T, ?> tile) {
         synchronized (this) {
-            if (isRunning()) {
+            if (mScheduler.isRunning()) {
                 scheduleRunnable(Collections.singletonList(onPlay(tile)));
             }
         }
