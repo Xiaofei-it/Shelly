@@ -36,8 +36,8 @@ import xiaofei.library.shelly.util.Tile;
  */
 public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
 
-    protected TaskDomino(Object label, Tile<T, Triple<Boolean, R, U>> player) {
-        super(label, player);
+    protected TaskDomino(Object label, Tile<T, Triple<Boolean, R, U>> tile) {
+        super(label, tile);
     }
 
     private TaskDomino(Domino<T, Triple<Boolean, R, U>> domino) {

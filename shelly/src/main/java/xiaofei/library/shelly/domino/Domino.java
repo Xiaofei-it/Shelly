@@ -67,7 +67,7 @@ public class Domino<T, R> {
 
     protected static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 
-    private Tile<T, R> mPlayer;
+    private Tile<T, R> mTile;
 
     private Object mLabel;
 
@@ -80,9 +80,9 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino(Object label, Tile<T, R> player) {
+    public Domino(Object label, Tile<T, R> tile) {
         mLabel = label;
-        mPlayer = player;
+        mTile = tile;
     }
 
     public Object getLabel() {
@@ -90,7 +90,7 @@ public class Domino<T, R> {
     }
 
     public Tile<T, R> getPlayer() {
-        return mPlayer;
+        return mTile;
     }
 
     public <S extends Domino<T, ?>> S convert(DominoConverter<T, R, S> converter) {
@@ -106,7 +106,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
@@ -127,7 +127,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
@@ -150,7 +150,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
@@ -168,7 +168,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
@@ -188,12 +188,12 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
                         //TODO How about stash here?
-                        ((Domino<R, ?>) domino).mPlayer.call(input);
+                        ((Domino<R, ?>) domino).mTile.call(input);
                         return player;
                     }
                 });
@@ -218,14 +218,14 @@ public class Domino<T, R> {
         return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
             public Player<U> call(List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 List<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>> functions =
                         new ArrayList<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>>();
                 for (final Domino<? super R, ? extends U> domino : dominoes) {
                     functions.add(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                         @Override
                         public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                            Player<U> player = ((Domino<R, U>) domino).mPlayer.call(input);
+                            Player<U> player = ((Domino<R, U>) domino).mTile.call(input);
                             return (CopyOnWriteArrayList<U>) player.waitForFinishing();
                         }
                     });
@@ -307,7 +307,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new BackgroundPlayer<R>(player);
             }
         });
@@ -320,7 +320,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new NewThreadPlayer<R>(player);
             }
         });
@@ -333,7 +333,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new DefaultPlayer<R>(player);
             }
         });
@@ -343,7 +343,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new UiThreadPlayer<R>(player);
             }
         });
@@ -353,7 +353,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new BackgroundQueuePlayer<R>(player);
             }
         });
@@ -363,7 +363,7 @@ public class Domino<T, R> {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
-                Player<R> player = mPlayer.call(input);
+                Player<R> player = mTile.call(input);
                 return new ThrottlePlayer<R>(player, mLabel, windowDuration, unit);
             }
         });
@@ -373,7 +373,7 @@ public class Domino<T, R> {
         return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
             public Player<U> call(final List<T> input) {
-                final Player<R> player = mPlayer.call(input);
+                final Player<R> player = mTile.call(input);
                 return player.scheduleFunction(Collections.singletonList(function));
             }
         });
@@ -442,7 +442,7 @@ public class Domino<T, R> {
     }
 
     public void play(CopyOnWriteArrayList<T> input) {
-        mPlayer.call(input);
+        mTile.call(input);
     }
 
     public void commit() {

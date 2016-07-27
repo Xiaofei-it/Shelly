@@ -78,12 +78,12 @@ public abstract class Player<T> {
         return mState == STATE_RUNNING;
     }
 
-    protected Runnable onPlay(final Tile<T, ?> player) {
+    protected Runnable onPlay(final Tile<T, ?> tile) {
         return new Runnable() {
             private int mIndex = mInputs.size() - 1;
             @Override
             public void run() {
-                player.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex).getInputs());
+                tile.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex).getInputs());
             }
         };
     }
@@ -116,10 +116,10 @@ public abstract class Player<T> {
     }
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final void play(Tile<T, ?> player) {
+    public final void play(Tile<T, ?> tile) {
         synchronized (this) {
             if (isRunning()) {
-                scheduleRunnable(Collections.singletonList(onPlay(player)));
+                scheduleRunnable(Collections.singletonList(onPlay(tile)));
             }
         }
     }

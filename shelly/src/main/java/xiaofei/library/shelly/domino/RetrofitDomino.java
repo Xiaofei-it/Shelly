@@ -37,8 +37,8 @@ import xiaofei.library.shelly.util.Tile;
  */
 public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>, Throwable>> {
 
-    public RetrofitDomino(Object label, Tile<T, Triple<Boolean, Response<R>, Throwable>> player) {
-        super(label, player);
+    public RetrofitDomino(Object label, Tile<T, Triple<Boolean, Response<R>, Throwable>> tile) {
+        super(label, tile);
     }
 
     private RetrofitDomino(Domino<T, Triple<Boolean, Response<R>, Throwable>> domino) {
