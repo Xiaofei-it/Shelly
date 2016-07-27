@@ -18,8 +18,6 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import xiaofei.library.shelly.util.Player;
-
 /**
  * Created by Xiaofei on 16/5/31.
  *

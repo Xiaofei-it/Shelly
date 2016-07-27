@@ -18,16 +18,7 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import android.os.Handler;
-import android.os.Looper;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import xiaofei.library.concurrentutils.util.Action;
-import xiaofei.library.shelly.runnable.ScheduledRunnable;
-import xiaofei.library.shelly.util.Config;
-import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/7/27.

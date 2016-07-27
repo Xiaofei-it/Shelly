@@ -26,7 +26,6 @@ import java.util.concurrent.Executors;
 
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
 import xiaofei.library.shelly.util.Config;
-import xiaofei.library.shelly.util.Player;
 
 /**
  * Created by Xiaofei on 16/5/31.

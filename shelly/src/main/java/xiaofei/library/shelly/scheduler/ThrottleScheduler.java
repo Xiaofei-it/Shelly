@@ -23,8 +23,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import xiaofei.library.shelly.util.Player;
-
 /**
  * Created by Xiaofei on 16/6/21.
  */
