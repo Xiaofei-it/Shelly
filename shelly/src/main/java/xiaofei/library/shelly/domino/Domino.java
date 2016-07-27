@@ -30,6 +30,7 @@ import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter;
 import xiaofei.library.shelly.domino.converter.RetrofitDominoConverter2;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
+import xiaofei.library.shelly.function.Action2;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
@@ -104,88 +105,66 @@ public class Domino<T, R> {
      */
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
+        return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
-            public Player<R> call(List<T> input) {
-                final Player<R> player = mTile.call(input);
-                player.play(new Tile<R, R>() {
-                    @Override
-                    public Player<R> call(List<R> input) {
-                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                        player.prepare(targetAction0);
-                        for (Object object : objects) {
-                            targetAction0.call(clazz.cast(object));
-                        }
-                        return player;
-                    }
-                });
-                return player;
+            public void call(Player<R> player, List<R> input) {
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                player.prepare(targetAction0);
+                for (Object object : objects) {
+                    targetAction0.call(clazz.cast(object));
+                }
             }
         });
     }
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
+        return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
-            public Player<R> call(List<T> input) {
-                final Player<R> player = mTile.call(input);
-                player.play(new Tile<R, R>() {
-                    @Override
-                    public Player<R> call(List<R> input) {
-                        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                        player.prepare(targetAction1);
-                        for (Object object : objects) {
-                            for (R singleInput : input) {
-                                targetAction1.call(clazz.cast(object), singleInput);
-                            }
-                        }
-                        return player;
+            public void call(Player<R> player, List<R> input) {
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                player.prepare(targetAction1);
+                for (Object object : objects) {
+                    for (R singleInput : input) {
+                        targetAction1.call(clazz.cast(object), singleInput);
                     }
-                });
-                return player;
+                }
             }
         });
     }
 
     public Domino<T, R> target(final Action0 action0) {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
+        return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
-            public Player<R> call(List<T> input) {
-                final Player<R> player = mTile.call(input);
-                player.play(new Tile<R, R>() {
-                    @Override
-                    public Player<R> call(List<R> input) {
-                        player.prepare(action0);
-                        action0.call();
-                        return player;
-                    }
-                });
-                return player;
+            public void call(Player<R> player, List<R> input) {
+                player.prepare(action0);
+                action0.call();
             }
         });
     }
 
     public Domino<T, R> target(final Action1<? super R> action1) {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
-            @Override
-            public Player<R> call(List<T> input) {
-                final Player<R> player = mTile.call(input);
-                player.play(new Tile<R, R>() {
+        return targetInternal(new Action2<Player<R>, List<R>>() {
                     @Override
-                    public Player<R> call(List<R> input) {
+                    public void call(Player<R> player, List<R> input) {
                         player.prepare(action1);
                         for (R singleInput : input) {
                             action1.call(singleInput);
                         }
-                        return player;
                     }
                 });
-                return player;
-            }
-        });
     }
 
     public Domino<T, R> target(final Domino<? super R, ?> domino) {
+        return targetInternal(new Action2<Player<R>, List<R>>() {
+                    @Override
+                    public void call(Player<R> player, List<R> input) {
+                        //TODO How about stash here?
+                        ((Domino<R, ?>) domino).mTile.call(input);
+                    }
+                });
+    }
+
+    private Domino<T, R> targetInternal(final Action2<Player<R>, List<R>> action2) {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
@@ -193,8 +172,7 @@ public class Domino<T, R> {
                 player.play(new Tile<R, R>() {
                     @Override
                     public Player<R> call(List<R> input) {
-                        //TODO How about stash here?
-                        ((Domino<R, ?>) domino).mTile.call(input);
+                        action2.call(player, input);
                         return player;
                     }
                 });
@@ -436,5 +414,4 @@ public class Domino<T, R> {
 //// TODO: 16/6/30 加上包裹类，这时候begintask会怎么样
 
 // TODO 加上stash，整个传进来map；之后参数可以传入map
-// TODO 重构所有target
 // TODO 加上onSuccessBeginTask，参考其他
