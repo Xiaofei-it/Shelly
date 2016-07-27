@@ -46,6 +46,7 @@ import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
+import xiaofei.library.shelly.scheduler.Scheduler;
 import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
@@ -303,65 +304,41 @@ public class Domino<T, R> {
                 combiner);
     }
 
-    public Domino<T, R> background() {
+    private Domino<T, R> schedule(final Scheduler scheduler) {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
                 Player<R> player = mTile.call(input);
-                player.setScheduler(new BackgroundScheduler());
+                player.setScheduler(scheduler);
                 return player;
             }
         });
+    }
+
+    public Domino<T, R> background() {
+        return schedule(new BackgroundScheduler());
     }
 
     /**
      * For unit test only.
      */
     Domino<T, R> newThread() {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
-            @Override
-            public Player<R> call(List<T> input) {
-                Player<R> player = mTile.call(input);
-                player.setScheduler(new NewThreadScheduler());
-                return player;
-            }
-        });
+        return schedule(new NewThreadScheduler());
     }
 
     /**
      * For unit test only.
      */
     Domino<T, R> defaultScheduler() {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
-            @Override
-            public Player<R> call(List<T> input) {
-                Player<R> player = mTile.call(input);
-                player.setScheduler(new DefaultScheduler());
-                return player;
-            }
-        });
+        return schedule(new DefaultScheduler());
     }
 
     public Domino<T, R> uiThread() {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
-            @Override
-            public Player<R> call(List<T> input) {
-                Player<R> player = mTile.call(input);
-                player.setScheduler(new UiThreadScheduler());
-                return player;
-            }
-        });
+        return schedule(new UiThreadScheduler());
     }
 
     public Domino<T, R> backgroundQueue() {
-        return new Domino<T, R>(mLabel, new Tile<T, R>() {
-            @Override
-            public Player<R> call(List<T> input) {
-                Player<R> player = mTile.call(input);
-                player.setScheduler(new BackgroundQueueScheduler());
-                return player;
-            }
-        });
+        return schedule(new BackgroundQueueScheduler());
     }
 
     public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
