@@ -16,23 +16,15 @@
  *
  */
 
-package xiaofei.library.shelly.scheduler;
+package xiaofei.library.shelly.util;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.List;
 
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.function.Function1;
 
 /**
- * Created by Xiaofei on 16/5/31.
+ * Created by Xiaofei on 16/5/27.
  */
-public class BackgroundQueueScheduler extends Scheduler {
-
-    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
-
-    @Override
-    public void call(Runnable runnable) {
-        mExecutorService.execute(runnable);
-    }
+public interface Tile<T, R> extends Function1<List<T>, Player<R>> {
 
 }

@@ -46,7 +46,7 @@ import xiaofei.library.shelly.scheduler.BackgroundQueueScheduler;
 import xiaofei.library.shelly.scheduler.BackgroundScheduler;
 import xiaofei.library.shelly.scheduler.DefaultScheduler;
 import xiaofei.library.shelly.scheduler.NewThreadScheduler;
-import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.scheduler.ThrottleScheduler;
 import xiaofei.library.shelly.scheduler.UiThreadScheduler;
 import xiaofei.library.shelly.task.AbstractRetrofitTask;
@@ -54,7 +54,7 @@ import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
 import xiaofei.library.shelly.tuple.Triple;
 import xiaofei.library.shelly.util.DominoCenter;
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.Tile;
 import xiaofei.library.shelly.util.TargetCenter;
 import xiaofei.library.shelly.util.TaskFunction;
 
@@ -67,30 +67,30 @@ public class Domino<T, R> {
 
     protected static final TargetCenter TARGET_CENTER = TargetCenter.getInstance();
 
-    private Player<T, R> mPlayer;
+    private Tile<T, R> mTile;
 
     private Object mLabel;
 
     public Domino(Object label) {
-        this(label, new Player<T, R>() {
+        this(label, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                return (Scheduler<R>) new DefaultScheduler<T>(input);
+            public Player<R> call(List<T> input) {
+                return (Player<R>) new Player<T>(input);
             }
         });
     }
 
-    public Domino(Object label, Player<T, R> player) {
+    public Domino(Object label, Tile<T, R> tile) {
         mLabel = label;
-        mPlayer = player;
+        mTile = tile;
     }
 
     public Object getLabel() {
         return mLabel;
     }
 
-    public Player<T, R> getPlayer() {
-        return mPlayer;
+    public Tile<T, R> getPlayer() {
+        return mTile;
     }
 
     public <S extends Domino<T, ?>> S convert(DominoConverter<T, R, S> converter) {
@@ -103,101 +103,101 @@ public class Domino<T, R> {
      */
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+            public Player<R> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
+                player.play(new Tile<R, R>() {
                     @Override
-                    public Scheduler<R> call(List<R> input) {
+                    public Player<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                        scheduler.prepare(targetAction0);
+                        player.prepare(targetAction0);
                         for (Object object : objects) {
                             targetAction0.call(clazz.cast(object));
                         }
-                        return scheduler;
+                        return player;
                     }
                 });
-                return scheduler;
+                return player;
             }
         });
     }
 
     public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+            public Player<R> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
+                player.play(new Tile<R, R>() {
                     @Override
-                    public Scheduler<R> call(List<R> input) {
+                    public Player<R> call(List<R> input) {
                         CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
-                        scheduler.prepare(targetAction1);
+                        player.prepare(targetAction1);
                         for (Object object : objects) {
                             for (R singleInput : input) {
                                 targetAction1.call(clazz.cast(object), singleInput);
                             }
                         }
-                        return scheduler;
+                        return player;
                     }
                 });
-                return scheduler;
+                return player;
             }
         });
     }
 
     public Domino<T, R> target(final Action0 action0) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+            public Player<R> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
+                player.play(new Tile<R, R>() {
                     @Override
-                    public Scheduler<R> call(List<R> input) {
-                        scheduler.prepare(action0);
+                    public Player<R> call(List<R> input) {
+                        player.prepare(action0);
                         action0.call();
-                        return scheduler;
+                        return player;
                     }
                 });
-                return scheduler;
+                return player;
             }
         });
     }
 
     public Domino<T, R> target(final Action1<? super R> action1) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+            public Player<R> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
+                player.play(new Tile<R, R>() {
                     @Override
-                    public Scheduler<R> call(List<R> input) {
-                        scheduler.prepare(action1);
+                    public Player<R> call(List<R> input) {
+                        player.prepare(action1);
                         for (R singleInput : input) {
                             action1.call(singleInput);
                         }
-                        return scheduler;
+                        return player;
                     }
                 });
-                return scheduler;
+                return player;
             }
         });
     }
 
     public Domino<T, R> target(final Domino<? super R, ?> domino) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                scheduler.play(new Player<R, R>() {
+            public Player<R> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
+                player.play(new Tile<R, R>() {
                     @Override
-                    public Scheduler<R> call(List<R> input) {
+                    public Player<R> call(List<R> input) {
                         //TODO How about stash here?
-                        ((Domino<R, ?>) domino).mPlayer.call(input);
-                        return scheduler;
+                        ((Domino<R, ?>) domino).mTile.call(input);
+                        return player;
                     }
                 });
-                return scheduler;
+                return player;
             }
         });
     }
@@ -215,22 +215,22 @@ public class Domino<T, R> {
     }
 
     public <U> Domino<T, U> merge(final Domino<? super R, ? extends U>[] dominoes) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
+        return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
-            public Scheduler<U> call(List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
+            public Player<U> call(List<T> input) {
+                final Player<R> player = mTile.call(input);
                 List<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>> functions =
                         new ArrayList<Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>>();
                 for (final Domino<? super R, ? extends U> domino : dominoes) {
                     functions.add(new Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>>() {
                         @Override
                         public CopyOnWriteArrayList<U> call(CopyOnWriteArrayList<R> input) {
-                            Scheduler<U> scheduler = ((Domino<R, U>) domino).mPlayer.call(input);
-                            return (CopyOnWriteArrayList<U>) scheduler.waitForFinishing();
+                            Player<U> player = ((Domino<R, U>) domino).mTile.call(input);
+                            return (CopyOnWriteArrayList<U>) player.waitForFinishing();
                         }
                     });
                 }
-                return scheduler.scheduleFunction(functions);
+                return player.playFunction(functions);
             }
         });
     }
@@ -304,11 +304,12 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> background() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new BackgroundScheduler<R>(scheduler);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new BackgroundScheduler());
+                return player;
             }
         });
     }
@@ -317,11 +318,12 @@ public class Domino<T, R> {
      * For unit test only.
      */
     Domino<T, R> newThread() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new NewThreadScheduler<R>(scheduler);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new NewThreadScheduler());
+                return player;
             }
         });
     }
@@ -330,51 +332,55 @@ public class Domino<T, R> {
      * For unit test only.
      */
     Domino<T, R> defaultScheduler() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new DefaultScheduler<R>(scheduler);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new DefaultScheduler());
+                return player;
             }
         });
     }
 
     public Domino<T, R> uiThread() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new UiThreadScheduler<R>(scheduler);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new UiThreadScheduler());
+                return player;
             }
         });
     }
 
     public Domino<T, R> backgroundQueue() {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new BackgroundQueueScheduler<R>(scheduler);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new BackgroundQueueScheduler());
+                return player;
             }
         });
     }
 
     public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
-        return new Domino<T, R>(mLabel, new Player<T, R>() {
+        return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
-            public Scheduler<R> call(List<T> input) {
-                Scheduler<R> scheduler = mPlayer.call(input);
-                return new ThrottleScheduler<R>(scheduler, mLabel, windowDuration, unit);
+            public Player<R> call(List<T> input) {
+                Player<R> player = mTile.call(input);
+                player.setScheduler(new ThrottleScheduler(player.getScheduler(), mLabel, windowDuration, unit));
+                return player;
             }
         });
     }
 
     public <U> Domino<T, U> lift(final Function1<CopyOnWriteArrayList<R>, CopyOnWriteArrayList<U>> function) {
-        return new Domino<T, U>(mLabel, new Player<T, U>() {
+        return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
-            public Scheduler<U> call(final List<T> input) {
-                final Scheduler<R> scheduler = mPlayer.call(input);
-                return scheduler.scheduleFunction(Collections.singletonList(function));
+            public Player<U> call(final List<T> input) {
+                final Player<R> player = mTile.call(input);
+                return player.playFunction(Collections.singletonList(function));
             }
         });
     }
@@ -442,7 +448,7 @@ public class Domino<T, R> {
     }
 
     public void play(CopyOnWriteArrayList<T> input) {
-        mPlayer.call(input);
+        mTile.call(input);
     }
 
     public void commit() {

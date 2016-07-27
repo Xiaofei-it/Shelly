@@ -23,19 +23,17 @@ import android.os.Looper;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import xiaofei.library.shelly.util.Player;
+
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class BackgroundScheduler<T> extends Scheduler<T> {
+public class BackgroundScheduler extends Scheduler {
 
     private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
 
-    public <R> BackgroundScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
-    }
-
     @Override
-    protected void onSchedule(Runnable runnable) {
+    public void call(Runnable runnable) {
         boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
         if (isMainThread) {
             sExecutorService.execute(runnable);

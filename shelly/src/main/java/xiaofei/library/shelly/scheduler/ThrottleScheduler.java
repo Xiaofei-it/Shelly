@@ -23,17 +23,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import xiaofei.library.shelly.util.Player;
+
 /**
  * Created by Xiaofei on 16/6/21.
  */
-public class ThrottleScheduler<T> extends Scheduler<T> {
+public class ThrottleScheduler extends Scheduler {
 
     private static ScheduledExecutorService sExecutorService = Executors.newScheduledThreadPool(10);
 
     private static ConcurrentHashMap<Object, Boolean> sRunningMap = new ConcurrentHashMap<Object, Boolean>();
 
-    private Scheduler<T> mScheduler;
-
+    private Scheduler mScheduler;
     private Object mLabel;
 
     private long mDuration;
@@ -54,8 +55,7 @@ public class ThrottleScheduler<T> extends Scheduler<T> {
         }
     };
 
-    public ThrottleScheduler(Scheduler<T> scheduler, Object label, long duration, TimeUnit unit) {
-        super(scheduler);
+    public ThrottleScheduler(Scheduler scheduler, Object label, long duration, TimeUnit unit) {
         mScheduler = scheduler;
         mLabel = label;
         mDuration = duration;
@@ -63,10 +63,10 @@ public class ThrottleScheduler<T> extends Scheduler<T> {
     }
 
     @Override
-    protected void onSchedule(Runnable runnable) {
+    public void call(Runnable runnable) {
         Boolean running = sRunningMap.get(mLabel);
         if (running == null || running) {
-            mScheduler.onSchedule(runnable);
+            mScheduler.call(runnable);
             sRunningMap.put(mLabel, false);
             sExecutorService.schedule(new ResumeRunnable(mLabel), mDuration, mUnit);
         } else {

@@ -18,19 +18,16 @@
 
 package xiaofei.library.shelly.scheduler;
 
+import xiaofei.library.shelly.util.Player;
+
 /**
  * Created by Xiaofei on 16/5/31.
  *
  * For unit test only.
  */
-public class NewThreadScheduler<T> extends Scheduler<T> {
-
-    public <R> NewThreadScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
-    }
-
+public class NewThreadScheduler extends Scheduler {
     @Override
-    protected void onSchedule(Runnable runnable) {
+    public void call(Runnable runnable) {
         new Thread(runnable).start();
     }
 }

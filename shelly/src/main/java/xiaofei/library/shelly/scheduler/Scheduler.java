@@ -18,28 +18,21 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import android.os.Handler;
+import android.os.Looper;
 
-import xiaofei.library.concurrentutils.AugmentedListCanary;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import xiaofei.library.concurrentutils.util.Action;
-import xiaofei.library.concurrentutils.util.Condition;
-import xiaofei.library.shelly.function.Function;
-import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.function.stashfunction.StashFunction;
-import xiaofei.library.shelly.runnable.BlockingRunnable;
 import xiaofei.library.shelly.runnable.ScheduledRunnable;
-import xiaofei.library.shelly.util.DoubleKeyMap;
+import xiaofei.library.shelly.util.Config;
 import xiaofei.library.shelly.util.Player;
-import xiaofei.library.shelly.util.SchedulerInputs;
 
 /**
- * Created by Xiaofei on 16/5/31.
- *
- * Not thread-safe!!!
+ * Created by Xiaofei on 16/7/27.
  */
-public abstract class Scheduler<T> {
+public abstract class Scheduler implements Action<Runnable> {
 
     private static final int STATE_RUNNING = 0;
 
@@ -47,117 +40,15 @@ public abstract class Scheduler<T> {
 
     private volatile int mState;
 
-    private final AugmentedListCanary<SchedulerInputs> mInputs;
-
-    private final DoubleKeyMap mStash;
-
-    public Scheduler(List<T> input) {
-        mInputs = new AugmentedListCanary<SchedulerInputs>();
-        mInputs.add(new SchedulerInputs((List<Object>) input, 0));
+    public Scheduler() {
         mState = STATE_RUNNING;
-        mStash = new DoubleKeyMap();
     }
 
-    public <R> Scheduler(Scheduler<R> scheduler) {
-        mInputs = scheduler.mInputs;
-        mState = scheduler.mState;
-        mStash = scheduler.mStash;
-    }
-
-    public void prepare(Function function) {
-        if (function instanceof StashFunction) {
-            ((StashFunction) function).setStash(mStash);
-        }
-    }
-
-    public void pause() {
+    public final void pause() {
         mState = STATE_PAUSE;
     }
 
-    protected boolean isRunning() {
+    public final boolean isRunning() {
         return mState == STATE_RUNNING;
     }
-
-    protected Runnable onPlay(final Player<T, ?> player) {
-        return new Runnable() {
-            private int mIndex = mInputs.size() - 1;
-            @Override
-            public void run() {
-                player.call((CopyOnWriteArrayList<T>) mInputs.get(mIndex).getInputs());
-            }
-        };
-    }
-
-    protected abstract void onSchedule(Runnable runnable);
-
-    //This method is not thread-safe! But we always call this in a single thread.
-    public final <R> Scheduler<R> scheduleRunnable(List<? extends Runnable> runnables) {
-        synchronized (this) {
-            if (isRunning()) {
-                int size = mInputs.size();
-                for (Runnable runnable : runnables) {
-                    onSchedule(new ScheduledRunnable<T>(this, runnable, size));
-                }
-            }
-            return (Scheduler<R>) this;
-        }
-    }
-
-    public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
-        synchronized (this) {
-            if (isRunning()) {
-                int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
-                for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
-                    onSchedule(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
-                }
-            }
-            return (Scheduler<R>) this;
-        }
-    }
-
-    //This method is not thread-safe! But we always call this in a single thread.
-    public final void play(Player<T, ?> player) {
-        synchronized (this) {
-            if (isRunning()) {
-                scheduleRunnable(Collections.singletonList(onPlay(player)));
-            }
-        }
-    }
-
-    public void appendAt(int index, final CopyOnWriteArrayList<Object> object) {
-        mInputs.action(index, new Action<SchedulerInputs>() {
-            @Override
-            public void call(SchedulerInputs o) {
-                o.getInputs().addAll(object);
-                o.getFinishedNumber().getAndIncrement();
-            }
-        });
-    }
-
-    public final CopyOnWriteArrayList<Object> waitForFinishing() {
-        int index = mInputs.size() - 1;
-        return mInputs.get(index, new Condition<SchedulerInputs>() {
-            @Override
-            public boolean satisfy(SchedulerInputs o) {
-                return o.getFinishedNumber().get() == o.getFunctionNumber();
-            }
-        }).getInputs();
-    }
-
-    public CopyOnWriteArrayList<Object> getInput(int index) {
-        return mInputs.get(index).getInputs();
-    }
-
-    public AugmentedListCanary<SchedulerInputs> getInputs() {
-        return mInputs;
-    }
-
 }
-
-//TODO 这个应该做成player，里面包含scheduler。本来的player要换个名字！
-
-//TODO 下周完成所有的！！！
-
-//TODO 这个想法可以。文档可以写了。
-
-//TODO 好忧伤

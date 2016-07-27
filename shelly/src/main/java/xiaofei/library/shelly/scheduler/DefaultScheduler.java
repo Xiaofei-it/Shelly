@@ -20,21 +20,15 @@ package xiaofei.library.shelly.scheduler;
 
 import java.util.List;
 
+import xiaofei.library.shelly.util.Player;
+
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class DefaultScheduler<T> extends Scheduler<T> {
-
-    public DefaultScheduler(List<T> input) {
-        super(input);
-    }
-
-    public <R> DefaultScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
-    }
+public class DefaultScheduler extends Scheduler {
 
     @Override
-    protected void onSchedule(Runnable runnable) {
+    public void call(Runnable runnable) {
         runnable.run();
     }
 

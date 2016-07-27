@@ -19,7 +19,7 @@
 package xiaofei.library.shelly.runnable;
 
 import xiaofei.library.concurrentutils.util.Condition;
-import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.util.Player;
 import xiaofei.library.shelly.util.SchedulerInputs;
 
 /**
@@ -27,14 +27,14 @@ import xiaofei.library.shelly.util.SchedulerInputs;
  */
 public class ScheduledRunnable<R> implements Runnable {
 
-    private Scheduler<R> mScheduler;
+    private Player<R> mPlayer;
 
     private Runnable mRunnable;
 
     private int mWaiting;
 
-    public ScheduledRunnable(Scheduler<R> scheduler, Runnable runnable, int waiting) {
-        mScheduler = scheduler;
+    public ScheduledRunnable(Player<R> player, Runnable runnable, int waiting) {
+        mPlayer = player;
         mRunnable = runnable;
         mWaiting = waiting;
     }
@@ -45,7 +45,7 @@ public class ScheduledRunnable<R> implements Runnable {
 
     public void waitForInput() {
         int waitingIndex = mWaiting - 1;
-        mScheduler.getInputs().wait(waitingIndex, new Condition<SchedulerInputs>() {
+        mPlayer.getInputs().wait(waitingIndex, new Condition<SchedulerInputs>() {
             @Override
             public boolean satisfy(SchedulerInputs o) {
                 return o.getFinishedNumber().get() == o.getFunctionNumber();
@@ -54,7 +54,7 @@ public class ScheduledRunnable<R> implements Runnable {
     }
 
     public boolean inputSet() {
-        return mScheduler.getInputs().satisfy(mWaiting - 1, new Condition<SchedulerInputs>() {
+        return mPlayer.getInputs().satisfy(mWaiting - 1, new Condition<SchedulerInputs>() {
             @Override
             public boolean satisfy(SchedulerInputs o) {
                 return o.getFinishedNumber().get() == o.getFunctionNumber();

@@ -29,15 +29,15 @@ import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.operator.ListIdentityOperator;
 import xiaofei.library.shelly.tuple.Triple;
-import xiaofei.library.shelly.util.Player;
+import xiaofei.library.shelly.util.Tile;
 
 /**
  * Created by Xiaofei on 16/6/21.
  */
 public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
 
-    protected TaskDomino(Object label, Player<T, Triple<Boolean, R, U>> player) {
-        super(label, player);
+    protected TaskDomino(Object label, Tile<T, Triple<Boolean, R, U>> tile) {
+        super(label, tile);
     }
 
     private TaskDomino(Domino<T, Triple<Boolean, R, U>> domino) {
