@@ -26,13 +26,13 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Xiaofei on 16/6/21.
  */
-public class ThrottleScheduler<T> extends Scheduler<T> {
+public class ThrottlePlayer<T> extends Player<T> {
 
     private static ScheduledExecutorService sExecutorService = Executors.newScheduledThreadPool(10);
 
     private static ConcurrentHashMap<Object, Boolean> sRunningMap = new ConcurrentHashMap<Object, Boolean>();
 
-    private Scheduler<T> mScheduler;
+    private Player<T> mPlayer;
 
     private Object mLabel;
 
@@ -54,9 +54,9 @@ public class ThrottleScheduler<T> extends Scheduler<T> {
         }
     };
 
-    public ThrottleScheduler(Scheduler<T> scheduler, Object label, long duration, TimeUnit unit) {
-        super(scheduler);
-        mScheduler = scheduler;
+    public ThrottlePlayer(Player<T> player, Object label, long duration, TimeUnit unit) {
+        super(player);
+        mPlayer = player;
         mLabel = label;
         mDuration = duration;
         mUnit = unit;
@@ -66,7 +66,7 @@ public class ThrottleScheduler<T> extends Scheduler<T> {
     protected void onSchedule(Runnable runnable) {
         Boolean running = sRunningMap.get(mLabel);
         if (running == null || running) {
-            mScheduler.onSchedule(runnable);
+            mPlayer.onSchedule(runnable);
             sRunningMap.put(mLabel, false);
             sExecutorService.schedule(new ResumeRunnable(mLabel), mDuration, mUnit);
         } else {

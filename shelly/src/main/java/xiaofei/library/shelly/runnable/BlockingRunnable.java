@@ -21,27 +21,27 @@ package xiaofei.library.shelly.runnable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.scheduler.Player;
 
 /**
  * Created by Xiaofei on 16/6/23.
  */
 public class BlockingRunnable<T, R> implements Runnable {
 
-    private Scheduler<T> mScheduler;
+    private Player<T> mPlayer;
 
     private int mIndex;
 
     private Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> mFunction;
 
-    public BlockingRunnable(Scheduler<T> scheduler, Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function, int index) {
-        mScheduler = scheduler;
+    public BlockingRunnable(Player<T> player, Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function, int index) {
+        mPlayer = player;
         mFunction = function;
         mIndex = index;
     }
 
     protected final CopyOnWriteArrayList<T> getPreviousInput() {
-        return (CopyOnWriteArrayList<T>) mScheduler.getInput(mIndex - 1);
+        return (CopyOnWriteArrayList<T>) mPlayer.getInput(mIndex - 1);
     }
 
     @Override
@@ -50,6 +50,6 @@ public class BlockingRunnable<T, R> implements Runnable {
         if (input == null) {
             throw new IllegalStateException();
         }
-        mScheduler.appendAt(mIndex, (CopyOnWriteArrayList<Object>) input);
+        mPlayer.appendAt(mIndex, (CopyOnWriteArrayList<Object>) input);
     }
 }

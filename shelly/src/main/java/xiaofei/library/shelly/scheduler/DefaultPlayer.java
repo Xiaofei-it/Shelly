@@ -23,14 +23,14 @@ import java.util.List;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class DefaultScheduler<T> extends Scheduler<T> {
+public class DefaultPlayer<T> extends Player<T> {
 
-    public DefaultScheduler(List<T> input) {
+    public DefaultPlayer(List<T> input) {
         super(input);
     }
 
-    public <R> DefaultScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
+    public <R> DefaultPlayer(Player<R> player) {
+        super(player);
     }
 
     @Override

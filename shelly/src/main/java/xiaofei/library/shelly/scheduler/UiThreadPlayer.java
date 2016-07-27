@@ -30,15 +30,15 @@ import xiaofei.library.shelly.util.Config;
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class UiThreadScheduler<T> extends Scheduler<T> {
+public class UiThreadPlayer<T> extends Player<T> {
 
     private static Handler sHandler = new Handler(Looper.getMainLooper());
 
     //下面这个改变比较重要！！！
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
-    public <R> UiThreadScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
+    public <R> UiThreadPlayer(Player<R> player) {
+        super(player);
     }
 
     private void scheduleInternal(Runnable runnable) {

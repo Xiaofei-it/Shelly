@@ -39,7 +39,7 @@ import xiaofei.library.shelly.util.SchedulerInputs;
  *
  * Not thread-safe!!!
  */
-public abstract class Scheduler<T> {
+public abstract class Player<T> {
 
     private static final int STATE_RUNNING = 0;
 
@@ -51,17 +51,17 @@ public abstract class Scheduler<T> {
 
     private final DoubleKeyMap mStash;
 
-    public Scheduler(List<T> input) {
+    public Player(List<T> input) {
         mInputs = new AugmentedListCanary<SchedulerInputs>();
         mInputs.add(new SchedulerInputs((List<Object>) input, 0));
         mState = STATE_RUNNING;
         mStash = new DoubleKeyMap();
     }
 
-    public <R> Scheduler(Scheduler<R> scheduler) {
-        mInputs = scheduler.mInputs;
-        mState = scheduler.mState;
-        mStash = scheduler.mStash;
+    public <R> Player(Player<R> player) {
+        mInputs = player.mInputs;
+        mState = player.mState;
+        mStash = player.mStash;
     }
 
     public void prepare(Function function) {
@@ -91,7 +91,7 @@ public abstract class Scheduler<T> {
     protected abstract void onSchedule(Runnable runnable);
 
     //This method is not thread-safe! But we always call this in a single thread.
-    public final <R> Scheduler<R> scheduleRunnable(List<? extends Runnable> runnables) {
+    public final <R> Player<R> scheduleRunnable(List<? extends Runnable> runnables) {
         synchronized (this) {
             if (isRunning()) {
                 int size = mInputs.size();
@@ -99,11 +99,11 @@ public abstract class Scheduler<T> {
                     onSchedule(new ScheduledRunnable<T>(this, runnable, size));
                 }
             }
-            return (Scheduler<R>) this;
+            return (Player<R>) this;
         }
     }
 
-    public final <R> Scheduler<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
+    public final <R> Player<R> scheduleFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
             if (isRunning()) {
                 int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
@@ -111,7 +111,7 @@ public abstract class Scheduler<T> {
                     onSchedule(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
                 }
             }
-            return (Scheduler<R>) this;
+            return (Player<R>) this;
         }
     }
 

@@ -23,10 +23,10 @@ package xiaofei.library.shelly.scheduler;
  *
  * For unit test only.
  */
-public class NewThreadScheduler<T> extends Scheduler<T> {
+public class NewThreadPlayer<T> extends Player<T> {
 
-    public <R> NewThreadScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
+    public <R> NewThreadPlayer(Player<R> player) {
+        super(player);
     }
 
     @Override

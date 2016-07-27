@@ -21,11 +21,11 @@ package xiaofei.library.shelly.util;
 import java.util.List;
 
 import xiaofei.library.shelly.function.Function1;
-import xiaofei.library.shelly.scheduler.Scheduler;
+import xiaofei.library.shelly.scheduler.Player;
 
 /**
  * Created by Xiaofei on 16/5/27.
  */
-public interface Tile<T, R> extends Function1<List<T>, Scheduler<R>> {
+public interface Tile<T, R> extends Function1<List<T>, Player<R>> {
 
 }

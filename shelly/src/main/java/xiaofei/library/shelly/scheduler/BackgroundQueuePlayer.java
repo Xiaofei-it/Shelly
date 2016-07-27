@@ -18,30 +18,23 @@
 
 package xiaofei.library.shelly.scheduler;
 
-import android.os.Looper;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
  * Created by Xiaofei on 16/5/31.
  */
-public class BackgroundScheduler<T> extends Scheduler<T> {
+public class BackgroundQueuePlayer<T> extends Player<T> {
 
-    private static ExecutorService sExecutorService = Executors.newCachedThreadPool();
+    private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
 
-    public <R> BackgroundScheduler(Scheduler<R> scheduler) {
-        super(scheduler);
+    public <R> BackgroundQueuePlayer(Player<R> player) {
+        super(player);
     }
 
     @Override
     protected void onSchedule(Runnable runnable) {
-        boolean isMainThread = Looper.getMainLooper() == Looper.myLooper();
-        if (isMainThread) {
-            sExecutorService.execute(runnable);
-        } else {
-            runnable.run();
-        }
+        mExecutorService.execute(runnable);
     }
 
 }
