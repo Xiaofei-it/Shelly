@@ -196,6 +196,12 @@ String or something else.
 
 More methods will be discussed in the future.
 
+####Task Domino
+
+####Retrofit Domino
+
+####Merge, combine and others
+
 ###Domino invocation
 
 When you want to invoke a domino, do the following:
