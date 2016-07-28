@@ -190,3 +190,18 @@ can be found in the Domino class.
 ```
 
 Remember to commit the domino finally!
+
+Each domino should be specified a unique label, which is an object, i.e. it can be an Integer, a
+String or something else.
+
+More methods will be discussed in the future.
+
+###Domino invocation
+
+When you want to invoke a domino, do the following:
+
+```
+Shelly.playDomino("Example", "Single String"); //Pass a single String to the domino
+
+Shelly.playDomino("Example", "First String", "Second String"); //Pass two Strings to the domino
+```
