@@ -28,30 +28,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThrottleScheduler extends Scheduler {
 
-    private static ScheduledExecutorService sExecutorService = Executors.newScheduledThreadPool(10);
+    private static final ScheduledExecutorService sExecutorService = Executors.newScheduledThreadPool(10);
 
-    private static ConcurrentHashMap<Object, Boolean> sRunningMap = new ConcurrentHashMap<Object, Boolean>();
+    private static final ConcurrentHashMap<Object, Boolean> sRunningMap = new ConcurrentHashMap<Object, Boolean>();
 
-    private Scheduler mScheduler;
-    private Object mLabel;
+    private final Scheduler mScheduler;
 
-    private long mDuration;
+    private final Object mLabel;
 
-    private TimeUnit mUnit;
+    private final long mDuration;
 
-    private static class ResumeRunnable implements Runnable {
-
-        private Object mLabel;
-
-        ResumeRunnable(Object label) {
-            mLabel = label;
-        }
-
-        @Override
-        public void run() {
-            sRunningMap.put(mLabel, true);
-        }
-    };
+    private final TimeUnit mUnit;
 
     public ThrottleScheduler(Scheduler scheduler, Object label, long duration, TimeUnit unit) {
         mScheduler = scheduler;
@@ -66,11 +53,24 @@ public class ThrottleScheduler extends Scheduler {
         if (running == null || running) {
             mScheduler.call(runnable);
             sRunningMap.put(mLabel, false);
-            sExecutorService.schedule(new ResumeRunnable(mLabel), mDuration, mUnit);
+            sExecutorService.schedule(new ResumingRunnable(mLabel), mDuration, mUnit);
         } else {
             pause();
         }
     }
 
+    private static class ResumingRunnable implements Runnable {
+
+        private final Object mLabel;
+
+        ResumingRunnable(Object label) {
+            mLabel = label;
+        }
+
+        @Override
+        public void run() {
+            sRunningMap.put(mLabel, true);
+        }
+    }
 
 }
