@@ -40,15 +40,15 @@ import xiaofei.library.shelly.scheduler.Scheduler;
  */
 public class Player<T> {
 
-    private final AugmentedListCanary<SchedulerInputs> mInputs;
+    private final AugmentedListCanary<PlayerInputs> mInputs;
 
     private final DoubleKeyMap mStash;
 
     private Scheduler mScheduler;
 
     public Player(List<T> input) {
-        mInputs = new AugmentedListCanary<SchedulerInputs>();
-        mInputs.add(new SchedulerInputs((List<Object>) input, 0));
+        mInputs = new AugmentedListCanary<PlayerInputs>();
+        mInputs.add(new PlayerInputs((List<Object>) input, 0));
         mStash = new DoubleKeyMap();
         mScheduler = new DefaultScheduler();
     }
@@ -93,7 +93,7 @@ public class Player<T> {
     public final <R> Player<R> playFunction(List<? extends Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>>> functions) {
         synchronized (this) {
             if (mScheduler.isRunning()) {
-                int index = mInputs.add(new SchedulerInputs(functions.size())) - 1;
+                int index = mInputs.add(new PlayerInputs(functions.size())) - 1;
                 for (Function1<CopyOnWriteArrayList<T>, CopyOnWriteArrayList<R>> function : functions) {
                     mScheduler.call(new ScheduledRunnable<T>(this, new BlockingRunnable<T, R>(this, function, index), index));
                 }
@@ -112,9 +112,9 @@ public class Player<T> {
     }
 
     public void appendAt(int index, final CopyOnWriteArrayList<Object> object) {
-        mInputs.action(index, new Action<SchedulerInputs>() {
+        mInputs.action(index, new Action<PlayerInputs>() {
             @Override
-            public void call(SchedulerInputs o) {
+            public void call(PlayerInputs o) {
                 o.getInputs().addAll(object);
                 o.getFinishedNumber().getAndIncrement();
             }
@@ -123,9 +123,9 @@ public class Player<T> {
 
     public final CopyOnWriteArrayList<Object> waitForFinishing() {
         int index = mInputs.size() - 1;
-        return mInputs.get(index, new Condition<SchedulerInputs>() {
+        return mInputs.get(index, new Condition<PlayerInputs>() {
             @Override
-            public boolean satisfy(SchedulerInputs o) {
+            public boolean satisfy(PlayerInputs o) {
                 return o.getFinishedNumber().get() == o.getFunctionNumber();
             }
         }).getInputs();
@@ -135,7 +135,7 @@ public class Player<T> {
         return mInputs.get(index).getInputs();
     }
 
-    public AugmentedListCanary<SchedulerInputs> getInputs() {
+    public AugmentedListCanary<PlayerInputs> getInputs() {
         return mInputs;
     }
 

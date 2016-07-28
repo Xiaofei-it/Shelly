@@ -20,7 +20,7 @@ package xiaofei.library.shelly.runnable;
 
 import xiaofei.library.concurrentutils.util.Condition;
 import xiaofei.library.shelly.util.Player;
-import xiaofei.library.shelly.util.SchedulerInputs;
+import xiaofei.library.shelly.util.PlayerInputs;
 
 /**
  * Created by Xiaofei on 16/6/23.
@@ -45,18 +45,18 @@ public class ScheduledRunnable<R> implements Runnable {
 
     public void waitForInput() {
         int waitingIndex = mWaiting - 1;
-        mPlayer.getInputs().wait(waitingIndex, new Condition<SchedulerInputs>() {
+        mPlayer.getInputs().wait(waitingIndex, new Condition<PlayerInputs>() {
             @Override
-            public boolean satisfy(SchedulerInputs o) {
+            public boolean satisfy(PlayerInputs o) {
                 return o.getFinishedNumber().get() == o.getFunctionNumber();
             }
         });
     }
 
     public boolean inputSet() {
-        return mPlayer.getInputs().satisfy(mWaiting - 1, new Condition<SchedulerInputs>() {
+        return mPlayer.getInputs().satisfy(mWaiting - 1, new Condition<PlayerInputs>() {
             @Override
-            public boolean satisfy(SchedulerInputs o) {
+            public boolean satisfy(PlayerInputs o) {
                 return o.getFinishedNumber().get() == o.getFunctionNumber();
             }
         });

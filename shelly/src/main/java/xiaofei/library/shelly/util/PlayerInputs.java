@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * Created by Xiaofei on 16/6/23.
  */
-public class SchedulerInputs {
+public class PlayerInputs {
 
     private final CopyOnWriteArrayList<Object> mInputs;
 
@@ -33,7 +33,7 @@ public class SchedulerInputs {
 
     private final AtomicInteger mFinishedNumber;
 
-    public SchedulerInputs(List<Object> list, int functionNumber) {
+    public PlayerInputs(List<Object> list, int functionNumber) {
         if (list instanceof CopyOnWriteArrayList<?>) {
             mInputs = (CopyOnWriteArrayList<Object>) list;
         } else {
@@ -43,7 +43,7 @@ public class SchedulerInputs {
         mFinishedNumber = new AtomicInteger();
     }
 
-    public SchedulerInputs(int functionNumber) {
+    public PlayerInputs(int functionNumber) {
         mInputs = new CopyOnWriteArrayList<Object>();
         mFunctionNumber = functionNumber;
         mFinishedNumber = new AtomicInteger();
