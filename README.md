@@ -198,7 +198,13 @@ More methods will be discussed in the future.
 
 ####Task Domino
 
+The Shelly library provides a method for executing a task and processing the result according to the
+result or the failure of the task after its execution.
+
 ####Retrofit Domino
+
+The Shelly library provides a method for executing a task and processing the result according to the
+result or the failure of the task after its execution.
 
 ####Merge, combine and others
 
