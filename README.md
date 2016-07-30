@@ -191,7 +191,7 @@ can be found in the Domino class.
 
 Remember to commit the domino finally!
 
-Each domino should be specified a unique label, which is an object, i.e. it can be an Integer, a
+Each domino should be specified a unique label, which is an object, i.e. an Integer, a
 String or something else.
 
 More methods will be discussed in the future.
@@ -201,10 +201,12 @@ More methods will be discussed in the future.
 The Shelly library provides a method for executing a task and processing the result according to the
 result or the failure of the task after its execution.
 
+
+
 ####Retrofit Domino
 
-The Shelly library provides a method for executing a task and processing the result according to the
-result or the failure of the task after its execution.
+The Shelly library provides a method for using Retrofit to send a HTTP request and processing the
+result according to the result or the failure of the request.
 
 ####Merge, combine and others
 

@@ -18,6 +18,9 @@
 
 package xiaofei.library.shelly.domino;
 
+import android.graphics.Bitmap;
+
+import java.io.IOException;
 import java.util.List;
 
 import xiaofei.library.shelly.Shelly;
@@ -26,104 +29,176 @@ import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
+import xiaofei.library.shelly.task.Task;
 
 /**
  * Created by Xiaofei on 16/7/28.
  */
 public class ReadmeExample {
-    public class MyActivity{
-
-    }
     public void f() {
-        //Create a domino labeled "Example" which takes one or more Strings as input
+        class MyActivity {}
+        // Create a domino labeled "Example" which takes one or more Strings as input
         Shelly.<String>createDomino("Example")
-                //Perform an action. The action is performed once.
+                // Perform an action. The action is performed once.
                 .target(new Action0() {
                     @Override
                     public void call() {
-                        //Do something
+                        // Do something
                     }
                 })
-                //Perform an action which takes the String as input.
-                //If one String is passed here, the action is performed once.
-                //If two Strings are passed here, the action is performed twice.
+                // Perform an action which takes the String as input.
+                // If one String is passed here, the action is performed once.
+                // If two Strings are passed here, the action is performed twice.
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
-                        //Do something
+                        // Do something
                     }
                 })
-                //Perform another action which takes the String as input.
-                //If one String is passed here, the action is performed once.
-                //If two Strings are passed here, the action is performed twice.
+                // Perform another action which takes the String as input.
+                // If one String is passed here, the action is performed once.
+                // If two Strings are passed here, the action is performed twice.
                 .target(new Action1<String>() {
                     @Override
                     public void call(String input) {
-                        //Do something
+                        // Do something
                     }
                 })
-                //The above actions is performed in the thread in which the domino is invoked.
-                //Now the following actions will be perform in background.
+                // The above actions is performed in the thread in which the domino is invoked.
+                // Now the following actions will be performed in background.
                 .background()
-                //Transform the String into an integer.
-                //If one String is passed here, one integer will be passed to the following actions.
-                //If two Strings are passed here, two integers will be passed to the following actions.
+                // Transform the String into an integer.
+                // If one String is passed here, one integer will be passed to the following actions.
+                // If two Strings are passed here, two integers will be passed to the following actions.
                 .map(new Function1<String, Integer>() {
                     @Override
                     public Integer call(String input) {
                         return null;
                     }
                 })
-                //The following actions will be perform in a queue in background.
+                // The following actions will be performed in a queue in background.
                 .backgroundQueue()
-                //Use a filter to filter the integers.
-                //Only the integers labeled "true" will be passed to the following actions.
+                // Use a filter to filter the integers.
+                // Only the integers labeled "true" will be passed to the following actions.
                 .filter(new Function1<Integer, Boolean>() {
                     @Override
                     public Boolean call(Integer input) {
                         return false;
                     }
                 })
-                //Pass the integer into the function and the function takes an integer as input
-                //and return a list of Strings. Each String will be passed to the following actions.
-                //If an integer is passed here, and the function returns two Strings,
-                //then two Strings will be passed to the following actions.
-                //If two integers are passed here, and the function takes an integer as input and
-                //returns two Strings, then we get four Strings here,
-                //then four Strings will be passed to the following actions.
+                // Pass the integer into the function and the function takes an integer as input
+                // and return a list of Strings. Each String will be passed to the following actions.
+                // If an integer is passed here, and the function returns two Strings,
+                // then two Strings will be passed to the following actions.
+                // If two integers are passed here, and the function takes an integer as input and
+                // returns two Strings, then we get four Strings here,
+                // then four Strings will be passed to the following actions.
                 .flatMap(new Function1<Integer, List<String>>() {
                     @Override
                     public List<String> call(Integer input) {
                         return null;
                     }
                 })
-                //The following actions will be perform in the main thread, i.e. the UI thread.
+                // The following actions will be performed in the main thread, i.e. the UI thread.
                 .uiThread()
-                //Perform an action on all registered instances of MyActivity.
+                // Perform an action on all registered instances of MyActivity.
                 .target(MyActivity.class, new TargetAction0<MyActivity>() {
                     @Override
                     public void call(MyActivity myActivity) {
-                        //Do something
+                        // Do something
                     }
                 })
-                //Pass all the Strings into the function and get a single double.
-                //Now the following actions will receive only one single input which is a double.
+                // Pass all the Strings into the function and get a single double.
+                // Now the following actions will receive only one single input which is a double.
                 .reduce(new Function1<List<String>, Double>() {
                     @Override
                     public Double call(List<String> input) {
                         return null;
                     }
                 })
-                //Perform an action on all registered instances of MyActivity.
-                //If there are two instances, then:
-                //If one String is passed here, the action is performed twice.
-                //If two Strings are passed here, the action is performed four times.
+                // Perform an action on all registered instances of MyActivity.
+                // If there are two instances, then:
+                // If one String is passed here, the action is performed twice.
+                // If two Strings are passed here, the action is performed four times.
                 .target(MyActivity.class, new TargetAction1<MyActivity, Double>() {
                     @Override
                     public void call(MyActivity myActivity, Double input) {
-                        //Do something
+                        // Do something
                     }
                 })
                 .commit();
+        class Bitmap {}
+        class ImageView {}
+        // Create a domino labeled "LoadingBitmap" which takes a String as input,
+        // which is the path of a bitmap.
+        Shelly.<String>createDomino("LoadingBitmap")
+                // The following actions will be performed in background.
+                .background()
+                // Execute a task which loads a bitmap according to the path.
+                .beginTask(new Task<String, Bitmap, Exception>() {
+                    private Bitmap load(String path) throws IOException {
+                        if (path == null) {
+                            throw new IOException();
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    @Override
+                    protected void onExecute(String input) {
+                        // We load the bitmap.
+                        // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
+                        // Otherwise, the Domino gets stuck here.
+                        try {
+                            Bitmap bitmap = load(input);
+                            notifySuccess(bitmap);
+                        } catch (IOException e) {
+                            notifyFailure(e);
+                        }
+                    }
+                })
+                // The following performs different actions according to the result or the failure
+                // of the task.
+                .onSuccess(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                .onSuccess(new Action1<Bitmap>() {
+                    @Override
+                    public void call(Bitmap input) {
+
+                    }
+                })
+                .uiThread()
+                .onSuccess(ImageView.class, new TargetAction1<ImageView, Bitmap>() {
+                    @Override
+                    public void call(ImageView imageView, Bitmap input) {
+
+                    }
+                })
+                .background()
+                .onFailure(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                .onFailure(new Action1<Exception>() {
+                    @Override
+                    public void call(Exception input) {
+
+                    }
+                })
+                .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
+                    @Override
+                    public void call(ImageView imageView, Exception input) {
+
+                    }
+                })
+                .endTask()
+                .commit();
+
     }
 }
