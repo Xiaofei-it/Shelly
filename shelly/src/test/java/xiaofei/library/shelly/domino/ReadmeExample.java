@@ -143,7 +143,6 @@ public class ReadmeExample {
                             return null;
                         }
                     }
-
                     @Override
                     protected void onExecute(String input) {
                         // We load the bitmap.
@@ -159,42 +158,54 @@ public class ReadmeExample {
                 })
                 // The following performs different actions according to the result or the failure
                 // of the task.
+
+                // If the execution of the above task succeeds, perform an action.
                 .onSuccess(new Action0() {
                     @Override
                     public void call() {
-
+                        // Do something.
                     }
                 })
+                // If the execution of the above task succeeds,
+                // perform an action which takes a bitmap as input.
                 .onSuccess(new Action1<Bitmap>() {
                     @Override
                     public void call(Bitmap input) {
-
+                        // Do something.
                     }
                 })
+                // The following actions will be performed in the main thread, i.e. the UI thread.
                 .uiThread()
+                // If the execution of the above task succeeds,
+                // perform an action on all registered instances of ImageView.
                 .onSuccess(ImageView.class, new TargetAction1<ImageView, Bitmap>() {
                     @Override
                     public void call(ImageView imageView, Bitmap input) {
-
+                        // Do something.
                     }
                 })
+                // The following actions will be performed in background.
                 .background()
+                // If the execution of the above task fails, perform an action.
                 .onFailure(new Action0() {
                     @Override
                     public void call() {
-
+                        // Do something.
                     }
                 })
+                // If the execution of the above task fails, print the stack trace fo the exception.
                 .onFailure(new Action1<Exception>() {
                     @Override
                     public void call(Exception input) {
-
+                        input.printStackTrace();
                     }
                 })
+                // If the execution of the above task fails,
+                // perform an action on all registered instances of ImageView.
                 .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
                     @Override
                     public void call(ImageView imageView, Exception input) {
-
+                        // Do something.
                     }
                 })
                 .endTask()

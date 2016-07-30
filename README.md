@@ -22,7 +22,7 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 
 ##Phylosophy
 
-In business-logic-oriented programming, a change of a business object may causes changes of many
+In business-logic-oriented programming, a change of a business object may cause changes of many
 components and the complexity of business logic will increase coupling between components.
 To decrease coupling we usually use listeners (observers) or EventBus, which is effective and easy
 to use. However, these techniques have the following disadvantages:
@@ -66,7 +66,7 @@ created) and the objects passed to them as parameters and executes the statement
 
 The Shelly library provides many methods to compose a method chain, including a variety of methods
 for performing different actions, methods for data transformation and methods for thread scheduling.
-Also it, as is discussed above, provides a EventBus-like feature for preforming actions on registered
+Also it, as is discussed above, provides an EventBus-like feature for preforming actions on registered
 components. Therefore, a method chain provides you with a global view of what happens after the
 change of a business object. The method chain is named "Domino" in the Shelly library for it represents
 a series of actions to perform one after the other, as the domino game does.
@@ -196,20 +196,6 @@ String or something else.
 
 More methods will be discussed in the future.
 
-####Task Domino
-
-The Shelly library provides a method for executing a task and processing the result according to the
-result or the failure of the task after its execution.
-
-
-
-####Retrofit Domino
-
-The Shelly library provides a method for using Retrofit to send a HTTP request and processing the
-result according to the result or the failure of the request.
-
-####Merge, combine and others
-
 ###Domino invocation
 
 When you want to invoke a domino, do the following:
@@ -219,3 +205,111 @@ Shelly.playDomino("Example", "Single String"); //Pass a single String to the dom
 
 Shelly.playDomino("Example", "First String", "Second String"); //Pass two Strings to the domino
 ```
+
+As is shown above, a unique label is needed to indicate the Domino to be invoked,
+thus you should specify a unique lable when creating a Domino, otherwise the created Domino shall
+not be committed.
+
+However, A Domino which do not have a label (anonymous Domino) is also quite useful in that,
+there exist some situation where you only need to create a Domino but not want to commit it.
+For example, you can perform an action on an anonymous Domino, or you can merge two anonymous
+Dominoes. See the following for the details.
+
+####Task Domino
+
+The Shelly library provides a method for executing a task and processing the result according to the
+result or the failure of the task after its execution.
+
+Here is an example.
+
+```
+        // Create a domino labeled "LoadingBitmap" which takes a String as input,
+        // which is the path of a bitmap.
+        Shelly.<String>createDomino("LoadingBitmap")
+                // The following actions will be performed in background.
+                .background()
+                // Execute a task which loads a bitmap according to the path.
+                .beginTask(new Task<String, Bitmap, Exception>() {
+                    private Bitmap load(String path) throws IOException {
+                        if (path == null) {
+                            throw new IOException();
+                        } else {
+                            return null;
+                        }
+                    }
+                    @Override
+                    protected void onExecute(String input) {
+                        // We load the bitmap.
+                        // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
+                        // Otherwise, the Domino gets stuck here.
+                        try {
+                            Bitmap bitmap = load(input);
+                            notifySuccess(bitmap);
+                        } catch (IOException e) {
+                            notifyFailure(e);
+                        }
+                    }
+                })
+                // The following performs different actions according to the result or the failure
+                // of the task.
+
+                // If the execution of the above task succeeds, perform an action.
+                .onSuccess(new Action0() {
+                    @Override
+                    public void call() {
+                        // Do something.
+                    }
+                })
+                // If the execution of the above task succeeds,
+                // perform an action which takes a bitmap as input.
+                .onSuccess(new Action1<Bitmap>() {
+                    @Override
+                    public void call(Bitmap input) {
+                        // Do something.
+                    }
+                })
+                // The following actions will be performed in the main thread, i.e. the UI thread.
+                .uiThread()
+                // If the execution of the above task succeeds,
+                // perform an action on all registered instances of ImageView.
+                .onSuccess(ImageView.class, new TargetAction1<ImageView, Bitmap>() {
+                    @Override
+                    public void call(ImageView imageView, Bitmap input) {
+                        // Do something.
+                    }
+                })
+                // The following actions will be performed in background.
+                .background()
+                // If the execution of the above task fails, perform an action.
+                .onFailure(new Action0() {
+                    @Override
+                    public void call() {
+                        // Do something.
+                    }
+                })
+                // If the execution of the above task fails, print the stack trace fo the exception.
+                .onFailure(new Action1<Exception>() {
+                    @Override
+                    public void call(Exception input) {
+                        input.printStackTrace();
+                    }
+                })
+                // If the execution of the above task fails,
+                // perform an action on all registered instances of ImageView.
+                .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
+                    @Override
+                    public void call(ImageView imageView, Exception input) {
+                        // Do something.
+                    }
+                })
+                .endTask()
+                .commit();
+
+```
+
+####Retrofit Domino
+
+The Shelly library provides a method for using Retrofit to send a HTTP request and processing the
+result according to the result or the failure of the request.
+
+####Merge, combine and others
