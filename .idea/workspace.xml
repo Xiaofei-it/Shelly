@@ -10,8 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +42,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8327138">
-              <caret line="212" column="47" selection-start-line="212" selection-start-column="47" selection-end-line="212" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.47945204">
+              <caret line="218" column="4" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -52,8 +52,8 @@
       <file leaf-file-name="ReadmeExample.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.1296296">
-              <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+            <state vertical-scroll-proportion="-8.074074">
+              <caret line="212" column="0" selection-start-line="131" selection-start-column="8" selection-end-line="212" selection-end-column="0" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -4413,8 +4413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.1296296">
-          <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+        <state vertical-scroll-proportion="-8.074074">
+          <caret line="212" column="0" selection-start-line="131" selection-start-column="8" selection-end-line="212" selection-end-column="0" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -4444,8 +4444,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8327138">
-          <caret line="212" column="47" selection-start-line="212" selection-start-column="47" selection-end-line="212" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.47945204">
+          <caret line="218" column="4" selection-start-line="218" selection-start-column="4" selection-end-line="218" selection-end-column="4" />
           <folding />
         </state>
       </provider>

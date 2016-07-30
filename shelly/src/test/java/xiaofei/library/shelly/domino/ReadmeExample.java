@@ -18,8 +18,6 @@
 
 package xiaofei.library.shelly.domino;
 
-import android.graphics.Bitmap;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -30,6 +28,7 @@ import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.task.Task;
+import xiaofei.library.shelly.tuple.Pair;
 
 /**
  * Created by Xiaofei on 16/7/28.
@@ -127,6 +126,40 @@ public class ReadmeExample {
                     }
                 })
                 .commit();
+        Shelly.<String>createDomino("Example 2")
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+
+                    }
+                })
+                .target(Shelly.<String>createDomino()
+                            .map(new Function1<String, Integer>() {
+                                @Override
+                                public Integer call(String input) {
+                                    return null;
+                                }
+                            })
+                            .target(new Action1<Integer>() {
+                                @Override
+                                public void call(Integer input) {
+
+                                }
+                            })
+                            .target(new Action0() {
+                                @Override
+                                public void call() {
+
+                                }
+                            })
+                )
+                .target(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+
+                    }
+                })
+                .commit();
         class Bitmap {}
         class ImageView {}
         // Create a domino labeled "LoadingBitmap" which takes a String as input,
@@ -210,6 +243,92 @@ public class ReadmeExample {
                 })
                 .endTask()
                 .commit();
+        // Create a domino labeled "LoadingBitmap" which takes a String as input,
+        // which is the path of a bitmap.
+        Shelly.<String>createDomino("LoadingBitmap 2")
+                // The following actions will be performed in background.
+                .background()
+                // Execute a task which loads a bitmap according to the path.
+                .beginTaskKeepingInput(new Task<String, Bitmap, Exception>() {
+                    private Bitmap load(String path) throws IOException {
+                        if (path == null) {
+                            throw new IOException();
+                        } else {
+                            return null;
+                        }
+                    }
+                    @Override
+                    protected void onExecute(String input) {
+                        // We load the bitmap.
+                        // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
+                        // Otherwise, the Domino gets stuck here.
+                        try {
+                            Bitmap bitmap = load(input);
+                            notifySuccess(bitmap);
+                        } catch (IOException e) {
+                            notifyFailure(e);
+                        }
+                    }
+                })
+                // The following performs different actions according to the result or the failure
+                // of the task.
 
+                // If the execution of the above task succeeds, perform an action.
+                .onSuccess(new Action0() {
+                    @Override
+                    public void call() {
+                        // Do something.
+                    }
+                })
+                // If the execution of the above task succeeds,
+                // perform an action which takes a bitmap as input.
+                .onSuccess(new Action1<Pair<String, Bitmap>>() {
+                    @Override
+                    public void call(Pair<String, Bitmap> input) {
+
+                    }
+                })
+                // The following actions will be performed in the main thread, i.e. the UI thread.
+                .uiThread()
+                // If the execution of the above task succeeds,
+                // perform an action on all registered instances of ImageView.
+                .onSuccess(ImageView.class, new TargetAction1<ImageView, Pair<String,Bitmap>>() {
+                    @Override
+                    public void call(ImageView imageView, Pair<String, Bitmap> input) {
+
+                    }
+                })
+                // The following actions will be performed in background.
+                .background()
+                // If the execution of the above task fails, perform an action.
+                .onFailure(new Action0() {
+                    @Override
+                    public void call() {
+                        // Do something.
+                    }
+                })
+                // If the execution of the above task fails, print the stack trace fo the exception.
+                .onFailure(new Action1<Exception>() {
+                    @Override
+                    public void call(Exception input) {
+                        input.printStackTrace();
+                    }
+                })
+                // If the execution of the above task fails,
+                // perform an action on all registered instances of ImageView.
+                .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
+                    @Override
+                    public void call(ImageView imageView, Exception input) {
+                        // Do something.
+                    }
+                })
+                .endTask()
+                .target(new Action1<Pair<String, Bitmap>>() {
+                    @Override
+                    public void call(Pair<String, Bitmap> input) {
+
+                    }
+                })
+                .commit();
     }
 }
