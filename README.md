@@ -78,6 +78,8 @@ Then it performs actions on each corresponding component according to the sequen
 
 ##Usage
 
+The following illustrates the usage of the Shelly library.
+
 ###Component registration
 
 Each component which changes according to the change of a business object should be registered first,
