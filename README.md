@@ -78,7 +78,30 @@ Then it performs actions on each corresponding component according to the sequen
 
 ##Usage
 
-The following illustrates the usage of the Shelly library.
+The following illustrates the usage of the Shelly library. Here I focus on the basic usage including
+component registration, Domino creation and Domino invocation. After reading these, you will have a
+basic understanding of the Shelly library.
+
+The Domino discussed below is the basic Domino, which provides the basic methods for
+performing different kinds of actions, for data transformation and for thread scheduling.
+
+The Shelly library also provides many other useful Dominoes, including but not limited to:
+
+1. Task Domino, which provides a method for executing a time-consuming task and performs different
+kinds of actions according to the result or the failure of the task execution. The usage of a Task
+Domino makes the business logic of your app clear and easy to understand.
+
+2. Retrofit Domino, which provides a convenient pattern for sending a HTTP request and performing
+different kinds of actions according to the result or the failure of the request. The
+Retrofit Task is very useful in the development of an app, which takes many advantages over the other
+architectures for sending HTTP requests.
+
+Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
+results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
+Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
+and uses the results of the two requests to perform actions. Also, you can write a Domino which
+sends a HTTP request and after getting its result sends another request. These features are inspired
+by RxJava.
 
 ###Component registration
 
