@@ -18,6 +18,7 @@
 
 package xiaofei.library.shelly.domino;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -451,6 +452,107 @@ public class ReadmeExample {
                     }
                 })
                 .endTask()
+                .commit();
+        Shelly.<String>createDomino("Find *.jpg")
+                .background()
+                .map(new Function1<String, File>() {
+                    @Override
+                    public File call(String input) {
+                        return new File(input);
+                    }
+                })
+                .flatMap(new Function1<File, List<File>>() {
+                    @Override
+                    public List<File> call(File input) {
+                        // Find *.jpg in this folder
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png")
+                .background()
+                .map(new Function1<String, File>() {
+                    @Override
+                    public File call(String input) {
+                        return new File(input);
+                    }
+                })
+                .flatMap(new Function1<File, List<File>>() {
+                    @Override
+                    public List<File> call(File input) {
+                        // Find *.png in this folder
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png and *.jpg")
+                .background()
+                .merge(Shelly.<String, File>getDominoByLabel("Find *.png"),
+                        Shelly.<String, File>getDominoByLabel("Find *.jpg"))
+                .uiThread()
+                .target(new Action1<File>() {
+                    @Override
+                    public void call(File input) {
+
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png")
+                .background()
+                .map(new Function1<String, File>() {
+                    @Override
+                    public File call(String input) {
+                        return new File(input);
+                    }
+                })
+                .flatMap(new Function1<File, List<File>>() {
+                    @Override
+                    public List<File> call(File input) {
+                        // Find *.png in this folder
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png and *.jpg")
+                .background()
+                .merge(Shelly.<String>createDomino()
+                                .background()
+                                .map(new Function1<String, File>() {
+                                    @Override
+                                    public File call(String input) {
+                                        return new File(input);
+                                    }
+                                })
+                                .flatMap(new Function1<File, List<File>>() {
+                                    @Override
+                                    public List<File> call(File input) {
+                                        // Find *.jpg in this folder
+                                        return null;
+                                    }
+                                }),
+                        Shelly.<String>createDomino()
+                                .background()
+                                .map(new Function1<String, File>() {
+                                    @Override
+                                    public File call(String input) {
+                                        return new File(input);
+                                    }
+                                })
+                                .flatMap(new Function1<File, List<File>>() {
+                                    @Override
+                                    public List<File> call(File input) {
+                                        // Find *.png in this folder
+                                        return null;
+                                    }
+                                })
+                )
+                .uiThread()
+                .target(new Action1<File>() {
+                    @Override
+                    public void call(File input) {
+
+                    }
+                })
                 .commit();
     }
     class User {

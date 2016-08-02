@@ -610,4 +610,102 @@ method.
                 .commit();
 ```
 
-####Merge, combine and others
+###The merging and combination of Dominoes
+
+Dominoes can be merged. If we merge two Dominoes whose final data are of the same type, then we get
+a new Domino whose initial data is the union of their final data.
+
+```
+        Shelly.<String>createDomino("Find *.jpg")
+                .background()
+                .map(new Function1<String, File>() {
+                    @Override
+                    public File call(String input) {
+                        return new File(input);
+                    }
+                })
+                .flatMap(new Function1<File, List<File>>() {
+                    @Override
+                    public List<File> call(File input) {
+                        // Find *.jpg in this folder
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png")
+                .background()
+                .map(new Function1<String, File>() {
+                    @Override
+                    public File call(String input) {
+                        return new File(input);
+                    }
+                })
+                .flatMap(new Function1<File, List<File>>() {
+                    @Override
+                    public List<File> call(File input) {
+                        // Find *.png in this folder
+                        return null;
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Find *.png and *.jpg")
+                .background()
+                .merge(Shelly.<String, File>getDominoByLabel("Find *.png"),
+                        Shelly.<String, File>getDominoByLabel("Find *.jpg"))
+                .uiThread()
+                .target(new Action1<File>() {
+                    @Override
+                    public void call(File input) {
+
+                    }
+                })
+                .commit();
+```
+
+Also, you can write the following using anonymous Dominoes.
+
+```
+        Shelly.<String>createDomino("Find *.png and *.jpg")
+                .background()
+                .merge(Shelly.<String>createDomino()
+                                .background()
+                                .map(new Function1<String, File>() {
+                                    @Override
+                                    public File call(String input) {
+                                        return new File(input);
+                                    }
+                                })
+                                .flatMap(new Function1<File, List<File>>() {
+                                    @Override
+                                    public List<File> call(File input) {
+                                        // Find *.jpg in this folder
+                                        return null;
+                                    }
+                                }),
+                        Shelly.<String>createDomino()
+                                .background()
+                                .map(new Function1<String, File>() {
+                                    @Override
+                                    public File call(String input) {
+                                        return new File(input);
+                                    }
+                                })
+                                .flatMap(new Function1<File, List<File>>() {
+                                    @Override
+                                    public List<File> call(File input) {
+                                        // Find *.png in this folder
+                                        return null;
+                                    }
+                                })
+                )
+                .uiThread()
+                .target(new Action1<File>() {
+                    @Override
+                    public void call(File input) {
+
+                    }
+                })
+                .commit();
+```
+
+###Domino invocation within a Domino
