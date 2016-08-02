@@ -21,12 +21,16 @@ package xiaofei.library.shelly.domino;
 import java.io.IOException;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Response;
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
+import xiaofei.library.shelly.function.TargetAction2;
+import xiaofei.library.shelly.task.RetrofitTask;
 import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
 
@@ -330,5 +334,131 @@ public class ReadmeExample {
                     }
                 })
                 .commit();
+        final Network network = null;
+
+        Shelly.<String>createDomino("GETTING_USER")
+                .background()
+                // Return a call for the Retrofit task.
+                .beginRetrofitTask(new RetrofitTask<String, User>() {
+                    @Override
+                    protected Call<User> getCall(String s) {
+                        return network.getUser(s);
+                    }
+                })
+                .uiThread()
+                // If the request succeed and we get the user information,
+                // perform an action.
+                .onSuccessResult(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed and we get the user information,
+                // perform an action on MyActivity.
+                .onSuccessResult(MyActivity.class, new TargetAction1<MyActivity, User>() {
+                    @Override
+                    public void call(MyActivity mainActivity, User input) {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action.
+                .onResponseFailure(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action on MyActivity.
+                .onResponseFailure(MyActivity.class, new TargetAction1<MyActivity, Response<User>>() {
+                    @Override
+                    public void call(MyActivity myActivity, Response<User> input) {
+
+                    }
+                })
+                // If the request fails, perform an action.
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+
+                    }
+                })
+                // If the request fails, perform an action on MyActivity.
+                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+                    @Override
+                    public void call(MyActivity myActivity, Throwable input) {
+
+                    }
+                })
+                .endTask()
+                .commit();
+        Shelly.<String>createDomino("GETTING_USER")
+                .background()
+                // Return a call for the Retrofit task.
+                .beginRetrofitTaskKeepingInput(new RetrofitTask<String, User>() {
+                    @Override
+                    protected Call<User> getCall(String s) {
+                        return network.getUser(s);
+                    }
+                })
+                .uiThread()
+                // If the request succeed and we get the user information,
+                // perform an action.
+                .onSuccessResult(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed and we get the user information,
+                // perform an action on MyActivity.
+                .onSuccessResult(MyActivity.class, new TargetAction2<MyActivity, String, User>() {
+                    @Override
+                    public void call(MyActivity myActivity, String input1, User input2) {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action.
+                .onResponseFailure(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action on MyActivity.
+                .onResponseFailure(MyActivity.class, new TargetAction2<MyActivity, String, Response<User>>() {
+                    @Override
+                    public void call(MyActivity myActivity, String input1, Response<User> input2) {
+
+                    }
+                })
+                // If the request fails, perform an action.
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+
+                    }
+                })
+                // If the request fails, perform an action on MyActivity.
+                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+                    @Override
+                    public void call(MyActivity myActivity, Throwable input) {
+
+                    }
+                })
+                .endTask()
+                .commit();
+    }
+    class User {
+        String getId() {
+            return null;
+        }
+    }
+    interface Network {
+        Call<User> getUser(String id);
     }
 }

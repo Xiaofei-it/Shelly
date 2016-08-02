@@ -481,4 +481,133 @@ after the execution. See the above for example.
 The Shelly library provides a method for using Retrofit to send a HTTP request and processing the
 result according to the result or the failure of the request.
 
+Suppose that we want to use Retrofit to send a HTTP request to get the user information.
+
+```
+        Shelly.<String>createDomino("GETTING_USER")
+                .background()
+                // Return a call for the Retrofit task.
+                .beginRetrofitTask(new RetrofitTask<String, User>() {
+                    @Override
+                    protected Call<User> getCall(String s) {
+                        return network.getUser(s);
+                    }
+                })
+                .uiThread()
+                // If the request succeed and we get the user information,
+                // perform an action.
+                .onSuccessResult(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed and we get the user information,
+                // perform an action on MyActivity.
+                .onSuccessResult(MyActivity.class, new TargetAction1<MyActivity, User>() {
+                    @Override
+                    public void call(MyActivity mainActivity, User input) {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action.
+                .onResponseFailure(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action on MyActivity.
+                .onResponseFailure(MyActivity.class, new TargetAction1<MyActivity, Response<User>>() {
+                    @Override
+                    public void call(MyActivity myActivity, Response<User> input) {
+
+                    }
+                })
+                // If the request fails, perform an action.
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+
+                    }
+                })
+                // If the request fails, perform an action on MyActivity.
+                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+                    @Override
+                    public void call(MyActivity myActivity, Throwable input) {
+
+                    }
+                })
+                .endTask()
+                .commit();
+```
+
+Also, you may find that after the execution of the request, the result or the exception will be
+passed to the following actions, but the original input of the task has been lost. Sometimes we
+need to know the original input in the following actions. So you can execute a task using another
+method.
+
+```
+        Shelly.<String>createDomino("GETTING_USER")
+                .background()
+                // Return a call for the Retrofit task.
+                .beginRetrofitTaskKeepingInput(new RetrofitTask<String, User>() {
+                    @Override
+                    protected Call<User> getCall(String s) {
+                        return network.getUser(s);
+                    }
+                })
+                .uiThread()
+                // If the request succeed and we get the user information,
+                // perform an action.
+                .onSuccessResult(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed and we get the user information,
+                // perform an action on MyActivity.
+                .onSuccessResult(MyActivity.class, new TargetAction2<MyActivity, String, User>() {
+                    @Override
+                    public void call(MyActivity myActivity, String input1, User input2) {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action.
+                .onResponseFailure(new Action0() {
+                    @Override
+                    public void call() {
+
+                    }
+                })
+                // If the request succeed but we get an error from the server,
+                // perform an action on MyActivity.
+                .onResponseFailure(MyActivity.class, new TargetAction2<MyActivity, String, Response<User>>() {
+                    @Override
+                    public void call(MyActivity myActivity, String input1, Response<User> input2) {
+
+                    }
+                })
+                // If the request fails, perform an action.
+                .onFailure(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable input) {
+
+                    }
+                })
+                // If the request fails, perform an action on MyActivity.
+                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+                    @Override
+                    public void call(MyActivity myActivity, Throwable input) {
+
+                    }
+                })
+                .endTask()
+                .commit();
+```
+
 ####Merge, combine and others
