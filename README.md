@@ -626,7 +626,7 @@ a new Domino whose initial data is the union of their final data.
                 })
                 .flatMap(new Function1<File, List<Bitmap>>() {
                     @Override
-                    public List<File> call(File input) {
+                    public List<Bitmap> call(File input) {
                         // Find *.jpg in this folder
                         return null;
                     }
@@ -634,15 +634,15 @@ a new Domino whose initial data is the union of their final data.
                 .commit();
         Shelly.<String>createDomino("Find *.png")
                 .background()
-                .map(new Function1<String, Bitmap>() {
+                .map(new Function1<String, File>() {
                     @Override
-                    public Bitma call(String input) {
+                    public File call(String input) {
                         return new File(input);
                     }
                 })
-                .flatMap(new Function1<File, List<File>>() {
+                .flatMap(new Function1<File, List<Bitmap>>() {
                     @Override
-                    public List<File> call(File input) {
+                    public List<Bitmap> call(File input) {
                         // Find *.png in this folder
                         return null;
                     }
@@ -650,12 +650,12 @@ a new Domino whose initial data is the union of their final data.
                 .commit();
         Shelly.<String>createDomino("Find *.png and *.jpg")
                 .background()
-                .merge(Shelly.<String, File>getDominoByLabel("Find *.png"),
-                        Shelly.<String, File>getDominoByLabel("Find *.jpg"))
+                .merge(Shelly.<String, Bitmap>getDominoByLabel("Find *.png"),
+                        Shelly.<String, Bitmap>getDominoByLabel("Find *.jpg"))
                 .uiThread()
-                .target(new Action1<File>() {
+                .target(new Action1<Bitmap>() {
                     @Override
-                    public void call(File input) {
+                    public void call(Bitmap input) {
 
                     }
                 })
@@ -675,9 +675,9 @@ Also, you can write the following using anonymous Dominoes.
                                         return new File(input);
                                     }
                                 })
-                                .flatMap(new Function1<File, List<File>>() {
+                                .flatMap(new Function1<File, List<Bitmap>>() {
                                     @Override
-                                    public List<File> call(File input) {
+                                    public List<Bitmap> call(File input) {
                                         // Find *.jpg in this folder
                                         return null;
                                     }
@@ -690,18 +690,18 @@ Also, you can write the following using anonymous Dominoes.
                                         return new File(input);
                                     }
                                 })
-                                .flatMap(new Function1<File, List<File>>() {
+                                .flatMap(new Function1<File, List<Bitmap>>() {
                                     @Override
-                                    public List<File> call(File input) {
+                                    public List<Bitmap> call(File input) {
                                         // Find *.png in this folder
                                         return null;
                                     }
                                 })
                 )
                 .uiThread()
-                .target(new Action1<File>() {
+                .target(new Action1<Bitmap>() {
                     @Override
-                    public void call(File input) {
+                    public void call(Bitmap input) {
 
                     }
                 })
@@ -709,6 +709,45 @@ Also, you can write the following using anonymous Dominoes.
 ```
 
 You can combine two Dominoes into one. Specifically, suppose there are two Dominoes named "Domino A"
-and "Domino B", and the combination of these two Dominoes is a new Domino named "Domino C".The final data of the two Dominoes are passed into a function
-whose
+and "Domino B", and you can provide a function and combine these two Dominoes into a new Domino
+named "Domino C" in the following way: The final data of the two Dominoes are passed into th
+function and the function returns new data as the input of Domino C.
+
+The following is an example.
+
+```
+        Shelly.<String>createDomino("Login")
+                .combine(
+                        Shelly.<String>createDomino()
+                                .beginRetrofitTask(new RetrofitTask<String, User>() {
+                                    @Override
+                                    protected Call<User> getCall(String s) {
+                                        return network.getUser(s);
+                                    }
+                                })
+                                .endTask(),
+                        Shelly.<String>createDomino()
+                                .beginRetrofitTask(new RetrofitTask<String, Summary>() {
+                                    @Override
+                                    protected Call<Summary> getCall(String s) {
+                                        return network.getSummary(s);
+                                    }
+                                })
+                                .endTask(),
+                        new Function2<User, Summary, Internal>() {
+                            @Override
+                            public Internal call(User input1, Summary input2) {
+                                return null;
+                            }
+                        }
+                )
+                .target(new Action1<Internal>() {
+                    @Override
+                    public void call(Internal input) {
+
+                    }
+                })
+                .commit();
+```
+
 ###Domino invocation within a Domino

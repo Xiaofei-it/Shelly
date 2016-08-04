@@ -28,6 +28,7 @@ import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.function.Action0;
 import xiaofei.library.shelly.function.Action1;
 import xiaofei.library.shelly.function.Function1;
+import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
@@ -461,9 +462,9 @@ public class ReadmeExample {
                         return new File(input);
                     }
                 })
-                .flatMap(new Function1<File, List<File>>() {
+                .flatMap(new Function1<File, List<Bitmap>>() {
                     @Override
-                    public List<File> call(File input) {
+                    public List<Bitmap> call(File input) {
                         // Find *.jpg in this folder
                         return null;
                     }
@@ -477,9 +478,9 @@ public class ReadmeExample {
                         return new File(input);
                     }
                 })
-                .flatMap(new Function1<File, List<File>>() {
+                .flatMap(new Function1<File, List<Bitmap>>() {
                     @Override
-                    public List<File> call(File input) {
+                    public List<Bitmap> call(File input) {
                         // Find *.png in this folder
                         return null;
                     }
@@ -487,29 +488,13 @@ public class ReadmeExample {
                 .commit();
         Shelly.<String>createDomino("Find *.png and *.jpg")
                 .background()
-                .merge(Shelly.<String, File>getDominoByLabel("Find *.png"),
-                        Shelly.<String, File>getDominoByLabel("Find *.jpg"))
+                .merge(Shelly.<String, Bitmap>getDominoByLabel("Find *.png"),
+                        Shelly.<String, Bitmap>getDominoByLabel("Find *.jpg"))
                 .uiThread()
-                .target(new Action1<File>() {
+                .target(new Action1<Bitmap>() {
                     @Override
-                    public void call(File input) {
+                    public void call(Bitmap input) {
 
-                    }
-                })
-                .commit();
-        Shelly.<String>createDomino("Find *.png")
-                .background()
-                .map(new Function1<String, File>() {
-                    @Override
-                    public File call(String input) {
-                        return new File(input);
-                    }
-                })
-                .flatMap(new Function1<File, List<File>>() {
-                    @Override
-                    public List<File> call(File input) {
-                        // Find *.png in this folder
-                        return null;
                     }
                 })
                 .commit();
@@ -523,9 +508,9 @@ public class ReadmeExample {
                                         return new File(input);
                                     }
                                 })
-                                .flatMap(new Function1<File, List<File>>() {
+                                .flatMap(new Function1<File, List<Bitmap>>() {
                                     @Override
-                                    public List<File> call(File input) {
+                                    public List<Bitmap> call(File input) {
                                         // Find *.jpg in this folder
                                         return null;
                                     }
@@ -538,18 +523,51 @@ public class ReadmeExample {
                                         return new File(input);
                                     }
                                 })
-                                .flatMap(new Function1<File, List<File>>() {
+                                .flatMap(new Function1<File, List<Bitmap>>() {
                                     @Override
-                                    public List<File> call(File input) {
+                                    public List<Bitmap> call(File input) {
                                         // Find *.png in this folder
                                         return null;
                                     }
                                 })
                 )
                 .uiThread()
-                .target(new Action1<File>() {
+                .target(new Action1<Bitmap>() {
                     @Override
-                    public void call(File input) {
+                    public void call(Bitmap input) {
+
+                    }
+                })
+                .commit();
+
+        Shelly.<String>createDomino("Login")
+                .combine(
+                        Shelly.<String>createDomino()
+                                .beginRetrofitTask(new RetrofitTask<String, User>() {
+                                    @Override
+                                    protected Call<User> getCall(String s) {
+                                        return network.getUser(s);
+                                    }
+                                })
+                                .endTask(),
+                        Shelly.<String>createDomino()
+                                .beginRetrofitTask(new RetrofitTask<String, Summary>() {
+                                    @Override
+                                    protected Call<Summary> getCall(String s) {
+                                        return network.getSummary(s);
+                                    }
+                                })
+                                .endTask(),
+                        new Function2<User, Summary, Internal>() {
+                            @Override
+                            public Internal call(User input1, Summary input2) {
+                                return null;
+                            }
+                        }
+                )
+                .target(new Action1<Internal>() {
+                    @Override
+                    public void call(Internal input) {
 
                     }
                 })
@@ -560,7 +578,15 @@ public class ReadmeExample {
             return null;
         }
     }
+    class Summary {
+
+    }
+
+    class Internal {
+
+    }
     interface Network {
         Call<User> getUser(String id);
+        Call<Summary> getSummary(String id);
     }
 }
