@@ -11,6 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="13.037037">
-              <caret line="638" column="32" selection-start-line="638" selection-start-column="32" selection-end-line="638" selection-end-column="32" />
+            <state vertical-scroll-proportion="4.356322">
+              <caret line="751" column="0" selection-start-line="751" selection-start-column="0" selection-end-line="751" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,10 +60,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78723407">
+            <state vertical-scroll-proportion="-4.111111">
               <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
               <folding />
             </state>
@@ -71,11 +73,15 @@
       <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="99.62963">
-              <caret line="163" column="19" selection-start-line="163" selection-start-column="19" selection-end-line="163" selection-end-column="19" />
+            <state vertical-scroll-proportion="-1.2037038">
+              <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#7617#7678#0" expanded="true" />
+                <element signature="e#8842#9115#0" expanded="true" />
+                <element signature="e#9114#9115#0" expanded="true" />
+                <element signature="e#9449#10586#0" expanded="true" />
+                <element signature="e#10585#10586#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,48 +102,52 @@
       <file leaf-file-name="ReadmeExample.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.481482">
-              <caret line="555" column="26" selection-start-line="555" selection-start-column="26" selection-end-line="555" selection-end-column="26" />
+            <state vertical-scroll-proportion="-11.074074">
+              <caret line="573" column="26" selection-start-line="542" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#15284#15292#0" expanded="true" />
-                <element signature="e#15442#15658#0" expanded="true" />
-                <element signature="e#15657#15658#0" expanded="true" />
-                <element signature="e#17626#17634#0" expanded="true" />
-                <element signature="e#17796#18012#0" expanded="true" />
-                <element signature="e#18011#18012#0" expanded="true" />
-                <element signature="e#20026#20034#0" expanded="true" />
-                <element signature="e#20112#20314#0" expanded="true" />
-                <element signature="e#20313#20314#0" expanded="true" />
-                <element signature="e#20341#20593#0" expanded="true" />
-                <element signature="e#20592#20593#0" expanded="true" />
-                <element signature="e#20637#20645#0" expanded="true" />
-                <element signature="e#20723#20925#0" expanded="true" />
-                <element signature="e#20924#20925#0" expanded="true" />
-                <element signature="e#20952#21204#0" expanded="true" />
-                <element signature="e#21203#21204#0" expanded="true" />
-                <element signature="e#21248#21256#0" expanded="true" />
-                <element signature="e#21353#21367#0" expanded="true" />
-                <element signature="e#21430#21444#0" expanded="true" />
-                <element signature="e#21715#21723#0" expanded="true" />
-                <element signature="e#21801#22003#0" expanded="true" />
-                <element signature="e#22002#22003#0" expanded="true" />
-                <element signature="e#22030#22282#0" expanded="true" />
-                <element signature="e#22281#22282#0" expanded="true" />
-                <element signature="e#22326#22334#0" expanded="true" />
-                <element signature="e#22431#22439#0" expanded="true" />
-                <element signature="e#22537#22819#0" expanded="true" />
-                <element signature="e#22818#22819#0" expanded="true" />
-                <element signature="e#22862#23210#0" expanded="true" />
-                <element signature="e#23209#23210#0" expanded="true" />
-                <element signature="e#23244#23252#0" expanded="true" />
-                <element signature="e#23350#23632#0" expanded="true" />
-                <element signature="e#23631#23632#0" expanded="true" />
-                <element signature="e#23675#24023#0" expanded="true" />
-                <element signature="e#24022#24023#0" expanded="true" />
-                <element signature="e#24313#24314#0" expanded="true" />
-                <element signature="e#24348#24349#0" expanded="true" />
+                <element signature="e#15334#15342#0" expanded="true" />
+                <element signature="e#15492#15708#0" expanded="true" />
+                <element signature="e#15707#15708#0" expanded="true" />
+                <element signature="e#17676#17684#0" expanded="true" />
+                <element signature="e#17846#18062#0" expanded="true" />
+                <element signature="e#18061#18062#0" expanded="true" />
+                <element signature="e#20076#20084#0" expanded="true" />
+                <element signature="e#20162#20364#0" expanded="true" />
+                <element signature="e#20363#20364#0" expanded="true" />
+                <element signature="e#20391#20647#0" expanded="true" />
+                <element signature="e#20646#20647#0" expanded="true" />
+                <element signature="e#20691#20699#0" expanded="true" />
+                <element signature="e#20777#20979#0" expanded="true" />
+                <element signature="e#20978#20979#0" expanded="true" />
+                <element signature="e#21006#21262#0" expanded="true" />
+                <element signature="e#21261#21262#0" expanded="true" />
+                <element signature="e#21306#21314#0" expanded="true" />
+                <element signature="e#21411#21427#0" expanded="true" />
+                <element signature="e#21490#21506#0" expanded="true" />
+                <element signature="e#21781#21789#0" expanded="true" />
+                <element signature="e#21886#21894#0" expanded="true" />
+                <element signature="e#21992#22274#0" expanded="true" />
+                <element signature="e#22273#22274#0" expanded="true" />
+                <element signature="e#22317#22669#0" expanded="true" />
+                <element signature="e#22668#22669#0" expanded="true" />
+                <element signature="e#22703#22711#0" expanded="true" />
+                <element signature="e#22809#23091#0" expanded="true" />
+                <element signature="e#23090#23091#0" expanded="true" />
+                <element signature="e#23134#23486#0" expanded="true" />
+                <element signature="e#23485#23486#0" expanded="true" />
+                <element signature="e#23750#23758#0" expanded="true" />
+                <element signature="e#23837#23845#0" expanded="true" />
+                <element signature="e#23911#24207#0" expanded="true" />
+                <element signature="e#24206#24207#0" expanded="true" />
+                <element signature="e#24284#24292#0" expanded="true" />
+                <element signature="e#24358#24663#0" expanded="true" />
+                <element signature="e#24662#24663#0" expanded="true" />
+                <element signature="e#24733#24994#0" expanded="true" />
+                <element signature="e#24993#24994#0" expanded="true" />
+                <element signature="e#25263#25264#0" expanded="true" />
+                <element signature="e#25298#25299#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2795,9 +2805,9 @@
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/SchedulerInputs.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/PlayerInputs.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/ThrottleScheduler.java" />
+        <option value="$PROJECT_DIR$/shelly/build.gradle" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/shelly/build.gradle" />
       </list>
     </option>
   </component>
@@ -3918,7 +3928,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -3929,12 +3939,13 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -3947,7 +3958,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -4485,14 +4495,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="13.037037">
-          <caret line="638" column="32" selection-start-line="638" selection-start-column="32" selection-end-line="638" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4509,51 +4511,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
+    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.481482">
-          <caret line="555" column="26" selection-start-line="555" selection-start-column="26" selection-end-line="555" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#593#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#15284#15292#0" expanded="true" />
-            <element signature="e#15442#15658#0" expanded="true" />
-            <element signature="e#15657#15658#0" expanded="true" />
-            <element signature="e#17626#17634#0" expanded="true" />
-            <element signature="e#17796#18012#0" expanded="true" />
-            <element signature="e#18011#18012#0" expanded="true" />
-            <element signature="e#20026#20034#0" expanded="true" />
-            <element signature="e#20112#20314#0" expanded="true" />
-            <element signature="e#20313#20314#0" expanded="true" />
-            <element signature="e#20341#20593#0" expanded="true" />
-            <element signature="e#20592#20593#0" expanded="true" />
-            <element signature="e#20637#20645#0" expanded="true" />
-            <element signature="e#20723#20925#0" expanded="true" />
-            <element signature="e#20924#20925#0" expanded="true" />
-            <element signature="e#20952#21204#0" expanded="true" />
-            <element signature="e#21203#21204#0" expanded="true" />
-            <element signature="e#21248#21256#0" expanded="true" />
-            <element signature="e#21353#21367#0" expanded="true" />
-            <element signature="e#21430#21444#0" expanded="true" />
-            <element signature="e#21715#21723#0" expanded="true" />
-            <element signature="e#21801#22003#0" expanded="true" />
-            <element signature="e#22002#22003#0" expanded="true" />
-            <element signature="e#22030#22282#0" expanded="true" />
-            <element signature="e#22281#22282#0" expanded="true" />
-            <element signature="e#22326#22334#0" expanded="true" />
-            <element signature="e#22431#22439#0" expanded="true" />
-            <element signature="e#22537#22819#0" expanded="true" />
-            <element signature="e#22818#22819#0" expanded="true" />
-            <element signature="e#22862#23210#0" expanded="true" />
-            <element signature="e#23209#23210#0" expanded="true" />
-            <element signature="e#23244#23252#0" expanded="true" />
-            <element signature="e#23350#23632#0" expanded="true" />
-            <element signature="e#23631#23632#0" expanded="true" />
-            <element signature="e#23675#24023#0" expanded="true" />
-            <element signature="e#24022#24023#0" expanded="true" />
-            <element signature="e#24313#24314#0" expanded="true" />
-            <element signature="e#24348#24349#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-4.111111">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4569,19 +4531,75 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="99.62963">
-          <caret line="163" column="19" selection-start-line="163" selection-start-column="19" selection-end-line="163" selection-end-column="19" />
+        <state vertical-scroll-proportion="-1.2037038">
+          <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#7617#7678#0" expanded="true" />
+            <element signature="e#8842#9115#0" expanded="true" />
+            <element signature="e#9114#9115#0" expanded="true" />
+            <element signature="e#9449#10586#0" expanded="true" />
+            <element signature="e#10585#10586#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78723407">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state vertical-scroll-proportion="-11.074074">
+          <caret line="573" column="26" selection-start-line="542" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#593#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#15334#15342#0" expanded="true" />
+            <element signature="e#15492#15708#0" expanded="true" />
+            <element signature="e#15707#15708#0" expanded="true" />
+            <element signature="e#17676#17684#0" expanded="true" />
+            <element signature="e#17846#18062#0" expanded="true" />
+            <element signature="e#18061#18062#0" expanded="true" />
+            <element signature="e#20076#20084#0" expanded="true" />
+            <element signature="e#20162#20364#0" expanded="true" />
+            <element signature="e#20363#20364#0" expanded="true" />
+            <element signature="e#20391#20647#0" expanded="true" />
+            <element signature="e#20646#20647#0" expanded="true" />
+            <element signature="e#20691#20699#0" expanded="true" />
+            <element signature="e#20777#20979#0" expanded="true" />
+            <element signature="e#20978#20979#0" expanded="true" />
+            <element signature="e#21006#21262#0" expanded="true" />
+            <element signature="e#21261#21262#0" expanded="true" />
+            <element signature="e#21306#21314#0" expanded="true" />
+            <element signature="e#21411#21427#0" expanded="true" />
+            <element signature="e#21490#21506#0" expanded="true" />
+            <element signature="e#21781#21789#0" expanded="true" />
+            <element signature="e#21886#21894#0" expanded="true" />
+            <element signature="e#21992#22274#0" expanded="true" />
+            <element signature="e#22273#22274#0" expanded="true" />
+            <element signature="e#22317#22669#0" expanded="true" />
+            <element signature="e#22668#22669#0" expanded="true" />
+            <element signature="e#22703#22711#0" expanded="true" />
+            <element signature="e#22809#23091#0" expanded="true" />
+            <element signature="e#23090#23091#0" expanded="true" />
+            <element signature="e#23134#23486#0" expanded="true" />
+            <element signature="e#23485#23486#0" expanded="true" />
+            <element signature="e#23750#23758#0" expanded="true" />
+            <element signature="e#23837#23845#0" expanded="true" />
+            <element signature="e#23911#24207#0" expanded="true" />
+            <element signature="e#24206#24207#0" expanded="true" />
+            <element signature="e#24284#24292#0" expanded="true" />
+            <element signature="e#24358#24663#0" expanded="true" />
+            <element signature="e#24662#24663#0" expanded="true" />
+            <element signature="e#24733#24994#0" expanded="true" />
+            <element signature="e#24993#24994#0" expanded="true" />
+            <element signature="e#25263#25264#0" expanded="true" />
+            <element signature="e#25298#25299#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.356322">
+          <caret line="751" column="0" selection-start-line="751" selection-start-column="0" selection-end-line="751" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -35,6 +35,7 @@ import xiaofei.library.shelly.function.TargetAction2;
 import xiaofei.library.shelly.task.RetrofitTask;
 import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
+import xiaofei.library.shelly.tuple.Triple;
 
 /**
  * Created by Xiaofei on 16/7/28.
@@ -572,6 +573,46 @@ public class ReadmeExample {
                     }
                 })
                 .commit();
+        Shelly.<String>createDomino("Login")
+                .beginRetrofitTask(new RetrofitTask<String, User>() {
+                    @Override
+                    protected Call<User> getCall(String s) {
+                        return network.getUser(s);
+                    }
+                })
+                .onSuccessResult(
+                        Shelly.<User>createDomino()
+                                .beginRetrofitTask(new RetrofitTask<User, Summary>() {
+                                    @Override
+                                    protected Call<Summary> getCall(User user) {
+                                        return network.getSummary(user.getId());
+                                    }
+                                })
+                                .onSuccessResult(new Action1<Summary>() {
+                                    @Override
+                                    public void call(Summary input) {
+
+                                    }
+                                })
+                                .endTask()
+                )
+                .endTask()
+                .commit();
+        Shelly.<Triple<Integer, Integer, Double>>createDomino("Add")
+                .map(new Function1<Triple<Integer,Integer,Double>, Double>() {
+                    @Override
+                    public Double call(Triple<Integer, Integer, Double> input) {
+                        return input.first + input.second + input.third;
+                    }
+                })
+                .target(new Action1<Double>() {
+                    @Override
+                    public void call(Double input) {
+                        System.out.print(input);
+                    }
+                })
+                .commit();
+        Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
     }
     class User {
         String getId() {
