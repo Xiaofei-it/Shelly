@@ -624,7 +624,7 @@ a new Domino whose initial data is the union of their final data.
                         return new File(input);
                     }
                 })
-                .flatMap(new Function1<File, List<File>>() {
+                .flatMap(new Function1<File, List<Bitmap>>() {
                     @Override
                     public List<File> call(File input) {
                         // Find *.jpg in this folder
@@ -634,9 +634,9 @@ a new Domino whose initial data is the union of their final data.
                 .commit();
         Shelly.<String>createDomino("Find *.png")
                 .background()
-                .map(new Function1<String, File>() {
+                .map(new Function1<String, Bitmap>() {
                     @Override
-                    public File call(String input) {
+                    public Bitma call(String input) {
                         return new File(input);
                     }
                 })
@@ -708,4 +708,7 @@ Also, you can write the following using anonymous Dominoes.
                 .commit();
 ```
 
+You can combine two Dominoes into one. Specifically, suppose there are two Dominoes named "Domino A"
+and "Domino B", and the combination of these two Dominoes is a new Domino named "Domino C".The final data of the two Dominoes are passed into a function
+whose
 ###Domino invocation within a Domino
