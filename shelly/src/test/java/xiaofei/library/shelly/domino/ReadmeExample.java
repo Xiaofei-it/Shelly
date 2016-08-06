@@ -32,6 +32,8 @@ import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
+import xiaofei.library.shelly.function.stashfunction.StashAction0;
+import xiaofei.library.shelly.function.stashfunction.StashAction1;
 import xiaofei.library.shelly.task.RetrofitTask;
 import xiaofei.library.shelly.task.Task;
 import xiaofei.library.shelly.tuple.Pair;
@@ -613,6 +615,42 @@ public class ReadmeExample {
                 })
                 .commit();
         Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
+
+        Shelly.<String>createDomino("Stash example")
+                .target(new StashAction1<String>() {
+                    @Override
+                    public void call(String input) {
+                        stash(1, input + " test");
+                    }
+                })
+                .target(new StashAction1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println(get(1));
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Stash example 2")
+                .target(new StashAction1<String>() {
+                    @Override
+                    public void call(String input) {
+                        stash("First", input, input + " First");
+                    }
+                })
+                .target(new StashAction1<String>() {
+                    @Override
+                    public void call(String input) {
+                        stash("Second", input, input + "Second");
+                    }
+                })
+                .target(new StashAction1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println(get("First", input));
+                        System.out.println(get("Second", input));
+                    }
+                })
+                .commit();
     }
     class User {
         String getId() {

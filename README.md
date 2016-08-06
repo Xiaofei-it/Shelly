@@ -818,3 +818,13 @@ Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
 
 ###Stash
 
+Sometimes, in an action performed by a Domino, you want to save something for later use. Now you can
+use the stash actions or stash functions, whose classes are located in the package
+`xiaofei.library.shelly.function.stashfunction`. These actions and functions are the same as their
+corresponding actions and functions except that they provide additional methods for stashing, with
+which you can stash data for later use.
+
+The following is an example:
+
+```
+```

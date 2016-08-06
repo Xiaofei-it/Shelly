@@ -40,11 +40,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.356322">
-              <caret line="751" column="0" selection-start-line="751" selection-start-column="0" selection-end-line="751" selection-end-column="0" />
+            <state vertical-scroll-proportion="-230.27777">
+              <caret line="829" column="3" selection-start-line="829" selection-start-column="3" selection-end-line="829" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test08.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.148148">
+              <caret line="52" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="52" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#998#1166#0" expanded="true" />
+                <element signature="e#1165#1166#0" expanded="true" />
+                <element signature="e#1192#1393#0" expanded="true" />
+                <element signature="e#1392#1393#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StashAction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.0">
+              <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StashFunction.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashFunction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.814815">
+              <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
+              <folding>
+                <element signature="e#1086#1087#0" expanded="true" />
+                <element signature="e#1124#1125#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StashAction1.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction1.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.0">
+              <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -53,18 +102,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.111111">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -73,13 +112,10 @@
       <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.2037038">
+            <state vertical-scroll-proportion="63.407406">
               <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7617#7678#0" expanded="true" />
-                <element signature="e#8842#9115#0" expanded="true" />
-                <element signature="e#9114#9115#0" expanded="true" />
                 <element signature="e#9449#10586#0" expanded="true" />
                 <element signature="e#10585#10586#0" expanded="true" />
               </folding>
@@ -99,55 +135,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReadmeExample.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReadmeExample.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.074074">
-              <caret line="573" column="26" selection-start-line="542" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
+            <state vertical-scroll-proportion="-8.191489">
+              <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#15334#15342#0" expanded="true" />
-                <element signature="e#15492#15708#0" expanded="true" />
-                <element signature="e#15707#15708#0" expanded="true" />
-                <element signature="e#17676#17684#0" expanded="true" />
-                <element signature="e#17846#18062#0" expanded="true" />
-                <element signature="e#18061#18062#0" expanded="true" />
-                <element signature="e#20076#20084#0" expanded="true" />
-                <element signature="e#20162#20364#0" expanded="true" />
-                <element signature="e#20363#20364#0" expanded="true" />
-                <element signature="e#20391#20647#0" expanded="true" />
-                <element signature="e#20646#20647#0" expanded="true" />
-                <element signature="e#20691#20699#0" expanded="true" />
-                <element signature="e#20777#20979#0" expanded="true" />
-                <element signature="e#20978#20979#0" expanded="true" />
-                <element signature="e#21006#21262#0" expanded="true" />
-                <element signature="e#21261#21262#0" expanded="true" />
-                <element signature="e#21306#21314#0" expanded="true" />
-                <element signature="e#21411#21427#0" expanded="true" />
-                <element signature="e#21490#21506#0" expanded="true" />
-                <element signature="e#21781#21789#0" expanded="true" />
-                <element signature="e#21886#21894#0" expanded="true" />
-                <element signature="e#21992#22274#0" expanded="true" />
-                <element signature="e#22273#22274#0" expanded="true" />
-                <element signature="e#22317#22669#0" expanded="true" />
-                <element signature="e#22668#22669#0" expanded="true" />
-                <element signature="e#22703#22711#0" expanded="true" />
-                <element signature="e#22809#23091#0" expanded="true" />
-                <element signature="e#23090#23091#0" expanded="true" />
-                <element signature="e#23134#23486#0" expanded="true" />
-                <element signature="e#23485#23486#0" expanded="true" />
-                <element signature="e#23750#23758#0" expanded="true" />
-                <element signature="e#23837#23845#0" expanded="true" />
-                <element signature="e#23911#24207#0" expanded="true" />
-                <element signature="e#24206#24207#0" expanded="true" />
-                <element signature="e#24284#24292#0" expanded="true" />
-                <element signature="e#24358#24663#0" expanded="true" />
-                <element signature="e#24662#24663#0" expanded="true" />
-                <element signature="e#24733#24994#0" expanded="true" />
-                <element signature="e#24993#24994#0" expanded="true" />
-                <element signature="e#25263#25264#0" expanded="true" />
-                <element signature="e#25298#25299#0" expanded="true" />
+                <element signature="e#3359#3556#0" expanded="true" />
+                <element signature="e#3555#3556#0" expanded="true" />
+                <element signature="e#24911#25172#0" expanded="true" />
+                <element signature="e#25171#25172#0" expanded="true" />
+                <element signature="e#27223#27231#0" expanded="true" />
+                <element signature="e#27285#27487#0" expanded="true" />
+                <element signature="e#27486#27487#0" expanded="true" />
+                <element signature="e#27513#27716#0" expanded="true" />
+                <element signature="e#27715#27716#0" expanded="true" />
+                <element signature="e#27760#27768#0" expanded="true" />
+                <element signature="e#27824#28040#0" expanded="true" />
+                <element signature="e#28039#28040#0" expanded="true" />
+                <element signature="e#28066#28283#0" expanded="true" />
+                <element signature="e#28282#28283#0" expanded="true" />
+                <element signature="e#28309#28591#0" expanded="true" />
+                <element signature="e#28590#28591#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2806,8 +2817,8 @@
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/PlayerInputs.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/ThrottleScheduler.java" />
         <option value="$PROJECT_DIR$/shelly/build.gradle" />
-        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
       </list>
     </option>
   </component>
@@ -2841,9 +2852,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2896,6 +2904,9 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -3211,6 +3222,78 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="runnable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="function" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="function" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stashfunction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3945,7 +4028,6 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26171243" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -3958,6 +4040,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -4094,27 +4177,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="75" selection-start-line="25" selection-start-column="75" selection-end-line="25" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#593#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4172,13 +4238,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashFunction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0808625">
-          <caret line="59" column="60" selection-start-line="59" selection-start-column="60" selection-end-line="59" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/DelegatingMethodAccessorImpl.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08928572">
@@ -4221,7 +4280,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4410,22 +4468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3988096">
-          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#998#1166#0" expanded="true" />
-            <element signature="e#1165#1166#0" expanded="true" />
-            <element signature="e#1192#1393#0" expanded="true" />
-            <element signature="e#1392#1393#0" expanded="true" />
-            <element signature="e#1419#1622#0" expanded="true" />
-            <element signature="e#1621#1622#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73214287">
@@ -4495,26 +4537,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.78723407">
+          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2222223">
+        <state vertical-scroll-proportion="-0.21276596">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.111111">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -4529,78 +4563,99 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-230.27777">
+          <caret line="829" column="3" selection-start-line="829" selection-start-column="3" selection-end-line="829" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2037038">
+        <state vertical-scroll-proportion="63.407406">
           <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7617#7678#0" expanded="true" />
-            <element signature="e#8842#9115#0" expanded="true" />
-            <element signature="e#9114#9115#0" expanded="true" />
             <element signature="e#9449#10586#0" expanded="true" />
             <element signature="e#10585#10586#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.074074">
-          <caret line="573" column="26" selection-start-line="542" selection-start-column="8" selection-end-line="573" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.814815">
+          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
           <folding>
-            <element signature="e#0#593#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#15334#15342#0" expanded="true" />
-            <element signature="e#15492#15708#0" expanded="true" />
-            <element signature="e#15707#15708#0" expanded="true" />
-            <element signature="e#17676#17684#0" expanded="true" />
-            <element signature="e#17846#18062#0" expanded="true" />
-            <element signature="e#18061#18062#0" expanded="true" />
-            <element signature="e#20076#20084#0" expanded="true" />
-            <element signature="e#20162#20364#0" expanded="true" />
-            <element signature="e#20363#20364#0" expanded="true" />
-            <element signature="e#20391#20647#0" expanded="true" />
-            <element signature="e#20646#20647#0" expanded="true" />
-            <element signature="e#20691#20699#0" expanded="true" />
-            <element signature="e#20777#20979#0" expanded="true" />
-            <element signature="e#20978#20979#0" expanded="true" />
-            <element signature="e#21006#21262#0" expanded="true" />
-            <element signature="e#21261#21262#0" expanded="true" />
-            <element signature="e#21306#21314#0" expanded="true" />
-            <element signature="e#21411#21427#0" expanded="true" />
-            <element signature="e#21490#21506#0" expanded="true" />
-            <element signature="e#21781#21789#0" expanded="true" />
-            <element signature="e#21886#21894#0" expanded="true" />
-            <element signature="e#21992#22274#0" expanded="true" />
-            <element signature="e#22273#22274#0" expanded="true" />
-            <element signature="e#22317#22669#0" expanded="true" />
-            <element signature="e#22668#22669#0" expanded="true" />
-            <element signature="e#22703#22711#0" expanded="true" />
-            <element signature="e#22809#23091#0" expanded="true" />
-            <element signature="e#23090#23091#0" expanded="true" />
-            <element signature="e#23134#23486#0" expanded="true" />
-            <element signature="e#23485#23486#0" expanded="true" />
-            <element signature="e#23750#23758#0" expanded="true" />
-            <element signature="e#23837#23845#0" expanded="true" />
-            <element signature="e#23911#24207#0" expanded="true" />
-            <element signature="e#24206#24207#0" expanded="true" />
-            <element signature="e#24284#24292#0" expanded="true" />
-            <element signature="e#24358#24663#0" expanded="true" />
-            <element signature="e#24662#24663#0" expanded="true" />
-            <element signature="e#24733#24994#0" expanded="true" />
-            <element signature="e#24993#24994#0" expanded="true" />
-            <element signature="e#25263#25264#0" expanded="true" />
-            <element signature="e#25298#25299#0" expanded="true" />
+            <element signature="e#1086#1087#0" expanded="true" />
+            <element signature="e#1124#1125#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.356322">
-          <caret line="751" column="0" selection-start-line="751" selection-start-column="0" selection-end-line="751" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.0">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.148148">
+          <caret line="52" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="52" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#998#1166#0" expanded="true" />
+            <element signature="e#1165#1166#0" expanded="true" />
+            <element signature="e#1192#1393#0" expanded="true" />
+            <element signature="e#1392#1393#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.191489">
+          <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#593#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3359#3556#0" expanded="true" />
+            <element signature="e#3555#3556#0" expanded="true" />
+            <element signature="e#24911#25172#0" expanded="true" />
+            <element signature="e#25171#25172#0" expanded="true" />
+            <element signature="e#27223#27231#0" expanded="true" />
+            <element signature="e#27285#27487#0" expanded="true" />
+            <element signature="e#27486#27487#0" expanded="true" />
+            <element signature="e#27513#27716#0" expanded="true" />
+            <element signature="e#27715#27716#0" expanded="true" />
+            <element signature="e#27760#27768#0" expanded="true" />
+            <element signature="e#27824#28040#0" expanded="true" />
+            <element signature="e#28039#28040#0" expanded="true" />
+            <element signature="e#28066#28283#0" expanded="true" />
+            <element signature="e#28282#28283#0" expanded="true" />
+            <element signature="e#28309#28591#0" expanded="true" />
+            <element signature="e#28590#28591#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
