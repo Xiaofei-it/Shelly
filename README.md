@@ -3,39 +3,30 @@
 A library for business-logic-oriented programming, providing a novel pattern which uses a method
 chain to illustrate how each component varies with a business object.
 
-##Gradle
+##Features
 
-```
-compile 'xiaofei.library:shelly:0.2.5-alpha4'
-```
+1. Provide a novel pattern for business-logic-oriented programming.
 
-##Maven
+2. Make the source code of a business-logic-oriented app easy to understand and maintain.
 
-```
-<dependency>
-  <groupId>xiaofei.library</groupId>
-  <artifactId>shelly</artifactId>
-  <version>0.2.5-alpha4</version>
-  <type>pom</type>
-</dependency>
-```
-
+3. Powerful APIs for data
 ##Phylosophy
 
-In business-logic-oriented programming, a change of a business object may cause changes of many
-components and the complexity of business logic will increase coupling between components.
-To decrease coupling we usually use listeners (observers) or EventBus, which is effective and easy
-to use. However, these techniques have the following disadvantages:
+In business-logic-oriented programming, a change of a particular business object may cause changes
+of various components, and the complexity of business logic will increase coupling between components.
+To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
+also effective. However, these techniques have the following disadvantages:
 
-1. The amount of listeners or events increases as the complexity of business logic does.
+1. The amount of listeners or events increases as the complexity of business logic does, which makes
+the project difficult to maintain.
 
-2. The usage of a listener will cause corresponding components to implement the interface of the
-listener, which makes code confusing and complex. What's worse, the abuse of listeners will cause
-memory leaks.
+2. The usage of a particular listener will cause corresponding components to implement the interface
+of the listener, which makes code confusing and complicated. What's worse, the abuse of listeners
+leads to a potential risk of memory leaking.
 
-3. The usage of EventBus will cause code to be difficult to debug, since it is difficult to know
-what happens after the posting of an event and you should find the usages of the Java class of the
-specified event in IDE to find all the components receiving the specified event.
+3. The usage of the event bus will cause code to be difficult to debug, since it is difficult to
+predict and control what happens after the posting of a particular event and you should find the
+usages of the Java class of the event in IDE to find all the components receiving the event.
 
 To solve the above problems, I compose the Shelly library.
 
@@ -75,6 +66,70 @@ The above is discussing something about the structure of the method chain, i.e. 
 Now let's say something about how to "invoke" the Domino, which is a bit easy.
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs actions on each corresponding component according to the sequence of the methods.
+
+
+##Definitions
+
+This section gives the definitions of the technical terms with respect to the Shelly library.
+
+An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
+to, performing certain operations on certain components, producing certain outputs, performing
+data transformation, and performing thread scheduling. An action is represented by a Java
+class or a Java interface, in which there exists a method, which is named "call" and contains the
+sequence of Java statements of the action and the invocation of which performs the action.
+
+"Performing an action" refers to executing the sequence of Java statements of the action.
+
+"The input of an action" is a group of objects which is passed to the "call" method as arguments.
+The following illustrates the relationship between the input and the performance of an action:
+
+>Suppose the number of arguments the "call" method takes, excluding the arguments representing the
+components, is `a`. And suppose the number of the objects contained in the input group is `b`. Then:
+
+>1. If the "call" method takes no arguments, then the action is performed only once.
+
+>2. If the "call" method takes
+
+A "Domino" is a Java object which, under certain circumstances, performs a sequence of actions.
+For the sake of simplicity, a "Domino" may also refer to the Java class of a particular Domino
+object.
+
+"Creating a Domino" refers to the operation of building a particular Java instance of a Domino
+class. A Domino is usually created by a Java method chain which starts with
+`Shelly.createDomino(Object)` or `Shelly.createDomino()` and is followed by various methods provided
+by the Shelly library.
+
+"Committing a Domino" refers to the operation of causing the Shelly library to hold a Java reference
+of the specified Domino object for later usage.
+
+"Playing a Domino" or "Invoking a Domino" refers to the operation of causing the specified Domino to
+perform a sequence of actions. To play a Domino, a group of objects is needed. The group must contain
+one or more objects.
+
+
+of the corresponding
+class of the action. The "call" method may take no arguments,
+
+
+
+##Downloading
+
+###Gradle
+
+```
+compile 'xiaofei.library:shelly:0.2.5-alpha4'
+```
+
+###Maven
+
+```
+<dependency>
+  <groupId>xiaofei.library</groupId>
+  <artifactId>shelly</artifactId>
+  <version>0.2.5-alpha4</version>
+  <type>pom</type>
+</dependency>
+```
 
 ##Usage
 
@@ -234,7 +289,7 @@ Shelly.playDomino("Example", "First String", "Second String"); //Pass two String
 ###Anonymous Domino
 
 As is shown above, a unique label is needed to indicate the Domino to be invoked,
-thus you should specify a unique lable when creating a Domino, otherwise the created Domino shall
+thus you should specify a unique label when creating a Domino, otherwise the created Domino shall
 not be committed.
 
 However, A Domino which do not have a label (anonymous Domino) is also quite useful in that,
