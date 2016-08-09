@@ -86,9 +86,9 @@ The following illustrates the relationship between the input and the performance
 * Suppose the number of arguments the "call" method takes, excluding the arguments representing the
 components, is `a`. And suppose the number of the objects contained in the input group is `b`. Then:
 
-*  If the "call" method takes no arguments, then the action is performed only once.
+*    If the "call" method takes no arguments, then the action is performed only once.
 
-*  If the "call" method takes no arguments, then the action is performed only once.
+*    If the "call" method takes no arguments, then the action is performed only once.
 
 >2. If the "call" method takes
 
