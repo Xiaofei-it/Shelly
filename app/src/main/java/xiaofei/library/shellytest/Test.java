@@ -19,13 +19,11 @@
 package xiaofei.library.shellytest;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import xiaofei.library.shelly.Shelly;
 import xiaofei.library.shelly.domino.Domino;
@@ -110,15 +108,6 @@ public class Test {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
-                })
-                .onResponseFailure(MainActivity.class, new TargetAction1<MainActivity, Response<ResponseBody>>() {
-                    @Override
-                    public void call(MainActivity mainActivity, Response<ResponseBody> input) {
-                        Toast.makeText(
-                                mainActivity.getApplicationContext(),
-                                input.errorBody().string(),
-                                Toast.LENGTH_SHORT).show();
                     }
                 })
                 .onFailure(new Action1<Throwable>() {
