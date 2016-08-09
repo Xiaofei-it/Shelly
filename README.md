@@ -68,7 +68,6 @@ Now let's say something about how to "invoke" the Domino, which is a bit easy.
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs actions on each corresponding component according to the sequence of the methods.
 
-
 ##Definitions
 
 This section gives the definitions of the technical terms with respect to the Shelly library.
@@ -105,21 +104,53 @@ one or more objects.
 of the corresponding
 class of the action. The "call" method may take no arguments,
 
-####The input of an action
+####Input of an action
 
-"The input of an action" is a group of objects which is passed to the `call` method as arguments.
+The "input of an action" is a group ("input group") of objects which is passed to the `call` method as arguments.
 The following illustrates the relationship between the input and the performance of an action:
 
-Suppose the number of arguments the `call` method takes, excluding the arguments representing the
-components, is `a`. suppose the number of the objects contained in the input group is `b`. Suppose
-the number of occasions when the action is performed is `c`.
+Suppose
+the number of arguments the `call` method takes, excluding the arguments representing the components, is `a`,
+the number of the objects contained in the input group is `b`,
+and the number of occasions when the action is performed is `c`, i.e. the action is performed for `c` times.
 Then
 
-1. If `b = 0`, then `c = 1`.
+1. If b = 0 and a = 0, then c = 1.
 
-2. If `b > 0` and `a = 0`, then `c = a * b`.
+2. If b = 0 and a > 0, then c = 0.
 
-3.
+3. If b > 0 and a = 0, then c = 1.
+
+4. If b > 0 and a > 0, then c = a * b.
+
+####Output of an action
+
+Before the definition of the "output of an action", the `call` method should be paid more attention
+on. As is mentioned above, actions includes but is not limited to performing certain operations
+on certain components, producing certain outputs, performing data transformation, and performing
+thread scheduling. The action performing data transformation is called the "lifting actions".
+
+The "output of an action" is a group ("output group") of objects, produced in the following way:
+
+1. If the action is not a "lifting action", then the output is exactly the same as the input.
+
+2. If the action is a "lifting action", then the output is produced according to the effect of various
+actions. And the number of the objects contained in an output group may be different from the number
+of the objects contained in an input group.
+
+####Data flow
+
+Once invoked, a Domino performs a sequence of actions.
+
+The "input of a Domino" is the input of the first action of the action sequence of the Domino.
+
+The "output of a Domino" is the output of the last action of the action sequence of the Domino.
+
+In an action sequence, the output of a previous action is passed to the next one.
+Thus the output of a previous action is exactly the same as the input of the next one.
+
+Therefore, the "data flow of a Domino" is the sequence of the input of each action of the Domino,
+followed by the output of the Domino.
 
 ##Downloading
 
