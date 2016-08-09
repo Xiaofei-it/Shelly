@@ -203,7 +203,7 @@ results of two Dominoes into one result, which is useful especially when it come
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends a HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [HERE] for more information(doc/DOMINO_COMBINATION.md).
+by RxJava. See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
 get objects and the tuple class to combine several input together. Please see [HERE](doc/LAST_BUT_NOT_LEAST.md)
@@ -218,110 +218,125 @@ the business logic clear and easy to understand and makes the app easy to mainta
 Each component which changes according to the change of a business object should be registered first,
 and should be unregistered whenever it is destroyed.
 
-```
-Shelly.register(this);
-```
+The following is an example of the registration and unregistration of an Activity:
 
 ```
-Shelly.unregister(this);
+public class MyActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Shelly.register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Shelly.unregister(this);
+    }
+
+}
 ```
 
 ###Domino creation
 
-A domino should be created and committed before it takes effect. Here is an example. And more APIs
-can be found in the Domino class.
+A domino should be created and committed before it takes effect. The following is an example.
+And more APIs can be found in the
+[Domino](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java) class.
 
 ```
-        // Create a domino labeled "Example" which takes one or more Strings as input
-        Shelly.<String>createDomino("Example")
-                // Perform an action. The action is performed once.
-                .target(new Action0() {
-                    @Override
-                    public void call() {
-                        // Do something
-                    }
-                })
-                // Perform an action which takes the String as input.
-                // If one String is passed here, the action is performed once.
-                // If two Strings are passed here, the action is performed twice.
-                .target(new Action1<String>() {
-                    @Override
-                    public void call(String input) {
-                        // Do something
-                    }
-                })
-                // Perform another action which takes the String as input.
-                // If one String is passed here, the action is performed once.
-                // If two Strings are passed here, the action is performed twice.
-                .target(new Action1<String>() {
-                    @Override
-                    public void call(String input) {
-                        // Do something
-                    }
-                })
-                // The above actions is performed in the thread in which the domino is invoked.
-                // Now the following actions will be performed in background.
-                .background()
-                // Transform the String into an integer.
-                // If one String is passed here, one integer will be passed to the following actions.
-                // If two Strings are passed here, two integers will be passed to the following actions.
-                .map(new Function1<String, Integer>() {
-                    @Override
-                    public Integer call(String input) {
-                        return null;
-                    }
-                })
-                // The following actions will be performed in a queue in background.
-                .backgroundQueue()
-                // Use a filter to filter the integers.
-                // Only the integers labeled "true" will be passed to the following actions.
-                .filter(new Function1<Integer, Boolean>() {
-                    @Override
-                    public Boolean call(Integer input) {
-                        return false;
-                    }
-                })
-                // Pass the integer into the function and the function takes an integer as input
-                // and return a list of Strings. Each String will be passed to the following actions.
-                // If an integer is passed here, and the function returns two Strings,
-                // then two Strings will be passed to the following actions.
-                // If two integers are passed here, and the function takes an integer as input and
-                // returns two Strings, then we get four Strings here,
-                // then four Strings will be passed to the following actions.
-                .flatMap(new Function1<Integer, List<String>>() {
-                    @Override
-                    public List<String> call(Integer input) {
-                        return null;
-                    }
-                })
-                // The following actions will be performed in the main thread, i.e. the UI thread.
-                .uiThread()
-                // Perform an action on all registered instances of MyActivity.
-                .target(MyActivity.class, new TargetAction0<MyActivity>() {
-                    @Override
-                    public void call(MyActivity myActivity) {
-                        // Do something
-                    }
-                })
-                // Pass all the Strings into the function and get a single double.
-                // Now the following actions will receive only one single input which is a double.
-                .reduce(new Function1<List<String>, Double>() {
-                    @Override
-                    public Double call(List<String> input) {
-                        return null;
-                    }
-                })
-                // Perform an action on all registered instances of MyActivity.
-                // If there are two instances, then:
-                // If one String is passed here, the action is performed twice.
-                // If two Strings are passed here, the action is performed four times.
-                .target(MyActivity.class, new TargetAction1<MyActivity, Double>() {
-                    @Override
-                    public void call(MyActivity myActivity, Double input) {
-                        // Do something
-                    }
-                })
-                .commit();
+// Create a domino labeled "Example" which takes one or more Strings as input.
+Shelly.<String>createDomino("Example")
+        // Perform an action. The action is performed once.
+        .target(new Action0() {
+            @Override
+            public void call() {
+                // Do something
+            }
+        })
+        // Perform an action which takes the String as input.
+        // If one String is passed to this action, the action is performed once.
+        // If two Strings are passed to this action, the action is performed twice.
+        .target(new Action1<String>() {
+            @Override
+            public void call(String input) {
+                // Do something
+            }
+        })
+        // Perform another action which takes the String as input.
+        // If one String is passed to this action, the action is performed once.
+        // If two Strings are passed to this action, the action is performed twice.
+        .target(new Action1<String>() {
+            @Override
+            public void call(String input) {
+                // Do something
+            }
+        })
+        // The above actions is performed in the thread in which the domino is invoked.
+        // Now the following actions will be performed in background.
+        .background()
+        // Transform the String into an integer.
+        // If one String is passed to this action, one integer will be passed to the following actions.
+        // If two Strings are passed to this action, two integers will be passed to the following actions.
+        .map(new Function1<String, Integer>() {
+            @Override
+            public Integer call(String input) {
+                return null;
+            }
+        })
+        // The following actions will be performed one after the other in background.
+        .backgroundQueue()
+        // Use a filter to filter the integers.
+        // Only the integers labeled "true" will be passed to the following actions.
+        .filter(new Function1<Integer, Boolean>() {
+            @Override
+            public Boolean call(Integer input) {
+                return false;
+            }
+        })
+        // Pass the integer into the function and the function takes an integer as input
+        // and return a list of Strings. Each String will be passed to the actions following
+        // this action.
+        // If one integer is passed to this action, and the function returns two Strings,
+        // then two Strings will be passed to the following actions.
+        // If two integers are passed to this action, and the function takes an integer as input and
+        // returns two Strings, then we get four Strings here,
+        // then four Strings will be passed to the following actions.
+        .flatMap(new Function1<Integer, List<String>>() {
+            @Override
+            public List<String> call(Integer input) {
+                return null;
+            }
+        })
+        // The following actions will be performed in the main thread, i.e. the UI thread.
+        .uiThread()
+        // Perform an action on all registered instances of MyActivity.
+        .target(MyActivity.class, new TargetAction0<MyActivity>() {
+            @Override
+            public void call(MyActivity myActivity) {
+                // Do something
+            }
+        })
+        // Pass all the Strings into the function and get a single double.
+        // Now the following actions will receive only one single input, which is a double.
+        .reduce(new Function1<List<String>, Double>() {
+            @Override
+            public Double call(List<String> input) {
+                return null;
+            }
+        })
+        // Perform an action on all registered instances of MyActivity.
+        // If there are two instances, then:
+        // If one String is passed to this action, the action is performed twice.
+        // If two Strings are passed to this action, the action is performed four times.
+        .target(MyActivity.class, new TargetAction1<MyActivity, Double>() {
+            @Override
+            public void call(MyActivity myActivity, Double input) {
+                // Do something
+            }
+        })
+        // Commit the Domino for later use.
+        .commit();
 ```
 
 Remember to commit the domino finally!
@@ -329,66 +344,65 @@ Remember to commit the domino finally!
 Each domino should be specified a unique label, which is an object, i.e. an Integer, a
 String or something else.
 
-More methods will be discussed in the future.
-
 ###Domino invocation
 
-When you want to invoke a domino, do the following:
+To invoke a domino, do the following:
 
 ```
-Shelly.playDomino("Example", "Single String"); //Pass a single String to the domino
+Shelly.playDomino("Example", "Single String"); // Pass a single String to the domino
 
-Shelly.playDomino("Example", "First String", "Second String"); //Pass two Strings to the domino
+Shelly.playDomino("Example", "First String", "Second String"); // Pass two Strings to the domino
 ```
 
 ###Anonymous Domino
 
-As is shown above, a unique label is needed to indicate the Domino to be invoked,
+As is shown above, a unique label is needed to label the Domino to be invoked,
 thus you should specify a unique label when creating a Domino, otherwise the created Domino shall
 not be committed.
 
-However, A Domino which do not have a label (anonymous Domino) is also quite useful in that,
+However, a Domino which do not have a label ("Anonymous Domino") is also quite useful in that,
 there exist some situation where you only need to create a Domino but not want to commit it.
 For example, you can perform an action on an anonymous Domino.
 
 ```
-         Shelly.<String>createDomino("Example 2")
-                .target(new Action1<String>() {
-                    @Override
-                    public void call(String input) {
+Shelly.<String>createDomino("Example 2")
+        .target(new Action1<String>() {
+            @Override
+            public void call(String input) {
 
-                    }
-                })
-                .target(Shelly.<String>createDomino()
-                            .map(new Function1<String, Integer>() {
-                                @Override
-                                public Integer call(String input) {
-                                    return null;
-                                }
-                            })
-                            .target(new Action1<Integer>() {
-                                @Override
-                                public void call(Integer input) {
+            }
+        })
+        .target(Shelly.<String>createDomino()
+                        .map(new Function1<String, Integer>() {
+                            @Override
+                            public Integer call(String input) {
+                                return null;
+                            }
+                        })
+                        .target(new Action1<Integer>() {
+                            @Override
+                            public void call(Integer input) {
 
-                                }
-                            })
-                            .target(new Action0() {
-                                @Override
-                                public void call() {
+                            }
+                        })
+                        .target(new Action0() {
+                            @Override
+                            public void call() {
 
-                                }
-                            })
-                )
-                .target(new Action1<String>() {
-                    @Override
-                    public void call(String input) {
+                            }
+                        })
+        )
+        .target(new Action1<String>() {
+            @Override
+            public void call(String input) {
 
-                    }
-                })
-                .commit();
+            }
+        })
+        .commit();
 ```
 
-Moreover, you can merge two anonymous Dominoes. See the following for the details.
+Moreover, you can merge or combine two anonymous Dominoes.
+See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 ###More kinds of Dominoes
 
