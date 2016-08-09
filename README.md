@@ -83,10 +83,10 @@ sequence of Java statements of the action and the invocation of which performs t
 "The input of an action" is a group of objects which is passed to the "call" method as arguments.
 The following illustrates the relationship between the input and the performance of an action:
 
->Suppose the number of arguments the "call" method takes, excluding the arguments representing the
+*Suppose the number of arguments the "call" method takes, excluding the arguments representing the
 components, is `a`. And suppose the number of the objects contained in the input group is `b`. Then:
 
->1. If the "call" method takes no arguments, then the action is performed only once.
+*1. If the "call" method takes no arguments, then the action is performed only once.
 
 >2. If the "call" method takes
 
