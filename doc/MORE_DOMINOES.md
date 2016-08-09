@@ -200,137 +200,147 @@ after the execution. See the above for example.
 
 ##Retrofit Domino
 
-The Shelly library provides a method for using Retrofit to send an HTTP request and processing the
-result according to the result or the failure of the request.
+The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
+various kinds of actions according to the result or the failure of the request. The
+Retrofit Task is very useful in the development of an app, which takes many advantages over the other
+architectures for sending HTTP requests.
 
-Suppose that we want to use Retrofit to send an HTTP request to get the user information.
+Suppose that we want to use Retrofit to send an HTTP request to get the user information:
 
 ```
-        Shelly.<String>createDomino("GETTING_USER")
-                .background()
-                // Return a call for the Retrofit task.
-                .beginRetrofitTask(new RetrofitTask<String, User>() {
-                    @Override
-                    protected Call<User> getCall(String s) {
-                        return network.getUser(s);
-                    }
-                })
-                .uiThread()
-                // If the request succeed and we get the user information,
-                // perform an action.
-                .onSuccessResult(new Action0() {
-                    @Override
-                    public void call() {
+Shelly.<String>createDomino("GETTING_USER")
+        .background()
+        // Return a call for the Retrofit task.
+        .beginRetrofitTask(new RetrofitTask<String, User>() {
+            @Override
+            protected Call<User> getCall(String s) {
+                return network.getUser(s);
+            }
+        })
+        .uiThread()
+        // If the request succeed and we get the user information,
+        // perform an action.
+        .onSuccessResult(new Action0() {
+            @Override
+            public void call() {
 
-                    }
-                })
-                // If the request succeed and we get the user information,
-                // perform an action on MyActivity.
-                .onSuccessResult(MyActivity.class, new TargetAction1<MyActivity, User>() {
-                    @Override
-                    public void call(MyActivity mainActivity, User input) {
+            }
+        })
+        // If the request succeed and we get the user information,
+        // perform an action on MyActivity.
+        .onSuccessResult(MyActivity.class, new TargetAction1<MyActivity, User>() {
+            @Override
+            public void call(MyActivity mainActivity, User input) {
 
-                    }
-                })
-                // If the request succeed but we get an error from the server,
-                // perform an action.
-                .onResponseFailure(new Action0() {
-                    @Override
-                    public void call() {
+            }
+        })
+        // If the request succeed but we get an error from the server,
+        // perform an action.
+        .onResponseFailure(new Action0() {
+            @Override
+            public void call() {
 
-                    }
-                })
-                // If the request succeed but we get an error from the server,
-                // perform an action on MyActivity.
-                .onResponseFailure(MyActivity.class, new TargetAction1<MyActivity, Response<User>>() {
-                    @Override
-                    public void call(MyActivity myActivity, Response<User> input) {
+            }
+        })
+        // If the request succeed but we get an error from the server,
+        // perform an action on MyActivity.
+        .onResponseFailure(MyActivity.class, new TargetAction1<MyActivity, Response<User>>() {
+            @Override
+            public void call(MyActivity myActivity, Response<User> input) {
 
-                    }
-                })
-                // If the request fails, perform an action.
-                .onFailure(new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable input) {
+            }
+        })
+        // If the request fails, perform an action.
+        .onFailure(new Action1<Throwable>() {
+            @Override
+            public void call(Throwable input) {
 
-                    }
-                })
-                // If the request fails, perform an action on MyActivity.
-                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
-                    @Override
-                    public void call(MyActivity myActivity, Throwable input) {
+            }
+        })
+        // If the request fails, perform an action on MyActivity.
+        .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+            @Override
+            public void call(MyActivity myActivity, Throwable input) {
 
-                    }
-                })
-                .endTask()
-                .commit();
+            }
+        })
+        .endTask()
+        .commit();
 ```
+
+
+See [HERE](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
+for more APIs of the Retrofit Domino.
 
 Also, you may find that after the execution of the request, the result or the exception will be
 passed to the following actions, but the original input of the task has been lost. Sometimes we
-need to know the original input in the following actions. So you can execute a task using another
-method.
+need to know the original input in the following actions. To pass the original input to the following
+actions, you can execute a task using another method.
 
 ```
-        Shelly.<String>createDomino("GETTING_USER")
-                .background()
-                // Return a call for the Retrofit task.
-                .beginRetrofitTaskKeepingInput(new RetrofitTask<String, User>() {
-                    @Override
-                    protected Call<User> getCall(String s) {
-                        return network.getUser(s);
-                    }
-                })
-                .uiThread()
-                // If the request succeed and we get the user information,
-                // perform an action.
-                .onSuccessResult(new Action0() {
-                    @Override
-                    public void call() {
+Shelly.<String>createDomino("GETTING_USER")
+        .background()
+        // Return a call for the Retrofit task.
+        .beginRetrofitTaskKeepingInput(new RetrofitTask<String, User>() {
+            @Override
+            protected Call<User> getCall(String s) {
+                return network.getUser(s);
+            }
+        })
+        .uiThread()
+        // If the request succeed and we get the user information,
+        // perform an action.
+        .onSuccessResult(new Action0() {
+            @Override
+            public void call() {
 
-                    }
-                })
-                // If the request succeed and we get the user information,
-                // perform an action on MyActivity.
-                .onSuccessResult(MyActivity.class, new TargetAction2<MyActivity, String, User>() {
-                    @Override
-                    public void call(MyActivity myActivity, String input1, User input2) {
+            }
+        })
+        // If the request succeed and we get the user information,
+        // perform an action on MyActivity.
+        .onSuccessResult(MyActivity.class, new TargetAction2<MyActivity, String, User>() {
+            @Override
+            public void call(MyActivity myActivity, String input1, User input2) {
 
-                    }
-                })
-                // If the request succeed but we get an error from the server,
-                // perform an action.
-                .onResponseFailure(new Action0() {
-                    @Override
-                    public void call() {
+            }
+        })
+        // If the request succeed but we get an error from the server,
+        // perform an action.
+        .onResponseFailure(new Action0() {
+            @Override
+            public void call() {
 
-                    }
-                })
-                // If the request succeed but we get an error from the server,
-                // perform an action on MyActivity.
-                .onResponseFailure(MyActivity.class, new TargetAction2<MyActivity, String, Response<User>>() {
-                    @Override
-                    public void call(MyActivity myActivity, String input1, Response<User> input2) {
+            }
+        })
+        // If the request succeed but we get an error from the server,
+        // perform an action on MyActivity.
+        .onResponseFailure(MyActivity.class, new TargetAction2<MyActivity, String, Response<User>>() {
+            @Override
+            public void call(MyActivity myActivity, String input1, Response<User> input2) {
 
-                    }
-                })
-                // If the request fails, perform an action.
-                .onFailure(new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable input) {
+            }
+        })
+        // If the request fails, perform an action.
+        .onFailure(new Action1<Throwable>() {
+            @Override
+            public void call(Throwable input) {
 
-                    }
-                })
-                // If the request fails, perform an action on MyActivity.
-                .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
-                    @Override
-                    public void call(MyActivity myActivity, Throwable input) {
+            }
+        })
+        // If the request fails, perform an action on MyActivity.
+        .onFailure(MyActivity.class, new TargetAction1<MyActivity, Throwable>() {
+            @Override
+            public void call(MyActivity myActivity, Throwable input) {
 
-                    }
-                })
-                .endTask()
-                .commit();
+            }
+        })
+        .endTask()
+        .commit();
 ```
+
+
+The above Domino is [RetrofitDomino2]. See [HERE](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
+for more APIs of the RetrofitDomino2 class.
 
 ##The merging and combination of Dominoes
 
@@ -504,49 +514,4 @@ The following is an example.
                 )
                 .endTask()
                 .commit();
-```
-
-###Tuple input
-
-You may find that in the above examples, all of the Dominoes take only one input each time, but how
-about multiple input?
-
-The Shelly library provides you with some tuple classes, in which you can put multiple inputs.
-
-The following is an example.
-
-```
-        Shelly.<Triple<Integer, Integer, Double>>createDomino("Add")
-                .map(new Function1<Triple<Integer,Integer,Double>, Double>() {
-                    @Override
-                    public Double call(Triple<Integer, Integer, Double> input) {
-                        return input.first + input.second + input.third;
-                    }
-                })
-                .target(new Action1<Double>() {
-                    @Override
-                    public void call(Double input) {
-                        System.out.print(input);
-                    }
-                })
-                .commit();
-```
-
-Invoke the Domino with the following statement:
-
-```
-Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
-```
-
-###Stash
-
-Sometimes, in an action performed by a Domino, you want to save something for later use. Now you can
-use the stash actions or stash functions, whose classes are located in the package
-`xiaofei.library.shelly.function.stashfunction`. These actions and functions are the same as their
-corresponding actions and functions except that they provide additional methods for stashing, with
-which you can stash data for later use.
-
-The following is an example:
-
-```
 ```
