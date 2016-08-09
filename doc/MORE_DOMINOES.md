@@ -11,7 +11,7 @@ kinds of actions according to the result or the failure of the task execution. T
 Domino makes the business logic of your app clear and easy to understand.
 
 The following is an example of
-[Task Domino](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
+[Task Domino](../Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
 
 ```
 // Create a domino labeled "LoadingBitmap" which takes a String as input,
