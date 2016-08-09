@@ -11,6 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/MORE_DOMINOES.md" afterPath="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,8 +90,8 @@
       <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.2413793">
-              <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+            <state vertical-scroll-proportion="1.8505747">
+              <caret line="13" column="129" selection-start-line="13" selection-start-column="124" selection-end-line="13" selection-end-column="129" />
               <folding />
             </state>
           </provider>
@@ -4316,8 +4317,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.2413793">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        <state vertical-scroll-proportion="1.8505747">
+          <caret line="13" column="129" selection-start-line="13" selection-start-column="124" selection-end-line="13" selection-end-column="129" />
           <folding />
         </state>
       </provider>
