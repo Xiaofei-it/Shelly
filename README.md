@@ -3,14 +3,15 @@
 A library for business-logic-oriented programming, providing a novel pattern which uses a method
 chain to illustrate how each component varies with a business object.
 
-##Features
+## Features
 
 1. Provide a novel pattern for business-logic-oriented programming.
 
 2. Make the source code of a business-logic-oriented app easy to understand and maintain.
 
 3. Powerful APIs for data
-##Phylosophy
+
+## Philosophy
 
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
@@ -72,6 +73,8 @@ Then it performs actions on each corresponding component according to the sequen
 
 This section gives the definitions of the technical terms with respect to the Shelly library.
 
+###On actions
+
 An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
 to, performing certain operations on certain components, producing certain outputs, performing
 data transformation, and performing thread scheduling. An action is represented by a Java
@@ -80,17 +83,7 @@ sequence of Java statements of the action and the invocation of which performs t
 
 "Performing an action" refers to executing the sequence of Java statements of the action.
 
-"The input of an action" is a group of objects which is passed to the "call" method as arguments.
-The following illustrates the relationship between the input and the performance of an action:
-
-* Suppose the number of arguments the "call" method takes, excluding the arguments representing the
-components, is `a`. And suppose the number of the objects contained in the input group is `b`. Then:
-
-* 1. If the "call" method takes no arguments, then the action is performed only once.
-
-* 2. If the "call" method takes no arguments, then the action is performed only once.
-
->2. If the "call" method takes
+###On Dominoes
 
 A "Domino" is a Java object which, under certain circumstances, performs a sequence of actions.
 For the sake of simplicity, a "Domino" may also refer to the Java class of a particular Domino
@@ -108,11 +101,25 @@ of the specified Domino object for later usage.
 perform a sequence of actions. To play a Domino, a group of objects is needed. The group must contain
 one or more objects.
 
-
+###On input, output and data flow
 of the corresponding
 class of the action. The "call" method may take no arguments,
 
+####The input of an action
 
+"The input of an action" is a group of objects which is passed to the `call` method as arguments.
+The following illustrates the relationship between the input and the performance of an action:
+
+Suppose the number of arguments the `call` method takes, excluding the arguments representing the
+components, is `a`. suppose the number of the objects contained in the input group is `b`. Suppose
+the number of occasions when the action is performed is `c`.
+Then
+
+1. If `b = 0`, then `c = 1`.
+
+2. If `b > 0` and `a = 0`, then `c = a * b`.
+
+3.
 
 ##Downloading
 
