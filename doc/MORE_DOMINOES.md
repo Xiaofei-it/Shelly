@@ -6,192 +6,196 @@ below.
 
 ##Task Domino
 
-The Shelly library provides a method for executing a task and processing the result according to the
-result or the failure of the task after its execution.
+The Task Domino provides methods for executing a time-consuming task and performing various
+kinds of actions according to the result or the failure of the task execution. The usage of a Task
+Domino makes the business logic of your app clear and easy to understand.
 
-Here is an example.
+The following is an example of
+[Task Domino](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
 
 ```
-        // Create a domino labeled "LoadingBitmap" which takes a String as input,
-        // which is the path of a bitmap.
-        Shelly.<String>createDomino("LoadingBitmap")
-                // The following actions will be performed in background.
-                .background()
-                // Execute a task which loads a bitmap according to the path.
-                .beginTask(new Task<String, Bitmap, Exception>() {
-                    private Bitmap load(String path) throws IOException {
-                        if (path == null) {
-                            throw new IOException();
-                        } else {
-                            return null;
-                        }
-                    }
-                    @Override
-                    protected void onExecute(String input) {
-                        // We load the bitmap.
-                        // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
-                        // Otherwise, the Domino gets stuck here.
-                        try {
-                            Bitmap bitmap = load(input);
-                            notifySuccess(bitmap);
-                        } catch (IOException e) {
-                            notifyFailure(e);
-                        }
-                    }
-                })
-                // The following performs different actions according to the result or the failure
-                // of the task.
+// Create a domino labeled "LoadingBitmap" which takes a String as input,
+// indicating is the path of a bitmap.
+Shelly.<String>createDomino("LoadingBitmap")
+        // The following actions will be performed in background.
+        .background()
+        // Execute a task which loads a bitmap according to the path.
+        .beginTask(new Task<String, Bitmap, Exception>() {
+            private Bitmap load(String path) throws IOException {
+                if (path == null) {
+                    throw new IOException();
+                } else {
+                    return null;
+                }
+            }
 
-                // If the execution of the above task succeeds, perform an action.
-                .onSuccess(new Action0() {
-                    @Override
-                    public void call() {
-                        // Do something.
-                    }
-                })
-                // If the execution of the above task succeeds,
-                // perform an action which takes a bitmap as input.
-                .onSuccess(new Action1<Bitmap>() {
-                    @Override
-                    public void call(Bitmap input) {
-                        // Do something.
-                    }
-                })
-                // The following actions will be performed in the main thread, i.e. the UI thread.
-                .uiThread()
-                // If the execution of the above task succeeds,
-                // perform an action on all registered instances of ImageView.
-                .onSuccess(ImageView.class, new TargetAction1<ImageView, Bitmap>() {
-                    @Override
-                    public void call(ImageView imageView, Bitmap input) {
-                        // Do something.
-                    }
-                })
-                // The following actions will be performed in background.
-                .background()
-                // If the execution of the above task fails, perform an action.
-                .onFailure(new Action0() {
-                    @Override
-                    public void call() {
-                        // Do something.
-                    }
-                })
-                // If the execution of the above task fails, print the stack trace fo the exception.
-                .onFailure(new Action1<Exception>() {
-                    @Override
-                    public void call(Exception input) {
-                        input.printStackTrace();
-                    }
-                })
-                // If the execution of the above task fails,
-                // perform an action on all registered instances of ImageView.
-                .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
-                    @Override
-                    public void call(ImageView imageView, Exception input) {
-                        // Do something.
-                    }
-                })
-                .endTask()
-                .commit();
+            @Override
+            protected void onExecute(String input) {
+                // We load the bitmap.
+                // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
+                // Otherwise, the Domino gets stuck here.
+                try {
+                    Bitmap bitmap = load(input);
+                    notifySuccess(bitmap);
+                } catch (IOException e) {
+                    notifyFailure(e);
+                }
+            }
+        })
 
+        // The following performs different actions according to the result or the failure
+        // of the task.
+
+        // If the execution of the above task succeeds, perform an action.
+        .onSuccess(new Action0() {
+            @Override
+            public void call() {
+                // Do something.
+            }
+        })
+        // If the execution of the above task succeeds,
+        // perform an action which takes a bitmap as input.
+        .onSuccess(new Action1<Bitmap>() {
+            @Override
+            public void call(Bitmap input) {
+                // Do something.
+            }
+        })
+        // The following actions will be performed in the main thread, i.e. the UI thread.
+        .uiThread()
+        // If the execution of the above task succeeds,
+        // perform an action on all registered instances of ImageView.
+        .onSuccess(ImageView.class, new TargetAction1<ImageView, Bitmap>() {
+            @Override
+            public void call(ImageView imageView, Bitmap input) {
+                // Do something.
+            }
+        })
+        // The following actions will be performed in background.
+        .background()
+        // If the execution of the above task fails, perform an action.
+        .onFailure(new Action0() {
+            @Override
+            public void call() {
+                // Do something.
+            }
+        })
+        // If the execution of the above task fails, print the stack trace fo the exception.
+        .onFailure(new Action1<Exception>() {
+            @Override
+            public void call(Exception input) {
+                input.printStackTrace();
+            }
+        })
+        // If the execution of the above task fails,
+        // perform an action on all registered instances of ImageView.
+        .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
+            @Override
+            public void call(ImageView imageView, Exception input) {
+                // Do something.
+            }
+        })
+        .endTask()
+        .commit();
 ```
 
 You may find that after the execution of the task, the result or the exception will be passed to
 the following actions, but the original input of the task has been lost. Sometimes we need to know
-the original input in the following actions. So you can execute a task using another method.
+the original input in the following actions. To pass the original input to the following actions,
+you can execute a task using another method.
 
 ```
-        // Create a domino labeled "LoadingBitmap" which takes a String as input,
-        // which is the path of a bitmap.
-        Shelly.<String>createDomino("LoadingBitmap 2")
-                // The following actions will be performed in background.
-                .background()
-                // Execute a task which loads a bitmap according to the path.
-                .beginTaskKeepingInput(new Task<String, Bitmap, Exception>() {
-                    private Bitmap load(String path) throws IOException {
-                        if (path == null) {
-                            throw new IOException();
-                        } else {
-                            return null;
-                        }
-                    }
-                    @Override
-                    protected void onExecute(String input) {
-                        // We load the bitmap.
-                        // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
-                        // Otherwise, the Domino gets stuck here.
-                        try {
-                            Bitmap bitmap = load(input);
-                            notifySuccess(bitmap);
-                        } catch (IOException e) {
-                            notifyFailure(e);
-                        }
-                    }
-                })
-                // The following performs different actions according to the result or the failure
-                // of the task.
+// Create a domino labeled "LoadingBitmap" which takes a String as input,
+// indicating is the path of a bitmap.
+Shelly.<String>createDomino("LoadingBitmap 2")
+        // The following actions will be performed in background.
+        .background()
+        // Execute a task which loads a bitmap according to the path.
+        .beginTaskKeepingInput(new Task<String, Bitmap, Exception>() {
+            private Bitmap load(String path) throws IOException {
+                if (path == null) {
+                    throw new IOException();
+                } else {
+                    return null;
+                }
+            }
+            @Override
+            protected void onExecute(String input) {
+                // We load the bitmap.
+                // Remember to call Task.notifySuccess() or Task.notifyFailure() in the end.
+                // Otherwise, the Domino gets stuck here.
+                try {
+                    Bitmap bitmap = load(input);
+                    notifySuccess(bitmap);
+                } catch (IOException e) {
+                    notifyFailure(e);
+                }
+            }
+        })
+        // The following performs different actions according to the result or the failure
+        // of the task.
 
-                // If the execution of the above task succeeds, perform an action.
-                .onSuccess(new Action0() {
-                    @Override
-                    public void call() {
-                        // Do something.
-                    }
-                })
-                // If the execution of the above task succeeds,
-                // perform an action which takes a bitmap as input.
-                .onSuccess(new Action1<Pair<String, Bitmap>>() {
-                    @Override
-                    public void call(Pair<String, Bitmap> input) {
+        // If the execution of the above task succeeds, perform an action.
+        .onSuccess(new Action0() {
+            @Override
+            public void call() {
+                // Do something.
+            }
+        })
+        // If the execution of the above task succeeds,
+        // perform an action which takes a bitmap as input.
+        .onSuccess(new Action1<Pair<String, Bitmap>>() {
+            @Override
+            public void call(Pair<String, Bitmap> input) {
 
-                    }
-                })
-                // The following actions will be performed in the main thread, i.e. the UI thread.
-                .uiThread()
-                // If the execution of the above task succeeds,
-                // perform an action on all registered instances of ImageView.
-                .onSuccess(ImageView.class, new TargetAction1<ImageView, Pair<String,Bitmap>>() {
-                    @Override
-                    public void call(ImageView imageView, Pair<String, Bitmap> input) {
+            }
+        })
+        // The following actions will be performed in the main thread, i.e. the UI thread.
+        .uiThread()
+        // If the execution of the above task succeeds,
+        // perform an action on all registered instances of ImageView.
+        .onSuccess(ImageView.class, new TargetAction1<ImageView, Pair<String,Bitmap>>() {
+            @Override
+            public void call(ImageView imageView, Pair<String, Bitmap> input) {
 
-                    }
-                })
-                // The following actions will be performed in background.
-                .background()
-                // If the execution of the above task fails, perform an action.
-                .onFailure(new Action0() {
-                    @Override
-                    public void call() {
-                        // Do something.
-                    }
-                })
-                // If the execution of the above task fails, print the stack trace fo the exception.
-                .onFailure(new Action1<Exception>() {
-                    @Override
-                    public void call(Exception input) {
-                        input.printStackTrace();
-                    }
-                })
-                // If the execution of the above task fails,
-                // perform an action on all registered instances of ImageView.
-                .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
-                    @Override
-                    public void call(ImageView imageView, Exception input) {
-                        // Do something.
-                    }
-                })
-                .endTask()
-                // Now the task ends, but the result remains. You can do more in the following.
-                .target(new Action1<Pair<String, Bitmap>>() {
-                          @Override
-                          public void call(Pair<String, Bitmap> input) {
+            }
+        })
+        // The following actions will be performed in background.
+        .background()
+        // If the execution of the above task fails, perform an action.
+        .onFailure(new Action0() {
+            @Override
+            public void call() {
+                // Do something.
+            }
+        })
+        // If the execution of the above task fails, print the stack trace fo the exception.
+        .onFailure(new Action1<Exception>() {
+            @Override
+            public void call(Exception input) {
+                input.printStackTrace();
+            }
+        })
+        // If the execution of the above task fails,
+        // perform an action on all registered instances of ImageView.
+        .onFailure(ImageView.class, new TargetAction1<ImageView, Exception>() {
+            @Override
+            public void call(ImageView imageView, Exception input) {
+                // Do something.
+            }
+        })
+        .endTask()
+        // Now the task ends, but the result remains. You can do more in the following.
+        .target(new Action1<Pair<String, Bitmap>>() {
+            @Override
+            public void call(Pair<String, Bitmap> input) {
 
-                          }
-                })
-                .commit();
+            }
+        })
+        .commit();
 ```
 
-Note that TaskDomino.endTask() will keep the result of the task, thus you can perform more actions
+Note that `TaskDomino.endTask()`` will keep the result of the task, thus you can perform more actions
 after the execution. See the above for example.
 
 ##Retrofit Domino
