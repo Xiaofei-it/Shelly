@@ -11,7 +11,7 @@ kinds of actions according to the result or the failure of the task execution. T
 Domino makes the business logic of your app clear and easy to understand.
 
 The following is an example of
-[Task Domino](../Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
+[Task Domino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
 
 ```
 // Create a domino labeled "LoadingBitmap" which takes a String as input,
@@ -269,7 +269,7 @@ Shelly.<String>createDomino("GETTING_USER")
 ```
 
 
-See [HERE](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
+See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
 for more APIs of the Retrofit Domino.
 
 Also, you may find that after the execution of the request, the result or the exception will be
@@ -339,7 +339,7 @@ Shelly.<String>createDomino("GETTING_USER")
 ```
 
 
-The above Domino is [RetrofitDomino2]. See [HERE](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
+The above Domino is [RetrofitDomino2]. See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
 for more APIs of the RetrofitDomino2 class.
 
 ##The merging and combination of Dominoes
