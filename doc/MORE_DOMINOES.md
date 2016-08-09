@@ -488,7 +488,7 @@ Shelly.<String>createDomino("Login")
         .commit();
 ```
 
-###Domino invocation within a Domino
+##Domino invocation within a Domino
 
 The Shelly library provides the methods for invoking Dominoes within a Domino.
 
