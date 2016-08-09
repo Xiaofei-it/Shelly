@@ -196,10 +196,10 @@ after the execution. See the above for example.
 
 ##Retrofit Domino
 
-The Shelly library provides a method for using Retrofit to send a HTTP request and processing the
+The Shelly library provides a method for using Retrofit to send an HTTP request and processing the
 result according to the result or the failure of the request.
 
-Suppose that we want to use Retrofit to send a HTTP request to get the user information.
+Suppose that we want to use Retrofit to send an HTTP request to get the user information.
 
 ```
         Shelly.<String>createDomino("GETTING_USER")

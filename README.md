@@ -5,11 +5,82 @@ chain to illustrate how each component varies with a business object.
 
 ##Features
 
-1. Provide a novel pattern for business-logic-oriented programming.
+1. Provides a novel pattern for business-logic-oriented programming.
 
-2. Make the source code of a business-logic-oriented app easy to understand and maintain.
+2. Makes the source code of a business-logic-oriented app easy to understand and maintain.
 
-3. Powerful APIs for data
+3. Convenient for sending HTTP requests and performing callback operations after getting the results.
+
+4. Convenient for time-consuming tasks and performing callback operations after the task execution.
+
+5. Powerful APIs for data flow control and thread scheduling.
+
+##Preview
+
+Before the introduction, let's see an example first.
+
+The following is an example, which sends an HTTP request and performs callback operations:
+
+```
+Shelly.<String>createDomino("Sending request")
+        .background()
+        .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
+            @Override
+            protected Call<ResponseBody> getCall(String s) {
+                return netInterface.test(s);
+            }
+        })
+        .uiThread()
+        .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
+            @Override
+            public void call(MainActivity mainActivity, ResponseBody input) {
+                try {
+                    mainActivity.show(input.string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        })
+        .onSuccessResult(SecondActivity.class, new TargetAction1<SecondActivity, ResponseBody>() {
+            @Override
+            public void call(SecondActivity secondActivity, ResponseBody input) {
+                try {
+                    secondActivity.show(input.string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        })
+        .onResponseFailure(MainActivity.class, new TargetAction1<MainActivity, Response<ResponseBody>>() {
+            @Override
+            public void call(MainActivity mainActivity, Response<ResponseBody> input) {
+                try {
+                    Toast.makeText(
+                        mainActivity.getApplicationContext(),
+                        input.errorBody().string(),
+                        Toast.LENGTH_SHORT
+                    ).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        })
+        .onFailure(new Action1<Throwable>() {
+            @Override
+            public void call(Throwable input) {
+                Log.e("Eric Zhao", "Error", input);
+            }
+        })
+        .endTask()
+        .commit();
+```
+
+From the above example, you can see how MainActivity and SecondActivity change according
+to the result or the failure of the HTTP request. We can see the changes of each component
+from a single place.
+
+This is just a simple example. Actually, the Shelly library is very powerful,
+which will be introduced in the following sections.
 
 ##Philosophy
 
@@ -104,8 +175,6 @@ perform a sequence of actions. To play a Domino, a group of objects is needed. T
 one or more objects.
 
 ###On input, output and data flow
-of the corresponding
-class of the action. The "call" method may take no arguments,
 
 ####Input of an action
 
@@ -191,7 +260,7 @@ kinds of actions according to the result or the failure of the task execution. T
 Domino makes the business logic of your app clear and easy to understand.
 
 2. Retrofit Domino,
-which provides a convenient pattern for sending a HTTP request and performing
+which provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
@@ -202,7 +271,7 @@ Also, the Shelly library provides methods for merging the results of two Dominoe
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
-sends a HTTP request and after getting its result, sends another request. These features are inspired
+sends an HTTP request and after getting its result, sends another request. These features are inspired
 by RxJava. See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
@@ -414,7 +483,7 @@ The Task Domino provides methods for executing a time-consuming task and perform
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
 Domino makes the business logic of your app clear and easy to understand.
 
-The Retrofit Domino provides a convenient pattern for sending a HTTP request and performing
+The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
@@ -427,7 +496,7 @@ The Shelly library provides methods for merging the results of two Dominoes and 
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
-sends a HTTP request and after getting its result, sends another request. These features are inspired
+sends an HTTP request and after getting its result, sends another request. These features are inspired
 by RxJava.
 
 The Shelly library provides the methods for invoking Dominoes within a Domino.
