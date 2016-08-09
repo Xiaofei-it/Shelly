@@ -151,8 +151,9 @@ This section gives the definitions of the technical terms with respect to the Sh
 An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
 to, performing certain operations on certain components, producing certain outputs, performing
 data transformation, and performing thread scheduling. An action is represented by a Java
-class or a Java interface, in which there exists a method, which is named "call" and contains the
-sequence of Java statements of the action and the invocation of which performs the action.
+class or a Java interface, in which there exists a method which is named "call" and contains the
+sequence of Java statements of the action. Such a method may be invoked to perform the corresponding
+action.
 
 "Performing an action" refers to executing the sequence of Java statements of the action.
 

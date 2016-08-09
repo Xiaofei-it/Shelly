@@ -9,10 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-    </list>
+    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="" />
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3409091">
-              <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+            <state vertical-scroll-proportion="66.296295">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,10 +49,26 @@
       <file leaf-file-name="NetInterface.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/NetInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.888889">
+              <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
               <folding>
                 <element signature="e#0#593#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="16.666666">
+              <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+              <folding>
+                <element signature="e#2454#2462#0" expanded="true" />
+                <element signature="e#2534#2739#0" expanded="true" />
+                <element signature="e#2738#2739#0" expanded="true" />
+                <element signature="e#3825#4249#0" expanded="true" />
+                <element signature="e#4248#4249#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,6 +79,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-12.148149">
               <caret line="133" column="5" selection-start-line="129" selection-start-column="4" selection-end-line="133" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.30991736">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -113,51 +136,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Secrect.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/secrect/Secrect.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.87037">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="wonderful.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/secrect/wonderful.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="0" selection-end-column="53" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadmeExample.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="129.51852">
-              <caret line="355" column="44" selection-start-line="355" selection-start-column="37" selection-end-line="355" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#593#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-                <element signature="e#3359#3556#0" expanded="true" />
-                <element signature="e#3555#3556#0" expanded="true" />
-                <element signature="e#24911#25172#0" expanded="true" />
-                <element signature="e#25171#25172#0" expanded="true" />
-                <element signature="e#27223#27231#0" expanded="true" />
-                <element signature="e#27285#27487#0" expanded="true" />
-                <element signature="e#27486#27487#0" expanded="true" />
-                <element signature="e#27513#27716#0" expanded="true" />
-                <element signature="e#27715#27716#0" expanded="true" />
-                <element signature="e#27760#27768#0" expanded="true" />
-                <element signature="e#27824#28040#0" expanded="true" />
-                <element signature="e#28039#28040#0" expanded="true" />
-                <element signature="e#28066#28283#0" expanded="true" />
-                <element signature="e#28282#28283#0" expanded="true" />
-                <element signature="e#28309#28591#0" expanded="true" />
-                <element signature="e#28590#28591#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -2766,7 +2750,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashAction2.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashFunction1.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashFunction2.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/function/stashfunction/StashTargetAction0.java" />
@@ -2811,12 +2794,13 @@
         <option value="$PROJECT_DIR$/shelly/build.gradle" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
         <option value="$PROJECT_DIR$/secrect/wonderful.md" />
-        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
         <option value="$PROJECT_DIR$/doc/MORE_USAGE.md" />
         <option value="$PROJECT_DIR$/doc/DOMINOE_COMBINATION.md" />
         <option value="$PROJECT_DIR$/doc/LAST_BUT_NOT_LEAST.md" />
         <option value="$PROJECT_DIR$/doc/METHODOLOGY.md" />
+        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java" />
       </list>
     </option>
   </component>
@@ -3978,14 +3962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="217" column="26" selection-start-line="191" selection-start-column="8" selection-end-line="217" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.026548672">
@@ -4174,18 +4150,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Shelly.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1467711">
-          <caret line="547" column="3" selection-start-line="547" selection-start-column="3" selection-end-line="547" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/NetInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.666667">
+          <caret line="57" column="31" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="31" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
           </folding>
@@ -4200,12 +4168,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Shelly.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/NetInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.666667">
-          <caret line="57" column="31" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="31" />
+        <state vertical-scroll-proportion="-13.888889">
+          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
           <folding>
             <element signature="e#0#593#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="66.296295">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="16.666666">
+          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
+          <folding>
+            <element signature="e#2454#2462#0" expanded="true" />
+            <element signature="e#2534#2739#0" expanded="true" />
+            <element signature="e#2738#2739#0" expanded="true" />
+            <element signature="e#3825#4249#0" expanded="true" />
+            <element signature="e#4248#4249#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4218,10 +4208,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3409091">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.30991736">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
