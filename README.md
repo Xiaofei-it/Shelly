@@ -7,7 +7,8 @@ chain to illustrate how each component varies with a business object.
 
 1. Provides a novel pattern for business-logic-oriented programming.
 
-2. Makes the source code of a business-logic-oriented app easy to understand and maintain.
+2. Makes the source code of a business-logic-oriented app easy to understand and maintain, no matter
+how the business logic is modified.
 
 3. Convenient for sending HTTP requests and performing callback operations,
 especially for sending multiple requests synchronously or sequentially.
