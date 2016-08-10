@@ -220,6 +220,12 @@ The "output of an action" is a group ("output group") of objects, produced in th
 actions. And the number of the objects contained in an output group may be different from the number
 of the objects contained in an input group.
 
+#### Types
+
+The "type of the input" is the Java type of elements in the input group.
+
+The "type of the output" is the Java type of elements in the output group.
+
 #### Data flow
 
 Once invoked, a Domino performs a sequence of actions.
@@ -285,7 +291,7 @@ sends an HTTP request and after getting its result, sends another request. These
 by RxJava. See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/LAST_BUT_NOT_LEAST.md)
+get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
 for more information.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes

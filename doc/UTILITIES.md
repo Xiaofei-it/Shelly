@@ -1,5 +1,6 @@
+# Utilities
 
-###Tuple input
+## Tuple input
 
 You may find that in the above examples, all of the Dominoes take only one input each time, but how
 about multiple input?
