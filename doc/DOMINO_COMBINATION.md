@@ -1,8 +1,8 @@
-#Domino Combination
+# Domino Combination
 
 
 
-#The merging and combination of Dominoes
+#Merging and combination of Dominoes
 
 Dominoes can be merged. If we merge two Dominoes whose final data are of the same type, then we get
 a new Domino whose initial data is the union of their final data.

@@ -1,25 +1,34 @@
-#Shelly
+# Shelly
 
 A library for business-logic-oriented programming, providing a novel pattern which uses a method
 chain to illustrate how each component varies with a business object.
 
-##Features
+## Features
 
 1. Provides a novel pattern for business-logic-oriented programming.
 
 2. Makes the source code of a business-logic-oriented app easy to understand and maintain.
 
-3. Convenient for sending HTTP requests and performing callback operations after getting the results.
+3. Convenient for sending HTTP requests and performing callback operations,
+especially for sending multiple requests synchronously or sequentially.
 
-4. Convenient for time-consuming tasks and performing callback operations after the task execution.
+4. Convenient for time-consuming tasks and performing callback operations.
 
 5. Powerful APIs for data flow control and thread scheduling.
 
-##Preview
+## Preview
 
 Before the introduction, let's see an example first.
 
-The following is an example, which sends an HTTP request and performs callback operations:
+Suppose that you want to use Retrofit to send an HTTP request, and
+
+1. If the response is successful, invoke two particular methods of MyActivity and SecondActivity;
+
+2. If the response is not successful, show a toast on the screen;
+
+3. If something goes wrong when sending request and an exception is thrown, print the message of the error.
+
+Using the Shelly library, you write the following to fulfil the above requirement:
 
 ```
 Shelly.<String>createDomino("Sending request")
@@ -82,7 +91,7 @@ from a single place.
 This is just a simple example. Actually, the Shelly library is very powerful,
 which will be introduced in the following sections.
 
-##Philosophy
+## Philosophy
 
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
@@ -142,11 +151,11 @@ After the creation of a Domino, you can "invoke" it to perform the specified act
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
-##Definitions
+## Definitions
 
 This section gives the definitions of the technical terms with respect to the Shelly library.
 
-###On actions
+### On actions
 
 An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
 to, performing certain operations on certain components, producing certain outputs, performing
@@ -157,7 +166,7 @@ action.
 
 "Performing an action" refers to executing the sequence of Java statements of the action.
 
-###On Dominoes
+### On Dominoes
 
 A "Domino" is a Java object which, under certain circumstances, performs a sequence of actions.
 For the sake of simplicity, a "Domino" may also refer to the Java class of a particular Domino
@@ -175,9 +184,9 @@ of the specified Domino object for later use.
 perform a sequence of actions. To play a Domino, a group of objects is needed. The group must contain
 one or more objects.
 
-###On input, output and data flow
+### On input, output and data flow
 
-####Input of an action
+#### Input of an action
 
 The "input of an action" is a group ("input group") of objects which is passed to the `call` method as arguments.
 The following illustrates the relationship between the input and the performance of an action:
@@ -196,7 +205,7 @@ Then
 
 4. If b > 0 and a > 0, then c = a * b.
 
-####Output of an action
+#### Output of an action
 
 Before the definition of the "output of an action", the `call` method should be paid more attention
 on. As is mentioned above, actions includes but is not limited to performing certain operations
@@ -211,7 +220,7 @@ The "output of an action" is a group ("output group") of objects, produced in th
 actions. And the number of the objects contained in an output group may be different from the number
 of the objects contained in an input group.
 
-####Data flow
+#### Data flow
 
 Once invoked, a Domino performs a sequence of actions.
 
@@ -225,15 +234,15 @@ Thus the output of a previous action is exactly the same as the input of the nex
 Therefore, the "data flow of a Domino" is the sequence of the input of each action of the Domino,
 followed by the output of the Domino.
 
-##Downloading
+## Downloading
 
-###Gradle
+### Gradle
 
 ```
 compile 'xiaofei.library:shelly:0.2.5-alpha4'
 ```
 
-###Maven
+### Maven
 
 ```
 <dependency>
@@ -244,7 +253,7 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 </dependency>
 ```
 
-##Usage
+## Usage
 
 The following illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
@@ -283,7 +292,7 @@ The shelly library provides a novel pattern for developing a business-logic-orie
 the business logic clear and easy to understand and makes the app easy to maintain. Please see
 [HERE](doc/METHODOLOGY.md) for the methodology.
 
-###Component registration
+### Component registration
 
 Each component which changes according to the change of a business object should be registered first,
 and should be unregistered whenever it is destroyed.
@@ -308,7 +317,7 @@ public class MyActivity extends AppCompatActivity {
 }
 ```
 
-###Domino creation
+### Domino creation
 
 A domino should be created and committed before it takes effect. The following is an example.
 And more APIs can be found in the
@@ -414,7 +423,7 @@ Remember to commit the domino finally!
 Each domino should be specified a unique label, which is an object, i.e. an Integer, a
 String or something else.
 
-###Domino invocation
+### Domino invocation
 
 To invoke a domino, do the following:
 
@@ -424,7 +433,7 @@ Shelly.playDomino("Example", "Single String"); // Pass a single String to the do
 Shelly.playDomino("Example", "First String", "Second String"); // Pass two Strings to the domino
 ```
 
-###Anonymous Domino
+### Anonymous Domino
 
 As is shown above, a unique label is needed to label the Domino to be invoked,
 thus you should specify a unique label when creating a Domino, otherwise the created Domino shall
@@ -474,7 +483,7 @@ Shelly.<String>createDomino("Example 2")
 Moreover, you can merge or combine two anonymous Dominoes.
 See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
-###More kinds of Dominoes
+### More kinds of Dominoes
 
 The Domino class provides many basic methods. Also you can write derived Dominoes which extend the
 class. In the Shelly library, there are already several kinds of derived Dominoes, which are shown
@@ -491,7 +500,7 @@ architectures for sending HTTP requests.
 
 For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
 
-###The merging and combination of Dominoes
+### Merging and combination of Dominoes
 
 The Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
@@ -504,19 +513,19 @@ The Shelly library provides the methods for invoking Dominoes within a Domino.
 
 See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
-###Tuple and stash
+### Tuple and stash
 
 The Shelly library provides some useful utilities, such as the stash to store and
 get objects and the tuple class to combine several input together. Please see [HERE](doc/LAST_BUT_NOT_LEAST.md)
 for more information.
 
-###Methodology
+### Methodology
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
 the business logic clear and easy to understand and makes the app easy to maintain. Please see
 [HERE](doc/METHODOLOGY.md) for the methodology.
 
-##License
+## License
 
 Copyright (C) 2016 Xiaofei
 

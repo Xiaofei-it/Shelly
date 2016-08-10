@@ -1,10 +1,10 @@
-#More kinds of Dominoes
+# More kinds of Dominoes
 
 The Domino class provides many basic methods. Also you can write derived Dominoes which extend the
 class. In the Shelly library, there are already several kinds of derived Dominoes, which are shown
 below.
 
-##Task Domino
+## Task Domino
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
@@ -198,7 +198,7 @@ Shelly.<String>createDomino("LoadingBitmap 2")
 Note that `TaskDomino.endTask()`` will keep the result of the task, thus you can perform more actions
 after the execution. See the above for example.
 
-##Retrofit Domino
+## Retrofit Domino
 
 The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
@@ -342,7 +342,7 @@ Shelly.<String>createDomino("GETTING_USER")
 The above Domino is RetrofitDomino2. See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
 for more APIs of the RetrofitDomino2 class.
 
-##The merging and combination of Dominoes
+## The merging and combination of Dominoes
 
 Dominoes can be merged. If we merge two Dominoes whose output are of the same type, then we get
 a new Domino whose input is the union of their output.
@@ -488,7 +488,7 @@ Shelly.<String>createDomino("Login")
         .commit();
 ```
 
-##Domino invocation within a Domino
+## Domino invocation within a Domino
 
 The Shelly library provides the methods for invoking Dominoes within a Domino.
 
