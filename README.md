@@ -522,7 +522,7 @@ See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 ### Tuple and stash
 
 The Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/LAST_BUT_NOT_LEAST.md)
+get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
 for more information.
 
 ### Methodology

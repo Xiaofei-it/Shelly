@@ -57,10 +57,11 @@ The Shelly library provides you with many tuple classes, which are contained in 
 `xiaofei.library.shelly.tuple`. You can create a tuple by `XXX.create(...)` rather than using the
 constructor of a tuple class.
 
-###Stash
+## Stash
 
-Sometimes, in an action performed by a Domino, you want to save something for later use. Now you can
-use the stash actions or stash functions, whose classes are located in the package
+Sometimes, in an action performed by a Domino, you want to save something for later use.
+
+In this case, use the stash actions or stash functions, which are contained in the package
 `xiaofei.library.shelly.function.stashfunction`. These actions and functions are the same as their
 corresponding actions and functions except that they provide additional methods for stashing, with
 which you can stash data for later use.
@@ -68,4 +69,63 @@ which you can stash data for later use.
 The following is an example:
 
 ```
+Shelly.<String>createDomino("Stash example")
+        .target(new StashAction1<String>() {
+            @Override
+            public void call(String input) {
+                // Store a String with the key "1".
+                stash(1, input + " test");
+            }
+        })
+        .target(new StashAction1<String>() {
+            @Override
+            public void call(String input) {
+                // Get the String with the key "1".
+                System.out.println(get(1));
+            }
+        })
+        .commit();
+```
+
+Note that if you invoke the Domino by `Shelly.playDomino("Stash example", "INPUT")`, it will work well.
+But if you invoke the Domino by `Shelly.playDomino("Stash example", "INPUT1", "INPUT2")`, something
+may go wrong:
+After the first action is performed, there is only one value ("INPUT2 test") in the stash.
+
+Why does this happen? The Shelly library performs the actions one after the other. When performing
+the first action, "INPUT1" is passed in and "INPUT1 test" is stashed. But after this, "INPUT2" is
+passed in and "INPUT2 test" replaces the previous one.
+Only after finishing performing the first action will the Shelly library perform the second action.
+
+So, what should we do to avoid the value replacement?
+
+You can use another method of the stash:
+
+```
+Shelly.<String>createDomino("Stash example 2")
+        .target(new StashAction1<String>() {
+            @Override
+            public void call(String input) {
+                // Store the String with two keys,
+                // the first of which is "First" and the second of which is input.
+                stash("First", input, input + " First");
+            }
+        })
+        .target(new StashAction1<String>() {
+            @Override
+            public void call(String input) {
+                // Store the String with two keys,
+                // the first of which is "Second" and the second of which is input.
+                stash("Second", input, input + "Second");
+            }
+        })
+        .target(new StashAction1<String>() {
+            @Override
+            public void call(String input) {
+                // Get the String with two keys.
+                System.out.println(get("First", input));
+                System.out.println(get("Second", input));
+            }
+        })
+        .commit();
 ```
