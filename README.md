@@ -50,7 +50,7 @@ performed to print the names.
 Now let's see another example which is more complex.
 Suppose that you want to use Retrofit to send an HTTP request, and
 
-1. If the response is successful, invoke two particular methods of MyActivity and SecondActivity;
+1. If the response is successful, invoke two particular methods of `MyActivity` and `SecondActivity`;
 
 2. If the response is not successful, show a toast on the screen;
 
@@ -88,7 +88,7 @@ Shelly.<String>createDomino("Sending request")
 A URL is passed in and Retrofit is used to send a HTTP request. After that, different actions are
 performed according to the results of the request.
 
-There are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
+In the above code, there are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
 `background()` means that the following actions are performed in background. And `uiThread()` means
 that the following actions are performed in the main thread, i.e. the UI thread.
 
@@ -96,11 +96,12 @@ From the above example, you can see how `MainActivity` and `SecondActivity` chan
 to the result or the failure of the HTTP request. We can see the changes of each component
 from a single place.
 
-Note that the above code will not perform any actions! What the code does is simply committing and
-storing the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Note that, actually the above code will not perform any actions unless the Domino is invoked!
+What the code does is simply committing and storing the Domino for later use.
+To make the Domino perform actions, you should invoke the Domino.
 Only after the Domino is invoked will it perform actions.
 
-This is just a simple example. Actually, the Shelly library is very powerful,
+These are just simple examples. Actually, the Shelly library is very powerful,
 which will be introduced in the following sections.
 
 ## Philosophy
@@ -111,7 +112,8 @@ See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy.
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
 To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have several disadvantages.
+also effective. However, these techniques have several disadvantages, such as making code difficult
+to maintain and leading to a potential risk of memory leaking.
 
 To solve these problems, I compose the Shelly library.
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each

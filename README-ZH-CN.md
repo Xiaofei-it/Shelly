@@ -2,170 +2,119 @@
 
 面向业务逻辑的编程库。本库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。
 
-# Shelly
+## 特色
 
-A library for business-logic-oriented programming, providing a novel pattern which uses a method
-chain to illustrate how each component varies with a business object.
+1. 为面向业务逻辑的编程提供一种全新的编程模式。
 
-[Chinese Readme 中文文档](README-ZH-CN.md)
+2. 无论业务逻辑怎么变化，使用本库编写的代码都易于理解和维护。
 
-## Features
+3. 能够方便地发送网络请求和处理回调，尤其是发送并发请求和连续请求。
 
-1. Provides a novel pattern for business-logic-oriented programming.
+4. 能够方便地执行耗时任务和处理回调。
 
-2. Makes the source code of a business-logic-oriented app easy to understand and maintain, no matter
-how the business logic is modified.
+5. 提供强大丰富的数据流控制的API和线程调度的API。
 
-3. Convenient for sending HTTP requests and performing callback operations,
-especially for sending multiple requests synchronously or sequentially.
+## 预览
 
-4. Convenient for time-consuming tasks and performing callback operations.
+//TODO 介绍Domino
 
-5. Powerful APIs for data flow control and thread scheduling.
+在介绍之前，我们先看一个例子。
 
-## Preview
-
-Before the introduction, let's see an example first.
-
-Suppose that you want to print the names of all the files in a folder. Using the Shelly library, we write the
-following to fulfil the requirement:
+假设现在你想打印文件夹里所有文件的名字。使用本库，你可以写如下代码：
 
 ```
 Shelly.<String>createDomino("Print file names")
         .background()
-        .flatMap(new Function1<String, List<String>>() {
-            @Override
-            public List<String> call(String input) {
+        .flatMap((Function1) (input) -> {
                 File[] files = new File(input).listFiles();
                 List<String> result = new ArrayList<String>();
                 for (File file : files) {
                     result.add(file.getName());
                 }
                 return result;
-            }
         })
-        .perform(new Action1<String>() {
-            @Override
-            public void call(String input) {
+        .perform((Action1) (input) -> {
                 System.out.println(input);
-            }
         })
         .commit();
 ```
 
-The above code uses a method chain to print the names of all the files. A folder path is passed in.
-`Function1` uses the path to get all the files and pass the file names to `Action1`. `Action1` is
-performed to print the names.
+上面的代码用方法链打印文件夹中的文件名。文件夹的路径被传入，`Function1`获取此路径下的所有文件并将文件名传给
+`Action1`，`Action1`将文件名打印出来。
 
-Now let's see another example which is more complex.
-Suppose that you want to use Retrofit to send an HTTP request, and
+我们看一个稍微复杂的例子。假设现在你想使用Retrofit发送HTTP请求，然后
 
-1. If the response is successful, invoke two particular methods of MyActivity and SecondActivity;
+1. 如果服务端的响应成功，那么调用`MyActivity`和`SecondActivity`中的两个函数；
 
-2. If the response is not successful, show a toast on the screen;
+2. 如果服务端的响应失败，那么在屏幕上显示一个toast；
 
-3. If something goes wrong when sending request and an exception is thrown, print the message of the error.
+3. 如果在发请求的时候出现错误或者异常，那么打印错误信息。
 
-Using the Shelly library, you write the following to fulfil the above requirement:
+使用本库，你可以写下面的代码：
 
 ```
 Shelly.<String>createDomino("Sending request")
         .background()
-        .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
-            @Override
-            protected Call<ResponseBody> getCall(String s) {
+        .beginRetrofitTask((RetrofitTask) (s) -> {
                 return netInterface.test(s);
-            }
         })
         .uiThread()
-        .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
-            @Override
-            public void call(MainActivity mainActivity, ResponseBody input) {
-                try {
-                    mainActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onSuccessResult(MainActivity.class, (TargetAction1) (mainActivity, input) -> {
+                mainActivity.show(input.string());
         })
-        .onSuccessResult(SecondActivity.class, new TargetAction1<SecondActivity, ResponseBody>() {
-            @Override
-            public void call(SecondActivity secondActivity, ResponseBody input) {
-                try {
-                    secondActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onSuccessResult(SecondActivity.class, (TargetAction1) (secondActivity, input) -> {
+                secondActivity.show(input.string());
         })
-        .onResponseFailure(MainActivity.class, new TargetAction1<MainActivity, Response<ResponseBody>>() {
-            @Override
-            public void call(MainActivity mainActivity, Response<ResponseBody> input) {
-                try {
-                    Toast.makeText(
-                        mainActivity.getApplicationContext(),
-                        input.errorBody().string(),
-                        Toast.LENGTH_SHORT
-                    ).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onResponseFailure(MainActivity.class, (TargetAction1) (mainActivity, input) -> {
+                Toast.makeText(
+                    mainActivity.getApplicationContext(),
+                    input.errorBody().string(),
+                    Toast.LENGTH_SHORT
+                ).show();
         })
-        .onFailure(new Action1<Throwable>() {
-            @Override
-            public void call(Throwable input) {
+        .onFailure((Action1) (input) -> {
                 Log.e("Eric Zhao", "Error", input);
-            }
         })
         .endTask()
         .commit();
 ```
 
-A URL is passed in and Retrofit is used to send a HTTP request. After that, different actions are
-performed according to the results of the request.
+一个URL被传入，Retrofit发送HTTP请求，之后根据不同结果执行相应的操作。
 
-There are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
-`background()` means that the following actions are performed in background. And `uiThread()` means
-that the following actions are performed in the main thread, i.e. the UI thread.
+代码中有一些线程调度相关的东西，比如`background()`和`uiThread()`。
+`background()`是说下面的操作在后台执行。
+`uiThread()`是说下面的操作在主线程（UI线程）执行。
 
-From the above example, you can see how MainActivity and SecondActivity change according
-to the result or the failure of the HTTP request. We can see the changes of each component
-from a single place.
+上面的例子中，你可以看出发送HTTP请求后`MainActivity`和`SecondActivity`是如何变化的。
+我们在一个地方就可以看到整个世界的变化。
 
-Note that the above code will not perform any actions! What the code does is simply commit and
-store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
-Only after the Domino is invoked will it perform actions.
 
-This is just a simple example. Actually, the Shelly library is very powerful,
-which will be introduced in the following sections.
+注意，如果不调用Domino，上面这段代码实际上并不会执行任何操作！这段代码做的只是提交并存储Domino，供以后使用。
+想要让Domino执行操作，必须调用它。只有调用Domino后，它才会执行操作。
 
-## Philosophy
+这些只是简单的例子。实际上，本库是非常强大的，将在后面几节介绍。
 
-This section illustrates a simple explanation of the theory of the Shelly library.
-See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy.
+## 思想
 
-In business-logic-oriented programming, a change of a particular business object may cause changes
-of various components, and the complexity of business logic will increase coupling between components.
-To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have several disadvantages. See [THEORY](doc/THEORY.md)
-for the disadvantages.
+本节简单介绍本库的理论。如果想要看完整版，请查看[THEORY](doc/THEORY.md)。
 
-To solve these problems, I compose the Shelly library.
-The Shelly library provides a novel pattern which uses a method chain to illustrate how each
-component varies with a business object. In the method chain, each method takes an action which
-represents the change of a particular component. The chain of methods represents all of the changes
-of all of the corresponding components. Thus you can see the change of the whole "world" in a single
-file rather than searching the whole project for the corresponding classes.
+在面向业务逻辑的编程中，一个特定的业务对象的改变可能会引起各个组件的变化，业务逻辑的复杂性也会增加模块之间的耦合。
+为了降低耦合，我们通常使用listeners（observers）或者event bus，这些易于使用并且非常有效，但是有一些缺点，比如
+难以维护，也可能有内存泄漏的风险。
 
-After the creation of a Domino, you can "invoke" it to perform the specified actions.
-When a business object is changed, you "invoke" the Domino and pass the business object to it.
-Then it performs the actions in the action sequence one after the other.
+为了解决这些问题，我写了Shelly库。
 
-See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy. Also, it gives the definitions
-of the technical terms with respect to the Shelly library, such as the Domino and the data flow.
+Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。在方法链中，每个方法有一个
+action参数，这个action执行相应的操作改变特定的组件。方法串起来后就代表了一系列的对各个组件的操作。这样你就能从
+这一个地方看到整个世界的变化。
 
-## Downloading
+//TODO 创建Domino和使用Domino关系没说清，看看详细用法中有没有说清
+创建Domino后，你可以“调用”Domino执行相应的操作。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
+然后它就会按action序列一个个执行action。
+
+如果要看详细的思想，请看[THEORY](doc/THEORY.md)。这里也会给出关于本库的许多技术术语的定语，比如Domino和数据流。
+
+## 下载
 
 ### Gradle
 
@@ -184,16 +133,29 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 </dependency>
 ```
 
-## Usage
+## 用法
+
+
+This section illustrates a brief outline of the usage of the Shelly library. For the details of
+the usage, please read the articles listed below:
+
+* [BASIC USAGE](doc/USAGE.md), contains the basic usage, including component registration,
+Domino creation and Domino invocation.
+
+* [MORE DOMINOES](doc/MORE_DOMINOES.md), contains the usage of various kinds of Dominoes.
+
+* [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md), illustrates how to merge the results of two
+Dominoes and combing two results of two Dominoes into one result.
+
+* [UTILITIES](doc/UTILITIES.md), contains the usage of the utilities provided by the Shelly library.
+
+* [METHODOLOGY](doc/METHODOLOGY.md), illustrates how to use the Shelly library in action.
 
 The Shelly library provides several kinds of Dominoes, including the basic Domino, the Task Domino
 and the Retrofit Domino.
 
 The basic Domino, which provides the basic methods for performing various kinds of actions,
 for data transformation and for thread scheduling.
-
-See [USAGE](doc/USAGE.md) for the information of the basic Domino, including component registration,
-Domino creation and Domino invocation.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
@@ -204,22 +166,18 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [MORE DOMINOES](doc/MORE_DOMINOES.md).
-
 Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md) for more information.
+by RxJava.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
-for more information.
+get objects and the tuple class to combine several input together.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
+the business logic clear and easy to understand and makes the app easy to maintain.
 
 ## License
 
