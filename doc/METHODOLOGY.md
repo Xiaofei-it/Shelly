@@ -128,6 +128,10 @@ these constants as Domino labels.
 
 Similarly, we create `PictureService`. The source code is not given here for simplicity.
 
+Note that the above code will not perform any actions! What the code does is simply commit and
+store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Only after the Domino is invoked will it perform actions.
+
 ### Preparation for Domino invocation
 
 In the `onCreate()` of the `Application` class, we write the following code:

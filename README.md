@@ -89,6 +89,10 @@ From the above example, you can see how MainActivity and SecondActivity change a
 to the result or the failure of the HTTP request. We can see the changes of each component
 from a single place.
 
+Note that the above code will not perform any actions! What the code does is simply commit and
+store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Only after the Domino is invoked will it perform actions.
+
 This is just a simple example. Actually, the Shelly library is very powerful,
 which will be introduced in the following sections.
 
@@ -429,6 +433,10 @@ Remember to commit the domino finally!
 
 Each domino should be specified a unique label, which is an object, i.e. an Integer, a
 String or something else.
+
+Again, note that the above code will not perform any actions! What the code does is simply commit and
+store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Only after the Domino is invoked will it perform actions.
 
 ### Domino invocation
 
