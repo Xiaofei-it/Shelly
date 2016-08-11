@@ -17,13 +17,13 @@ especially for sending multiple requests synchronously or sequentially.
 
 4. Convenient for time-consuming tasks and performing callback operations.
 
-5. Powerful APIs for data flow control and thread scheduling.
+5. Provides powerful APIs for data flow control and thread scheduling.
 
 ## Preview
 
 Before the introduction, let's see an example first.
 
-Suppose that you want to print the names of all the files in a folder. Using the Shelly library, we write the
+Suppose that you want to print the names of all the files in a folder. Using the Shelly library, you write the
 following to fulfil the requirement:
 
 ```
@@ -92,12 +92,12 @@ There are also something concerning the thread scheduling, such as `background()
 `background()` means that the following actions are performed in background. And `uiThread()` means
 that the following actions are performed in the main thread, i.e. the UI thread.
 
-From the above example, you can see how MainActivity and SecondActivity change according
+From the above example, you can see how `MainActivity` and `SecondActivity` change according
 to the result or the failure of the HTTP request. We can see the changes of each component
 from a single place.
 
-Note that the above code will not perform any actions! What the code does is simply commit and
-store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Note that the above code will not perform any actions! What the code does is simply committing and
+storing the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
 Only after the Domino is invoked will it perform actions.
 
 This is just a simple example. Actually, the Shelly library is very powerful,
