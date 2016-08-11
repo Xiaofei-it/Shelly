@@ -1,6 +1,7 @@
 # Theory
 
-This article discusses the theory of the Shelly library.
+This article discusses the theory of the Shelly library, including the philosophy and the definitions
+of the technical terms with respect to the Shelly library.
 
 ## Philosophy
 

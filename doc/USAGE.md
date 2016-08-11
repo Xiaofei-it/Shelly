@@ -1,186 +1,4 @@
-# Shelly
-
-A library for business-logic-oriented programming, providing a novel pattern which uses a method
-chain to illustrate how each component varies with a business object.
-
-[Chinese Readme 中文文档](README-ZH-CN.md)
-
-## Features
-
-1. Provides a novel pattern for business-logic-oriented programming.
-
-2. Makes the source code of a business-logic-oriented app easy to understand and maintain, no matter
-how the business logic is modified.
-
-3. Convenient for sending HTTP requests and performing callback operations,
-especially for sending multiple requests synchronously or sequentially.
-
-4. Convenient for time-consuming tasks and performing callback operations.
-
-5. Powerful APIs for data flow control and thread scheduling.
-
-## Preview
-
-Before the introduction, let's see an example first.
-
-Suppose that you want to print the names of all the files in a folder. Using the Shelly library, we write the
-following to fulfil the requirement:
-
-```
-Shelly.<String>createDomino("Print file names")
-        .background()
-        .flatMap(new Function1<String, List<String>>() {
-            @Override
-            public List<String> call(String input) {
-                File[] files = new File(input).listFiles();
-                List<String> result = new ArrayList<String>();
-                for (File file : files) {
-                    result.add(file.getName());
-                }
-                return result;
-            }
-        })
-        .perform(new Action1<String>() {
-            @Override
-            public void call(String input) {
-                System.out.println(input);
-            }
-        })
-        .commit();
-```
-
-The above code uses a method chain to print the names of all the files. A folder path is passed in.
-`Function1` uses the path to get all the files and pass the file names to `Action1`. `Action1` is
-performed to print the names.
-
-Now let's see another example which is more complex.
-Suppose that you want to use Retrofit to send an HTTP request, and
-
-1. If the response is successful, invoke two particular methods of MyActivity and SecondActivity;
-
-2. If the response is not successful, show a toast on the screen;
-
-3. If something goes wrong when sending request and an exception is thrown, print the message of the error.
-
-Using the Shelly library, you write the following to fulfil the above requirement:
-
-```
-Shelly.<String>createDomino("Sending request")
-        .background()
-        .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
-            @Override
-            protected Call<ResponseBody> getCall(String s) {
-                return netInterface.test(s);
-            }
-        })
-        .uiThread()
-        .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
-            @Override
-            public void call(MainActivity mainActivity, ResponseBody input) {
-                try {
-                    mainActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        })
-        .onSuccessResult(SecondActivity.class, new TargetAction1<SecondActivity, ResponseBody>() {
-            @Override
-            public void call(SecondActivity secondActivity, ResponseBody input) {
-                try {
-                    secondActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        })
-        .onResponseFailure(MainActivity.class, new TargetAction1<MainActivity, Response<ResponseBody>>() {
-            @Override
-            public void call(MainActivity mainActivity, Response<ResponseBody> input) {
-                try {
-                    Toast.makeText(
-                        mainActivity.getApplicationContext(),
-                        input.errorBody().string(),
-                        Toast.LENGTH_SHORT
-                    ).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        })
-        .onFailure(new Action1<Throwable>() {
-            @Override
-            public void call(Throwable input) {
-                Log.e("Eric Zhao", "Error", input);
-            }
-        })
-        .endTask()
-        .commit();
-```
-
-A URL is passed in and Retrofit is used to send a HTTP request. After that, different actions are
-performed according to the results of the request.
-
-There are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
-`background()` means that the following actions are performed in background. And `uiThread()` means
-that the following actions are performed in the main thread, i.e. the UI thread.
-
-From the above example, you can see how MainActivity and SecondActivity change according
-to the result or the failure of the HTTP request. We can see the changes of each component
-from a single place.
-
-Note that the above code will not perform any actions! What the code does is simply commit and
-store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
-Only after the Domino is invoked will it perform actions.
-
-This is just a simple example. Actually, the Shelly library is very powerful,
-which will be introduced in the following sections.
-
-## Philosophy
-
-This section illustrates a simple explanation of the theory of the Shelly library.
-See [HERE](doc/THEORY.md) for a detailed introduction of the philosophy.
-
-In business-logic-oriented programming, a change of a particular business object may cause changes
-of various components, and the complexity of business logic will increase coupling between components.
-To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have several disadvantages. See [HERE](doc/THEORY.md) for
-the disadvantages.
-
-To solve these problems, I compose the Shelly library.
-The Shelly library provides a novel pattern which uses a method chain to illustrate how each
-component varies with a business object. In the method chain, each method takes an action which
-represents the change of a particular component. The chain of methods represents all of the changes
-of all of the corresponding components. Thus you can see the change of the whole "world" in a single
-file rather than searching the whole project for the corresponding classes.
-
-After the creation of a Domino, you can "invoke" it to perform the specified actions.
-When a business object is changed, you "invoke" the Domino and pass the business object to it.
-Then it performs the actions in the action sequence one after the other.
-
-See [HERE](doc/THEORY.md) for a detailed introduction of the philosophy. Also, it gives the definitions
-of the technical terms with respect to the Shelly library, such as the Domino and the data flow.
-
-## Downloading
-
-### Gradle
-
-```
-compile 'xiaofei.library:shelly:0.2.5-alpha4'
-```
-
-### Maven
-
-```
-<dependency>
-  <groupId>xiaofei.library</groupId>
-  <artifactId>shelly</artifactId>
-  <version>0.2.5-alpha4</version>
-  <type>pom</type>
-</dependency>
-```
-
-## Usage
+# Usage
 
 The following illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
@@ -219,7 +37,7 @@ The shelly library provides a novel pattern for developing a business-logic-orie
 the business logic clear and easy to understand and makes the app easy to maintain. Please see
 [HERE](doc/METHODOLOGY.md) for the methodology.
 
-### Component registration
+## Component registration
 
 Each component which changes according to the change of a business object should be registered first,
 and should be unregistered whenever it is destroyed.
@@ -244,7 +62,7 @@ public class MyActivity extends AppCompatActivity {
 }
 ```
 
-### Domino creation
+## Domino creation
 
 A domino should be created and committed before it takes effect. The following is an example.
 And more APIs can be found in the
@@ -354,7 +172,7 @@ Again, note that the above code will not perform any actions! What the code does
 store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
 Only after the Domino is invoked will it perform actions.
 
-### Domino invocation
+## Domino invocation
 
 To invoke a domino, do the following:
 
@@ -364,7 +182,7 @@ Shelly.playDomino("Example", "Single String"); // Pass a single String to the do
 Shelly.playDomino("Example", "First String", "Second String"); // Pass two Strings to the domino
 ```
 
-### Anonymous Domino
+## Anonymous Domino
 
 As is shown above, a unique label is needed to label the Domino to be invoked,
 thus you should specify a unique label when creating a Domino, otherwise the created Domino shall
@@ -414,7 +232,7 @@ Shelly.<String>createDomino("Example 2")
 Moreover, you can merge or combine two anonymous Dominoes.
 See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
-### More kinds of Dominoes
+## More kinds of Dominoes
 
 The Domino class provides many basic methods. Also you can write derived Dominoes which extend the
 class. In the Shelly library, there are already several kinds of derived Dominoes, which are shown
@@ -431,7 +249,7 @@ architectures for sending HTTP requests.
 
 For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
 
-### Merging and combination of Dominoes
+## Merging and combination of Dominoes
 
 The Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
@@ -444,21 +262,14 @@ The Shelly library provides the methods for invoking Dominoes within a Domino.
 
 See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
-### Tuple and stash
+## Tuple and stash
 
 The Shelly library provides some useful utilities, such as the stash to store and
 get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
 for more information.
 
-### Methodology
+## Methodology
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
 the business logic clear and easy to understand and makes the app easy to maintain. Please see
 [HERE](doc/METHODOLOGY.md) for the methodology.
-
-## License
-
-Copyright (C) 2016 Xiaofei
-
-HermesEventBus binaries and source code can be used according to the
-[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
