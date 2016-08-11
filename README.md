@@ -23,6 +23,37 @@ especially for sending multiple requests synchronously or sequentially.
 
 Before the introduction, let's see an example first.
 
+Suppose that you want to print the names of all the files in a folder. Using the Shelly library, we write the
+following to fulfil the requirement:
+
+```
+Shelly.<String>createDomino("Print file names")
+        .background()
+        .flatMap(new Function1<String, List<String>>() {
+            @Override
+            public List<String> call(String input) {
+                File[] files = new File(input).listFiles();
+                List<String> result = new ArrayList<String>();
+                for (File file : files) {
+                    result.add(file.getName());
+                }
+                return result;
+            }
+        })
+        .perform(new Action1<String>() {
+            @Override
+            public void call(String input) {
+                System.out.println(input);
+            }
+        })
+        .commit();
+```
+
+The above code uses a method chain to print the names of all the files. A folder path is passed in.
+`Function1` uses the path to get all the files and pass the file names to `Action1`. `Action1` is
+performed to print the names.
+
+Now let's see another example which is more complex.
 Suppose that you want to use Retrofit to send an HTTP request, and
 
 1. If the response is successful, invoke two particular methods of MyActivity and SecondActivity;
@@ -86,6 +117,13 @@ Shelly.<String>createDomino("Sending request")
         .endTask()
         .commit();
 ```
+
+A URL is passed in and Retrofit is used to send a HTTP request. After that, different actions are
+performed according to the results of the request.
+
+There are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
+`background()` means that the following actions are performed in background. And `uiThread()` means
+that the following actions are performed in the main thread, i.e. the UI thread.
 
 From the above example, you can see how MainActivity and SecondActivity change according
 to the result or the failure of the HTTP request. We can see the changes of each component

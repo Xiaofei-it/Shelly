@@ -20,6 +20,7 @@ package xiaofei.library.shelly.domino;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -647,6 +648,26 @@ public class ReadmeExample {
                     public void call(String input) {
                         System.out.println(get("First", input));
                         System.out.println(get("Second", input));
+                    }
+                })
+                .commit();
+        Shelly.<String>createDomino("Print file names")
+                .background()
+                .flatMap(new Function1<String, List<String>>() {
+                    @Override
+                    public List<String> call(String input) {
+                        File[] files = new File(input).listFiles();
+                        List<String> result = new ArrayList<String>();
+                        for (File file : files) {
+                            result.add(file.getName());
+                        }
+                        return result;
+                    }
+                })
+                .perform(new Action1<String>() {
+                    @Override
+                    public void call(String input) {
+                        System.out.println(input);
                     }
                 })
                 .commit();
