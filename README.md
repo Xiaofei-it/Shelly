@@ -139,13 +139,13 @@ which will be introduced in the following sections.
 ## Philosophy
 
 This section illustrates a simple explanation of the theory of the Shelly library.
-See [HERE](doc/THEORY.md) for a detailed introduction of the philosophy.
+See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy.
 
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
 To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have several disadvantages. See [HERE](doc/THEORY.md) for
-the disadvantages.
+also effective. However, these techniques have several disadvantages. See [THEORY](doc/THEORY.md)
+for the disadvantages.
 
 To solve these problems, I compose the Shelly library.
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each
@@ -158,7 +158,7 @@ After the creation of a Domino, you can "invoke" it to perform the specified act
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
-See [HERE](doc/THEORY.md) for a detailed introduction of the philosophy. Also, it gives the definitions
+See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy. Also, it gives the definitions
 of the technical terms with respect to the Shelly library, such as the Domino and the data flow.
 
 ## Downloading
@@ -188,7 +188,7 @@ and the Retrofit Domino.
 The basic Domino, which provides the basic methods for performing various kinds of actions,
 for data transformation and for thread scheduling.
 
-See [HERE](doc/USAGE.md) for the information of the basic Domino, including component registration,
+See [USAGE](doc/USAGE.md) for the information of the basic Domino, including component registration,
 Domino creation and Domino invocation.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
@@ -200,22 +200,22 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
+For the information about various kinds of Dominoes, please see [MORE DOMINOES](doc/MORE_DOMINOES.md).
 
 Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [HERE](doc/DOMINO_COMBINATION.md) for more information.
+by RxJava. See [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
+get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
 for more information.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
 the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[HERE](doc/METHODOLOGY.md) for the methodology.
+[METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
 
 ## License
 
