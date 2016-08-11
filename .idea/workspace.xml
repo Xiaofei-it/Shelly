@@ -10,20 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java" afterPath="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java" afterPath="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/ReadmeExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test01.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test01.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test02.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test02.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test03.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test03.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test04.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test04.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test05.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test05.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test07.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test07.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java" afterPath="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/DOMINO_COMBINATION.md" afterPath="$PROJECT_DIR$/doc/DOMINO_COMBINATION.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/MORE_DOMINOES.md" afterPath="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/UTILITIES.md" afterPath="$PROJECT_DIR$/doc/UTILITIES.md" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,8 +44,18 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="43.962963">
-              <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+            <state vertical-scroll-proportion="-1.1851852">
+              <caret line="421" column="16" selection-start-line="421" selection-start-column="9" selection-end-line="421" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DOMINO_COMBINATION.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.44444445">
+              <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -64,8 +64,48 @@
       <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8888888">
-              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+            <state vertical-scroll-proportion="25.851852">
+              <caret line="37" column="23" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UTILITIES.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doc/UTILITIES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22758621">
+              <caret line="119" column="13" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.8148148">
+              <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaskDomino.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.8333333">
+              <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RetrofitDomino2.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.9444444">
+              <caret line="153" column="26" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -81,45 +121,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test02.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test02.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8035714">
-              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Domino.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="13.925926">
-              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.1111112">
+              <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9454#10591#0" expanded="true" />
-                <element signature="e#10590#10591#0" expanded="true" />
+                <element signature="e#9466#10603#0" expanded="true" />
+                <element signature="e#10602#10603#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.592592">
-              <caret line="343" column="0" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test01.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test01.java">
+      <file leaf-file-name="Test06.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -2745,9 +2765,6 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/test/java/xiaofei/library/shellytest/Test01.java" />
         <option value="$PROJECT_DIR$/app/src/test/java/xiaofei/library/shellytest/Test02.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java" />
-        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/Player.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundPlayer.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/ThrottlePlayer.java" />
@@ -2770,16 +2787,19 @@
         <option value="$PROJECT_DIR$/doc/MORE_USAGE.md" />
         <option value="$PROJECT_DIR$/doc/DOMINOE_COMBINATION.md" />
         <option value="$PROJECT_DIR$/app/src/main/java/xiaofei/library/shellytest/Test.java" />
-        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
-        <option value="$PROJECT_DIR$/doc/DOMINO_COMBINATION.md" />
         <option value="$PROJECT_DIR$/doc/LAST_BUT_NOT_LEAST.md" />
-        <option value="$PROJECT_DIR$/doc/UTILITIES.md" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/UserService.java" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/demo/UserService.java" />
         <option value="$PROJECT_DIR$/shelly/build.gradle" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/doc/METHODOLOGY.md" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java" />
+        <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/doc/DOMINO_COMBINATION.md" />
+        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
+        <option value="$PROJECT_DIR$/doc/UTILITIES.md" />
       </list>
     </option>
   </component>
@@ -3417,33 +3437,7 @@
       <recent name="$PROJECT_DIR$/secrect" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Test01">
-    <configuration default="false" name="Test08.testMap" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="xiaofei.library.shelly.demo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="shelly" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="xiaofei.library.shelly.domino" />
-      <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.domino.Test08" />
-      <option name="METHOD_NAME" value="testMap" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.Test06">
     <configuration default="false" name="Test01.f" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -3510,6 +3504,58 @@
       <option name="MAIN_CLASS_NAME" value="xiaofei.library.shellytest.Test02" />
       <option name="METHOD_NAME" value="f" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test02" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="xiaofei.library.shelly.domino.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="shelly" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="xiaofei.library.shelly.domino" />
+      <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.domino.Test02" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test06" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="xiaofei.library.shelly.domino.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="shelly" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="xiaofei.library.shelly.domino" />
+      <option name="MAIN_CLASS_NAME" value="xiaofei.library.shelly.domino.Test06" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -3768,20 +3814,21 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Android Application.app" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.Test08.testMap" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.Test01.f" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.Test01" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.Test02.f" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.Test01.f" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.Test01" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.Test02.f" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.Test02" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.Test06" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.Test01" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.Test02.f" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.Test01.f" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.Test01" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.Test08.testMap" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.Test06" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.Test02" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.Test01" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.Test02.f" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.Test01.f" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
@@ -3814,14 +3861,11 @@
     <history-entry file="Test01 - 2016.08.11 at 16h 04m 23s.xml">
       <configuration name="Test01" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Test01_f - 2016.07.20 at 16h 00m 17s.xml">
-      <configuration name="Test01.f" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Test01_f - 2016.07.20 at 16h 00m 43s.xml">
-      <configuration name="Test01.f" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Test01_f - 2016.07.20 at 16h 04m 52s.xml">
       <configuration name="Test01.f" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test02 - 2016.08.11 at 16h 05m 16s.xml">
+      <configuration name="Test02" configurationId="JUnit" />
     </history-entry>
     <history-entry file="Test02_f - 2016.07.20 at 16h 11m 31s.xml">
       <configuration name="Test02.f" configurationId="JUnit" />
@@ -3841,6 +3885,9 @@
     <history-entry file="Test02_f - 2016.07.20 at 20h 36m 24s.xml">
       <configuration name="Test02.f" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Test06 - 2016.08.11 at 16h 11m 19s.xml">
+      <configuration name="Test06" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -3853,7 +3900,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="709" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -3863,8 +3910,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6694772" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -4019,13 +4066,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/scheduler/BackgroundQueueScheduler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4109,14 +4149,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.026549">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/test/java/xiaofei/library/shellytest/Test01.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.625">
@@ -4189,20 +4221,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.21276596">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.148148">
-          <caret line="52" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="52" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#999#1167#0" expanded="false" />
-            <element signature="e#1166#1167#0" expanded="false" />
-            <element signature="e#1194#1395#0" expanded="false" />
-            <element signature="e#1394#1395#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4298,37 +4316,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.907408">
-          <caret line="114" column="37" selection-start-line="114" selection-start-column="37" selection-end-line="114" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/converter/RetrofitDominoConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25092936">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7843866">
-          <caret line="198" column="29" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8277886">
-          <caret line="180" column="49" selection-start-line="180" selection-start-column="45" selection-end-line="180" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#593#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4347,14 +4339,6 @@
           <folding>
             <element signature="e#0#593#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/UTILITIES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.1296296">
-          <caret line="124" column="48" selection-start-line="124" selection-start-column="48" selection-end-line="124" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -4428,30 +4412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.592592">
-          <caret line="343" column="0" selection-start-line="343" selection-start-column="0" selection-end-line="343" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8888888">
-          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="43.962963">
-          <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test01.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -4460,15 +4420,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test08.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="26" selection-start-line="33" selection-start-column="8" selection-end-line="52" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test02.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.2222223">
+          <caret line="148" column="71" selection-start-line="148" selection-start-column="71" selection-end-line="148" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#593#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8333333">
+          <caret line="213" column="20" selection-start-line="213" selection-start-column="20" selection-end-line="213" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="13.925926">
-          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.1111112">
+          <caret line="164" column="5" selection-start-line="164" selection-start-column="5" selection-end-line="164" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9454#10591#0" expanded="true" />
-            <element signature="e#10590#10591#0" expanded="true" />
+            <element signature="e#9466#10603#0" expanded="true" />
+            <element signature="e#10602#10603#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9444444">
+          <caret line="153" column="26" selection-start-line="153" selection-start-column="26" selection-end-line="153" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4480,10 +4490,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test02.java">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8035714">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        <state vertical-scroll-proportion="-1.1851852">
+          <caret line="421" column="16" selection-start-line="421" selection-start-column="9" selection-end-line="421" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.44444445">
+          <caret line="99" column="12" selection-start-line="99" selection-start-column="12" selection-end-line="99" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8148148">
+          <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="25.851852">
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/UTILITIES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22758621">
+          <caret line="119" column="13" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
           <folding />
         </state>
       </provider>

@@ -9,7 +9,7 @@ See another example:
 
 ```
 Shelly.<Integer>createDomino("Print")
-        .target(new Action1<Integer>() {
+        .perform(new Action1<Integer>() {
             @Override
             public void call(Integer input) {
                 System.out.println(input);
@@ -38,7 +38,7 @@ Shelly.<Triple<Integer, Integer, Double>>createDomino("Add")
                 return input.first + input.second + input.third;
             }
         })
-        .target(new Action1<Double>() {
+        .perform(new Action1<Double>() {
             @Override
             public void call(Double input) {
                 System.out.print(input);
@@ -70,14 +70,14 @@ The following is an example:
 
 ```
 Shelly.<String>createDomino("Stash example")
-        .target(new StashAction1<String>() {
+        .perform(new StashAction1<String>() {
             @Override
             public void call(String input) {
                 // Store a String with the key "1".
                 stash(1, input + " test");
             }
         })
-        .target(new StashAction1<String>() {
+        .perform(new StashAction1<String>() {
             @Override
             public void call(String input) {
                 // Get the String with the key "1".
@@ -103,7 +103,7 @@ You can use another method of the stash:
 
 ```
 Shelly.<String>createDomino("Stash example 2")
-        .target(new StashAction1<String>() {
+        .perform(new StashAction1<String>() {
             @Override
             public void call(String input) {
                 // Store the String with two keys,
@@ -111,7 +111,7 @@ Shelly.<String>createDomino("Stash example 2")
                 stash("First", input, input + " First");
             }
         })
-        .target(new StashAction1<String>() {
+        .perform(new StashAction1<String>() {
             @Override
             public void call(String input) {
                 // Store the String with two keys,
@@ -119,7 +119,7 @@ Shelly.<String>createDomino("Stash example 2")
                 stash("Second", input, input + "Second");
             }
         })
-        .target(new StashAction1<String>() {
+        .perform(new StashAction1<String>() {
             @Override
             public void call(String input) {
                 // Get the String with two keys.

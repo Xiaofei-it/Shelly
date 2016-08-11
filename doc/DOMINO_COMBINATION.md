@@ -54,7 +54,7 @@ Shelly.<String>createDomino("Find *.png and *.jpg")
             Shelly.<String, Bitmap>getDominoByLabel("Find *.jpg")
         )
         .uiThread()
-        .target(new Action1<Bitmap>() {
+        .perform(new Action1<Bitmap>() {
             @Override
             public void call(Bitmap input) {
 
@@ -101,7 +101,7 @@ Shelly.<String>createDomino("Find *.png and *.jpg")
                     })
         )
         .uiThread()
-        .target(new Action1<Bitmap>() {
+        .perform(new Action1<Bitmap>() {
             @Override
             public void call(Bitmap input) {
 
@@ -146,7 +146,7 @@ Shelly.<String>createDomino("Login")
                 }
             }
         )
-        .target(new Action1<Internal>() {
+        .perform(new Action1<Internal>() {
             @Override
             public void call(Internal input) {
 

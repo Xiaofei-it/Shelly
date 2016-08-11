@@ -338,7 +338,7 @@ And more APIs can be found in the
 // Create a domino labeled "Example" which takes one or more Strings as input.
 Shelly.<String>createDomino("Example")
         // Perform an action. The action is performed once.
-        .target(new Action0() {
+        .perform(new Action0() {
             @Override
             public void call() {
                 // Do something
@@ -347,7 +347,7 @@ Shelly.<String>createDomino("Example")
         // Perform an action which takes the String as input.
         // If one String is passed to this action, the action is performed once.
         // If two Strings are passed to this action, the action is performed twice.
-        .target(new Action1<String>() {
+        .perform(new Action1<String>() {
             @Override
             public void call(String input) {
                 // Do something
@@ -356,7 +356,7 @@ Shelly.<String>createDomino("Example")
         // Perform another action which takes the String as input.
         // If one String is passed to this action, the action is performed once.
         // If two Strings are passed to this action, the action is performed twice.
-        .target(new Action1<String>() {
+        .perform(new Action1<String>() {
             @Override
             public void call(String input) {
                 // Do something
@@ -401,7 +401,7 @@ Shelly.<String>createDomino("Example")
         // The following actions will be performed in the main thread, i.e. the UI thread.
         .uiThread()
         // Perform an action on all registered instances of MyActivity.
-        .target(MyActivity.class, new TargetAction0<MyActivity>() {
+        .perform(MyActivity.class, new TargetAction0<MyActivity>() {
             @Override
             public void call(MyActivity myActivity) {
                 // Do something
@@ -419,7 +419,7 @@ Shelly.<String>createDomino("Example")
         // If there are two instances, then:
         // If one String is passed to this action, the action is performed twice.
         // If two Strings are passed to this action, the action is performed four times.
-        .target(MyActivity.class, new TargetAction1<MyActivity, Double>() {
+        .perform(MyActivity.class, new TargetAction1<MyActivity, Double>() {
             @Override
             public void call(MyActivity myActivity, Double input) {
                 // Do something
@@ -460,33 +460,33 @@ For example, you can perform an action on an anonymous Domino.
 
 ```
 Shelly.<String>createDomino("Example 2")
-        .target(new Action1<String>() {
+        .perform(new Action1<String>() {
             @Override
             public void call(String input) {
 
             }
         })
-        .target(Shelly.<String>createDomino()
+        .perform(Shelly.<String>createDomino()
                         .map(new Function1<String, Integer>() {
                             @Override
                             public Integer call(String input) {
                                 return null;
                             }
                         })
-                        .target(new Action1<Integer>() {
+                        .perform(new Action1<Integer>() {
                             @Override
                             public void call(Integer input) {
 
                             }
                         })
-                        .target(new Action0() {
+                        .perform(new Action0() {
                             @Override
                             public void call() {
 
                             }
                         })
         )
-        .target(new Action1<String>() {
+        .perform(new Action1<String>() {
             @Override
             public void call(String input) {
 

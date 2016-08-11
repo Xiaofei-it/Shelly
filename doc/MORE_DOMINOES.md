@@ -186,7 +186,7 @@ Shelly.<String>createDomino("LoadingBitmap 2")
         })
         .endTask()
         // Now the task ends, but the result remains. You can do more in the following.
-        .target(new Action1<Pair<String, Bitmap>>() {
+        .perform(new Action1<Pair<String, Bitmap>>() {
             @Override
             public void call(Pair<String, Bitmap> input) {
 
