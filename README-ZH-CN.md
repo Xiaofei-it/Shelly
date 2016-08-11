@@ -1,13 +1,10 @@
 # Shelly
 
-A library for business-logic-oriented programming, providing a novel pattern which uses a method
-chain to illustrate how each component varies with a business object.
+面向业务逻辑的编程库。本库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。
 
-[Chinese Readme 中文文档](README-ZH-CN.md)
+## 特色
 
-## Features
-
-1. Provides a novel pattern for business-logic-oriented programming.
+1. 提供了一种全新的Provides a novel pattern for business-logic-oriented programming.
 
 2. Makes the source code of a business-logic-oriented app easy to understand and maintain, no matter
 how the business logic is modified.
