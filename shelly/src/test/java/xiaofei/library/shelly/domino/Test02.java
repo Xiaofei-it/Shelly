@@ -33,7 +33,7 @@ public class Test02 {
     @Test
     public void f() {
         Shelly.<Integer>createDomino(1)
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
                         System.out.println("directly then");
@@ -43,23 +43,23 @@ public class Test02 {
         Shelly.playDomino(1, 2);
 
         Shelly.<Integer>createDomino(2)
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
-                        System.out.println("double target 1");
+                        System.out.println("double perform 1");
                     }
                 })
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
-                        System.out.println("double target 2");
+                        System.out.println("double perform 2");
                     }
                 })
                 .commit();
         Shelly.playDomino(2, 2);
 
         Shelly.<Integer>createDomino(3)
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("action1 " + input);
@@ -71,7 +71,7 @@ public class Test02 {
                         return input + "haha";
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("after map " + input);
@@ -83,7 +83,7 @@ public class Test02 {
                         return input + "hihi";
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("after map2 " + input);
@@ -93,7 +93,7 @@ public class Test02 {
         Shelly.playDomino(3, 2, 1);
 
         Shelly.<Integer>createDomino(4)
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("action1 " + input);
@@ -105,7 +105,7 @@ public class Test02 {
                         return "Map " + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("action1 " + input);

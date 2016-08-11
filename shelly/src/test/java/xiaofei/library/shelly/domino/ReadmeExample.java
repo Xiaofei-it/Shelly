@@ -32,7 +32,6 @@ import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.function.TargetAction0;
 import xiaofei.library.shelly.function.TargetAction1;
 import xiaofei.library.shelly.function.TargetAction2;
-import xiaofei.library.shelly.function.stashfunction.StashAction0;
 import xiaofei.library.shelly.function.stashfunction.StashAction1;
 import xiaofei.library.shelly.task.RetrofitTask;
 import xiaofei.library.shelly.task.Task;
@@ -48,7 +47,7 @@ public class ReadmeExample {
         // Create a domino labeled "Example" which takes one or more Strings as input
         Shelly.<String>createDomino("Example")
                 // Perform an action. The action is performed once.
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
                         // Do something
@@ -57,7 +56,7 @@ public class ReadmeExample {
                 // Perform an action which takes the String as input.
                 // If one String is passed here, the action is performed once.
                 // If two Strings are passed here, the action is performed twice.
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         // Do something
@@ -66,7 +65,7 @@ public class ReadmeExample {
                 // Perform another action which takes the String as input.
                 // If one String is passed here, the action is performed once.
                 // If two Strings are passed here, the action is performed twice.
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         // Do something
@@ -110,7 +109,7 @@ public class ReadmeExample {
                 // The following actions will be performed in the main thread, i.e. the UI thread.
                 .uiThread()
                 // Perform an action on all registered instances of MyActivity.
-                .target(MyActivity.class, new TargetAction0<MyActivity>() {
+                .perform(MyActivity.class, new TargetAction0<MyActivity>() {
                     @Override
                     public void call(MyActivity myActivity) {
                         // Do something
@@ -128,7 +127,7 @@ public class ReadmeExample {
                 // If there are two instances, then:
                 // If one String is passed here, the action is performed twice.
                 // If two Strings are passed here, the action is performed four times.
-                .target(MyActivity.class, new TargetAction1<MyActivity, Double>() {
+                .perform(MyActivity.class, new TargetAction1<MyActivity, Double>() {
                     @Override
                     public void call(MyActivity myActivity, Double input) {
                         // Do something
@@ -136,33 +135,33 @@ public class ReadmeExample {
                 })
                 .commit();
         Shelly.<String>createDomino("Example 2")
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
 
                     }
                 })
-                .target(Shelly.<String>createDomino()
+                .perform(Shelly.<String>createDomino()
                             .map(new Function1<String, Integer>() {
                                 @Override
                                 public Integer call(String input) {
                                     return null;
                                 }
                             })
-                            .target(new Action1<Integer>() {
+                            .perform(new Action1<Integer>() {
                                 @Override
                                 public void call(Integer input) {
 
                                 }
                             })
-                            .target(new Action0() {
+                            .perform(new Action0() {
                                 @Override
                                 public void call() {
 
                                 }
                             })
                 )
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
 
@@ -332,7 +331,7 @@ public class ReadmeExample {
                     }
                 })
                 .endTask()
-                .target(new Action1<Pair<String, Bitmap>>() {
+                .perform(new Action1<Pair<String, Bitmap>>() {
                     @Override
                     public void call(Pair<String, Bitmap> input) {
 
@@ -494,7 +493,7 @@ public class ReadmeExample {
                 .merge(Shelly.<String, Bitmap>getDominoByLabel("Find *.png"),
                         Shelly.<String, Bitmap>getDominoByLabel("Find *.jpg"))
                 .uiThread()
-                .target(new Action1<Bitmap>() {
+                .perform(new Action1<Bitmap>() {
                     @Override
                     public void call(Bitmap input) {
 
@@ -535,7 +534,7 @@ public class ReadmeExample {
                                 })
                 )
                 .uiThread()
-                .target(new Action1<Bitmap>() {
+                .perform(new Action1<Bitmap>() {
                     @Override
                     public void call(Bitmap input) {
 
@@ -568,7 +567,7 @@ public class ReadmeExample {
                             }
                         }
                 )
-                .target(new Action1<Internal>() {
+                .perform(new Action1<Internal>() {
                     @Override
                     public void call(Internal input) {
 
@@ -607,7 +606,7 @@ public class ReadmeExample {
                         return input.first + input.second + input.third;
                     }
                 })
-                .target(new Action1<Double>() {
+                .perform(new Action1<Double>() {
                     @Override
                     public void call(Double input) {
                         System.out.print(input);
@@ -617,13 +616,13 @@ public class ReadmeExample {
         Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
 
         Shelly.<String>createDomino("Stash example")
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         stash(1, input + " test");
                     }
                 })
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println(get(1));
@@ -631,19 +630,19 @@ public class ReadmeExample {
                 })
                 .commit();
         Shelly.<String>createDomino("Stash example 2")
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         stash("First", input, input + " First");
                     }
                 })
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         stash("Second", input, input + "Second");
                     }
                 })
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println(get("First", input));

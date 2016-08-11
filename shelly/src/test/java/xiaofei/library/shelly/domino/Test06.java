@@ -65,7 +65,7 @@ public class Test06 {
                 })
                 .onSuccess(Shelly.<Character>createDomino()
                             .background()
-                            .target(new Action1<Character>() {
+                            .perform(new Action1<Character>() {
                                 @Override
                                 public void call(Character input) {
                                     System.out.println("3: " + Thread.currentThread().getName() + " " + input);
@@ -95,7 +95,7 @@ public class Test06 {
                 .backgroundQueue()
                 .onFailure(Shelly.<Integer>createDomino()
                             .newThread()
-                            .target(new Action1<Integer>() {
+                            .perform(new Action1<Integer>() {
                                 @Override
                                 public void call(Integer input) {
                                     System.out.println("7: " + Thread.currentThread().getName() + " " + input);
@@ -141,13 +141,13 @@ public class Test06 {
                     }
                 })
                 .<String>endTaskEmpty()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("14: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
                         System.out.println("15: " + Thread.currentThread().getName());
@@ -189,7 +189,7 @@ public class Test06 {
                 })
                 .onSuccess(Shelly.<Character>createDomino()
                         .background()
-                        .target(new Action1<Character>() {
+                        .perform(new Action1<Character>() {
                             @Override
                             public void call(Character input) {
                                 System.out.println("3: " + Thread.currentThread().getName() + " " + input);
@@ -219,7 +219,7 @@ public class Test06 {
                 .backgroundQueue()
                 .onFailure(Shelly.<Integer>createDomino()
                         .newThread()
-                        .target(new Action1<Integer>() {
+                        .perform(new Action1<Integer>() {
                             @Override
                             public void call(Integer input) {
                                 System.out.println("7: " + Thread.currentThread().getName() + " " + input);
@@ -265,13 +265,13 @@ public class Test06 {
                     }
                 })
                 .endTask()
-                .target(new Action1<Character>() {
+                .perform(new Action1<Character>() {
                     @Override
                     public void call(Character input) {
                         System.out.println("14: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
                         System.out.println("15: " + Thread.currentThread().getName());
@@ -289,7 +289,7 @@ public class Test06 {
     @Test
     public void testThrottle() {
         Shelly.<String>createDomino(2)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + Thread.currentThread().getName() + " " + input);
@@ -297,7 +297,7 @@ public class Test06 {
                 })
                 .newThread()
                 .throttle(1, TimeUnit.SECONDS)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("2: " + Thread.currentThread().getName() + " " + input);
@@ -305,14 +305,14 @@ public class Test06 {
                 })
                 .commit();
         Shelly.<String>createDomino(3)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + Thread.currentThread().getName() + " " + input);
                     }
                 })
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("4: " + Thread.currentThread().getName() + " " + input);
@@ -320,7 +320,7 @@ public class Test06 {
                 })
                 .commit();
         Shelly.<String>createDomino(4)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("5: " + Thread.currentThread().getName() + " " + input);
@@ -328,7 +328,7 @@ public class Test06 {
                 })
                 .newThread()
                 .throttle(1, TimeUnit.SECONDS)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("6: " + Thread.currentThread().getName() + " " + input);

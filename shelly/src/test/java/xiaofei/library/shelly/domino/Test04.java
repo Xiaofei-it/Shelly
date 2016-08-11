@@ -35,7 +35,7 @@ public class Test04 {
     @Test
     public void testFlatMap() {
         Shelly.<String>createDomino(1)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + input);
@@ -50,7 +50,7 @@ public class Test04 {
                         return list;
                     }
                 })
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("2: " + input);
@@ -62,7 +62,7 @@ public class Test04 {
                         return "" + input + "map";
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + input);
@@ -76,7 +76,7 @@ public class Test04 {
     @Test
     public void testFilter() {
         Shelly.<String>createDomino(2)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + input);
@@ -88,7 +88,7 @@ public class Test04 {
                         return input.length() == 1;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("2: " + input);
@@ -107,7 +107,7 @@ public class Test04 {
                         return input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + input);

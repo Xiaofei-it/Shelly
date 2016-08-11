@@ -104,7 +104,7 @@ public class Domino<T, R> {
      *
      */
 
-    public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
+    public <U> Domino<T, R> perform(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
         return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
@@ -117,7 +117,7 @@ public class Domino<T, R> {
         });
     }
 
-    public <U> Domino<T, R> target(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
+    public <U> Domino<T, R> perform(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
         return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
@@ -132,7 +132,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> target(final Action0 action0) {
+    public Domino<T, R> perform(final Action0 action0) {
         return targetInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
@@ -142,7 +142,7 @@ public class Domino<T, R> {
         });
     }
 
-    public Domino<T, R> target(final Action1<? super R> action1) {
+    public Domino<T, R> perform(final Action1<? super R> action1) {
         return targetInternal(new Action2<Player<R>, List<R>>() {
                     @Override
                     public void call(Player<R> player, List<R> input) {
@@ -154,7 +154,7 @@ public class Domino<T, R> {
                 });
     }
 
-    public Domino<T, R> target(final Domino<? super R, ?> domino) {
+    public Domino<T, R> perform(final Domino<? super R, ?> domino) {
         return targetInternal(new Action2<Player<R>, List<R>>() {
                     @Override
                     public void call(Player<R> player, List<R> input) {

@@ -32,19 +32,19 @@ public class Test08 {
     @Test
     public void testMap() {
         Shelly.<String>createDomino(1)
-                .target(new StashAction0() {
+                .perform(new StashAction0() {
                     @Override
                     public void call() {
                         stash(1, 2);
                     }
                 })
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         stash(1, input + get(1));
                     }
                 })
-                .target(new StashAction1<String>() {
+                .perform(new StashAction1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println(get(1));

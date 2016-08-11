@@ -62,7 +62,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onFailure(final Domino<? super Throwable, ?> domino) {
         return new RetrofitDomino<T, R>(
-                target(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Throwable>>() {
                             @Override
                             public List<Throwable> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
@@ -76,14 +76,14 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
                             }
                         })
                         .flatMap(new ListIdentityOperator<Throwable>())
-                        .target(domino)
+                        .perform(domino)
                 ));
     }
 
     public <S> RetrofitDomino<T, R> onFailure(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean, Response<R>, Throwable>>())
-                .target(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(S s, List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean failure = false;
@@ -101,7 +101,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     }
 
     public <S> RetrofitDomino<T, R> onFailure(final Class<? extends S> clazz, final TargetAction1<? super S, ? super Throwable> targetAction1) {
-        return new RetrofitDomino<T, R>(target(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
+        return new RetrofitDomino<T, R>(perform(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
             @Override
             public void call(S s, Triple<Boolean, Response<R>, Throwable> input) {
                 if (!input.first) {
@@ -114,7 +114,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     public RetrofitDomino<T, R> onFailure(final Action0 action0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean, Response<R>, Throwable>>())
-                .target(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean failure = false;
@@ -132,7 +132,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     }
 
     public RetrofitDomino<T, R> onFailure(final Action1<? super Throwable> action1) {
-        return new RetrofitDomino<T, R>(target(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
+        return new RetrofitDomino<T, R>(perform(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
             @Override
             public void call(Triple<Boolean, Response<R>, Throwable> input) {
                 if (!input.first) {
@@ -143,11 +143,11 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     }
 
     public RetrofitDomino<T, R> finallyDo(Action0 action0) {
-        return new RetrofitDomino<T, R>(target(action0));
+        return new RetrofitDomino<T, R>(perform(action0));
     }
 
     public <S> RetrofitDomino<T, R> finallyDo(Class<? extends S> clazz, TargetAction0<? super S> targetAction0) {
-        return new RetrofitDomino<T, R>(target(clazz, targetAction0));
+        return new RetrofitDomino<T, R>(perform(clazz, targetAction0));
     }
 
     private Domino<T, Triple<Boolean, Response<R>, Throwable>> toDomino() {
@@ -184,7 +184,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     public RetrofitDomino<T, R> onSuccessResult(final Action0 action0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean, Response<R>, Throwable>>())
-                .target(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean hasResult = false;
@@ -204,7 +204,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onSuccessResult(final Action1<R> action1) {
         return new RetrofitDomino<T, R>(
-                target(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
+                perform(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
                     public void call(Triple<Boolean, Response<R>, Throwable> input) {
                         if (responseSuccess(input)) {
@@ -218,7 +218,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     public <S> RetrofitDomino<T, R> onSuccessResult(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean, Response<R>, Throwable>>())
-                .target(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(S s, List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean success = false;
@@ -238,7 +238,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public <S> RetrofitDomino<T, R> onSuccessResult(final Class<? extends S> clazz, final TargetAction1<? super S, R> targetAction1) {
         return new RetrofitDomino<T, R>(
-                target(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
+                perform(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
                     public void call(S s, Triple<Boolean, Response<R>, Throwable> input) {
                         if (responseSuccess(input)) {
@@ -251,7 +251,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onSuccessResult(final Domino<R, ?> domino) {
         return new RetrofitDomino<T, R>(
-                target(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<R>>() {
                             @Override
                             public List<R> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
@@ -265,7 +265,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
                             }
                         })
                         .flatMap(new ListIdentityOperator<R>())
-                        .target(domino)
+                        .perform(domino)
                 ));
     }
 
@@ -278,7 +278,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     public RetrofitDomino<T, R> onResponseFailure(final Action0 action0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean, Response<R>, Throwable>>())
-                .target(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(new Action1<List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean failure = false;
@@ -298,7 +298,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onResponseFailure(final Action1<Response<R>> action1) {
         return new RetrofitDomino<T, R>(
-                target(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
+                perform(new Action1<Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
                     public void call(Triple<Boolean, Response<R>, Throwable> input) {
                         if (responseFailure(input)) {
@@ -312,7 +312,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
     public <S> RetrofitDomino<T, R> onResponseFailure(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
         return new RetrofitDomino<T, R>(
                 reduce(new ListIdentityOperator<Triple<Boolean,Response<R>,Throwable>>())
-                .target(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
+                .perform(clazz, new TargetAction1<S, List<Triple<Boolean, Response<R>, Throwable>>>() {
                     @Override
                     public void call(S s, List<Triple<Boolean, Response<R>, Throwable>> input) {
                         boolean failure = false;
@@ -331,7 +331,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public <S> RetrofitDomino<T, R> onResponseFailure(final Class<? extends S> clazz, final TargetAction1<? super S, Response<R>> targetAction1) {
         return new RetrofitDomino<T, R>(
-                target(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
+                perform(clazz, new TargetAction1<S, Triple<Boolean, Response<R>, Throwable>>() {
                     @Override
                     public void call(S s, Triple<Boolean, Response<R>, Throwable> input) {
                         if (responseFailure(input)) {
@@ -344,7 +344,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onResponseFailure(final Domino<Response<R>, ?> domino) {
         return new RetrofitDomino<T, R>(
-                target(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Response<R>>>() {
                             @Override
                             public List<Response<R>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
@@ -358,7 +358,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
                             }
                         })
                         .flatMap(new ListIdentityOperator<Response<R>>())
-                        .target(domino)
+                        .perform(domino)
                 ));
     }
 }

@@ -33,7 +33,7 @@ public class Test03 {
     public void f() {
         Shelly.<Integer>createDomino(1)
                 .backgroundQueue()
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("cached thread1 : " + Thread.currentThread().getName() + " " + input);
@@ -51,7 +51,7 @@ public class Test03 {
                         return "map1" + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("cached thread2 : " + Thread.currentThread().getName() + " " + input);
@@ -63,7 +63,7 @@ public class Test03 {
                         return "map2" + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("cached thread3 : " + Thread.currentThread().getName() + " " + input);
@@ -84,7 +84,7 @@ public class Test03 {
 
         Shelly.<Integer>createDomino(2)
                 .background()
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("back queue : " + Thread.currentThread().getName() + " " + input);
@@ -98,7 +98,7 @@ public class Test03 {
                     }
                 })
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("new thread : " + Thread.currentThread().getName() + " " + input);
@@ -129,7 +129,7 @@ public class Test03 {
                         return "map1" + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("Fuck: " + Thread.currentThread().getName() + " " + input);
@@ -160,7 +160,7 @@ public class Test03 {
                         return "map3" + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("new Thread1 : " + Thread.currentThread().getName() + " " + input);
@@ -191,7 +191,7 @@ public class Test03 {
                         return "map1" + input;
                     }
                 })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("Fuck: " + Thread.currentThread().getName() + " " + input);
@@ -253,7 +253,7 @@ public class Test03 {
     @Test
     public void testNull() {
         Shelly.<Integer>createDomino("Null")
-                .target(new Action1<Integer>() {
+                .perform(new Action1<Integer>() {
                     @Override
                     public void call(Integer input) {
                         System.out.println("a " + input);

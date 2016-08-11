@@ -34,7 +34,7 @@ public class Test05 {
     public void testMerge() {
         Shelly.<String>createDomino(1)
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + Thread.currentThread().getName() + " " + input);
@@ -53,7 +53,7 @@ public class Test05 {
                 })
                 .commit();
         Shelly.<String>createDomino(2)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("2: " + Thread.currentThread().getName() + " " + input);
@@ -61,7 +61,7 @@ public class Test05 {
                 })
                 .background()
                 .dominoMap(Shelly.<String, String>getDominoByLabel(1))
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + Thread.currentThread().getName() + " " + input);
@@ -76,7 +76,7 @@ public class Test05 {
                 .commit();
         Shelly.playDomino(2, "A", "B");
         Shelly.<String>createDomino(3)
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("4: " + Thread.currentThread().getName() + " " + input);
@@ -85,7 +85,7 @@ public class Test05 {
                 .background()
                 .merge(Shelly.<String, String>getDominoByLabel(1), Shelly.<String, String>getDominoByLabel(2))
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("5: " + Thread.currentThread().getName() + " " + input);
@@ -101,8 +101,8 @@ public class Test05 {
 
         Shelly.<String>createDomino(4)
                 .newThread()
-                .target(Shelly.<String, String>getDominoByLabel(1))
-                .target(new Action1<String>() {
+                .perform(Shelly.<String, String>getDominoByLabel(1))
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("6: " + Thread.currentThread().getName() + " " + input);
@@ -117,7 +117,7 @@ public class Test05 {
     public void testCombine() {
         Shelly.<String>createDomino(5)
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + Thread.currentThread().getName() + " " + input);
@@ -137,7 +137,7 @@ public class Test05 {
                 .commit();
         Shelly.<String>createDomino(6)
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("2: " + Thread.currentThread().getName() + " " + input);
@@ -164,7 +164,7 @@ public class Test05 {
                                 return "" + input1 + input2;
                             }
                         })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + Thread.currentThread().getName() + " " + input);
@@ -179,7 +179,7 @@ public class Test05 {
     public void testCombineNull() {
         Shelly.<String>createDomino(8)
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("1: " + Thread.currentThread().getName() + " " + input);
@@ -194,7 +194,7 @@ public class Test05 {
                 .commit();
         Shelly.<String>createDomino(9)
                 .newThread()
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("2: " + Thread.currentThread().getName() + " " + input);
@@ -216,7 +216,7 @@ public class Test05 {
                                 return "" + input1 + input2;
                             }
                         })
-                .target(new Action1<String>() {
+                .perform(new Action1<String>() {
                     @Override
                     public void call(String input) {
                         System.out.println("3: " + Thread.currentThread().getName() + " " + input);

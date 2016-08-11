@@ -44,7 +44,7 @@ public class Test {
     public static void init() {
         Shelly.<String>createDomino(1)
                 .backgroundQueue()
-                .target(new Action0() {
+                .perform(new Action0() {
                     @Override
                     public void call() {
                         try {
@@ -62,7 +62,7 @@ public class Test {
                     }
                 })
                 .uiThread()
-                .target(MainActivity.class, new TargetAction1<MainActivity, String>() {
+                .perform(MainActivity.class, new TargetAction1<MainActivity, String>() {
                     @Override
                     public void call(MainActivity mainActivity, String input) {
                         mainActivity.f(input);
@@ -78,7 +78,7 @@ public class Test {
                     }
                 })
                 .uiThread()
-                .target(MainActivity.class, new TargetAction1<MainActivity, String>() {
+                .perform(MainActivity.class, new TargetAction1<MainActivity, String>() {
                     @Override
                     public void call(MainActivity mainActivity, String input) {
                         mainActivity.f(input);
