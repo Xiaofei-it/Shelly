@@ -29,22 +29,16 @@ following to fulfil the requirement:
 ```
 Shelly.<String>createDomino("Print file names")
         .background()
-        .flatMap(new Function1<String, List<String>>() {
-            @Override
-            public List<String> call(String input) {
+        .flatMap((Function1) (input) -> {
                 File[] files = new File(input).listFiles();
                 List<String> result = new ArrayList<String>();
                 for (File file : files) {
                     result.add(file.getName());
                 }
                 return result;
-            }
         })
-        .perform(new Action1<String>() {
-            @Override
-            public void call(String input) {
+        .perform((Action1) (input) -> {
                 System.out.println(input);
-            }
         })
         .commit();
 ```
@@ -67,52 +61,25 @@ Using the Shelly library, you write the following to fulfil the above requiremen
 ```
 Shelly.<String>createDomino("Sending request")
         .background()
-        .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
-            @Override
-            protected Call<ResponseBody> getCall(String s) {
+        .beginRetrofitTask((RetrofitTask) (s) -> {
                 return netInterface.test(s);
-            }
         })
         .uiThread()
-        .onSuccessResult(MainActivity.class, new TargetAction1<MainActivity, ResponseBody>() {
-            @Override
-            public void call(MainActivity mainActivity, ResponseBody input) {
-                try {
-                    mainActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onSuccessResult(MainActivity.class, (TargetAction1) (mainActivity, input) -> {
+                mainActivity.show(input.string());
         })
-        .onSuccessResult(SecondActivity.class, new TargetAction1<SecondActivity, ResponseBody>() {
-            @Override
-            public void call(SecondActivity secondActivity, ResponseBody input) {
-                try {
-                    secondActivity.show(input.string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onSuccessResult(SecondActivity.class, (TargetAction1) (secondActivity, input) -> {
+                secondActivity.show(input.string());
         })
-        .onResponseFailure(MainActivity.class, new TargetAction1<MainActivity, Response<ResponseBody>>() {
-            @Override
-            public void call(MainActivity mainActivity, Response<ResponseBody> input) {
-                try {
-                    Toast.makeText(
-                        mainActivity.getApplicationContext(),
-                        input.errorBody().string(),
-                        Toast.LENGTH_SHORT
-                    ).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        .onResponseFailure(MainActivity.class, (TargetAction1) (mainActivity, input) -> {
+                Toast.makeText(
+                    mainActivity.getApplicationContext(),
+                    input.errorBody().string(),
+                    Toast.LENGTH_SHORT
+                ).show();
         })
-        .onFailure(new Action1<Throwable>() {
-            @Override
-            public void call(Throwable input) {
+        .onFailure((Action1) (input) -> {
                 Log.e("Eric Zhao", "Error", input);
-            }
         })
         .endTask()
         .commit();
@@ -144,8 +111,7 @@ See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy.
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
 To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have several disadvantages. See [THEORY](doc/THEORY.md)
-for the disadvantages.
+also effective. However, these techniques have several disadvantages.
 
 To solve these problems, I compose the Shelly library.
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each
@@ -182,14 +148,26 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 
 ## Usage
 
+This section illustrates a brief outline of the usage of the Shelly library. For the details of
+the usage, please read the articles listed below:
+
+* [BASIC USAGE](doc/USAGE.md), contains the basic usage, including component registration,
+Domino creation and Domino invocation.
+
+* [MORE DOMINOES](doc/MORE_DOMINOES.md), contains the usage of various kinds of Dominoes.
+
+* [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md), illustrates how to merge the results of two
+Dominoes and combing two results of two Dominoes into one result.
+
+* [UTILITIES](doc/UTILITIES.md), contains the usage of the utilities provided by the Shelly library.
+
+* [METHODOLOGY](doc/METHODOLOGY.md), illustrates how to use the Shelly library in action.
+
 The Shelly library provides several kinds of Dominoes, including the basic Domino, the Task Domino
 and the Retrofit Domino.
 
 The basic Domino, which provides the basic methods for performing various kinds of actions,
 for data transformation and for thread scheduling.
-
-See [USAGE](doc/USAGE.md) for the information of the basic Domino, including component registration,
-Domino creation and Domino invocation.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
@@ -200,22 +178,18 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [MORE DOMINOES](doc/MORE_DOMINOES.md).
-
 Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md) for more information.
+by RxJava.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
-for more information.
+get objects and the tuple class to combine several input together.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
+the business logic clear and easy to understand and makes the app easy to maintain.
 
 ## License
 
