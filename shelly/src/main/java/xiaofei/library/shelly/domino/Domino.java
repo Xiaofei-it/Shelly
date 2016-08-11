@@ -104,28 +104,28 @@ public class Domino<T, R> {
      *
      */
 
-    public <U> Domino<T, R> perform(final Class<? extends U> clazz, final TargetAction0<? super U> targetAction0) {
-        return targetInternal(new Action2<Player<R>, List<R>>() {
+    public <U> Domino<T, R> perform(final Class<? extends U> target, final TargetAction0<? super U> targetAction0) {
+        return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
-                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(target);
                 player.prepare(targetAction0);
                 for (Object object : objects) {
-                    targetAction0.call(clazz.cast(object));
+                    targetAction0.call(target.cast(object));
                 }
             }
         });
     }
 
-    public <U> Domino<T, R> perform(final Class<? extends U> clazz, final TargetAction1<? super U, ? super R> targetAction1) {
-        return targetInternal(new Action2<Player<R>, List<R>>() {
+    public <U> Domino<T, R> perform(final Class<? extends U> target, final TargetAction1<? super U, ? super R> targetAction1) {
+        return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
-                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(target);
                 player.prepare(targetAction1);
                 for (Object object : objects) {
                     for (R singleInput : input) {
-                        targetAction1.call(clazz.cast(object), singleInput);
+                        targetAction1.call(target.cast(object), singleInput);
                     }
                 }
             }
@@ -133,7 +133,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> perform(final Action0 action0) {
-        return targetInternal(new Action2<Player<R>, List<R>>() {
+        return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
                 player.prepare(action0);
@@ -143,7 +143,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> perform(final Action1<? super R> action1) {
-        return targetInternal(new Action2<Player<R>, List<R>>() {
+        return performInternal(new Action2<Player<R>, List<R>>() {
                     @Override
                     public void call(Player<R> player, List<R> input) {
                         player.prepare(action1);
@@ -155,7 +155,7 @@ public class Domino<T, R> {
     }
 
     public Domino<T, R> perform(final Domino<? super R, ?> domino) {
-        return targetInternal(new Action2<Player<R>, List<R>>() {
+        return performInternal(new Action2<Player<R>, List<R>>() {
                     @Override
                     public void call(Player<R> player, List<R> input) {
                         //TODO How about stash here?
@@ -164,7 +164,7 @@ public class Domino<T, R> {
                 });
     }
 
-    private Domino<T, R> targetInternal(final Action2<Player<R>, List<R>> action2) {
+    private Domino<T, R> performInternal(final Action2<Player<R>, List<R>> action2) {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
             public Player<R> call(List<T> input) {
@@ -344,8 +344,8 @@ public class Domino<T, R> {
         return lift(new MapOperator<R, U>(map));
     }
 
-    public <U, S> Domino<T, U> map(Class<S> clazz, Function2<? super S, ? super R, ? extends U> map) {
-        return lift(new MapOperator2<R, U, S>(clazz, map));
+    public <U, S> Domino<T, U> map(Class<S> target, Function2<? super S, ? super R, ? extends U> map) {
+        return lift(new MapOperator2<R, U, S>(target, map));
     }
 
     public <U> Domino<T, U> flatMap(Function1<? super R, List<U>> map) {

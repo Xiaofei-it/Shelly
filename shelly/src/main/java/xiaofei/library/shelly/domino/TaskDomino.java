@@ -64,10 +64,10 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
+    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> target, final TargetAction0<? super S> targetAction0) {
         return new TaskDomino<T, R, U>(
                 reduce(new ListIdentityOperator<Triple<Boolean, R, U>>())
-                .perform(clazz, new TargetAction1<S, List<Triple<Boolean, R, U>>>() {
+                .perform(target, new TargetAction1<S, List<Triple<Boolean, R, U>>>() {
                     @Override
                     public void call(S s, List<Triple<Boolean, R, U>> input) {
                         boolean success = false;
@@ -85,8 +85,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 .flatMap(new ListIdentityOperator<Triple<Boolean, R, U>>()));
     }
 
-    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> clazz, final TargetAction1<? super S, ? super R> targetAction1) {
-        return new TaskDomino<T, R, U>(perform(clazz, new TargetAction1<S, Triple<Boolean, R, U>>() {
+    public <S> TaskDomino<T, R, U> onSuccess(final Class<? extends S> target, final TargetAction1<? super S, ? super R> targetAction1) {
+        return new TaskDomino<T, R, U>(perform(target, new TargetAction1<S, Triple<Boolean, R, U>>() {
             @Override
             public void call(S s, Triple<Boolean, R, U> input) {
                 if (input.first) {
@@ -148,10 +148,10 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 ));
     }
 
-    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> clazz, final TargetAction0<? super S> targetAction0) {
+    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> target, final TargetAction0<? super S> targetAction0) {
         return new TaskDomino<T, R, U>(
                 reduce(new ListIdentityOperator<Triple<Boolean, R, U>>())
-                .perform(clazz, new TargetAction1<S, List<Triple<Boolean, R, U>>>() {
+                .perform(target, new TargetAction1<S, List<Triple<Boolean, R, U>>>() {
                     @Override
                     public void call(S s, List<Triple<Boolean, R, U>> input) {
                         boolean failure = false;
@@ -168,8 +168,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
                 }).flatMap(new ListIdentityOperator<Triple<Boolean, R, U>>()));
     }
 
-    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> clazz, final TargetAction1<? super S, ? super U> targetAction1) {
-        return new TaskDomino<T, R, U>(perform(clazz, new TargetAction1<S, Triple<Boolean, R, U>>() {
+    public <S> TaskDomino<T, R, U> onFailure(final Class<? extends S> target, final TargetAction1<? super S, ? super U> targetAction1) {
+        return new TaskDomino<T, R, U>(perform(target, new TargetAction1<S, Triple<Boolean, R, U>>() {
             @Override
             public void call(S s, Triple<Boolean, R, U> input) {
                 if (!input.first) {
@@ -214,8 +214,8 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
         return new TaskDomino<T, R, U>(perform(action0));
     }
 
-    public <S> TaskDomino<T, R, U> finallyDo(Class<? extends S> clazz, TargetAction0<? super S> targetAction0) {
-        return new TaskDomino<T, R, U>(perform(clazz, targetAction0));
+    public <S> TaskDomino<T, R, U> finallyDo(Class<? extends S> target, TargetAction0<? super S> targetAction0) {
+        return new TaskDomino<T, R, U>(perform(target, targetAction0));
     }
 
     private Domino<T, Triple<Boolean, R, U>> toDomino() {
