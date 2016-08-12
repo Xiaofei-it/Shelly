@@ -89,7 +89,7 @@ Shelly.<String>createDomino("Sending request")
         .commit();
 ```
 
-A URL is passed in and Retrofit is used to send a HTTP request. After that, different actions are
+A URL is passed in and Retrofit is used to send an HTTP request. After that, different actions are
 performed according to the results of the request.
 
 In the above code, there are also something concerning the thread scheduling, such as `background()` and `uiThread()`.
