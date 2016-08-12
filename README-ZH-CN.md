@@ -112,8 +112,7 @@ action参数，这个action执行相应的操作改变特定的组件。方法�
 使用Shelly库时，你可以使用一个方法链创建一个名为“Domino”的对象。方法链中的每个方法都以一个action作为参数。
 创建的Domino一旦被调用，就会根据方法链中的action序列执行每个action。
 
-创建Domino后，你可以调用Domino执行action序列中的每个action。
-如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
+创建Domino后，你可以调用Domino执行action序列中的每个action。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
 然后它就会按action序列一个个执行action。
 
 如果要看详细的思想，请看[理论部分](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定语，比如Domino和数据流。

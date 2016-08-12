@@ -26,31 +26,32 @@ usages of the Java class of the event in IDE to find all the components receivin
 To solve the above problems, I compose the Shelly library.
 
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each
-component varies with a business object. In the method chain, each method takes an action which
-represents the change of a particular component. The chain of methods represents all of the changes
-of all of the corresponding components. Thus you can see the change of the whole "world" in a single
-file rather than searching the whole project for the corresponding classes.
+component varies with a business object. In the method chain, each method takes an action, which
+represents the change of a particular component, as an argument.
+The chain of methods represents the changes of all of the corresponding components.
+Thus you can see the change of the whole "world" in a single file rather than searching
+the whole project for the corresponding classes.
 
 Specifically, a method chain corresponds to a piece of business logic and a business object. It
-illustrates what happens if this business object is changed. And this piece of business logic thus
-takes effect.
+illustrates that if this business object is changed, what happens to the whole app, according to
+this piece of business logic.
 
 When the method chain is created, the class of the business object is specified and then each method
-is appended to the chain. Each action of each method of the method chain takes some objects as
-parameters and perform a particular action.
+is appended to the chain. Under certain circumstances (when the Domino is invoked), each action,
+which is the argument of each method of the method chain, takes some objects as arguments and then is performed.
 
 More attention should be paid to the input of each action. The first action of the method chain
-takes the business objects as parameters. Then after it is performed, it passes the objects to the
-following action, which also perform a particular action and passes the objects to the following
-action. Thus the objects are passed between actions until they are passed to a transformation action,
-which takes the objects as a parameter and returns one or more new objects. After the transformation,
+takes the business objects as arguments. Then after it is performed, it passes the objects to the
+following action, which is also performed and then passes the objects to the following
+action. Thus the objects are passed between actions until they are passed to an action for data transformation,
+which takes the objects as an argument and returns one or more new objects. After the transformation,
 the new objects are passed to the following actions.
 
 Now pay attention to the action. The action can be regarded as a method which takes the objects
 passed to it as input and executes the statements inside it. Also the Shelly library provides
 an EventBus-like feature, in that there exists some special actions which take the registered
 components (which should be registered first, usually at the same time when they are
-created) and the objects passed to them as input and executes the statements inside.
+created) and the objects passed to the actions as input and executes the statements inside the actions.
 
 The Shelly library provides many methods to compose a method chain, including a variety of methods
 for performing different actions, methods for data transformation and methods for thread scheduling.
@@ -58,11 +59,12 @@ Also it, as is mentioned above, provides an EventBus-like feature for preforming
 components.
 
 A method chain provides you with a global view of what happens after the change of a business object.
-The method chain is named "Domino" in the Shelly library since it represents a series of actions to
-perform one after the other, as the domino game does.
+The return types of the methods of the method chain are the same, which are named "Domino"
+in the Shelly library, since it represents a series of actions to perform one after the other,
+as the domino game does.
 
 After the creation of a Domino, you can "invoke" it to perform the specified actions.
-When a business object is changed, you "invoke" the Domino and pass the business object to it.
+When a business object is changed, you "invoke" the corresponding Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
 ## Definitions
@@ -86,23 +88,24 @@ A "Domino" is a Java object which, under certain circumstances, performs a seque
 For the sake of simplicity, a "Domino" may also refer to the Java class of a particular Domino
 object.
 
-"Creating a Domino" refers to the operation of building a particular Java instance of a Domino
+"Creating a Domino" refers to the operation of building a Java instance of a particular Domino
 class. A Domino is usually created by a Java method chain which starts with
 `Shelly.createDomino(Object)` or `Shelly.createAnonymousDomino()` and is followed by various methods provided
 by the Shelly library.
 
 "Committing a Domino" refers to the operation of causing the Shelly library to hold a Java reference
-of the specified Domino object for later use.
+of the particular Domino object for later use.
 
-"Playing a Domino" or "Invoking a Domino" refers to the operation of causing the specified Domino to
-perform a sequence of actions. To play a Domino, a group of objects is needed. The group must contain
-one or more objects.
+"Playing a Domino" or "Invoking a Domino" refers to the operation of causing the particular Domino to
+perform a sequence of actions. To play a particular Domino, it is always necessary to pass a group
+of objects to the Domino as its input. The group must contain one or more objects.
 
 ### On input, output and data flow
 
 #### Input of an action
 
-The "input of an action" is a group ("input group") of objects which is passed to the `call` method as arguments.
+The "input of an action" is a group ("input group") of objects which is passed to the `call` method
+of the action as arguments.
 The following illustrates the relationship between the input and the performance of an action:
 
 Suppose
@@ -121,8 +124,8 @@ Then
 
 #### Output of an action
 
-Before the definition of the "output of an action", the `call` method should be paid more attention
-on. As is mentioned above, actions includes but is not limited to performing certain operations
+Before giving the definition of the "output of an action", the `call` method should be paid more attention
+on. As is mentioned above, actions includes but is not limited to, performing certain operations
 on certain components, producing certain outputs, performing data transformation, and performing
 thread scheduling. The action performing data transformation is called the "lifting actions".
 

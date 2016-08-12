@@ -16,45 +16,32 @@
 
 为了解决这些问题，我做了Shelly库。
 
-The Shelly library provides a novel pattern which uses a method chain to illustrate how each
-component varies with a business object. In the method chain, each method takes an action which
-represents the change of a particular component. The chain of methods represents all of the changes
-of all of the corresponding components. Thus you can see the change of the whole "world" in a single
-file rather than searching the whole project for the corresponding classes.
+Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。在方法链中，
+每个方法都有一个代表某个组件变化的action作为参数。这个方法链代表了所有对应组件的变化。这样你就可以在一个文件中
+看到整个“世界”的变化，不需要搜索整个工程查找对应的类。
 
-Specifically, a method chain corresponds to a piece of business logic and a business object. It
-illustrates what happens if this business object is changed. And this piece of business logic thus
-takes effect.
+特别地，一个方法链对应一条业务逻辑和一个业务对象。它表示，如果这个业务对象被改变，根据这条业务逻辑，整个app会有什么变化。
 
-When the method chain is created, the class of the business object is specified and then each method
-is appended to the chain. Each action of each method of the method chain takes some objects as
-parameters and perform a particular action.
+当方法链被创建的时候，这个业务对象的类被指定，然后每个方法被附加到方法链后。在某些情况下（当Domino被调用）每个作为
+方法链中的每个方法的参数的action将一些对象作为参数，随后被执行。
 
-More attention should be paid to the input of each action. The first action of the method chain
-takes the business objects as parameters. Then after it is performed, it passes the objects to the
-following action, which also perform a particular action and passes the objects to the following
-action. Thus the objects are passed between actions until they are passed to a transformation action,
-which takes the objects as a parameter and returns one or more new objects. After the transformation,
-the new objects are passed to the following actions.
+更多的注意力应该放在每个action的输入上。方法链的第一个action将业务对象作为参数，然后在它被执行后，它将对象传给下一个
+action，这个action也执行某个操作并且将对象传给下一个action，所以对象在action之间被传递，直到它们被传递到
+做数据变化的action为止。这个action将对象作为参数并且返回一个或一个以上的新对象。在变化后，新的对象被传递给随后的
+action。
 
-Now pay attention to the action. The action can be regarded as a method which takes the objects
-passed to it as input and executes the statements inside it. Also the Shelly library provides
-an EventBus-like feature, in that there exists some special actions which take the registered
-components (which should be registered first, usually at the same time when they are
-created) and the objects passed to them as input and executes the statements inside.
+现在我们看看action。action可以被看作一个方法，这个方法将传递给它的对象作为输入，执行action内部的语句。Shelly库也
+提供一个类似EventBus的特色，即提供一些特殊action，这些action将一些注册的组件和传递给action的对象一起作为输入，执行
+action内部的语句。
 
-The Shelly library provides many methods to compose a method chain, including a variety of methods
-for performing different actions, methods for data transformation and methods for thread scheduling.
-Also it, as is mentioned above, provides an EventBus-like feature for preforming actions on registered
-components.
+Shelly库提供了许多方法来构造一个方法链，包括执行不同操作的各类方法、执行数据转换的方法和执行线程调度的方法。像上文提到的
+那样，它也提供一个类似EventBus的特性来在已注册的组件上执行action。
 
-A method chain provides you with a global view of what happens after the change of a business object.
-The method chain is named "Domino" in the Shelly library since it represents a series of actions to
-perform one after the other, as the domino game does.
+方法链提供来一个全局视角，通过它你可以看清一个特定业务对象改变后，整个app产生了什么变化。
+方法链中的方法的返回类型都相同，叫做“Domino”。它表示一个将被一个个执行的action序列，和domino（多米诺）游戏类似。
 
-After the creation of a Domino, you can "invoke" it to perform the specified actions.
-When a business object is changed, you "invoke" the Domino and pass the business object to it.
-Then it performs the actions in the action sequence one after the other.
+在创建Domino后，你可以“调用”它来执行指定的操作。当一个业务对象被改变后，你调用对应的Domino，将业务对象传递给它，
+然后它就一个个执行action序列中的action。
 
 ## 定义
 
@@ -62,47 +49,35 @@ Then it performs the actions in the action sequence one after the other.
 
 ### 关于action
 
-一个“action”（“操作”）指的是一个Java语句的序列，这个序列包括
+一个“action”（“操作”）指的是一个Java语句的序列，这个序列产生的效果包括但不限于，在某些组件上执行某些操作，产生某些
+输出，执行数据变换，以及执行线程调度。一个action由一个Java类或者Java接口表示，其中存在一个名为“call”的包含该
+action的Java语句序列的方法。这样的方法可以被调用以执行对应的action。
 
-An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
-to, performing certain operations on certain components, producing certain outputs, performing
-data transformation, and performing thread scheduling. An action is represented by a Java
-class or a Java interface, in which there exists a method which is named "call" and contains the
-sequence of Java statements of the action. Such a method may be invoked to perform the corresponding
-action.
+“执行一个action”指的是执行action的Java语句序列。（水平有限，“perform”和“execute”是由区别的，但是我把它们都
+翻译成“执行”，看英文版的效果会更好。）
 
-"Performing an action" refers to executing the sequence of Java statements of the action.
+### 关于Domino
 
-### On Dominoes
+一个“Domino”指的是一个在某种情况下会执行一个action序列的Java对象。为了简洁，一个“Domino”也可以指某个Domino对象
+的Java类。
 
-A "Domino" is a Java object which, under certain circumstances, performs a sequence of actions.
-For the sake of simplicity, a "Domino" may also refer to the Java class of a particular Domino
-object.
+“创建一个Domino”指的是制造一个特定Domino类的一个Java实例。一个Domino总是通过一条以
+`Shelly.createDomino(Object)`或`Shelly.createAnonymousDomino()`开头，后面跟了由Shelly库提供的不同方法组成的
+Java方法链创建。
 
-"Creating a Domino" refers to the operation of building a particular Java instance of a Domino
-class. A Domino is usually created by a Java method chain which starts with
-`Shelly.createDomino(Object)` or `Shelly.createAnonymousDomino()` and is followed by various methods provided
-by the Shelly library.
+“提交一个Domino”指的是为了以后使用而使Shelly库持有一个特定的Domino对象的操作。
 
-"Committing a Domino" refers to the operation of causing the Shelly library to hold a Java reference
-of the specified Domino object for later use.
+“玩一个Domino”或“调用一个Domino”指的是使一个特定的Domino执行一个action序列的操作。
+要玩一个Domino，总是需要传给这个Domino一组对象作为输入，这个组必须包含一个或一个以上的对象。
 
-"Playing a Domino" or "Invoking a Domino" refers to the operation of causing the specified Domino to
-perform a sequence of actions. To play a Domino, a group of objects is needed. The group must contain
-one or more objects.
+### 关于输入、输出和数据流
 
-### On input, output and data flow
+#### action的输入
 
-#### Input of an action
+一个“action的输入”是一组被传入action的`call`方法作为参数的对象。这个组叫做“输入组”。下文阐述了action输入和action执行
+之间的关系。
 
-The "input of an action" is a group ("input group") of objects which is passed to the `call` method as arguments.
-The following illustrates the relationship between the input and the performance of an action:
-
-Suppose
-the number of arguments the `call` method takes, excluding the arguments representing the components, is `a`,
-the number of the objects contained in the input group is `b`,
-and the number of occasions when the action is performed is `c`, i.e. the action is performed for `c` times.
-Then
+假设`call`方法中非组件的参数数目是`a`，输入组中包含的对象数目是`b`，action执行的次数`c`。那么
 
 1. If b = 0 and a = 0, then c = 1.
 
@@ -112,37 +87,32 @@ Then
 
 4. If b > 0 and a > 0, then c = a * b.
 
-#### Output of an action
+#### action输出
 
-Before the definition of the "output of an action", the `call` method should be paid more attention
-on. As is mentioned above, actions includes but is not limited to performing certain operations
-on certain components, producing certain outputs, performing data transformation, and performing
-thread scheduling. The action performing data transformation is called the "lifting actions".
+在给出“action输出”的定义之前，我们把更多的注意放在`call`方法上。
+上文中提到，action包括但不限于，在特定的组件上执行特定的操作，产生特定的输出，执行数据转换，以及执行线程调度。
+执行数据转换的action叫做“lifting action”。
 
-The "output of an action" is a group ("output group") of objects, produced in the following way:
+一个“action的输出”指的是以下列方式产生的一组对象（输出组）：
 
-1. If the action is not a "lifting action", then the output is exactly the same as the input.
+1. 如果action不是“lifting action”，那么输出和输入完全相同。
 
-2. If the action is a "lifting action", then the output is produced according to the effect of various
-actions. And the number of the objects contained in an output group may be different from the number
-of the objects contained in an input group.
+2. 如果action是“lifting action”，那么输出是根据不同action的效果产生的。输出组包含的对象数目和输入组包含的对象数目可能不同。
 
-#### Types
+#### 类型
 
-The "type of the input" is the Java type of elements in the input group.
+“输入类型”指的是输入组中的元素的Java类型。
 
-The "type of the output" is the Java type of elements in the output group.
+“输出类型”指的是输出组中的元素的Java类型。
 
-#### Data flow
+#### 数据流
 
-Once invoked, a Domino performs a sequence of actions.
+一旦被调用，一个Domino执行一个action序列。
 
-The "input of a Domino" is the input of the first action of the action sequence of the Domino.
+一个“Domino的输入”是这个Domino的action序列中第一个action的输入。
 
-The "output of a Domino" is the output of the last action of the action sequence of the Domino.
+一个“Domino的输出”是这个Domino的action序列中最后一个action的输出。
 
-In an action sequence, the output of a previous action is passed to the next one.
-Thus the output of a previous action is exactly the same as the input of the next one.
+在一个action序列中，前一个action的输出被传递给下一个action，所以前一个action的输出和下一个action的输入完全相同。
 
-Therefore, the "data flow of a Domino" is the sequence of the input of each action of the Domino,
-followed by the output of the Domino.
+因此，一个“Domino的数据流”是一个以这个Domino每个action的输入组成并且结尾附上这个Domino的输出的序列。
