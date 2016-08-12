@@ -1,27 +1,20 @@
-# Theory
+# 理论基础
 
-This article discusses the theory of the Shelly library, including the philosophy and the definitions
-of the technical terms with respect to the Shelly library.
+本文讨论Shelly库的理论基础，包含Shelly库的思想以及相关技术术语的定义。
 
-## Philosophy
+## 思想
 
-In business-logic-oriented programming, a change of a particular business object may cause changes
-of various components, and the complexity of business logic will increase coupling between components.
-To decrease coupling we usually use listeners (observers) or the event bus, which is easy to use and
-also effective. However, these techniques have the following disadvantages:
+在面向业务逻辑的编程中，某个特定的业务对象的改变可能会引起各个组件的改变，业务逻辑的复杂性会增加组件之间的耦合。
+为了降低耦合，我们通常使用listener（observer）或者event bus，这些易于使用并且非常有效。但是存在以下缺点：
 
-1. The amount of listeners or events increases as the complexity of business logic does, which makes
-the project difficult to maintain.
+1. listener或者event数量随着业务逻辑的复杂性的增加而增加。这样使工程难以维护。
 
-2. The usage of a particular listener will cause corresponding components to implement the interface
-of the listener, which makes code confusing and complicated. What's worse, the abuse of listeners
-leads to a potential risk of memory leaking.
+2. 使用了某个listener，就需要相应的组件实现listener的接口，这样会使代码变得复杂。而且listener的滥用导致内存泄漏。
 
-3. The usage of the event bus will cause code to be difficult to debug, since it is difficult to
-predict and control what happens after the posting of a particular event and you should find the
-usages of the Java class of the event in IDE to find all the components receiving the event.
+3. event bus的使用使代码变得难以调试，因为很难预测并且控制event发送之后会发生什么。你必须在IDE中寻找使用event的地方
+来确定哪些组件接收了这个event。
 
-To solve the above problems, I compose the Shelly library.
+为了解决这些问题，我做了Shelly库。
 
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each
 component varies with a business object. In the method chain, each method takes an action which
@@ -63,11 +56,13 @@ After the creation of a Domino, you can "invoke" it to perform the specified act
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
-## Definitions
+## 定义
 
-This section gives the definitions of the technical terms with respect to the Shelly library.
+本节给出了关于Shelly库的技术术语的定义。
 
-### On actions
+### 关于action
+
+一个“action”（“操作”）指的是一个Java语句的序列，这个序列包括
 
 An "action" refers to a sequence of Java statements, the effect of which includes but is not limited
 to, performing certain operations on certain components, producing certain outputs, performing

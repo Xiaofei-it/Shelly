@@ -9,10 +9,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md" afterPath="$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md" />
-    </list>
+    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="" />
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,21 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DOMINO_COMBINATION.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.5555556">
-              <caret line="2" column="116" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="116" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.222222">
-              <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
+            <state vertical-scroll-proportion="-12.703704">
+              <caret line="187" column="80" selection-start-line="187" selection-start-column="80" selection-end-line="187" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -79,10 +66,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="USAGE.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="USAGE.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="128.33333">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -99,11 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.4074075">
-              <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+            <state vertical-scroll-proportion="4.628253">
+              <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-103.333336">
+              <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -112,7 +109,7 @@
       <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="173.96297">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -122,7 +119,7 @@
       <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="68.40741">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -4418,14 +4415,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="44.333332">
-          <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/UTILITIES.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9944238">
@@ -4490,38 +4479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.222222">
-          <caret line="31" column="18" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.4074075">
-          <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="173.96297">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="68.40741">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/UTILITIES.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="48.88889">
@@ -4530,10 +4487,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.703704">
+          <caret line="187" column="80" selection-start-line="187" selection-start-column="80" selection-end-line="187" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-103.333336">
+          <caret line="186" column="13" selection-start-line="186" selection-start-column="13" selection-end-line="186" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="128.33333">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.628253">
+          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
           <folding />
         </state>
       </provider>

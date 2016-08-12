@@ -18,7 +18,7 @@ of the listener, which makes code confusing and complicated. What's worse, the a
 leads to a potential risk of memory leaking.
 
 3. The usage of the event bus will cause code to be difficult to debug, since it is difficult to
-predict and control what happens after the posting of a particular event and you should find the
+predict and control what happens after the posting of a particular event and you have to find the
 usages of the Java class of the event in IDE to find all the components receiving the event.
 
 To solve the above problems, I compose the Shelly library.
