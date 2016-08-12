@@ -3,7 +3,7 @@
 A library for business-logic-oriented programming, providing a novel pattern which uses a method
 chain to illustrate how each component varies with a business object.
 
-[Chinese Readme 中文文档](README-ZH-CN.md)
+[Readme in Chinese 中文文档](README-ZH-CN.md)
 
 ## Features
 
@@ -20,6 +20,10 @@ especially for sending multiple requests synchronously or sequentially.
 5. Provides powerful APIs for data flow control and thread scheduling.
 
 ## Preview
+
+By the Shelly library, you can use a method chain in which each method takes an action as an argument,
+to create a object named "Domino" which, once invoked, performs each action according to the action
+sequence in the method chain.
 
 Before the introduction, let's see an example first.
 
@@ -122,7 +126,12 @@ represents the change of a particular component. The chain of methods represents
 of all of the corresponding components. Thus you can see the change of the whole "world" in a single
 file rather than searching the whole project for the corresponding classes.
 
-After the creation of a Domino, you can "invoke" it to perform the specified actions.
+By the Shelly library, you can use a method chain in which each method takes an action as an argument,
+to create a object named "Domino" which, once invoked, performs each action according to the action
+sequence in the method chain.
+
+After the creation of a Domino, you can "invoke" it to perform each action in the action sequence in
+the method chain.
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
