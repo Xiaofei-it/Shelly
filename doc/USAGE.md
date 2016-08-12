@@ -1,6 +1,6 @@
 # Usage
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE.md)
+[Corresponding document in Chinese 对应的中文文档](../doc-zh-cn/USAGE.md)
 
 This article illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
@@ -29,15 +29,15 @@ results of two Dominoes into one result, which is useful especially when it come
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md) for more information.
+by RxJava. See [DOMINO COMBINATION](DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
+get objects and the tuple class to combine several input together. Please see [UTILITIES](UTILITIES.md)
 for more information.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
 the souce code concerning the business logic clear and easy to understand and
-makes the app easy to maintain. Please see [METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
+makes the app easy to maintain. Please see [METHODOLOGY](METHODOLOGY.md) for the methodology.
 
 ## Component registration
 
@@ -268,11 +268,11 @@ See [DOMINO COMBINATION](DOMINO_COMBINATION.md) for more information.
 ## Tuple and stash
 
 The Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
+get objects and the tuple class to combine several input together. Please see [UTILITIES](UTILITIES.md)
 for more information.
 
 ## Methodology
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
 the source code concerning the business logic clear and easy to understand and
-makes the app easy to maintain. Please see [METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
+makes the app easy to maintain. Please see [METHODOLOGY](METHODOLOGY.md) for the methodology.
