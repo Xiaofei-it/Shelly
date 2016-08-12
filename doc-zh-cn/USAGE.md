@@ -21,8 +21,7 @@
 执行前一个请求得到结果后，发送另一个请求。这些特色是受RxJava启发。
 查看[组合Domino](DOMINO_COMBINATION.md)获取更多信息。
 
-Shelly库也提供一些有用的工具类，包括存取对象的stash以及组合多个输入的tuple类。查看[工具类](UTILITIES.md)
-获取更多信息。
+Shelly库也提供一些有用的工具类，包括存取对象的stash以及组合多个输入的tuple类。查看[工具类](UTILITIES.md)获取更多信息。
 
 Shelly库为开发面向业务逻辑的app提供了一种全新的模式，使得业务逻辑代码清晰并且易于理解，也使得app更易维护。参看
 [Shelly实战](METHODOLOGY.md)了解如何在实战中使用Shelly库。
@@ -237,8 +236,7 @@ Shelly库还提供函数用来在Domino中调用其他Domino。
 
 ## Tuple和stash
 
-Shelly库也提供一些有用的工具类，包括存取对象的stash以及组合多个输入的tuple类。查看[工具类](UTILITIES.md)
-获取更多信息。
+Shelly库也提供一些有用的工具类，包括存取对象的stash以及组合多个输入的tuple类。查看[工具类](UTILITIES.md)获取更多信息。
 
 ## 方法论
 
