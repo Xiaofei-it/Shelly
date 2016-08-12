@@ -1,6 +1,6 @@
 # Usage
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE-ZH-CN.md)
+[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE.md)
 
 This article illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
@@ -69,7 +69,7 @@ public class MyActivity extends AppCompatActivity {
 A domino should be created and committed before it takes effect. The following is an example illustrating
 various APIs for creating and committing a Domino.
 And more APIs can be found in the
-[Domino](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java) class.
+[Domino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java) class.
 
 ```
 // Create a domino labeled "Example" which takes one or more Strings as input.
