@@ -1,7 +1,8 @@
 # Domino Combination
 
-The Shelly library provides methods for merging the results of two Dominoes and combing two
-results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
+The Shelly library provides methods for merging the outputs of two Dominoes and combing two
+outputs of two Dominoes into one input for the following action,
+which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request.

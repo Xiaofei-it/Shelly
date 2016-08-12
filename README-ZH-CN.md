@@ -1,12 +1,12 @@
 # Shelly
 
-面向业务逻辑的编程库。本库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。
+面向业务逻辑的编程库。Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。
 
 ## 特色
 
 1. 为面向业务逻辑的编程提供一种全新的编程模式。
 
-2. 无论业务逻辑怎么变化，使用本库编写的代码都易于理解和维护。
+2. 无论业务逻辑怎么变化，使用Shelly库编写的代码都易于理解和维护。
 
 3. 能够方便地发送网络请求和处理回调，尤其是发送并发请求和连续请求。
 
@@ -20,7 +20,7 @@
 
 在介绍之前，我们先看一个例子。
 
-假设现在你想打印文件夹里所有文件的名字。使用本库，你可以写如下代码：
+假设现在你想打印文件夹里所有文件的名字。使用Shelly库，你可以写如下代码：
 
 ```
 Shelly.<String>createDomino("Print file names")
@@ -50,7 +50,7 @@ Shelly.<String>createDomino("Print file names")
 
 3. 如果在发请求的时候出现错误或者异常，那么打印错误信息。
 
-使用本库，你可以写下面的代码：
+使用Shelly库，你可以写下面的代码：
 
 ```
 Shelly.<String>createDomino("Sending request")
@@ -92,11 +92,11 @@ Shelly.<String>createDomino("Sending request")
 注意，如果不调用Domino，上面这段代码实际上并不会执行任何操作！这段代码做的只是提交并存储Domino，供以后使用。
 想要让Domino执行操作，必须调用它。只有调用Domino后，它才会执行操作。
 
-这些只是简单的例子。实际上，本库是非常强大的，将在后面几节介绍。
+这些只是简单的例子。实际上，Shelly库是非常强大的，将在后面几节介绍。
 
 ## 思想
 
-本节简单介绍本库的理论。如果想要看完整版，请查看[THEORY](doc/THEORY.md)。
+本节简单介绍Shelly库的理论。如果想要看完整版，请查看[THEORY](doc/THEORY.md)。
 
 在面向业务逻辑的编程中，一个特定的业务对象的改变可能会引起各个组件的变化，业务逻辑的复杂性也会增加模块之间的耦合。
 为了降低耦合，我们通常使用listeners（observers）或者event bus，这些易于使用并且非常有效，但是有一些缺点，比如
@@ -112,7 +112,7 @@ action参数，这个action执行相应的操作改变特定的组件。方法�
 创建Domino后，你可以“调用”Domino执行相应的操作。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
 然后它就会按action序列一个个执行action。
 
-如果要看详细的思想，请看[THEORY](doc/THEORY.md)。这里也会给出关于本库的许多技术术语的定语，比如Domino和数据流。
+如果要看详细的思想，请看[THEORY](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定语，比如Domino和数据流。
 
 ## 下载
 
@@ -135,22 +135,19 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 
 ## 用法
 
+本节对Shelly库的用法进行简单介绍。详细用法请查看下表：
 
-This section illustrates a brief outline of the usage of the Shelly library. For the details of
-the usage, please read the articles listed below:
+* [基本用法](doc/USAGE.md)，包含基本用法，包括组件注册、Domino创建和Domino调用。
 
-* [BASIC USAGE](doc/USAGE.md), contains the basic usage, including component registration,
-Domino creation and Domino invocation.
+* [DOMINO种类](doc/MORE_DOMINOES.md)，包含不同种类的Domino的用法。
 
-* [MORE DOMINOES](doc/MORE_DOMINOES.md), contains the usage of various kinds of Dominoes.
+* [组合Domino](doc/DOMINO_COMBINATION.md)，介绍如何合并或组合两个Domino输出。
 
-* [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md), illustrates how to merge the results of two
-Dominoes and combing two results of two Dominoes into one result.
+* [工具类](doc/UTILITIES.md)，包含Shelly库提供的工具类的用法。
 
-* [UTILITIES](doc/UTILITIES.md), contains the usage of the utilities provided by the Shelly library.
+* [方法论](doc/METHODOLOGY.md)，介绍如何在实战中使用Shelly库。
 
-* [METHODOLOGY](doc/METHODOLOGY.md), illustrates how to use the Shelly library in action.
-
+Shelly
 The Shelly library provides several kinds of Dominoes, including the basic Domino, the Task Domino
 and the Retrofit Domino.
 

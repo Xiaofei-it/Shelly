@@ -158,8 +158,8 @@ Domino creation and Domino invocation.
 
 * [MORE DOMINOES](doc/MORE_DOMINOES.md), contains the usage of various kinds of Dominoes.
 
-* [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md), illustrates how to merge the results of two
-Dominoes and combing two results of two Dominoes into one result.
+* [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md), illustrates how to merge the outputs of two
+Dominoes and combing two outputs of two Dominoes into one input for the following action.
 
 * [UTILITIES](doc/UTILITIES.md), contains the usage of the utilities provided by the Shelly library.
 
@@ -180,9 +180,10 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
-results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
-Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
+Also, the Shelly library provides methods for merging the outputs of two Dominoes and combing two
+outputs of two Dominoes into one input for the following action, which is useful especially
+when it comes to the Retrofit Domino.
+These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
 by RxJava.
