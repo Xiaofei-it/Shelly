@@ -1,52 +1,37 @@
-# Shelly in Action
+# Shelly实战
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/METHODOLOGY.md)
+本文阐述Shelly库的方法论，以及如何在实战中使用Shelly库。
 
-This article illustrates the methodology of using the Shelly library and how to use the Shelly library
-in action.
+Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。在使用Shelly库时，你不应该按原来的方法
+构建你的工程。你应该使用一种看似略微丑陋但实际非常有用的模式来构建你的工程。
 
-The Shelly library provides a novel pattern which uses a method chain to illustrate how each component
-varies with a business object. When using the Shelly library, you should never compose your project
-as before. Instead you should use a novel pattern, which appears to be a bit ugly but is actually
-useful.
+## 模式
 
-## Pattern
+本节阐述在工程中使用Shelly库的模式。
 
-This section illustrates the pattern for using the Shelly library in your project.
+首先，你应该让所有UI组件只进行UI渲染的工作，不进行任何关于业务逻辑的操作。通过Domino实现业务逻辑，Domino根据业务逻辑调用
+UI组件的函数改变UI。
 
-First of all, you should make all the UI components perform only the job of rendering the UI rather than
-performing actions concerning the business logic. And you should write Dominoes to invoke the methods
-in UI components to change them according to the business logic.
+第二，你应该始终记住，一个Domino对应一条业务逻辑，所以为每条业务逻辑创建一个Domino。
 
-Second, you should always remember that each Domino corresponds to a particular piece of
-business logic. So create a Domino for each piece of business logic.
+第三，将相似的业务逻辑归为一组，为这个组创建一个Java类。这个Java类创建组内所有的Domino，其他什么都不做。这个Java类
+可以被看作“配置类”。
 
-Third, put a set of "similar" pieces of business logic into a group. Create a Java class corresponding to
-the group. The Java class does nothing but creating the Dominoes of the group. This Java class is
-regarded as a "Configuration Class".
+第四，在调用某个组内的Domino之前，让对应的配置类创建组内所有的Domino。
 
-Fourth, before the invocation of a Domino of a particular group, cause the corresponding configuration
-class to create all the Dominoes of the group.
+第五，当某个业务对象改变时，使用`Shelly.playDomino()`将对象传入并且调用对应的Domino来执行操作并且改变组件。
 
-Fifth, when a particular business object is changed, use `Shelly.playDomino()` to pass the object
-to and invoke the corresponding Domino to perform the specified actions to change the components.
+## 例子
 
+本节给出一个例子来更好地理解上面地模式。
 
-## Example
+假设现在你要创建一个工程来做一个上传下载图片地app。
 
-This section gives an example for a better understanding of the pattern.
+第一次打开app会让用户进行注册，以后每次都会让用户登录。登录后就可以使用这个app进行上传和下载图片，使用后可以退出。
 
-Suppose that you will create a new project of an app for uploading and downloading pictures.
+我们将展示如何创建这个工程，并且展示关于Shelly库部分地模块。
 
-The first time you start the app, you should sign up.
-The next time you start the app, you can sign in.
-After that, you can upload or download pictures.
-You can also sign out after finishing your job.
-
-The following will illustrate not how to write the whole project but how to write the parts with
-respect to the Shelly library.
-
-### Domino creation
+### 创建Domino
 
 First, we divides all of the business logic into two groups. One contains the business logic concerning
 the user information, such as signing up, signing in and signing out. The other one contains the

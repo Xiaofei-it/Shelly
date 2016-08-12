@@ -20,7 +20,7 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [HERE](MORE_DOMINOES.md).
+For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
 
 Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
@@ -230,7 +230,7 @@ Shelly.<String>createDomino("Example 2")
 ```
 
 Moreover, you can merge or combine two anonymous Dominoes.
-See [HERE](DOMINO_COMBINATION.md) for more information.
+See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 ## More kinds of Dominoes
 
@@ -247,7 +247,7 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Domino is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [HERE](MORE_DOMINOES.md).
+For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
 
 ## Merging and combination of Dominoes
 
@@ -260,7 +260,7 @@ by RxJava.
 
 The Shelly library provides the methods for invoking Dominoes within a Domino.
 
-See [HERE](DOMINO_COMBINATION.md) for more information.
+See [HERE](doc/DOMINO_COMBINATION.md) for more information.
 
 ## Tuple and stash
 

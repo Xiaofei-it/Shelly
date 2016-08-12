@@ -1,21 +1,15 @@
-# Domino Combination
+# 组合Domino
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/UTILITIES.md)
+Shelly库提供方法用来合并两个Domino的输出，也可以将两个Domino的输出组合成一个作为下一个action的输入。这非常有用，尤其
+在使用Retrofit Domino的时候。这些方法让你可以写一个Domino同时发两个HTTP请求并且根据结果的不同执行不同操作。
+你也可以写一个Domino发送连续请求，在前一个请求返回后发送后一个请求。
 
-The Shelly library provides methods for merging the outputs of two Dominoes and combing two
-outputs of two Dominoes into one input for the following action,
-which is useful especially when it comes to the Retrofit
-Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
-and uses the results of the two requests to perform actions. Also, you can write a Domino which
-sends an HTTP request and after getting its result, sends another request.
+## 合并Domino
 
-## Merging of Dominoes
+输出为同一个种类型的Domino可以被合并。如果你合并两个输出类型相同的Domino，你会得到一个新的Domino，这个Domino的输入
+是前两个的输出的并集。
 
-Dominoes whose output are of the same type can be merged.
- If you merge two Dominoes whose output are of the same type, then you get
-a new Domino whose input is the union of their output.
-
-The following shows a Domino which loads the bitmaps from all of the .jpg and .png files:
+下面的代码展示了一个Domino，这个Domino从所有的.jpg和.png文件中载入图片：
 
 ```
 Shelly.<String>createDomino("Find *.jpg")
@@ -66,7 +60,7 @@ Shelly.<String>createDomino("Find *.png and *.jpg")
         .commit();
 ```
 
-Also, you can write the following example using anonymous Dominoes:
+另外，你可以使用匿名Domino来实现同样效果：
 
 ```
 Shelly.<String>createDomino("Find *.png and *.jpg")
@@ -113,15 +107,12 @@ Shelly.<String>createDomino("Find *.png and *.jpg")
         .commit();
 ```
 
-## Combination of Dominoes
+## 组合Domino
 
-You can combine two Dominoes into one. Specifically, suppose there are two Dominoes named "Domino A"
-and "Domino B", and you can provide a function named "f" and combine these two Dominoes into a new Domino
-named "Domino C" in the following way: The outputs of the two Dominoes are passed into "f" and "f"
-returns new objects as the input of Domino C.
+你可以将两个Domino组合成一个。具体说，假设有Domino A和Domino B，你提供一个函数f，组合后得到Domino C。具体组合方式是：
+前两个Domino的输出传入f，f返回新的对象作为Domino C的输入。
 
-The following is an example, which shows how to use the Shelly library to send two HTTP requests at
-the same time:
+下面是一个例子，这个例子展示了如何使用Shelly库同时发两个HTTP请求：
 
 ```
 Shelly.<String>createDomino("Login")
@@ -158,12 +149,11 @@ Shelly.<String>createDomino("Login")
         .commit();
 ```
 
-## Domino invocation within a Domino
+## 在Domino中调用其他Domino
 
-The Shelly library provides the methods for invoking Dominoes within a Domino.
+Shelly库提供函数让你在一个Domino中调用其他Domino。
 
-The following is an example, which shows how to use the Shelly library to send a request and after
-getting the result, send another request:
+下面是一个例子，展示了如何使用Shelly库发送两个连续请求（在第一个请求返回结果后，发送第二个请求）：
 
 ```
 Shelly.<String>createDomino("Login")
