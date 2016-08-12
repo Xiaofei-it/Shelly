@@ -10,7 +10,7 @@ below.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Domino makes the source code concerning the business logic of your app clear and easy to understand.
 
 The following is an example of
 [Task Domino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
@@ -104,7 +104,7 @@ Shelly.<String>createDomino("LoadingBitmap")
 You may find that after the execution of the task, the result or the exception will be passed to
 the following actions, but the original input of the task has been lost. Sometimes we need to know
 the original input in the following actions. To pass the original input to the following actions,
-you can execute a task using another method.
+you can execute a task using another method:
 
 ```
 // Create a domino labeled "LoadingBitmap" which takes a String as input,
@@ -197,8 +197,8 @@ Shelly.<String>createDomino("LoadingBitmap 2")
         .commit();
 ```
 
-Note that `TaskDomino.endTask()`` will keep the result of the task, thus you can perform more actions
-after the execution. See the above for example.
+Note that `TaskDomino.endTask()` will keep the result of the task, thus you can perform more actions
+with the result after `endTask()`. See the above for example.
 
 ## Retrofit Domino
 
@@ -277,7 +277,7 @@ for more APIs of the Retrofit Domino.
 Also, you may find that after the execution of the request, the result or the exception will be
 passed to the following actions, but the original input of the task has been lost. Sometimes we
 need to know the original input in the following actions. To pass the original input to the following
-actions, you can execute a task using another method.
+actions, you can sending an HTTP request using another method:
 
 ```
 Shelly.<String>createDomino("GETTING_USER")

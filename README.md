@@ -182,7 +182,7 @@ for data transformation and for thread scheduling.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Domino makes the source code concerning the business logic of your app clear and easy to understand.
 
 The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The

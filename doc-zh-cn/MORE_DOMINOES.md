@@ -1,17 +1,14 @@
-# More kinds of Dominoes
+# Domino种类
 
-The Domino class provides many basic methods. Also you can write derived Dominoes which extend the
-class. In the Shelly library, there are already several kinds of derived Dominoes, which are shown
-below.
+Domino类提供了许多基础函数。你也可以创建自己的Domino子类来扩展Domino。Shelly库中，已经有几个衍生类，将在下面展示。
 
 ## Task Domino
 
-The Task Domino provides methods for executing a time-consuming task and performing various
-kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Task Domino提供函数来执行耗时操作并且根据结果执行各种操作。使用Task Domino可以使app的业务逻辑清晰并且易于理解。
 
-The following is an example of
-[Task Domino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java):
+下面是
+[Task Domino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java)
+的例子：
 
 ```
 // Create a domino labeled "LoadingBitmap" which takes a String as input,
@@ -99,10 +96,8 @@ Shelly.<String>createDomino("LoadingBitmap")
         .commit();
 ```
 
-You may find that after the execution of the task, the result or the exception will be passed to
-the following actions, but the original input of the task has been lost. Sometimes we need to know
-the original input in the following actions. To pass the original input to the following actions,
-you can execute a task using another method.
+你可能会发现在task被执行后，执行的结果或异常会被传入之后的action，但是原始输入丢失了。
+某些时候在后面的action中我们也许会用到原始输入。为了将原始输入也传入后面的action，你可以使用另一个函数执行task：
 
 ```
 // Create a domino labeled "LoadingBitmap" which takes a String as input,
@@ -195,17 +190,14 @@ Shelly.<String>createDomino("LoadingBitmap 2")
         .commit();
 ```
 
-Note that `TaskDomino.endTask()`` will keep the result of the task, thus you can perform more actions
-after the execution. See the above for example.
+注意`TaskDomino.endTask()`会把task的结果保留下来，你可以在｀endTask()`之后利用这个结果执行更多的action，参看上面的例子。
 
 ## Retrofit Domino
 
-The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
-various kinds of actions according to the result or the failure of the request. The
-Retrofit Task is very useful in the development of an app, which takes many advantages over the other
-architectures for sending HTTP requests.
+Retrofit Domino提供一种方便的模式用来发送HTTP请求并且根据请求的不同结果进行不同的回调操作。在app开发中使用
+Retrofit Domino非常有效，相比其他框架有许多优点。
 
-Suppose that we want to use Retrofit to send an HTTP request to get the user information:
+假设我们要发送HTTP请求获取用户信息：
 
 ```
 Shelly.<String>createDomino("GETTING_USER")
@@ -268,14 +260,11 @@ Shelly.<String>createDomino("GETTING_USER")
         .commit();
 ```
 
+参见[这里](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
+了解Retrofit Domino的更多API。
 
-See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
-for more APIs of the Retrofit Domino.
-
-Also, you may find that after the execution of the request, the result or the exception will be
-passed to the following actions, but the original input of the task has been lost. Sometimes we
-need to know the original input in the following actions. To pass the original input to the following
-actions, you can execute a task using another method.
+同样的，你也会发现在请求执行后，结果或异常被传入后续的action，但原始输入丢失了。有些时候在后面的action中我们可能会用到
+原始输入。为了将原始输入传入后面的action，你可以使用另一个函数发送请求：
 
 ```
 Shelly.<String>createDomino("GETTING_USER")
@@ -338,6 +327,5 @@ Shelly.<String>createDomino("GETTING_USER")
         .commit();
 ```
 
-
-The above Domino is RetrofitDomino2. See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
-for more APIs of the RetrofitDomino2 class.
+上面这个Domino是RetrofitDomino2。参看[这里](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
+获取RetrofitDomino2的更多API。
