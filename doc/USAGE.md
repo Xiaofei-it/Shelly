@@ -244,7 +244,7 @@ Domino makes the business logic of your app clear and easy to understand.
 
 The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
-Retrofit Task is very useful in the development of an app, which takes many advantages over the other
+Retrofit Domino is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
 For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).

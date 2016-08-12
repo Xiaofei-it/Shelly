@@ -96,7 +96,7 @@ Shelly.<String>createDomino("Sending request")
 
 ## 思想
 
-本节简单介绍Shelly库的理论。如果想要看完整版，请查看[THEORY](doc/THEORY.md)。
+本节简单介绍Shelly库的理论。如果想要看完整版，请查看[理论部分](doc/THEORY.md)。
 
 在面向业务逻辑的编程中，一个特定的业务对象的改变可能会引起各个组件的变化，业务逻辑的复杂性也会增加模块之间的耦合。
 为了降低耦合，我们通常使用listeners（observers）或者event bus，这些易于使用并且非常有效，但是有一些缺点，比如
@@ -109,10 +109,11 @@ action参数，这个action执行相应的操作改变特定的组件。方法�
 这一个地方看到整个世界的变化。
 
 //TODO 创建Domino和使用Domino关系没说清，看看详细用法中有没有说清
+
 创建Domino后，你可以“调用”Domino执行相应的操作。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
 然后它就会按action序列一个个执行action。
 
-如果要看详细的思想，请看[THEORY](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定语，比如Domino和数据流。
+如果要看详细的思想，请看[理论部分](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定语，比如Domino和数据流。
 
 ## 下载
 
@@ -145,36 +146,23 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 
 * [工具类](doc/UTILITIES.md)，包含Shelly库提供的工具类的用法。
 
-* [方法论](doc/METHODOLOGY.md)，介绍如何在实战中使用Shelly库。
+* [Shelly实战](doc/METHODOLOGY.md)，介绍如何在实战中使用Shelly库。
 
-Shelly
-The Shelly library provides several kinds of Dominoes, including the basic Domino, the Task Domino
-and the Retrofit Domino.
+Shelly库提供了各种Domino，包括基本Domino、Task Domino和Retrofit Domino。
 
-The basic Domino, which provides the basic methods for performing various kinds of actions,
-for data transformation and for thread scheduling.
+基本Domino提供各种函数，用来执行各种不同操作、进行数据变换以及进行线程调度。
 
-The Task Domino provides methods for executing a time-consuming task and performing various
-kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Task Domino提供函数来执行耗时操作并且根据结果执行各种操作。使用Task Domino可以使app的业务逻辑清晰并且易于理解。
 
-The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
-various kinds of actions according to the result or the failure of the request. The
-Retrofit Task is very useful in the development of an app, which takes many advantages over the other
-architectures for sending HTTP requests.
+Retrofit Domino提供一种方便的模式用来发送HTTP请求并且根据请求的不同结果进行不同的回调操作。在app开发中使用
+Retrofit Domino非常有效，相比其他框架有许多优点。
 
-Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
-results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
-Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
-and uses the results of the two requests to perform actions. Also, you can write a Domino which
-sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava.
+另外，Shelly库提供许多方法用来合并或者组合多个Domino输出，这非常有用，尤其对于Retrofit Domino。这些函数可以让你
+同时发送多个HTTP请求，也发送连续请求。这个特色是受RxJava启发而做的。
 
-Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together.
+Shelly库还提供了一些有用的工具类，比如用来存取对象的stash和将多个输入组合在一起的tuple。
 
-The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain.
+综上，Shelly库为开发面向业务逻辑的app提供了一种全新的模式，可以使业务逻辑代码清晰并且易于理解，也使app易于维护。
 
 ## License
 

@@ -168,7 +168,7 @@ Dominoes and combing two outputs of two Dominoes into one input for the followin
 The Shelly library provides several kinds of Dominoes, including the basic Domino, the Task Domino
 and the Retrofit Domino.
 
-The basic Domino, which provides the basic methods for performing various kinds of actions,
+The basic Domino provides the basic methods for performing various kinds of actions,
 for data transformation and for thread scheduling.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
@@ -177,7 +177,7 @@ Domino makes the business logic of your app clear and easy to understand.
 
 The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
-Retrofit Task is very useful in the development of an app, which takes many advantages over the other
+Retrofit Domino is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
 Also, the Shelly library provides methods for merging the outputs of two Dominoes and combing two
@@ -191,8 +191,9 @@ by RxJava.
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
 get objects and the tuple class to combine several input together.
 
-The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain.
+In summary, the shelly library provides a novel pattern for developing a business-logic-oriented app,
+which makes the source code concerning the business logic clear and easy to understand and makes
+the app easy to maintain.
 
 ## License
 
