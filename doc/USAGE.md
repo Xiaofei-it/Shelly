@@ -1,6 +1,6 @@
 # Usage
 
-[Corresponding document in Chinese 对应的中文文档](../doc-zh-cn/USAGE.md)
+[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE-ZH-CN.md)
 
 This article illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
@@ -233,7 +233,7 @@ Shelly.<String>createDomino("Example 2")
 ```
 
 Moreover, you can merge or combine two anonymous Dominoes.
-See [HERE](DOMINO_COMBINATION.md) for more information.
+See [DOMINO COMBINATION](DOMINO_COMBINATION.md) for more information.
 
 ## More kinds of Dominoes
 

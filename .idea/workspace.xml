@@ -9,7 +9,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="" />
+    <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/USAGE.md" afterPath="$PROJECT_DIR$/doc/USAGE.md" />
+    </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.574468">
-              <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+            <state vertical-scroll-proportion="-3.8888888">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -96,16 +98,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-108.888885">
-              <caret line="196" column="0" selection-start-line="196" selection-start-column="0" selection-end-line="197" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
           <provider selected="true" editor-type-id="text-editor">
@@ -121,6 +113,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="108.333336">
               <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="USAGE.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doc/USAGE.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2631579">
+              <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -2786,11 +2788,11 @@
         <option value="$PROJECT_DIR$/doc/DOMINO_COMBINATION.md" />
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java" />
         <option value="$PROJECT_DIR$/doc-zh-cn/USAGE.md" />
-        <option value="$PROJECT_DIR$/doc/USAGE.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/README-ZH-CN.md" />
         <option value="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
         <option value="$PROJECT_DIR$/doc/THEORY.md" />
+        <option value="$PROJECT_DIR$/doc/USAGE.md" />
       </list>
     </option>
   </component>
@@ -4449,22 +4451,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/USAGE.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.037037">
-          <caret line="277" column="43" selection-start-line="277" selection-start-column="43" selection-end-line="277" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="108.333336">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-108.888885">
@@ -4531,8 +4517,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.574468">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+        <state vertical-scroll-proportion="-3.8888888">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="108.333336">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/USAGE.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2631579">
+          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
           <folding />
         </state>
       </provider>
