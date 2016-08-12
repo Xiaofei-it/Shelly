@@ -178,13 +178,14 @@ of business logic may be very long because of the complexity of the business log
 the longer the class will be.
 
 Now change your traditional opinion. You should not regard the configuration class as
-a traditional class. Instead you should regard it as a configuration file. A configuration file may
-be very long. And the class contains a group of business logic. If the business logic is complex,
+a traditional class. Instead you should regard it as a configuration file containing all of the
+corresponding business logic. A configuration file may be very long.
+And the class contains a group of business logic, so if the business logic is complex,
 the class is long for sure. So feel free if the class is extremely long.
 
 There exists several advantages if we write all the business logic in configuration classes:
 
-1. We can see whole the business logic, especially what happens to the whole project after
+1. We can see the whole business logic, especially what happens to the whole app after
 a particular business object changes.
 
 2. Whenever the business logic is modified, we only need to modify the source code in a single

@@ -33,14 +33,13 @@ UI组件的函数改变UI。
 
 ### 创建Domino
 
-First, we divides all of the business logic into two groups. One contains the business logic concerning
-the user information, such as signing up, signing in and signing out. The other one contains the
-business logic concerning the pictures, such as uploading and downloading pictures.
+首先，我们将业务逻辑分成两组，一组是关于用户信息的逻辑，比如注册、登录和退出。另一组是关于图片的业务逻辑，包括上传和
+下载图片。
 
-Second, we create two configuration classes corresponding to the two groups of business logic: `UserService`
-and `PictureService` respectively. Each class provides a method for creating Dominoes.
+其次，我们为每个业务逻辑组创建一个配置类，分别是`UserService`和`PictureService`。
+每个类提供一个方法用来创建Dominoes。
 
-The following is `UserService`:
+`UserService`如下：
 
 ```
 public class UserService {
@@ -110,19 +109,17 @@ public class UserService {
 }
 ```
 
-In the `init` method, we create the Dominoes for all the business logic concerning the user information.
-Also, `UserService` contains some constants, such as `SIGN_IN`, `SIGN_UP` and `SIGN_OUT`. We regard
-these constants as Domino labels.
+在`init`函数中，我们创建和用户信息相关的所有Domino。另外`UserService`中包含了几个常量，比如`SIGN_IN`、`SIGN_UP`
+和`SIGN_OUT`。我们把这些常量当作Domino标签。
 
-Similarly, we create `PictureService`. The source code is not given here for simplicity.
+类似地，我们创建`PictureService`。为了简洁，源码省略。
 
-Note that the above code will not perform any actions! What the code does is simply commit and
-store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
-Only after the Domino is invoked will it perform actions.
+注意，上面的代码不会执行任何操作！代码做的只是提交和存储Domino供以后使用。要使Domino执行操作，必须调用这个Domino。
+只有在调用Domino后，它才会执行操作。
 
-### Preparation for Domino invocation
+### 在调用Domino之前的准备操作
 
-In the `onCreate()` of the `Application` class, we write the following code:
+在`Application`类的`onCreate()`中，添加如下代码：
 
 ```
 public class MyApplication extends Application {
@@ -135,13 +132,13 @@ public class MyApplication extends Application {
 }
 ```
 
-In each `onCreate` and `onDestroy` of all the `Activity`s, add `Shelly.register(this)` and `Shelly.unregister(this)`.
+在所有的`Activity`的`onCreate`和`onDestroy`分别添加`Shelly.register(this)`和`Shelly.unregister(this)`。
 
-### Domino invocation
+### 调用Domino
 
-Whenever you want to invoke a particular Domino, write `Shelly.playDomino()`.
+如果你想调用Domino，就写`Shelly.playDomino()`。
 
-For example, you can write the following in the `onClick` method for signing up:
+比如，你在注册按钮的`onClick`函数中写如下代码：
 
 ```
 String userName = mUserNameEditText.getText().toString();
@@ -149,30 +146,22 @@ String password = mPasswordEditText.getText().toString();
 Shelly.playDomino(UserService.SIGN_UP, Pair.create(userName, password));
 ```
 
-Note the reason why we use constants for Domino labels and put all of the labels in the corresponding
-configuration class. In this way, we can easily find all of the Domino invocation of a particular
-Domino in the whole project, simply by using the IDE to find all the usages of the corresponding
-constant.
+注意我们为什么使用常量作为Domino标签，并且把这些标签放入对应的配置类中。用这种方式，我们可以轻易地找到某个特定的
+Domino在全工程中的哪些地方被调用，只需在IDE中对相应的Domino标签常量进行“Find Usage”操作。
 
-## Summary
+## 总结
 
-The above illustrates how to use the Shelly library in action.
+上面章节阐述了如何在实战中使用Shelly库。
 
-There exists one disadvantage: a particular configuration class corresponding to a group
-of business logic may be very long because of the complexity of the business logic. The more complex,
-the longer the class will be.
+你可能会发现有一个缺点：由于业务逻辑的复杂，相应的配置类会很长。业务逻辑越复杂，相应的配置类越长。
 
-Now change your traditional opinion. You should not regard the configuration class as
-a traditional class. Instead you should regard it as a configuration file. A configuration file may
-be very long. And the class contains a group of business logic. If the business logic is complex,
-the class is long for sure. So feel free if the class is extremely long.
+现在应该改变你传统的思维方式。你不应把配置类当作普通的类。你应该把它当作一个包含所有业务逻辑的配置文件。
+配置文件可能很长。这个类中包含一组业务逻辑，所以如果逻辑很复杂，类当然很长。所以即使类很长也没有关系。
 
-There exists several advantages if we write all the business logic in configuration classes:
+我们把业务逻辑写在配置类中是有许多优点的：
 
-1. We can see whole the business logic, especially what happens to the whole project after
-a particular business object changes.
+1. 我们可以看出整个业务逻辑，看出一个业务对象改变后整个app发生了什么变化。
 
-2. Whenever the business logic is modified, we only need to modify the source code in a single
-configuration class.
+2. 无论业务逻辑怎么修改，我们只需要在单一的配置类中修改代码即可。
 
-3. Because UI components are responsible for only the UI rendering, it is flexible to compose them.
+3. 因为UI组件只负责UI渲染，这样就变得易于创建和扩展。
