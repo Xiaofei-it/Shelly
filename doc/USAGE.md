@@ -2,7 +2,7 @@
 
 [Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE.md)
 
-The following illustrates the usage of the Shelly library. Here I focus on the basic usage including
+This article illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
 basic understanding of the Shelly library.
 
@@ -14,7 +14,7 @@ Moreover, the Shelly library also provides many other useful Dominoes, including
 1. Task Domino,
 which provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Domino makes source code concerning the business logic of your app clear and easy to understand.
 
 2. Retrofit Domino,
 which provides a convenient pattern for sending an HTTP request and performing
@@ -22,22 +22,22 @@ various kinds of actions according to the result or the failure of the request. 
 Retrofit Task is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [HERE](MORE_DOMINOES.md).
+For the information about various kinds of Dominoes, please see [MORE DOMINOES](MORE_DOMINOES.md).
 
 Also, the Shelly library provides methods for merging the results of two Dominoes and combing two
 results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
 Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
 and uses the results of the two requests to perform actions. Also, you can write a Domino which
 sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava. See [HERE](doc/DOMINO_COMBINATION.md) for more information.
+by RxJava. See [DOMINO COMBINATION](doc/DOMINO_COMBINATION.md) for more information.
 
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
+get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
 for more information.
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[HERE](doc/METHODOLOGY.md) for the methodology.
+the souce code concerning the business logic clear and easy to understand and
+makes the app easy to maintain. Please see [METHODOLOGY](doc/METHODOLOGY.md) for the methodology.
 
 ## Component registration
 
@@ -66,7 +66,8 @@ public class MyActivity extends AppCompatActivity {
 
 ## Domino creation
 
-A domino should be created and committed before it takes effect. The following is an example.
+A domino should be created and committed before it takes effect. The following is an example illustrating
+various APIs for creating and committing a Domino.
 And more APIs can be found in the
 [Domino](Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/Domino.java) class.
 
@@ -170,8 +171,8 @@ Remember to commit the domino finally!
 Each domino should be specified a unique label, which is an object, i.e. an Integer, a
 String or something else.
 
-Again, note that the above code will not perform any actions! What the code does is simply commit and
-store the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
+Note that the above code will not perform any actions! What the code does is simply committing and
+storing the Domino for later use. To make the Domino perform actions, you should invoke the Domino.
 Only after the Domino is invoked will it perform actions.
 
 ## Domino invocation
