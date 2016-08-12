@@ -1,11 +1,10 @@
-# Utilities
+# 工具类
 
-## Tuple input
+## Tuple输入
 
-You may find that in the previous examples, the type of the input of all the Dominoes is a single type.
-You can pass an integer to the Domino, or a double.
+你可能注意到之前的例子中，Domino的输入类型是单一类型，你可以给Domino传入一个Integer或者Double。
 
-See another example:
+看这个例子：
 
 ```
 Shelly.<Integer>createDomino("Print")
@@ -18,17 +17,16 @@ Shelly.<Integer>createDomino("Print")
         .commit();
 ```
 
-If you invoke the Domino by `Shelly.playDomino("Print", 3)`, the Shelly library prints "3".
+如果通过`Shelly.playDomino("Print", 3)`调用Domino，那么打印“3”。
 
-If you invoke the Domino by `Shelly.playDomino("Print", 3, 5)`, the Shelly library prints "3" and "5".
+如果通过`Shelly.playDomino("Print", 3, 5)`调用Domino，那么打印“3”和“5”。
 
-What should you do if you want to pass two integer and a double to the Domino at the same time?
-For example, if you want to create a Domino which take two integers and a double as input and
-print the sum of the three numbers.
+如果要同时给某个Domino传入两个integer和一个double，那么我们要做什么？
+比如，你要给一个Domino传入两个integer和一个double，打印这三个数的和。
 
-The Shelly library provides you with some tuple classes, in which you can put multiple objects.
+Shelly库提供了tuple类，支持多输入。
 
-To print the sum of two integers and a double, you write the following to create the Domino:
+要打印两个integer和一个double的和，你可以创建如下Domino：
 
 ```
 Shelly.<Triple<Integer, Integer, Double>>createDomino("Add")
@@ -47,26 +45,24 @@ Shelly.<Triple<Integer, Integer, Double>>createDomino("Add")
         .commit();
 ```
 
-Invoke the Domino with the following statement:
+使用下面的语句调用Domino：
 
 ```
 Shelly.playDomino("Add", Triple.create(1, 2, 3.0));
 ```
 
-The Shelly library provides you with many tuple classes, which are contained in the package
-`xiaofei.library.shelly.tuple`. You can create a tuple by `XXX.create(...)` rather than using the
-constructor of a tuple class.
+Shelly库提供了很多tuple类，位于`xiaofei.library.shelly.tuple`包内。
+你可以通过`XXX.create(...)`创建相应的tuple，不要使用tuple的构造器。
 
 ## Stash
 
-Sometimes, in an action performed by a Domino, you want to save something for later use.
+某些时候，在一个Domino的一个action中，你可能想保存一些东西供下面的action使用。
 
-In this case, use the stash actions or stash functions, which are contained in the package
-`xiaofei.library.shelly.function.stashfunction`. These actions and functions are the same as their
-corresponding actions and functions except that they provide additional methods for stashing, with
-which you can stash data for later use.
+在这种情况下，可以使用stash action或者stash function，这些类位于
+`xiaofei.library.shelly.function.stashfunction`包内。
+这些action和function与他们对应的原始action和function有相同的功能，只是提供了额外的方法供存取数据。
 
-The following is an example:
+下面是一个例子：
 
 ```
 Shelly.<String>createDomino("Stash example")
@@ -87,19 +83,17 @@ Shelly.<String>createDomino("Stash example")
         .commit();
 ```
 
-Note that if you invoke the Domino by `Shelly.playDomino("Stash example", "INPUT")`, it will work well.
-But if you invoke the Domino by `Shelly.playDomino("Stash example", "INPUT1", "INPUT2")`, something
-may go wrong:
-After the first action is performed, there is only one value ("INPUT2 test") in the stash.
+注意，如果你通过`Shelly.playDomino("Stash example", "INPUT")`调用Domino，一切正常。
+但是如果你通过`Shelly.playDomino("Stash example", "INPUT1", "INPUT2")`调用Domino，就会有问题：
+在第一个action被执行后，stash中只存在一个值：“INPUT2 test”。
 
-Why does this happen? The Shelly library performs the actions one after the other. When performing
-the first action, "INPUT1" is passed in and "INPUT1 test" is stashed. But after this, "INPUT2" is
-passed in and "INPUT2 test" replaces the previous one.
-Only after finishing performing the first action will the Shelly library perform the second action.
+这是为什么呢？Shelly库按顺序一个个执行action。执行第一个action的时候，“INPUT1”被传入，“INPUT1 test”被存储。
+之后，“INPUT2”被传入，“INPUT2 test”便替换了原来的“INPUT1 test”。
+只有执行完第一个action后，Shelly库才会执行第二个action。
 
-So, what should we do to avoid the value replacement?
+那么，我们怎么做才可以不发生替换呢？
 
-You can use another method of the stash:
+你可以使用stash的另一个函数：
 
 ```
 Shelly.<String>createDomino("Stash example 2")

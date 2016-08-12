@@ -1,5 +1,7 @@
 # Theory
 
+[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/THEORY.md)
+
 This article discusses the theory of the Shelly library, including the philosophy and the definitions
 of the technical terms with respect to the Shelly library.
 

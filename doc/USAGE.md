@@ -1,5 +1,7 @@
 # Usage
 
+[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/USAGE.md)
+
 The following illustrates the usage of the Shelly library. Here I focus on the basic usage including
 component registration, Domino creation and Domino invocation. After reading these, you will have a
 basic understanding of the Shelly library.

@@ -1,11 +1,13 @@
 # Utilities
 
+[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/UTILITIES.md)
+
 ## Tuple input
 
 You may find that in the previous examples, the type of the input of all the Dominoes is a single type.
 You can pass an integer to the Domino, or a double.
 
-See another example:
+See an example:
 
 ```
 Shelly.<Integer>createDomino("Print")
@@ -22,7 +24,7 @@ If you invoke the Domino by `Shelly.playDomino("Print", 3)`, the Shelly library 
 
 If you invoke the Domino by `Shelly.playDomino("Print", 3, 5)`, the Shelly library prints "3" and "5".
 
-What should you do if you want to pass two integer and a double to the Domino at the same time?
+What should you do if you want to pass two integer and a double to a particular Domino at the same time?
 For example, if you want to create a Domino which take two integers and a double as input and
 print the sum of the three numbers.
 
@@ -59,7 +61,7 @@ constructor of a tuple class.
 
 ## Stash
 
-Sometimes, in an action performed by a Domino, you want to save something for later use.
+Sometimes, in an action performed by a Domino, you want to save something for the following action to use.
 
 In this case, use the stash actions or stash functions, which are contained in the package
 `xiaofei.library.shelly.function.stashfunction`. These actions and functions are the same as their
