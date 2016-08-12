@@ -203,7 +203,7 @@ Shelly.<String>createDomino("Example 2")
 
             }
         })
-        .perform(Shelly.<String>createDomino()
+        .perform(Shelly.<String>createAnonymousDomino()
                         .map(new Function1<String, Integer>() {
                             @Override
                             public Integer call(String input) {

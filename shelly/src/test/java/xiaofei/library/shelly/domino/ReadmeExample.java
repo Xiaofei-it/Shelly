@@ -142,7 +142,7 @@ public class ReadmeExample {
 
                     }
                 })
-                .perform(Shelly.<String>createDomino()
+                .perform(Shelly.<String>createAnonymousDomino()
                             .map(new Function1<String, Integer>() {
                                 @Override
                                 public Integer call(String input) {
@@ -503,7 +503,7 @@ public class ReadmeExample {
                 .commit();
         Shelly.<String>createDomino("Find *.png and *.jpg")
                 .background()
-                .merge(Shelly.<String>createDomino()
+                .merge(Shelly.<String>createAnonymousDomino()
                                 .background()
                                 .map(new Function1<String, File>() {
                                     @Override
@@ -518,7 +518,7 @@ public class ReadmeExample {
                                         return null;
                                     }
                                 }),
-                        Shelly.<String>createDomino()
+                        Shelly.<String>createAnonymousDomino()
                                 .background()
                                 .map(new Function1<String, File>() {
                                     @Override
@@ -545,7 +545,7 @@ public class ReadmeExample {
 
         Shelly.<String>createDomino("Login")
                 .combine(
-                        Shelly.<String>createDomino()
+                        Shelly.<String>createAnonymousDomino()
                                 .beginRetrofitTask(new RetrofitTask<String, User>() {
                                     @Override
                                     protected Call<User> getCall(String s) {
@@ -553,7 +553,7 @@ public class ReadmeExample {
                                     }
                                 })
                                 .endTask(),
-                        Shelly.<String>createDomino()
+                        Shelly.<String>createAnonymousDomino()
                                 .beginRetrofitTask(new RetrofitTask<String, Summary>() {
                                     @Override
                                     protected Call<Summary> getCall(String s) {
@@ -583,7 +583,7 @@ public class ReadmeExample {
                     }
                 })
                 .onSuccessResult(
-                        Shelly.<User>createDomino()
+                        Shelly.<User>createAnonymousDomino()
                                 .beginRetrofitTask(new RetrofitTask<User, Summary>() {
                                     @Override
                                     protected Call<Summary> getCall(User user) {

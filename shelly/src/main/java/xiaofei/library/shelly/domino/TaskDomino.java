@@ -46,7 +46,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
 
     public TaskDomino<T, R, U> onSuccess(final Domino<R, ?> domino) {
         return new TaskDomino<T, R, U>(
-                perform(Shelly.<Triple<Boolean, R, U>>createDomino()
+                perform(Shelly.<Triple<Boolean, R, U>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, R, U>>, List<R>>() {
                             @Override
                             public List<R> call(List<Triple<Boolean, R, U>> input) {
@@ -130,7 +130,7 @@ public class TaskDomino<T, R, U> extends Domino<T, Triple<Boolean, R, U>> {
     //其实是player的高阶函数
     public TaskDomino<T, R, U> onFailure(final Domino<U, ?> domino) {
         return new TaskDomino<T, R, U>(
-                perform(Shelly.<Triple<Boolean, R, U>>createDomino()
+                perform(Shelly.<Triple<Boolean, R, U>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, R, U>>, List<U>>() {
                             @Override
                             public List<U> call(List<Triple<Boolean, R, U>> input) {

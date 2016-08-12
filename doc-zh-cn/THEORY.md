@@ -81,7 +81,7 @@ object.
 
 "Creating a Domino" refers to the operation of building a particular Java instance of a Domino
 class. A Domino is usually created by a Java method chain which starts with
-`Shelly.createDomino(Object)` or `Shelly.createDomino()` and is followed by various methods provided
+`Shelly.createDomino(Object)` or `Shelly.createAnonymousDomino()` and is followed by various methods provided
 by the Shelly library.
 
 "Committing a Domino" refers to the operation of causing the Shelly library to hold a Java reference

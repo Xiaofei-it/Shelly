@@ -165,7 +165,7 @@ public class Test {
                 .commit();
 
         Shelly.<String>createDomino(5)
-                .merge(new Domino[]{Shelly.<String>createDomino()
+                .merge(new Domino[]{Shelly.<String>createAnonymousDomino()
                                 .background()
                                 .map(new Function1<String, Integer>() {
                                     @Override

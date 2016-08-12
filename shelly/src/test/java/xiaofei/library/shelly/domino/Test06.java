@@ -63,7 +63,7 @@ public class Test06 {
                         }
                     }
                 })
-                .onSuccess(Shelly.<Character>createDomino()
+                .onSuccess(Shelly.<Character>createAnonymousDomino()
                             .background()
                             .perform(new Action1<Character>() {
                                 @Override
@@ -93,7 +93,7 @@ public class Test06 {
                     }
                 })
                 .backgroundQueue()
-                .onFailure(Shelly.<Integer>createDomino()
+                .onFailure(Shelly.<Integer>createAnonymousDomino()
                             .newThread()
                             .perform(new Action1<Integer>() {
                                 @Override
@@ -187,7 +187,7 @@ public class Test06 {
                         }
                     }
                 })
-                .onSuccess(Shelly.<Character>createDomino()
+                .onSuccess(Shelly.<Character>createAnonymousDomino()
                         .background()
                         .perform(new Action1<Character>() {
                             @Override
@@ -217,7 +217,7 @@ public class Test06 {
                     }
                 })
                 .backgroundQueue()
-                .onFailure(Shelly.<Integer>createDomino()
+                .onFailure(Shelly.<Integer>createAnonymousDomino()
                         .newThread()
                         .perform(new Action1<Integer>() {
                             @Override

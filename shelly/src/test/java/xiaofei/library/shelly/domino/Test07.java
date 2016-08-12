@@ -167,7 +167,7 @@ public class Test07 {
     @Test
     public void testBugOfHandler() {
         Shelly.<String>createDomino(5)
-                .merge(new Domino[]{Shelly.<String>createDomino()
+                .merge(new Domino[]{Shelly.<String>createAnonymousDomino()
                         .background()
                         .map(new Function1<String, Integer>() {
                             @Override

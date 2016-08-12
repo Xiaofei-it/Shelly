@@ -72,7 +72,7 @@ Also, you can write the following example using anonymous Dominoes:
 Shelly.<String>createDomino("Find *.png and *.jpg")
         .background()
         .merge(
-            Shelly.<String>createDomino()
+            Shelly.<String>createAnonymousDomino()
                     .background()
                     .map(new Function1<String, File>() {
                         @Override
@@ -87,7 +87,7 @@ Shelly.<String>createDomino("Find *.png and *.jpg")
                             return null;
                         }
                     }),
-            Shelly.<String>createDomino()
+            Shelly.<String>createAnonymousDomino()
                     .background()
                     .map(new Function1<String, File>() {
                         @Override
@@ -126,7 +126,7 @@ the same time:
 ```
 Shelly.<String>createDomino("Login")
         .combine(
-            Shelly.<String>createDomino()
+            Shelly.<String>createAnonymousDomino()
                     .beginRetrofitTask(new RetrofitTask<String, User>() {
                         @Override
                         protected Call<User> getCall(String s) {
@@ -134,7 +134,7 @@ Shelly.<String>createDomino("Login")
                         }
                     })
                     .endTask(),
-            Shelly.<String>createDomino()
+            Shelly.<String>createAnonymousDomino()
                     .beginRetrofitTask(new RetrofitTask<String, Summary>() {
                         @Override
                         protected Call<Summary> getCall(String s) {
@@ -174,7 +174,7 @@ Shelly.<String>createDomino("Login")
             }
         })
         .onSuccessResult(
-            Shelly.<User>createDomino()
+            Shelly.<User>createAnonymousDomino()
                     .beginRetrofitTask(new RetrofitTask<User, Summary>() {
                         @Override
                         protected Call<Summary> getCall(User user) {

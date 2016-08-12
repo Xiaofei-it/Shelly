@@ -66,7 +66,7 @@ public class RetrofitDomino2<T, R, S> extends Domino<T, Triple<Boolean, Pair<R, 
 
     public RetrofitDomino2<T, R, S> onFailure(final Domino<? super Throwable, ?> domino) {
         return new RetrofitDomino2<T, R, S>(
-                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Pair<R, Response<S>>, Throwable>>, List<Throwable>>() {
                             @Override
                             public List<Throwable> call(List<Triple<Boolean, Pair<R, Response<S>>, Throwable>> input) {
@@ -253,7 +253,7 @@ public class RetrofitDomino2<T, R, S> extends Domino<T, Triple<Boolean, Pair<R, 
 
     public RetrofitDomino2<T, R, S> onSuccessResult(final Domino<Pair<R, Response<S>>, ?> domino) {
         return new RetrofitDomino2<T, R, S>(
-                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Pair<R, Response<S>>, Throwable>>, List<Pair<R, Response<S>>>>() {
                             @Override
                             public List<Pair<R, Response<S>>> call(List<Triple<Boolean, Pair<R, Response<S>>, Throwable>> input) {
@@ -345,7 +345,7 @@ public class RetrofitDomino2<T, R, S> extends Domino<T, Triple<Boolean, Pair<R, 
 
     public RetrofitDomino2<T, R, S> onResponseFailure(final Domino<Pair<R, Response<S>>, ?> domino) {
         return new RetrofitDomino2<T, R, S>(
-                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Pair<R, Response<S>>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Pair<R, Response<S>>, Throwable>>, List<Pair<R, Response<S>>>>() {
                             @Override
                             public List<Pair<R, Response<S>>> call(List<Triple<Boolean, Pair<R, Response<S>>, Throwable>> input) {

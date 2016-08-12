@@ -50,7 +50,7 @@ public class Shelly {
         return new Domino<T, T>(label);
     }
 
-    public static <T> Domino<T, T> createDomino() {
+    public static <T> Domino<T, T> createAnonymousDomino() {
         return createDomino(null);
     }
 

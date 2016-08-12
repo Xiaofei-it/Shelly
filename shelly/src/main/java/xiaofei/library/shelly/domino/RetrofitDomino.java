@@ -62,7 +62,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onFailure(final Domino<? super Throwable, ?> domino) {
         return new RetrofitDomino<T, R>(
-                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Throwable>>() {
                             @Override
                             public List<Throwable> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
@@ -251,7 +251,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onSuccessResult(final Domino<R, ?> domino) {
         return new RetrofitDomino<T, R>(
-                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<R>>() {
                             @Override
                             public List<R> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
@@ -344,7 +344,7 @@ public class RetrofitDomino<T, R> extends Domino<T, Triple<Boolean, Response<R>,
 
     public RetrofitDomino<T, R> onResponseFailure(final Domino<Response<R>, ?> domino) {
         return new RetrofitDomino<T, R>(
-                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createDomino()
+                perform(Shelly.<Triple<Boolean, Response<R>, Throwable>>createAnonymousDomino()
                         .reduce(new Function1<List<Triple<Boolean, Response<R>, Throwable>>, List<Response<R>>>() {
                             @Override
                             public List<Response<R>> call(List<Triple<Boolean, Response<R>, Throwable>> input) {
