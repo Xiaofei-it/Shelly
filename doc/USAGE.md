@@ -193,7 +193,7 @@ not be committed.
 
 However, a Domino which do not have a label ("Anonymous Domino") is also quite useful in that,
 there exist some situation where you only need to create a Domino but not want to commit it.
-For example, you can perform an action on an anonymous Domino.
+For example, you can perform an action on an anonymous Domino:
 
 ```
 Shelly.<String>createDomino("Example 2")
@@ -243,14 +243,14 @@ below.
 
 The Task Domino provides methods for executing a time-consuming task and performing various
 kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Domino makes the source code concerning the business logic of your app clear and easy to understand.
 
 The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
 various kinds of actions according to the result or the failure of the request. The
 Retrofit Domino is very useful in the development of an app, which takes many advantages over the other
 architectures for sending HTTP requests.
 
-For the information about various kinds of Dominoes, please see [HERE](MORE_DOMINOES.md).
+For the information about various kinds of Dominoes, please see [MORE DOMINOES](MORE_DOMINOES.md).
 
 ## Merging and combination of Dominoes
 
@@ -263,16 +263,16 @@ by RxJava.
 
 The Shelly library provides the methods for invoking Dominoes within a Domino.
 
-See [HERE](DOMINO_COMBINATION.md) for more information.
+See [DOMINO COMBINATION](DOMINO_COMBINATION.md) for more information.
 
 ## Tuple and stash
 
 The Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
+get objects and the tuple class to combine several input together. Please see [UTILITIES](doc/UTILITIES.md)
 for more information.
 
 ## Methodology
 
 The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[HERE](doc/METHODOLOGY.md) for the methodology.
+the source code concerning the business logic clear and easy to understand and
+makes the app easy to maintain. Please see [METHODOLOGY](doc/METHODOLOGY.md) for the methodology.

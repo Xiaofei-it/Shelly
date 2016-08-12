@@ -170,13 +170,10 @@ Shelly.playDomino("Example", "First String", "Second String"); // Pass two Strin
 
 ## 匿名Domino
 
-As is shown above, a unique label is needed to label the Domino to be invoked,
-thus you should specify a unique label when creating a Domino, otherwise the created Domino shall
-not be committed.
+上面的例子中，被调用的Domino必须指定一个唯一标签，因此你在创建Domino时必须指定一个唯一标签，否则Domino无法提交。
 
-However, a Domino which do not have a label ("Anonymous Domino") is also quite useful in that,
-there exist some situation where you only need to create a Domino but not want to commit it.
-For example, you can perform an action on an anonymous Domino.
+然而，没有标签的Domino（“匿名Domino”）也非常有用。某些情形下，你可能只想要创建一个Domino而并不想提交，
+比如你可以在一个Domino上执行操作：
 
 ```
 Shelly.<String>createDomino("Example 2")
@@ -215,47 +212,35 @@ Shelly.<String>createDomino("Example 2")
         .commit();
 ```
 
-Moreover, you can merge or combine two anonymous Dominoes.
-See [HERE](doc/DOMINO_COMBINATION.md) for more information.
+另外，你也可以合并或者组合两个匿名Domino。更多信息参看[组合Domino](doc/DOMINO_COMBINATION.md)。
 
-## More kinds of Dominoes
+## 更多种类的Domino
 
-The Domino class provides many basic methods. Also you can write derived Dominoes which extend the
-class. In the Shelly library, there are already several kinds of derived Dominoes, which are shown
-below.
+Domino类提供了许多基本函数用来执行不同操作。Shelly库也提供许多其他的衍生Domino。
 
-The Task Domino provides methods for executing a time-consuming task and performing various
-kinds of actions according to the result or the failure of the task execution. The usage of a Task
-Domino makes the business logic of your app clear and easy to understand.
+Task Domino提供函数来执行耗时操作并且根据结果执行各种操作。使用Task Domino可以使app的业务逻辑清晰并且易于理解。
 
-The Retrofit Domino provides a convenient pattern for sending an HTTP request and performing
-various kinds of actions according to the result or the failure of the request. The
-Retrofit Domino is very useful in the development of an app, which takes many advantages over the other
-architectures for sending HTTP requests.
+Retrofit Domino提供一种方便的模式用来发送HTTP请求并且根据请求的不同结果进行不同的回调操作。
+在app开发中使用Retrofit Domino非常有效，相比其他框架有许多优点。
 
-For the information about various kinds of Dominoes, please see [HERE](doc/MORE_DOMINOES.md).
+要了解更多种类的Domino，请参看[Domino种类](doc/MORE_DOMINOES.md)。
 
-## Merging and combination of Dominoes
+## 合并或组合Domino
 
-The Shelly library provides methods for merging the results of two Dominoes and combing two
-results of two Dominoes into one result, which is useful especially when it comes to the Retrofit
-Domino. These methods allow you to write a Domino which sends two HTTP requests at the same time
-and uses the results of the two requests to perform actions. Also, you can write a Domino which
-sends an HTTP request and after getting its result, sends another request. These features are inspired
-by RxJava.
+Shelly库提供函数用来合并和组合Domino的输出，这个非常有用，尤其在使用Retrofit Domino的时候。
+这些函数让你可以写一个Domino同时发送两个请求然后根据这两个请求的结果执行操作。你也可以写一个Domino发送连续请求，
+执行前一个请求得到结果后，发送另一个请求。这些特色是受RxJava启发。
 
-The Shelly library provides the methods for invoking Dominoes within a Domino.
+Shelly库还提供函数用来在Domino中调用其他Domino。
 
-See [HERE](doc/DOMINO_COMBINATION.md) for more information.
+查看[组合Domino](doc/DOMINO_COMBINATION.md)获取更多信息。
 
-## Tuple and stash
+## Tuple和stash
 
-The Shelly library provides some useful utilities, such as the stash to store and
-get objects and the tuple class to combine several input together. Please see [HERE](doc/UTILITIES.md)
-for more information.
+Shelly库也提供一些有用的工具类，包括存取对象的stash以及组合多个输入的tuple类。查看[工具类](doc/UTILITIES.md)
+获取更多信息。
 
-## Methodology
+## 方法论
 
-The shelly library provides a novel pattern for developing a business-logic-oriented app, which makes
-the business logic clear and easy to understand and makes the app easy to maintain. Please see
-[HERE](doc/METHODOLOGY.md) for the methodology.
+Shelly库为开发面向业务逻辑的app提供了一种全新的模式，使得业务逻辑代码清晰并且易于理解，也使得app更易维护。参看
+[Shelly实战](doc/METHODOLOGY.md)了解如何在实战中使用Shelly库。
