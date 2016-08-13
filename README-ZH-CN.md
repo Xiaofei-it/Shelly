@@ -138,7 +138,7 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 
 ## 用法
 
-本节对Shelly库的用法进行简单介绍。详细用法请查看下表：
+本节对Shelly库的用法进行简单介绍。详细用法请查看下面列出的文章：
 
 * [基本用法](doc/USAGE.md)，包含基本用法，包括组件注册、Domino创建和Domino调用。
 
