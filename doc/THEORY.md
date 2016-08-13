@@ -28,24 +28,24 @@ To solve the above problems, I compose the Shelly library.
 The Shelly library provides a novel pattern which uses a method chain to illustrate how each
 component varies with a business object. In the method chain, each method takes an action, which
 represents the change of a particular component, as an argument.
-The chain of methods represents the changes of all of the corresponding components.
-Thus you can see the change of the whole "world" in a single file rather than searching
+Thus the chain of methods represents the changes of all of the corresponding components.
+Therefore you can see the change of the whole "world" in a single file rather than searching
 the whole project for the corresponding classes.
 
 Specifically, a method chain corresponds to a piece of business logic and a business object. It
 illustrates that if this business object is changed, what happens to the whole app, according to
 this piece of business logic.
 
-When the method chain is created, the class of the business object is specified and then each method
-is appended to the chain. Under certain circumstances (when the Domino is invoked), each action,
-which is the argument of each method of the method chain, takes some objects as arguments and then is performed.
+When the method chain is created, the class of the business object should be specified and then each method
+is appended to the chain. When the Domino is invoked (which will be mentioned below), each action,
+which is the argument of each method of the method chain, obtains some objects as arguments and then is performed.
 
 More attention should be paid to the input of each action. The first action of the method chain
 takes the business objects as arguments. Then after it is performed, it passes the objects to the
 following action, which is also performed and then passes the objects to the following
-action. Thus the objects are passed between actions until they are passed to an action for data transformation,
-which takes the objects as an argument and returns one or more new objects. After the transformation,
-the new objects are passed to the following actions.
+action. Thus the objects are passed between actions until they are passed to an action for
+performing data transformation, which takes the objects as an argument and returns one or more new
+objects. After the transformation, the new objects are passed to the following actions.
 
 Now pay attention to the action. The action can be regarded as a method which takes the objects
 passed to it as input and executes the statements inside it. Also the Shelly library provides
