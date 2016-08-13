@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc-zh-cn/THEORY.md" afterPath="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
     </list>
     <ignored path="Shelly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,21 +38,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.4444444">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.15264188">
+              <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.3483367">
-              <caret line="311" column="24" selection-start-line="311" selection-start-column="24" selection-end-line="311" selection-end-column="24" />
+            <state vertical-scroll-proportion="-71.111115">
+              <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.240741">
+              <caret line="343" column="57" selection-start-line="343" selection-start-column="57" selection-end-line="343" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -2745,8 +2755,6 @@
         <option value="$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md" />
         <option value="$PROJECT_DIR$/doc/UTILITIES.md" />
         <option value="$PROJECT_DIR$/doc-zh-cn/UTILITIES.md" />
-        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
-        <option value="$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/Shelly.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/TaskDomino.java" />
         <option value="$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java" />
@@ -2759,10 +2767,12 @@
         <option value="$PROJECT_DIR$/shelly/src/test/java/xiaofei/library/shelly/domino/Test06.java" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/README-ZH-CN.md" />
-        <option value="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
         <option value="$PROJECT_DIR$/doc/THEORY.md" />
         <option value="$PROJECT_DIR$/doc/USAGE.md" />
         <option value="$PROJECT_DIR$/doc-zh-cn/USAGE.md" />
+        <option value="$PROJECT_DIR$/doc/MORE_DOMINOES.md" />
+        <option value="$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md" />
+        <option value="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
       </list>
     </option>
   </component>
@@ -4421,14 +4431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.240741">
-          <caret line="343" column="48" selection-start-line="343" selection-start-column="46" selection-end-line="343" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.5555556">
@@ -4469,14 +4471,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4444444">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7064579">
@@ -4501,10 +4495,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/MORE_DOMINOES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.240741">
+          <caret line="343" column="57" selection-start-line="343" selection-start-column="57" selection-end-line="343" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.3483367">
-          <caret line="311" column="24" selection-start-line="311" selection-start-column="24" selection-end-line="311" selection-end-column="24" />
+        <state vertical-scroll-proportion="-71.111115">
+          <caret line="256" column="13" selection-start-line="256" selection-start-column="13" selection-end-line="256" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15264188">
+          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
           <folding />
         </state>
       </provider>
