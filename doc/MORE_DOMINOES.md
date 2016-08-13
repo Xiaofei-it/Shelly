@@ -271,7 +271,7 @@ Shelly.<String>createDomino("GETTING_USER")
 ```
 
 
-See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
+See [RetrofitDomino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
 for more APIs of the Retrofit Domino.
 
 Also, you may find that after the execution of the request, the result or the exception will be
@@ -341,5 +341,5 @@ Shelly.<String>createDomino("GETTING_USER")
 ```
 
 
-The above Domino is RetrofitDomino2. See [HERE](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
+The above Domino is RetrofitDomino2. See [RetrofitDomino2](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
 for more APIs of the RetrofitDomino2 class.

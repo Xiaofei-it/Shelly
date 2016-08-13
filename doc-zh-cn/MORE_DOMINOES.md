@@ -260,7 +260,7 @@ Shelly.<String>createDomino("GETTING_USER")
         .commit();
 ```
 
-参见[这里](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
+参见[RetrofitDomino](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino.java)
 了解Retrofit Domino的更多API。
 
 同样的，你也会发现在请求执行后，结果或异常被传入后续的action，但原始输入丢失了。有些时候在后面的action中我们可能会用到
@@ -327,5 +327,5 @@ Shelly.<String>createDomino("GETTING_USER")
         .commit();
 ```
 
-上面这个Domino是RetrofitDomino2。参看[这里](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
+上面这个Domino是RetrofitDomino2。参看[RetrofitDomino2](https://github.com/Xiaofei-it/Shelly/blob/master/shelly/src/main/java/xiaofei/library/shelly/domino/RetrofitDomino2.java)
 获取RetrofitDomino2的更多API。
