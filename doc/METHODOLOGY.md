@@ -1,6 +1,6 @@
 # Shelly in Action
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/METHODOLOGY.md)
+[Chinese Translation 中文翻译](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/METHODOLOGY.md)
 
 This article illustrates the methodology of using the Shelly library and how to use the Shelly library
 in action.

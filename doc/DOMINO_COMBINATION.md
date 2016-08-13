@@ -1,6 +1,6 @@
 # Domino Combination
 
-[Corresponding document in Chinese 对应的中文文档](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/UTILITIES.md)
+[Chinese Translation 中文翻译](https://github.com/Xiaofei-it/Shelly/blob/master/doc-zh-cn/UTILITIES.md)
 
 The Shelly library provides methods for merging the outputs of two Dominoes and combing two
 outputs of two Dominoes into one input for the following action,
