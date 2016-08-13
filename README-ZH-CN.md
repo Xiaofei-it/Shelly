@@ -16,8 +16,7 @@
 
 ## 预览
 
-使用Shelly库时，你可以使用一个方法链创建一个名为“Domino”的对象。方法链中的每个方法都以一个action作为参数。
-创建的Domino一旦被调用，就会根据方法链中的action序列执行每个action。
+使用Shelly库时，你可以使用一个方法链创建一个名为“Domino”的对象。方法链中的每个方法都以一个action作为参数。创建的Domino一旦被调用，就会根据方法链中的action序列执行每个action。
 
 在介绍之前，我们先看一个例子。
 
@@ -40,8 +39,7 @@ Shelly.<String>createDomino("Print file names")
         .commit();
 ```
 
-上面的代码用方法链打印文件夹中的文件名。文件夹的路径被传入，`Function1`获取此路径下的所有文件并将文件名传给
-`Action1`，`Action1`将文件名打印出来。
+上面的代码用方法链打印文件夹中的文件名。文件夹的路径被传入，`Function1`获取此路径下的所有文件并将文件名传给`Action1`，`Action1`将文件名打印出来。
 
 我们看一个稍微复杂的例子。假设现在你想使用Retrofit发送HTTP请求，然后
 
@@ -82,16 +80,12 @@ Shelly.<String>createDomino("Sending request")
 
 一个URL被传入，Retrofit发送HTTP请求，之后根据不同结果执行相应的操作。
 
-代码中有一些线程调度相关的东西，比如`background()`和`uiThread()`。
-`background()`是说下面的操作在后台执行。
-`uiThread()`是说下面的操作在主线程（UI线程）执行。
+代码中有一些线程调度相关的东西，比如`background()`和`uiThread()`。`background()`是说下面的操作在后台执行。`uiThread()`是说下面的操作在主线程（UI线程）执行。
 
-上面的例子中，你可以看出发送HTTP请求后`MainActivity`和`SecondActivity`是如何变化的。
-我们在一个地方就可以看到整个世界的变化。
+上面的例子中，你可以看出发送HTTP请求后`MainActivity`和`SecondActivity`是如何变化的。我们在一个地方就可以看到整个世界的变化。
 
 
-注意，如果不调用Domino，上面这段代码实际上并不会执行任何操作！这段代码做的只是提交并存储Domino，供以后使用。
-想要让Domino执行操作，必须调用它。只有调用Domino后，它才会执行操作。
+注意，如果不调用Domino，上面这段代码实际上并不会执行任何操作！这段代码做的只是提交并存储Domino，供以后使用。想要让Domino执行操作，必须调用它。只有调用Domino后，它才会执行操作。
 
 这些只是简单的例子。实际上，Shelly库是非常强大的，将在后面几节介绍。
 
@@ -99,23 +93,17 @@ Shelly.<String>createDomino("Sending request")
 
 本节简单介绍Shelly库的理论。如果想要看完整版，请查看[理论部分](doc/THEORY.md)。
 
-在面向业务逻辑的编程中，一个特定的业务对象的改变可能会引起各个组件的变化，业务逻辑的复杂性也会增加模块之间的耦合。
-为了降低耦合，我们通常使用listeners（observers）或者event bus，这些易于使用并且非常有效，但是有一些缺点，比如
-难以维护，也可能有内存泄漏的风险。
+在面向业务逻辑的编程中，一个特定的业务对象的改变可能会引起各个组件的变化，业务逻辑的复杂性也会增加模块之间的耦合。为了降低耦合，我们通常使用listeners（observers）或者event bus，这些易于使用并且非常有效，但是有一些缺点，比如难以维护，也可能有内存泄漏的风险。
 
 为了解决这些问题，我写了Shelly库。
 
-Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。在方法链中，每个方法有一个
-action参数，这个action执行相应的操作改变特定的组件。方法串起来后就代表了一系列的对各个组件的操作。这样你就能从
-这一个地方看到整个世界的变化。
+Shelly库提供了一种全新的编程模式，将业务对象的变化对各个模块的影响通过方法链表示出来。在方法链中，每个方法有一个action参数，这个action执行相应的操作改变特定的组件。方法串起来后就代表了一系列的对各个组件的操作。这样你就能从这一个地方看到整个世界的变化。
 
-使用Shelly库时，你可以使用一个方法链创建一个名为“Domino”的对象。方法链中的每个方法都以一个action作为参数。
-创建的Domino一旦被调用，就会根据方法链中的action序列执行每个action。
+使用Shelly库时，你可以使用一个方法链创建一个名为“Domino”的对象。方法链中的每个方法都以一个action作为参数。创建的Domino一旦被调用，就会根据方法链中的action序列执行每个action。
 
-创建Domino后，你可以调用Domino执行action序列中的每个action。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，
-然后它就会按action序列一个个执行action。
+创建Domino后，你可以调用Domino执行action序列中的每个action。如果一个业务对象发生改变，你只需调用Domino，并且将这个对象传给它，然后它就会按action序列一个个执行action。
 
-如果要看详细的思想，请看[理论部分](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定语，比如Domino和数据流。
+如果要看详细的思想，请看[理论部分](doc/THEORY.md)。这里也会给出关于Shelly库的许多技术术语的定义，比如Domino和数据流。
 
 ## 下载
 
@@ -156,11 +144,9 @@ Shelly库提供了各种Domino，包括基本Domino、Task Domino和Retrofit Dom
 
 Task Domino提供函数来执行耗时操作并且根据结果执行各种操作。使用Task Domino可以使app的业务逻辑清晰并且易于理解。
 
-Retrofit Domino提供一种方便的模式用来发送HTTP请求并且根据请求的不同结果进行不同的回调操作。在app开发中使用
-Retrofit Domino非常有效，相比其他框架有许多优点。
+Retrofit Domino提供一种方便的模式用来发送HTTP请求并且根据请求的不同结果进行不同的回调操作。在app开发中使用Retrofit Domino非常有效，相比其他框架有许多优点。
 
-另外，Shelly库提供许多方法用来合并或者组合多个Domino输出，这非常有用，尤其对于Retrofit Domino。这些函数可以让你
-同时发送多个HTTP请求，也发送连续请求。这个特色是受RxJava启发而做的。
+另外，Shelly库提供许多方法用来合并或者组合多个Domino输出，这非常有用，尤其对于Retrofit Domino。这些函数可以让你同时发送多个HTTP请求，也可以发送连续请求。这个特色是受RxJava启发而做的。
 
 Shelly库还提供了一些有用的工具类，比如用来存取对象的stash和将多个输入组合在一起的tuple。
 
