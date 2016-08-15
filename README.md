@@ -200,7 +200,7 @@ by RxJava.
 Moreover, the Shelly library provides some useful utilities, such as the stash to store and
 get objects and the tuple class to combine several input together.
 
-In summary, the shelly library provides a novel pattern for developing a business-logic-oriented app,
+In summary, the Shelly library provides a novel pattern for developing a business-logic-oriented app,
 which makes the source code concerning the business logic clear and easy to understand and makes
 the app easy to maintain.
 
