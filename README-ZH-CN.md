@@ -113,6 +113,8 @@ Shelly库的`Domino`有很多方法和RxJava的`Observable`相似，这些方法
 
 另外，Shelly库有一个类似EventBus的特点，允许你注册组件然后让`Domino`对已经注册的组件执行action。RxJava不支持这个特性。
 
+最后，`Domino`执行action的时间和`Observable`订阅`Subscriber`的时间不同。Shelly库中，`Domino`在被提交时不会执行任何action。只有在被调用的时候才会执行action。但是RxJava中，一旦`Observable.subscribe()`方法被调用，一切都会立即生效。
+
 ## 下载
 
 ### Gradle
