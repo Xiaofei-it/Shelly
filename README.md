@@ -162,7 +162,7 @@ Moreover, the Shelly library has an EventBus-like feature which allows you to re
 and then cause the `Domino` to perform actions on the registered components, which RxJava does not
 support.
 
-Last but not least, the occasion when the `Domino` perform actions and the one when the `Observable`
+Last but not least, the occasion when the `Domino` performs actions and the one when the `Observable`
 subscribes a `Subscriber` are different. In the Shelly library, the `Domino` will not perform any
 actions when it is committed. And only when it is invoked will it perform actions. In RxJava, however,
 everything will immediately take effect once the `Observable.subscribe()` method is invoked.
