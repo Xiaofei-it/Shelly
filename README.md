@@ -142,7 +142,7 @@ of the technical terms with respect to the Shelly library, such as the Domino an
 
 In the development of the Shelly library, I discovered the RxJava library. Then I researched and
 learned from its philosophy and its implementation. Thus the style of the Shelly library bears a
-rather resemblance to the one RxJava, but their philosophies and implementations are quite different,
+rather resemblance to the one RxJava, but their philosophies, implementations and usages are quite different,
 which is described in detail in [THEORY](doc/THEORY.md).
 
 ## Downloading
