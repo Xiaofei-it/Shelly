@@ -107,13 +107,7 @@ Shelly库提供了一种全新的编程模式，将业务对象的变化对各�
 
 ## 与RxJava比较
 
-我是2015年想到Shelly库这个点子的（那时我还没有给它名字）。本来我不知道怎么写`Domino`的源码，直到我研究了RxJava的源码。所以我受了RxJava的启发并且学习了好多。你会发现Shelly库的`Domino`源码和RxJava库的`Observable`源码在某些程度上很像。但是因为Shelly和RxJava库用法不同，所以源码还是存在很多不同的，尤其是，`Domino`有两个泛型参数，并且有一个Tile函数作为它的成员，这个函数在调用后返回一个`Player`。毕竟，正是这些不同才使得Shelly库能工作。
-
-Shelly库的`Domino`有很多方法和RxJava的`Observable`相似，这些方法用来数据流控制和线程调度。但是，`Domino`有很多方法用来一次性执行不同action，这个特点是RxJava没有的。具体地说，`Domino`的`perform`方法和`Observable`的`subscribe`方法很像。Shelly库中，你可以在方法链后添加多个`perform`方法来使得`Domino`在被调用后执行多个操作，但是RxJava中，你只能在方法链后添加一个`subscribe`方法，因此只能执行一个action。
-
-另外，Shelly库有一个类似EventBus的特点，允许你注册组件然后让`Domino`对已经注册的组件执行action。RxJava不支持这个特性。
-
-最后，`Domino`执行action的时间和`Observable`订阅`Subscriber`的时间不同。Shelly库中，`Domino`在被提交时不会执行任何action。只有在被调用的时候才会执行action。但是RxJava中，一旦`Observable.subscribe()`方法被调用，一切都会立即生效。
+在开发Shelly库的过程中，我发现了RxJva。然后我研究并学习了它的思想和实现，因此Shelly库和RxJava风格在某种程度上相似，但它们的思想和实现很不相同，具体细节在[理论部分](doc/THEORY.md)描述.
 
 ## 下载
 

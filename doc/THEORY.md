@@ -91,12 +91,12 @@ order to cause the `Domino` to perform multiple actions at a time after being in
 you can append only one `subscribe` method to the method chain in RxJava and thus can perform
 only one action.
 
-3. Features.
+3. An EventBus-like feature.
 The Shelly library has an EventBus-like feature which allows you to register components
 and then cause the `Domino` to perform actions on the registered components, which RxJava does not
 support.
 
-4. Occasion for triggering.
+4. Occasions for triggering.
 The occasion when the `Domino` performs actions and the one when the `Observable`
 subscribes a `Subscriber` are different. In the Shelly library, the `Domino` will not perform any
 actions when it is committed. And only when it is invoked will it perform actions. Thus you have to
