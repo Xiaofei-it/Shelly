@@ -140,20 +140,21 @@ of the technical terms with respect to the Shelly library, such as the Domino an
 
 ## Comparison with RxJava
 
-I had not figured out how to compose the source code of `Domino` until studying the source code of
+I came up with the idea of the Shelly library in 2015 (I did not name it at that time).
+But I had not figured out how to compose the source code of the `Domino` until studying the source code of
 RxJava. Thus I was inspired by RxJava and learned a lot from it. You will find that the source code
 of the `Domino` of the Shelly library bears a rather resemblance to the one of the `Observable` of RxJava.
 However, since the usages of the Shelly library and RxJava are different, there exists quite a lot
-of differences between them, especially in that `Domino` takes two generic type arguments and has
-a `Tile` function which returns a `Player` after being called. After all, it is these differences
-that make the Shelly library work.
+of differences between them, especially in that the `Domino` takes two generic type arguments and has
+a `Tile` function as one of its fields, which returns a `Player` after being called. After all,
+it is these differences that make the Shelly library work.
 
 The `Domino` of the Shelly library has many methods similar to the ones of the `Observable` of RxJava.
 Such methods are used for data flow control and thread scheduling. However, the `Domino` has many
 `perform` methods used for performing various actions at a time, which is a feature RxJava does not support.
 Specifically, the `perform` methods of the `Domino` is similar to the `subscribe` methods of the
-`Observable`. You can append several `perform` methods to the method chain in the Shelly library in
-order to cause the `Domino` to perform several actions at a time after being invoked, but
+`Observable`. You can append multiple `perform` methods to the method chain in the Shelly library in
+order to cause the `Domino` to perform multiple actions at a time after being invoked, but
 you can append only one `subscribe` method to the method chain in RxJava and thus can perform
 only one action.
 
