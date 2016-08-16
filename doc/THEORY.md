@@ -71,7 +71,7 @@ Then it performs the actions in the action sequence one after the other.
 
 In the development of the Shelly library, I discovered the RxJava library. Then I researched and
 learned from its philosophy and its implementation. Thus the style of the Shelly library bears a
-rather resemblance to the one RxJava, but their philosophies and implementations are quite different,
+rather resemblance to the one RxJava, but their philosophies, implementations and usages are quite different,
 which is described from the following aspects:
 
 1. Implementations.
