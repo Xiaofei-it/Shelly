@@ -8,12 +8,12 @@ ext {
     libraryName = 'Shelly'
     artifact = 'shelly'
 
-    libraryDescription = 'An Android library for business-logic-oriented functional co-reactive programming.'
+    libraryDescription = 'A library for business-logic-oriented programming, providing a novel pattern which uses a method chain to illustrate how each component varies with a business object.'
 
     siteUrl = 'https://github.com/Xiaofei-it/Shelly'
     gitUrl = 'https://github.com/Xiaofei-it/Shelly.git'
 
-    libraryVersion = '0.2.5-alpha5'
+    libraryVersion = '0.2.6'
 
     developerId = 'Xiaofei-it'
     developerName = 'Eric Zhao'
@@ -31,8 +31,8 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 23
-        versionCode 9
-        versionName "0.2.5-alpha5"
+        versionCode 10
+        versionName "0.2.6"
     }
     buildTypes {
         release {

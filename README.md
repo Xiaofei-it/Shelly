@@ -150,7 +150,7 @@ which is described in detail in [THEORY](doc/THEORY.md).
 ### Gradle
 
 ```
-compile 'xiaofei.library:shelly:0.2.5-alpha4'
+compile 'xiaofei.library:shelly:0.2.6'
 ```
 
 ### Maven
@@ -159,7 +159,7 @@ compile 'xiaofei.library:shelly:0.2.5-alpha4'
 <dependency>
   <groupId>xiaofei.library</groupId>
   <artifactId>shelly</artifactId>
-  <version>0.2.5-alpha4</version>
+  <version>0.2.6</version>
   <type>pom</type>
 </dependency>
 ```
