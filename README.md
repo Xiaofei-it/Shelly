@@ -22,7 +22,7 @@ especially for sending multiple requests synchronously or sequentially.
 ## Preview
 
 By the Shelly library, you can use a method chain in which each method takes an action as an argument,
-to create a object named "Domino" which, once invoked, performs each action according to the action
+to create an object named "Domino" which, once invoked, performs each action according to the action
 sequence in the method chain.
 
 Before the introduction, let's see an example first.
@@ -111,7 +111,7 @@ which will be introduced in the following sections.
 ## Philosophy
 
 This section illustrates a simple explanation of the theory of the Shelly library.
-See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy.
+See [THEORY](doc/THEORY.md) for a detailed introduction to the philosophy.
 
 In business-logic-oriented programming, a change of a particular business object may cause changes
 of various components, and the complexity of business logic will increase coupling between components.
@@ -127,7 +127,7 @@ of all of the corresponding components. Thus you can see the change of the whole
 file rather than searching the whole project for the corresponding classes.
 
 By the Shelly library, you can use a method chain in which each method takes an action as an argument,
-to create a object named "Domino" which, once invoked, performs each action according to the action
+to create an object named "Domino" which, once invoked, performs each action according to the action
 sequence in the method chain.
 
 After the creation of a Domino, you can "invoke" it to perform each action in the action sequence in
