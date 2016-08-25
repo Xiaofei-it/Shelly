@@ -135,7 +135,7 @@ the method chain.
 When a business object is changed, you "invoke" the Domino and pass the business object to it.
 Then it performs the actions in the action sequence one after the other.
 
-See [THEORY](doc/THEORY.md) for a detailed introduction of the philosophy. Also, it gives the definitions
+See [THEORY](doc/THEORY.md) for a detailed introduction to the philosophy. Also, it gives the definitions
 of the technical terms with respect to the Shelly library, such as the Domino and the data flow.
 
 ## Comparison with RxJava
