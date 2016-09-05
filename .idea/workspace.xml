@@ -11,6 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e05eef6f-e015-4171-b86f-228dca05c6f8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README-ZH-CN.md" afterPath="$PROJECT_DIR$/README-ZH-CN.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc-zh-cn/THEORY.md" afterPath="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/THEORY.md" afterPath="$PROJECT_DIR$/doc/THEORY.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shelly/shelly.iml" afterPath="$PROJECT_DIR$/shelly/shelly.iml" />
     </list>
     <ignored path="Shelly.iws" />
@@ -42,18 +46,78 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3275862">
-              <caret line="29" column="101" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
+            <state vertical-scroll-proportion="0.08364312">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
+      <file leaf-file-name="DOMINO_COMBINATION.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="56" column="87" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="87" />
+              <caret line="14" column="7" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.5555556">
+              <caret line="8" column="65" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DOMINO_COMBINATION.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc-zh-cn/DOMINO_COMBINATION.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="23.407408">
+              <caret line="108" column="74" selection-start-line="108" selection-start-column="74" selection-end-line="108" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="METHODOLOGY.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-82.77778">
+              <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MORE_DOMINOES.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.148148">
+              <caret line="323" column="168" selection-start-line="323" selection-start-column="168" selection-end-line="323" selection-end-column="168" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-55.0">
+              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="THEORY.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/doc/THEORY.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-47.22222">
+              <caret line="170" column="77" selection-start-line="170" selection-start-column="77" selection-end-line="170" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -62,8 +126,18 @@
       <file leaf-file-name="README-ZH-CN.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README-ZH-CN.md">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.037037">
+              <caret line="135" column="41" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+              <caret line="9" column="72" selection-start-line="8" selection-start-column="8" selection-end-line="9" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -2718,11 +2792,11 @@
         <option value="$PROJECT_DIR$/doc/UTILITIES.md" />
         <option value="$PROJECT_DIR$/secrect/wonderful.md" />
         <option value="$PROJECT_DIR$/secrect/Secrect.md" />
+        <option value="$PROJECT_DIR$/local.properties" />
+        <option value="$PROJECT_DIR$/shelly/build.gradle" />
+        <option value="$PROJECT_DIR$/README-ZH-CN.md" />
         <option value="$PROJECT_DIR$/doc/THEORY.md" />
         <option value="$PROJECT_DIR$/doc-zh-cn/THEORY.md" />
-        <option value="$PROJECT_DIR$/local.properties" />
-        <option value="$PROJECT_DIR$/README-ZH-CN.md" />
-        <option value="$PROJECT_DIR$/shelly/build.gradle" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -2757,6 +2831,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2819,7 +2894,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3405,7 +3479,7 @@
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32715008" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.66610456" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.66610456" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -3765,45 +3839,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/DOMINO_COMBINATION.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="23.407408">
-          <caret line="108" column="74" selection-start-line="108" selection-start-column="74" selection-end-line="108" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.592592">
-          <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc-zh-cn/USAGE.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-38.814816">
           <caret line="228" column="61" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5185184">
-          <caret line="323" column="168" selection-start-line="323" selection-start-column="168" selection-end-line="323" selection-end-column="168" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1111112">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1111112">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -3862,20 +3901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/THEORY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13157895">
-          <caret line="73" column="89" selection-start-line="73" selection-start-column="89" selection-end-line="73" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.9561404">
-          <caret line="34" column="87" selection-start-line="34" selection-start-column="87" selection-end-line="34" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shelly/src/main/java/xiaofei/library/shelly/util/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9574468">
@@ -3897,29 +3922,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README-ZH-CN.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="21" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9440559">
-          <caret line="9" column="72" selection-start-line="8" selection-start-column="8" selection-end-line="9" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="56" column="87" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5294118">
@@ -3927,10 +3929,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/doc/DOMINO_COMBINATION.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="7" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="72" selection-start-line="8" selection-start-column="8" selection-end-line="9" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shelly/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84070796">
+          <caret line="56" column="87" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/METHODOLOGY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5555556">
+          <caret line="8" column="65" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/DOMINO_COMBINATION.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="23.407408">
+          <caret line="108" column="74" selection-start-line="108" selection-start-column="74" selection-end-line="108" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/THEORY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-47.22222">
+          <caret line="170" column="77" selection-start-line="170" selection-start-column="77" selection-end-line="170" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/MORE_DOMINOES.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.148148">
+          <caret line="323" column="168" selection-start-line="323" selection-start-column="168" selection-end-line="323" selection-end-column="168" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/METHODOLOGY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-82.77778">
+          <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc-zh-cn/THEORY.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-55.0">
+          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README-ZH-CN.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.037037">
+          <caret line="135" column="41" selection-start-line="135" selection-start-column="41" selection-end-line="135" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3275862">
-          <caret line="29" column="101" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
+        <state vertical-scroll-proportion="0.08364312">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
           <folding />
         </state>
       </provider>
