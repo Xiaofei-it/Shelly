@@ -22,7 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ import xiaofei.library.shelly.Shelly;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
+    private TextView textView;
 
     private NetInterface netInterface;
 
@@ -58,13 +58,7 @@ public class MainActivity extends AppCompatActivity {
         initRetrofit();
         setContentView(R.layout.activity_main);
         Test.init();
-        button = (Button) findViewById(R.id.b);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Click", Toast.LENGTH_SHORT).show();
-            }
-        });
+        textView = (TextView) findViewById(R.id.b);
 
         findViewById(R.id.b2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-                            Log.v("EricZhao", "Response: " + response.body().string());
-                            toast(response.body().string());
+                            String s = response.body().string();
+                            Log.v("EricZhao", "Response: " + s);
+                            toast(s);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -90,41 +85,41 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.b3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(3, "101010100");
+                Shelly.playDomino(Test.QUERY_BY_TASK_DOMINO, "101010100");
             }
         });
         findViewById(R.id.b4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(4, 101010100l);
+                Shelly.playDomino(Test.QUERY_BY_TASK_DOMINO_II, 101010100l);
             }
         });
         findViewById(R.id.b5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(5, "A");
+                Shelly.playDomino(Test.BLOCKING, "A");
             }
         });
         findViewById(R.id.b6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(6, "101010100");
+                Shelly.playDomino(Test.QUERY_BY_RETROFIT_DOMINO, "101010100");
             }
         });
         findViewById(R.id.b7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(7, 101010100l);
+                Shelly.playDomino(Test.QUERY_BY_RETROFIT_DOMINO_II, 101010100l);
             }
         });
         findViewById(R.id.b8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Shelly.playDomino(8, 101010100l);
+                Shelly.playDomino(Test.QUERY_ONE_BY_ONE, 101010100l);
             }
         });
-        Shelly.playDomino(1, "Hello1");
-        Shelly.playDomino(2, "Hello2");
+        Shelly.playDomino(Test.TOAST_SIMPLE_MESSAGE_1, "Hello1");
+        Shelly.playDomino(Test.TOAST_SIMPLE_MESSAGE_2, "Hello2");
     }
 
     @Override
@@ -138,6 +133,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void f(String s) {
-        button.setText("receive: " + s);
+        textView.setText(s);
     }
 }

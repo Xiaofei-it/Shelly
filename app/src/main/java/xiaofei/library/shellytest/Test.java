@@ -41,14 +41,31 @@ import xiaofei.library.shelly.task.RetrofitTask;
  * Created by Xiaofei on 16/6/1.
  */
 public class Test {
+
+    public static final Object TOAST_SIMPLE_MESSAGE_1 = new Object();
+
+    public static final Object TOAST_SIMPLE_MESSAGE_2 = new Object();
+
+    public static final Object QUERY_BY_TASK_DOMINO = new Object();
+
+    public static final Object QUERY_BY_TASK_DOMINO_II = new Object();
+
+    public static final Object BLOCKING = new Object();
+
+    public static final Object QUERY_BY_RETROFIT_DOMINO  = new Object();
+
+    public static final Object QUERY_BY_RETROFIT_DOMINO_II  = new Object();
+
+    public static final Object QUERY_ONE_BY_ONE = new Object();
+
     public static void init() {
-        Shelly.<String>createDomino(1)
+        Shelly.<String>createDomino(TOAST_SIMPLE_MESSAGE_1)
                 .backgroundQueue()
                 .perform(new Action0() {
                     @Override
                     public void call() {
                         try {
-                            Thread.sleep(20000);
+                            Thread.sleep(10000);
                             System.out.println("Haha");
                         } catch (InterruptedException e) {
 
@@ -58,7 +75,7 @@ public class Test {
                 .map(new Function1<String, String>() {
                     @Override
                     public String call(String input) {
-                        return input + "map1";
+                        return "Show a message on the button 10s later: " + input;
                     }
                 })
                 .uiThread()
@@ -69,12 +86,12 @@ public class Test {
                     }
                 }).commit();
 
-        Shelly.<String>createDomino(2)
+        Shelly.<String>createDomino(TOAST_SIMPLE_MESSAGE_2)
                 .backgroundQueue()
                 .map(new Function1<String, String>() {
                     @Override
                     public String call(String input) {
-                        return input + "map2";
+                        return "Show a message on the button after the activity is started: " + input;
                     }
                 })
                 .uiThread()
@@ -86,11 +103,10 @@ public class Test {
                 }).commit();
 
         Retrofit retrofit = new Retrofit.Builder()
-                //这里建议：- Base URL: 总是以/结尾；- @Url: 不要以/开头
                 .baseUrl("http://www.weather.com.cn/")
                 .build();
         final NetInterface netInterface = retrofit.create(NetInterface.class);
-        Shelly.<String>createDomino(3)
+        Shelly.<String>createDomino(QUERY_BY_TASK_DOMINO)
                 .background()
                 .beginTask(new RetrofitTask<String, ResponseBody>() {
                     @Override
@@ -118,7 +134,7 @@ public class Test {
                 })
                 .endTask()
                 .commit();
-        Shelly.<Long>createDomino(4)
+        Shelly.<Long>createDomino(QUERY_BY_TASK_DOMINO_II)
                 .map(new Function1<Long, String>() {
                     @Override
                     public String call(Long input) {
@@ -138,8 +154,9 @@ public class Test {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
-                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
-                            mainActivity.toast(input2.string());
+                            String msg = input2.string();
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + msg);
+                            mainActivity.toast(msg);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -149,6 +166,7 @@ public class Test {
                     @Override
                     public void call(String input1, ResponseBody input2) {
                         try {
+                            // You will get nothing from input2 because the ResponseBody can only be read once.
                             Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -164,7 +182,7 @@ public class Test {
                 .endTask()
                 .commit();
 
-        Shelly.<String>createDomino(5)
+        Shelly.<String>createDomino(BLOCKING)
                 .merge(new Domino[]{Shelly.<String>createAnonymousDomino()
                                 .background()
                                 .map(new Function1<String, Integer>() {
@@ -189,7 +207,7 @@ public class Test {
                         })}
                 )
                 .commit();
-        Shelly.<String>createDomino(6)
+        Shelly.<String>createDomino(QUERY_BY_RETROFIT_DOMINO)
                 .background()
                 .beginRetrofitTask(new RetrofitTask<String, ResponseBody>() {
                     @Override
@@ -217,7 +235,7 @@ public class Test {
                 .endTask()
                 .commit();
 
-        Shelly.<Long>createDomino(7)
+        Shelly.<Long>createDomino(QUERY_BY_RETROFIT_DOMINO_II)
                 .map(new Function1<Long, String>() {
                     @Override
                     public String call(Long input) {
@@ -236,8 +254,9 @@ public class Test {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
-                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
-                            mainActivity.toast(input2.string());
+                            String msg = input2.string();
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + msg);
+                            mainActivity.toast(msg);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -247,6 +266,7 @@ public class Test {
                     @Override
                     public void call(String input1, ResponseBody input2) {
                         try {
+                            // You will get nothing from input2 because the ResponseBody can only be read once.
                             Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -262,7 +282,7 @@ public class Test {
                 .endTask()
                 .commit();
 
-        Shelly.<Long>createDomino(8)
+        Shelly.<Long>createDomino(QUERY_ONE_BY_ONE)
                 .map(new Function1<Long, String>() {
                     @Override
                     public String call(Long input) {
@@ -281,8 +301,9 @@ public class Test {
                     @Override
                     public void call(MainActivity mainActivity, String input1, ResponseBody input2) {
                         try {
-                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + input2.string());
-                            mainActivity.toast(input2.string());
+                            String msg = input2.string();
+                            Log.v("EricZhao", "TargetAction2 input1 = " + input1 + " input2 = " + msg);
+                            mainActivity.toast(msg);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -292,6 +313,7 @@ public class Test {
                     @Override
                     public void call(String input1, ResponseBody input2) {
                         try {
+                            // You will get nothing from input2 because the ResponseBody can only be read once.
                             Log.v("EricZhao", "Action2 input1 = " + input1 + " input2 = " + input2.string());
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -301,7 +323,7 @@ public class Test {
                 .onSuccessResult(new Action2<String, ResponseBody>() {
                     @Override
                     public void call(String input1, ResponseBody input2) {
-                        Shelly.playDomino(6, input1);
+                        Shelly.playDomino(QUERY_BY_RETROFIT_DOMINO, input1);
                     }
                 })
                 .onFailure(new Action1<Throwable>() {
