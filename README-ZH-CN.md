@@ -88,6 +88,8 @@ Shelly.<String>createDomino("Sending request")
 
 这些只是简单的例子。实际上，Shelly库是非常强大的，将在后面几节介绍。
 
+更多的例子请看Shelly库的demo和测试用例，以及下面的“用法”一节列出的各个文档。
+
 ## 思想
 
 本节简单介绍Shelly库的理论。如果想要看完整版，请查看[理论部分](doc/THEORY.md)。

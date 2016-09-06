@@ -108,6 +108,9 @@ Only after the Domino is invoked will it perform actions.
 These are just simple examples. Actually, the Shelly library is very powerful,
 which will be introduced in the following sections.
 
+For more examples, see the demo and test cases of the Shelly library.
+Also, the "Usage" section in this document lists some documents which contain many examples.
+
 ## Philosophy
 
 This section illustrates a simple explanation of the theory of the Shelly library.
