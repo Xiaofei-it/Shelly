@@ -62,6 +62,14 @@ import xiaofei.library.shelly.util.TaskFunction;
 
 /**
  * Created by Xiaofei on 16/5/26.
+ *
+ * Domino class.
+ *
+ * @param <T> the type of the input of this Domino
+ *
+ * @param <R> the type of the output of this Domino
+ *
+ * T是原本输入的参数类型，R是将传给下面的参数类型！
  */
 public class Domino<T, R> {
 
@@ -73,6 +81,10 @@ public class Domino<T, R> {
 
     private Object mLabel;
 
+    /**
+     * This constructor is deprecated. Use Shelly.createXXX() instead.
+     * @param label
+     */
     public Domino(Object label) {
         this(label, new Tile<T, R>() {
             @Override
@@ -82,6 +94,10 @@ public class Domino<T, R> {
         });
     }
 
+    /**
+     * This constructor is deprecated. Use Shelly.createXXX() instead.
+     * @param label
+     */
     public Domino(Object label, Tile<T, R> tile) {
         mLabel = label;
         mTile = tile;
@@ -95,15 +111,24 @@ public class Domino<T, R> {
         return mTile;
     }
 
+    /**
+     * Convert this Domino into another one.
+     * @param converter
+     * @param <S>
+     * @return
+     */
     public <S extends Domino<T, ?>> S convert(DominoConverter<T, R, S> converter) {
         return converter.call(this);
     }
 
     /**
-     * T是原本输入的参数类型，R是将传给下面的参数类型！
+     * Perform an action on all of the registered instances of a specified class.
      *
+     * @param target the specified class.
+     * @param targetAction0 action to perform.
+     * @param <U>
+     * @return
      */
-
     public <U> Domino<T, R> perform(final Class<? extends U> target, final TargetAction0<? super U> targetAction0) {
         return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
@@ -117,6 +142,14 @@ public class Domino<T, R> {
         });
     }
 
+    /**
+     * Perform an action on all of the registered instances of a specified class.
+     *
+     * @param target
+     * @param targetAction1
+     * @param <U>
+     * @return
+     */
     public <U> Domino<T, R> perform(final Class<? extends U> target, final TargetAction1<? super U, ? super R> targetAction1) {
         return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
@@ -132,6 +165,12 @@ public class Domino<T, R> {
         });
     }
 
+    /**
+     * Perform an action.
+     *
+     * @param action0
+     * @return
+     */
     public Domino<T, R> perform(final Action0 action0) {
         return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
@@ -142,6 +181,12 @@ public class Domino<T, R> {
         });
     }
 
+    /**
+     * Perform an action.
+     *
+     * @param action1
+     * @return
+     */
     public Domino<T, R> perform(final Action1<? super R> action1) {
         return performInternal(new Action2<Player<R>, List<R>>() {
                     @Override
@@ -154,6 +199,11 @@ public class Domino<T, R> {
                 });
     }
 
+    /**
+     * Pass the input of this Domino to another Domino and play it.
+     * @param domino
+     * @return
+     */
     public Domino<T, R> perform(final Domino<? super R, ?> domino) {
         return performInternal(new Action2<Player<R>, List<R>>() {
                     @Override
@@ -181,18 +231,50 @@ public class Domino<T, R> {
         });
     }
 
+    /**
+     * Pass the input of this Domino to another Domino and regard its output as the output of this Domino.
+     * @param domino
+     * @param <U>
+     * @return
+     */
     public <U> Domino<T, U> dominoMap(final Domino<? super R, ? extends U> domino) {
         return merge((Domino<R, U>[]) new Domino[]{domino});
     }
 
+    /**
+     * Pass the input of this Domino to another two Dominoes and merge their outputs into one,
+     * which is the output of this Domino.
+     *
+     * @param domino1
+     * @param domino2
+     * @param <U>
+     * @return
+     */
     public <U> Domino<T, U> merge(Domino<? super R, ? extends U> domino1, Domino<? super R, ? extends U> domino2) {
         return merge((Domino<R, U>[]) new Domino[]{domino1, domino2});
     }
 
+    /**
+     * Pass the input of this Domino to another three Dominoes and merge their outputs into one,
+     * which is the output of this Domino.
+     * @param domino1
+     * @param domino2
+     * @param domino3
+     * @param <U>
+     * @return
+     */
     public <U> Domino<T, U> merge(Domino<? super R, ? extends U> domino1, Domino<? super R, ? extends U> domino2, Domino<? super R, ? extends U> domino3) {
         return merge((Domino<R, U>[]) new Domino[]{domino1, domino2, domino3});
     }
 
+    /**
+     * Pass the input of this Domino to all the Dominoes in an array and merge their outputs into one,
+     * which is the output of this Domino.
+     *
+     * @param dominoes
+     * @param <U>
+     * @return
+     */
     public <U> Domino<T, U> merge(final Domino<? super R, ? extends U>[] dominoes) {
         return new Domino<T, U>(mLabel, new Tile<T, U>() {
             @Override
@@ -319,6 +401,14 @@ public class Domino<T, R> {
         return schedule(new BackgroundQueueScheduler());
     }
 
+    /**
+     * Specify a window duration, during which there will be only one group of input to be passed
+     * into this Domino.
+     *
+     * @param windowDuration
+     * @param unit
+     * @return
+     */
     public Domino<T, R> throttle(final long windowDuration, final TimeUnit unit) {
         return new Domino<T, R>(mLabel, new Tile<T, R>() {
             @Override
