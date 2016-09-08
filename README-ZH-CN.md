@@ -115,7 +115,7 @@ Shelly库提供了一种全新的编程模式，将业务对象的变化对各�
 ### Gradle
 
 ```
-compile 'xiaofei.library:shelly:0.2.7'
+compile 'xiaofei.library:shelly:0.2.8'
 ```
 
 ### Maven
@@ -124,7 +124,7 @@ compile 'xiaofei.library:shelly:0.2.7'
 <dependency>
   <groupId>xiaofei.library</groupId>
   <artifactId>shelly</artifactId>
-  <version>0.2.7</version>
+  <version>0.2.8</version>
   <type>pom</type>
 </dependency>
 ```
