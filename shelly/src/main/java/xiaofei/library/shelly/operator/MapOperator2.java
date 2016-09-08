@@ -20,7 +20,6 @@ package xiaofei.library.shelly.operator;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import xiaofei.library.shelly.function.Function1;
 import xiaofei.library.shelly.function.Function2;
 import xiaofei.library.shelly.util.TargetCenter;
 
@@ -43,7 +42,7 @@ public class MapOperator2<T, R, U> implements CopyOnWriteArrayListFunction1<T, R
     @Override
     public CopyOnWriteArrayList<R> call(CopyOnWriteArrayList<T> input) {
         CopyOnWriteArrayList<R> result = new CopyOnWriteArrayList<R>();
-        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(clazz);
+        CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getTargets(clazz);
         for (Object o : objects) {
             for (T singleInput : input) {
                 result.add(map.call((U) o, singleInput));

@@ -108,7 +108,7 @@ public class Domino<T, R> {
         return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
-                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(target);
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getTargets(target);
                 player.prepare(targetAction0);
                 for (Object object : objects) {
                     targetAction0.call(target.cast(object));
@@ -121,7 +121,7 @@ public class Domino<T, R> {
         return performInternal(new Action2<Player<R>, List<R>>() {
             @Override
             public void call(Player<R> player, List<R> input) {
-                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getObjects(target);
+                CopyOnWriteArrayList<Object> objects = TARGET_CENTER.getTargets(target);
                 player.prepare(targetAction1);
                 for (Object object : objects) {
                     for (R singleInput : input) {

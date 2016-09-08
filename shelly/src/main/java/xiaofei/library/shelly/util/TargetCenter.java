@@ -28,10 +28,10 @@ public class TargetCenter {
 
     private static volatile TargetCenter sInstance = null;
 
-    private final ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>> mObjects;
+    private final ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>> mTargets;
 
     private TargetCenter() {
-        mObjects = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>>();
+        mTargets = new ConcurrentHashMap<Class<?>, CopyOnWriteArrayList<Object>>();
     }
 
     public static TargetCenter getInstance() {
@@ -45,48 +45,49 @@ public class TargetCenter {
         return sInstance;
     }
 
-    public void register(Object object) {
-        synchronized (mObjects) {
-            for (Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
-                CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-                if (objects == null) {
-                    mObjects.putIfAbsent(clazz, new CopyOnWriteArrayList<Object>());
-                    objects = mObjects.get(clazz);
+    public void register(Object target) {
+        synchronized (mTargets) {
+            for (Class<?> clazz = target.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+                CopyOnWriteArrayList<Object> targets = mTargets.get(clazz);
+                if (targets == null) {
+                    mTargets.putIfAbsent(clazz, new CopyOnWriteArrayList<Object>());
+                    targets = mTargets.get(clazz);
                 }
-                objects.add(object);
+                targets.add(target);
             }
         }
     }
 
-    public void unregister(Object object) {
-        synchronized (mObjects) {
-            for (Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
-                CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-                if (objects == null) {
+    public void unregister(Object target) {
+        synchronized (mTargets) {
+            for (Class<?> clazz = target.getClass(); clazz != null; clazz = clazz.getSuperclass()) {
+                CopyOnWriteArrayList<Object> targets = mTargets.get(clazz);
+                if (targets == null) {
                     return;
                 }
-                int size = objects.size();
+                int size = targets.size();
                 for (int i = 0; i < size; ++i) {
-                    if (objects.get(i) == object) {
-                        objects.remove(i);
+                    if (targets.get(i) == target) {
+                        targets.remove(i);
                         --i;
                         --size;
                     }
                 }
-                if (objects.isEmpty()) {
-                    mObjects.remove(clazz);
+                if (targets.isEmpty()) {
+                    mTargets.remove(clazz);
                 }
             }
         }
     }
 
-    public boolean isRegistered(Object object) {
-        Class<?> clazz = object.getClass();
-        CopyOnWriteArrayList<Object> objects = mObjects.get(clazz);
-        return objects != null && objects.contains(object);
+    public boolean isRegistered(Object target) {
+        Class<?> clazz = target.getClass();
+        CopyOnWriteArrayList<Object> targets = mTargets.get(clazz);
+        return targets != null && targets.contains(target);
     }
 
-    public CopyOnWriteArrayList<Object> getObjects(Class<?> clazz) {
-        return mObjects.get(clazz);
+    public CopyOnWriteArrayList<Object> getTargets(Class<?> clazz) {
+        CopyOnWriteArrayList<Object> targets = mTargets.get(clazz);
+        return targets == null ? new CopyOnWriteArrayList<Object>() : targets;
     }
 }
